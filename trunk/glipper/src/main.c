@@ -32,7 +32,7 @@ int maxItemLength = 35; //Length of one history entry
 gboolean usePrimary = TRUE; //use Primary Clipboard
 gboolean useDefault = TRUE;; //use Default Clipboard
 gboolean markDefault = TRUE; //whether default entry should be tagged
-gboolean weSaveHistory = TRUE; //whether history should be safed
+gboolean weSaveHistory = TRUE; //whether history should be saved
 
 GtkClipboard* PrimaryCl;
 GtkClipboard* DefaultCl;
@@ -425,12 +425,6 @@ void savePreferences()
 	fclose(prefFile);
 }
 
-void handlesignal(int signal)
-{
-	saveHistory();
-	exit(1);
-}
-
 //Shows an error message dialog and outputs warning
 void errorDialog(gchar* error_msg, gchar* secondaryText)
 {
@@ -466,13 +460,6 @@ int main(int argc, char *argv[])
 	readPreferences();
 	if (weSaveHistory)
 		readHistory();
-	//Simply install all signals that could be emitted when exiting (obsolete)
-	signal(15, handlesignal);
-	signal(1, handlesignal);
-	signal(3, handlesignal);
-	signal(6, handlesignal);
     gtk_main ();
-	if (weSaveHistory)
-		saveHistory();
     return 0;
 }
