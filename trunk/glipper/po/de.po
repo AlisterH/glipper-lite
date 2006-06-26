@@ -5,88 +5,81 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glipper 0.8\n"
+"Project-Id-Version: glipper\n"
 "Report-Msgid-Bugs-To: Sven Rech <svenrech@gmx.de>\n"
 "POT-Creation-Date: 2006-04-24 00:14+0200\n"
-"PO-Revision-Date: 2006-06-22 13:31+0100\n"
-"Last-Translator: karderio <karderio at gmail dot com>\n"
+"PO-Revision-Date: 2006-05-02 18:50+0200\n"
+"Last-Translator: Sven Rech <svenrech@gmx.de>\n"
 "Language-Team: German <svenrech@gmx.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/main.c:120
+#: ../src/main.c:121
 msgid "<No Content>"
 msgstr "<Kein Inhalt>"
 
-#: ../src/main.c:279
+#: ../src/main.c:277
+msgid "Cannot load icon. Is the software properly installed ?"
+msgstr "Kann Icon nicht laden. Wurde die Software ordnungsgemäß installiert?"
+
+#: ../src/main.c:289
 msgid ""
 "Glipper\n"
 "Clipboardmanager"
-msgstr ""
-"Glipper\n"
-"Zwischenablagenverwalter"
+msgstr "Zwischenablagenverwalter"
 
-#: ../src/main.c:313
+#: ../src/main.c:324
 msgid "Clipboardmanager for Gnome"
-msgstr "Zwischenablagenverwalter für Gnome"
+msgstr "Zwischenablagenverwalter für GNOME"
 
-#: ../src/preferences.c:89
+#: ../src/preferences.c:86
 msgid "Could not load the preferences interface"
-msgstr ""
+msgstr "Konnte das Einstellungsfenster nicht laden"
 
-#: ../src/glipper-properties.glade.h:1
+#: ../data/glipper-properties.glade.h:1
 msgid "<b>Behaviour</b>"
-msgstr ""
+msgstr "<b>Verhalten</b>"
 
-#: ../src/glipper-properties.glade.h:2
+#: ../data/glipper-properties.glade.h:2
 msgid "<b>Clipboards</b>"
-msgstr ""
+msgstr "<b>Zwischenablagen</b>"
 
-#: ../src/glipper-properties.glade.h:3
-#, fuzzy
+#: ../data/glipper-properties.glade.h:3
 msgid "<b>Limits</b>"
-msgstr "<b>Einstellungen</b>"
+msgstr "<b>Limits</b>"
 
-#: ../src/glipper-properties.glade.h:4
-#, fuzzy
+#: ../data/glipper-properties.glade.h:4
 msgid "Amount of entries in history:"
-msgstr "Anzahl der Einträge im Verlauf: "
+msgstr "Anzahl der Einträge im Verlauf:"
 
-#: ../src/glipper-properties.glade.h:5
-#, fuzzy
+#: ../data/glipper-properties.glade.h:5
 msgid "Copy - Ctrl+C/Ctrl+V"
-msgstr "Strg+C/Strg+V"
+msgstr "Kopieren - Strg+C/Strg+V"
 
-#: ../src/glipper-properties.glade.h:6
-#, fuzzy
+#: ../data/glipper-properties.glade.h:6
 msgid "Glipper Preferences"
-msgstr "Einstellungen"
+msgstr "Glipper Einstellungen"
 
-#: ../src/glipper-properties.glade.h:7
-#, fuzzy
+#: ../data/glipper-properties.glade.h:7
 msgid "Length of one history entry:"
-msgstr "Länge eines Verlauf Eintrages: "
+msgstr "Länge eines Verlaufeintrages:"
 
-#: ../src/glipper-properties.glade.h:8
-#, fuzzy
+#: ../data/glipper-properties.glade.h:8
 msgid "Save history entries on exit"
-msgstr "Sichere den Verlauf beim Verlassen"
+msgstr "Sichere den Inhalt des Verlaufes beim Verlassen"
 
-#: ../src/glipper-properties.glade.h:9
-#, fuzzy
+#: ../data/glipper-properties.glade.h:9
 msgid "Select - Mark/middle mouse button"
-msgstr "Markieren/Mittlere Maustaste"
+msgstr "Auswählen - Markieren/Mittlere Maustaste"
 
-#: ../src/glipper-properties.glade.h:10
-#, fuzzy
+#: ../data/glipper-properties.glade.h:10
 msgid "Tag Ctrl+C clipboard's content in history (blue)"
-msgstr "Markiere den Inhalt der Strg+C Zwischenablage im Verlauf (Blau)"
+msgstr "Markiere Strg+C Zwischenablageninhalt im Verlauf (blau)"
 
-#: ../src/glipper-properties.glade.h:11
-#, fuzzy
+#: ../data/glipper-properties.glade.h:11
 msgid "Which clipboards should be managed by Glipper?"
-msgstr "<b>Welche Zwischenablagen sollen von Glipper verwaltet werden?</b>"
+msgstr "Welche Zwischenablagen sollen von Glipper verwaltet werden?"
 
 #: ../data/glipper.desktop.in.h:1
 msgid "Clipboard Manager"
@@ -95,4 +88,3 @@ msgstr "Zwischenablagenverwalter"
 #: ../data/glipper.desktop.in.h:2
 msgid "Glipper"
 msgstr "Glipper"
-
