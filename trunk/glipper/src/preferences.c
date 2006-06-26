@@ -87,7 +87,7 @@ void giveWindow(void)
 
 		g_free (glade_file);
 
-		return 1;
+		return;
         }
 
 	g_free (glade_file);
