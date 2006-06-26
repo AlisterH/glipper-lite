@@ -19,7 +19,7 @@ GtkWidget* saveHistCheck;
 GtkWidget* closeButton;
 GtkWidget* prefWin;
 
-//Die Variablen aus der main.c:
+//the variables from main.c:
 extern int maxElements; 
 extern int maxItemLength;
 extern gboolean usePrimary; 
@@ -29,7 +29,7 @@ extern gboolean weSaveHistory;
 void savePreferences();
 void applyPreferences();
 
-//Sets initilal state of widgets
+//Sets initial state of widgets
 void setWidgets()
 {
 	gtk_spin_button_set_value((GtkSpinButton*)historyLength, maxElements);
@@ -38,7 +38,7 @@ void setWidgets()
 	gtk_toggle_button_set_active((GtkToggleButton*)defaultCheck, useDefault);
 	gtk_toggle_button_set_active((GtkToggleButton*)markDefaultCheck, markDefault);
 	gtk_toggle_button_set_active((GtkToggleButton*)saveHistCheck, weSaveHistory);
-	on_clipCheck_toggled(NULL, NULL); //kann markDefaultCheck ggf. unsensitive machen
+	on_clipCheck_toggled(NULL, NULL); //can make markDefaultCheck possibly unsensitive
 }
 
 //Set markDefaultCheck checkbox (ctrl+c in blue) active or not
