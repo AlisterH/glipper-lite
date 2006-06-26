@@ -255,12 +255,15 @@ void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
 	checkClipboard(NULL);
 }
 
+void errorDialog(gchar* error_msg, gchar* secondaryText);
+
 void createTrayIcon()
 {
 	GdkPixbuf* pixbuf, *scaled;
 	GtkWidget* tray_icon_image;
 	GtkWidget* eventbox;
 	GError* pix_error = NULL;
+	GtkTooltips* toolTip; //The tooltip
 
 	//Load trayicon
 	TrayIcon = (GtkWidget*)egg_tray_icon_new("GLIPPER");
