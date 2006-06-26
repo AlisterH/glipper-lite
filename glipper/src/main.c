@@ -186,40 +186,19 @@ void processContent(gchar* newContent, gchar** lastContent, GtkClipboard* Clipbo
 	}
 }
 
-/*Some Apps (like Firefox) have Problems with the Clipboard, which causes
-  the wait_for_text routine to never return.
-  I did a Timeout because of this :( */
-/*I'm not sure if this is really reasonable...*/
-gboolean timeout(gpointer data)
-{
-	void** array = data;
-	if (array[1] != NULL)
-	{
-		g_print("Timeout: ");
-		g_print((gchar*)array[1]); 
-		g_print("\n");
-		gtk_clipboard_set_text((GtkClipboard*)array[0], (gchar*)array[1], -1);
-	}
-	return 0;
-}
-
 gboolean checkClipboard(gpointer data)
 {
 	g_source_remove(mainTimeout);
 	if (usePrimary)
 	{
 		void* infos[] = {PrimaryCl, lastPr};
-		gint timeoutsource = g_timeout_add(500, timeout, infos);
 		gchar* newContentPr = gtk_clipboard_wait_for_text(PrimaryCl);
-		g_source_remove(timeoutsource);
 		processContent(newContentPr, &lastPr, PrimaryCl);
 	}
 	if (useDefault)
 	{
 		void* infos[] = {DefaultCl, lastDf};
-		gint timeoutsource = g_timeout_add(500, timeout, infos);
 		gchar* newContentCl = gtk_clipboard_wait_for_text(DefaultCl);
-		g_source_remove(timeoutsource);
 		processContent(newContentCl, &lastDf, DefaultCl);
 	}
 	mainTimeout = g_timeout_add(500, checkClipboard, NULL);
