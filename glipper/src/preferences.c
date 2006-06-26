@@ -4,9 +4,9 @@
 
 #include <gtk/gtk.h>
 #include <glade/glade.h>
-
 #include "preferences.h"
 #include "glipper-i18n.h"
+#include "main.h"
 
 #define GLADE_XML_FILE "glipper-properties.glade"
 
@@ -18,16 +18,6 @@ GtkWidget* markDefaultCheck;
 GtkWidget* saveHistCheck;
 GtkWidget* closeButton;
 GtkWidget* prefWin;
-
-//the variables from main.c:
-extern int maxElements; 
-extern int maxItemLength;
-extern gboolean usePrimary; 
-extern gboolean useDefault; 
-extern gboolean markDefault; 
-extern gboolean weSaveHistory;
-void savePreferences();
-void applyPreferences();
 
 //Sets initial state of widgets
 void setWidgets()
