@@ -1,0 +1,98 @@
+# Deutsche Übersetzung
+# Copyright (C) 2006 Sven Rech
+# This file is distributed under the same license as the glipper package.
+# Sven Rech <svenrech@gmx.de>, 2006
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: glipper 0.8\n"
+"Report-Msgid-Bugs-To: Sven Rech <svenrech@gmx.de>\n"
+"POT-Creation-Date: 2006-04-24 00:14+0200\n"
+"PO-Revision-Date: 2006-06-22 13:31+0100\n"
+"Last-Translator: karderio <karderio at gmail dot com>\n"
+"Language-Team: German <svenrech@gmx.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/main.c:120
+msgid "<No Content>"
+msgstr "<Kein Inhalt>"
+
+#: ../src/main.c:279
+msgid ""
+"Glipper\n"
+"Clipboardmanager"
+msgstr ""
+"Glipper\n"
+"Zwischenablagenverwalter"
+
+#: ../src/main.c:313
+msgid "Clipboardmanager for Gnome"
+msgstr "Zwischenablagenverwalter für Gnome"
+
+#: ../src/preferences.c:89
+msgid "Could not load the preferences interface"
+msgstr ""
+
+#: ../src/glipper-properties.glade.h:1
+msgid "<b>Behaviour</b>"
+msgstr ""
+
+#: ../src/glipper-properties.glade.h:2
+msgid "<b>Clipboards</b>"
+msgstr ""
+
+#: ../src/glipper-properties.glade.h:3
+#, fuzzy
+msgid "<b>Limits</b>"
+msgstr "<b>Einstellungen</b>"
+
+#: ../src/glipper-properties.glade.h:4
+#, fuzzy
+msgid "Amount of entries in history:"
+msgstr "Anzahl der Einträge im Verlauf: "
+
+#: ../src/glipper-properties.glade.h:5
+#, fuzzy
+msgid "Copy - Ctrl+C/Ctrl+V"
+msgstr "Strg+C/Strg+V"
+
+#: ../src/glipper-properties.glade.h:6
+#, fuzzy
+msgid "Glipper Preferences"
+msgstr "Einstellungen"
+
+#: ../src/glipper-properties.glade.h:7
+#, fuzzy
+msgid "Length of one history entry:"
+msgstr "Länge eines Verlauf Eintrages: "
+
+#: ../src/glipper-properties.glade.h:8
+#, fuzzy
+msgid "Save history entries on exit"
+msgstr "Sichere den Verlauf beim Verlassen"
+
+#: ../src/glipper-properties.glade.h:9
+#, fuzzy
+msgid "Select - Mark/middle mouse button"
+msgstr "Markieren/Mittlere Maustaste"
+
+#: ../src/glipper-properties.glade.h:10
+#, fuzzy
+msgid "Tag Ctrl+C clipboard's content in history (blue)"
+msgstr "Markiere den Inhalt der Strg+C Zwischenablage im Verlauf (Blau)"
+
+#: ../src/glipper-properties.glade.h:11
+#, fuzzy
+msgid "Which clipboards should be managed by Glipper?"
+msgstr "<b>Welche Zwischenablagen sollen von Glipper verwaltet werden?</b>"
+
+#: ../data/glipper.desktop.in.h:1
+msgid "Clipboard Manager"
+msgstr "Zwischenablagenverwalter"
+
+#: ../data/glipper.desktop.in.h:2
+msgid "Glipper"
+msgstr "Glipper"
+
