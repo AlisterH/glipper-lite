@@ -27,12 +27,12 @@
 #include "glipper-i18n.h"
 
 //Preferences variables
-int maxElements = 20; //Anzahl der Elemente in der History
-int maxItemLength = 35; //Länge eines Eintrags in der History
+int maxElements = 20; //Amount of elements in history
+int maxItemLength = 35; //Length of one history entry
 gboolean usePrimary = TRUE; //use Primary Clipboard
 gboolean useDefault = TRUE;; //use Default Clipboard
-gboolean markDefault = TRUE; //Ob Default Inhalt blau markiert wird
-gboolean weSaveHistory = TRUE;
+gboolean markDefault = TRUE; //whether default entry should be tagged
+gboolean weSaveHistory = TRUE; //whether history should be safed
 
 GtkClipboard* PrimaryCl;
 GtkClipboard* DefaultCl;
@@ -47,11 +47,10 @@ int hasChanged = 1;
 
 void getClipboards()
 {
-	/*Es existieren zwei unterschiedliche Clipboards:
-	  PrimaryClipboard: Mit der Maus markierte Texte
-	  DefaultClipboard: Mit Strg+C Mechanismus kopierte Texte
+	/*There exists two different Clipboards:
+	  PrimaryClipboard: Marked with mouse
+	  DefaultClipboard: copied with Strg+C
 	*/
-	/*Default Clipboard wird noch nicht benutzt in dieser Version*/
 	DefaultCl = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
 	PrimaryCl = gtk_clipboard_get (GDK_SELECTION_PRIMARY);
 }
@@ -65,10 +64,10 @@ void deleteHistory(GtkMenuItem* menuItem, gpointer user_data)
 
 void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data);
 
-//fügt dem Menü ein History Eintrag hinzu:
+//add history entry to menu:
 void addHistMenuItem(gchar* item)
 {
-	//Wir müssen den String auf "maxItemLength" Zeichen verkürzen:
+	//we have to cut the string to "maxItemLength" characters:
 	GString* ellipseData = g_string_new(item);
 	if (ellipseData->len > maxItemLength)
 	{
@@ -76,7 +75,7 @@ void addHistMenuItem(gchar* item)
 									ellipseData->len-maxItemLength);
 		ellipseData = g_string_insert(ellipseData, ellipseData->len/2, "...");
 	}
-	//bestimmte escape chars entfernen:
+	//remove special escape character (\n and \t):
 	{ 
 		int x;
 		for (x=0; x<=ellipseData->len; x++)
@@ -85,10 +84,9 @@ void addHistMenuItem(gchar* item)
 				ellipseData->str[x] = ' ';
 		}
 	}
-	//Der verkürzte String ist jetzt in "ellipseData" gespeichert
+	//The cutted string is now stored in "ellipseData"
 	GtkWidget* MenuItem = gtk_menu_item_new_with_label(ellipseData->str);
-	//Wenn dieser String derjenige ist, der sich im DefaultClipboard befindet,
-	//dann markieren wir ihn (vorrausgesetzt markDefault ist true):
+	//if this string belongs to the default Clipboard, we tag it (presumed markDefault is true):
 	if (markDefault && useDefault && usePrimary)
 		if ((lastDf!=NULL)&&(g_ascii_strcasecmp(lastDf, item)==0))
 		{
@@ -115,14 +113,14 @@ void createHistMenu()
 							 G_CALLBACK(deleteHistory), NULL);
 	gtk_menu_append((GtkMenu*)historyMenu, deleteAll);
 	gtk_menu_append((GtkMenu*)historyMenu, gtk_separator_menu_item_new());
-	//Jetzt alle History Einträge hinzufügen:
+	//Now add all history entrys:
 	if (history == NULL)
 		gtk_menu_append(historyMenu, 
 			gtk_menu_item_new_with_label(_("<No Content>")));
 	else
 	{
 		GSList* temp = history;
-		addHistMenuItem(temp->data); //Füge erstes manuell hinzu
+		addHistMenuItem(temp->data); //We add the first manually
 		if (temp->next != NULL)
 		{
 			gtk_menu_append((GtkMenu*)historyMenu, gtk_separator_menu_item_new());
@@ -144,20 +142,19 @@ void insertInHistory(gchar* content)
 		//g_print(content);
 		history = g_slist_prepend(history, g_strdup(content));
 		hasChanged = 1;
-		//Wir gucken, ob es in der History den gleichen Eintrag schon gibt,
-		//und löschen diesen:
+		//We look whether the same entry still exists in the history and delete it:
 		GSList* temp = history;
 		while ((temp->next!=NULL)&&(temp->next->data!=NULL)&&
 		  (g_ascii_strcasecmp((gchar*)temp->next->data, content)!=0))
 		  	temp = temp->next;
-		//Wenn ein gleicher Eintrag gefunden wurde:
+		//If the same entry was found:
 		if (temp->next!=NULL)
 		{
 			GSList* dummy = temp->next;
 			temp->next = temp->next->next;
 			g_slist_free_1(dummy);
 		}
-		//Wir lassen die History nicht länger als "maxElements" Elemente werden:
+		//We shorten the history if it gets longer than "maxElements":
 		GSList* deleteElement = g_slist_nth(history, maxElements-1);
 		if (deleteElement != NULL)
 		{
@@ -189,11 +186,10 @@ void processContent(gchar* newContent, gchar** lastContent, GtkClipboard* Clipbo
 	}
 }
 
-/*Da manche Applikationen (z.B. Firefox) Probleme machen
-  können, und so die wait_for_text routine niemals
-  zurückkommt, müssen wie ein Timeout einbauen :( */
-/*Ich bin mir selber nicht wirklich sicher, ob das hier
-  wirklich etwas sinnvolles bringt... */
+/*Some Apps (like Firefox) have Problems with the Clipboard, which causes
+  the wait_for_text routine to never return.
+  I did a Timeout because of this :( */
+/*I'm not sure if this is really reasonable...*/
 gboolean timeout(gpointer data)
 {
 	void** array = data;
@@ -264,7 +260,6 @@ void createTrayIcon()
 	GdkPixbuf* pixbuf, *scaled;
 	GtkWidget* tray_icon_image;
 	GtkWidget* eventbox;
-	GtkTooltips* toolTip; //The tooltip
 	GError* pix_error = NULL;
 
 	//Load trayicon
@@ -281,14 +276,14 @@ void createTrayIcon()
 	tray_icon_image = gtk_image_new_from_pixbuf(pixbuf);
 	gdk_pixbuf_unref(pixbuf);
 
-	//Eventbox erzeugen:
+	//create eventbox:
 	eventbox = gtk_event_box_new();
 
 	//Add description tooltip to the icon
 	toolTip = gtk_tooltips_new();
 	gtk_tooltips_set_tip(toolTip, eventbox, _("Glipper\nClipboardmanager"), "Glipper");
 
-	//Alles verbinden und anzeigen:
+	//connect and show everything:
 	gtk_container_add(GTK_CONTAINER(eventbox), tray_icon_image);
 	gtk_container_add (GTK_CONTAINER(TrayIcon), eventbox);
 	gtk_widget_show_all(GTK_WIDGET(TrayIcon));
@@ -412,7 +407,7 @@ void readPreferences()
 	fclose(prefFile);
 }
 
-/*Sorgt dafür, dass die momentanten Einstellungen wirksam werden: */
+/*Makes sure, that the current preferences are used:*/
 void applyPreferences()
 {
 	hasChanged=1; 
@@ -489,8 +484,7 @@ int main(int argc, char *argv[])
 	readPreferences();
 	if (weSaveHistory)
 		readHistory();
-	//Einfach mal alle potenziel auftretenen Signalhandler beim
-	//beenden installieren:
+	//Simply install all signals that could be emitted when exiting (obsolete)
 	signal(15, handlesignal);
 	signal(1, handlesignal);
 	signal(3, handlesignal);
