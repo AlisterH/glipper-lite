@@ -378,6 +378,26 @@ void createPopupMenu()
 	gtk_widget_show_all(popupMenu);
 }
 
+//trys to open (or create) a file in "~/.glipper" for writing purposes:
+FILE* writeGlipperFile(char* filename)
+{
+	gchar* directory = g_build_path("/", g_get_home_dir(), ".glipper", NULL);
+	gchar* path = g_build_filename(directory, filename, NULL);
+	FILE* file = fopen(path, "w");
+	if (file == NULL)
+		if (mkdir(directory, S_IRWXU)==0)  //Trys to create the folder if open failes
+		{
+			file = fopen(path, "w");
+			if (file == NULL)
+				g_warning("Can't open or create file %s!", file);
+		}
+		else
+			g_warning ("Can't create directory '.glipper' in user's home directory!");
+	g_free(directory);
+	g_free(path);
+	return file;
+}
+
 void saveElem(gpointer data, gpointer histFile)
 {
 	GString* entry = g_string_new((gchar*)data);
@@ -388,21 +408,13 @@ void saveElem(gpointer data, gpointer histFile)
 
 void saveHistory()
 {
-	gchar* directory = g_build_path("/", g_get_home_dir(), ".glipper", NULL);
-	gchar* path= g_build_filename(directory, "history", NULL);
-	FILE* histFile = fopen(path, "w");
-	if (histFile == NULL)
+	FILE* histFile = writeGlipperFile("history");
+	if (histFile != NULL)
 	{
-		if (mkdir(directory, S_IRWXU)==0)
-			histFile = fopen(path, "w");
-		else
-			return;
+		fputc(g_slist_length(history), histFile);
+		g_slist_foreach(history, saveElem, histFile);
+		fclose(histFile);
 	}
-	g_free(path);
-	g_free(directory);
-	fputc(g_slist_length(history), histFile);
-	g_slist_foreach(history, saveElem, histFile);
-	fclose(histFile);
 }
 
 void readHistory()
@@ -410,18 +422,19 @@ void readHistory()
 	gchar* path= g_build_filename(g_get_home_dir(), ".glipper/history", NULL);
 	FILE* histFile = fopen(path, "r");
 	g_free(path);
-	if (histFile == 0)
-		return;
-	int length = fgetc(histFile);
-	int x;
-	for (x=0; x < length; x++)
-	{
-		int size;
-		fread(&size, 4, 1, histFile);
-		gchar* data = (gchar*)g_malloc(size+1);
-		fread(data, size, 1, histFile);
-		data[size] = '\0';
-		history = g_slist_append(history, data);
+	if (histFile != 0)
+	{	
+		int length = fgetc(histFile);
+		int x;
+		for (x=0; x < length; x++)
+		{
+			int size;
+			fread(&size, 4, 1, histFile);
+			gchar* data = (gchar*)g_malloc(size+1);
+			fread(data, size, 1, histFile);
+			data[size] = '\0';
+			history = g_slist_append(history, data);
+		}
 	}
 }
 
@@ -430,15 +443,16 @@ void readPreferences()
 	gchar* path= g_build_filename(g_get_home_dir(), ".glipper/prefs", NULL);
 	FILE* prefFile = fopen(path, "r");
 	g_free(path);
-	if (prefFile == 0)
-		return;
-	fread(&maxElements, sizeof(maxElements), 1, prefFile);
-	fread(&maxItemLength, sizeof(maxItemLength), 1, prefFile);
-	fread(&usePrimary, sizeof(usePrimary), 1, prefFile);
-	fread(&useDefault, sizeof(useDefault), 1, prefFile);
-	fread(&markDefault, sizeof(markDefault), 1, prefFile);
-	fread(&weSaveHistory, sizeof(weSaveHistory), 1, prefFile);
-	fclose(prefFile);
+	if (prefFile != 0)
+	{
+		fread(&maxElements, sizeof(maxElements), 1, prefFile);
+		fread(&maxItemLength, sizeof(maxItemLength), 1, prefFile);
+		fread(&usePrimary, sizeof(usePrimary), 1, prefFile);
+		fread(&useDefault, sizeof(useDefault), 1, prefFile);
+		fread(&markDefault, sizeof(markDefault), 1, prefFile);
+		fread(&weSaveHistory, sizeof(weSaveHistory), 1, prefFile);
+		fclose(prefFile);
+	}
 }
 
 /*Makes sure, that the current preferences are used:*/
@@ -455,32 +469,17 @@ void applyPreferences()
 
 void savePreferences()
 {
-	gchar* directory = g_build_path("/", g_get_home_dir(), ".glipper", NULL);
-	gchar* path= g_build_filename(directory, "prefs", NULL);
-	FILE* prefFile = fopen(path, "w");
-	if (prefFile == NULL)
+	FILE* prefFile = writeGlipperFile("prefs");
+	if (prefFile != 0)
 	{
-		if (mkdir(directory, S_IRWXU)==0)
-			prefFile = fopen(path, "w");
-		else
-		{
-			g_warning ("Can't create the .glipper directory in user's home directory!");
-			g_free(path);
-			g_free(directory);
-			return;
-		}
+		fwrite(&maxElements, sizeof(maxElements), 1, prefFile);
+		fwrite(&maxItemLength, sizeof(maxItemLength), 1, prefFile);
+		fwrite(&usePrimary, sizeof(usePrimary), 1, prefFile);
+		fwrite(&useDefault, sizeof(useDefault), 1, prefFile);
+		fwrite(&markDefault, sizeof(markDefault), 1, prefFile);
+		fwrite(&weSaveHistory, sizeof(weSaveHistory), 1, prefFile);
+		fclose(prefFile);
 	}
-	if (prefFile == 0)
-		return;
-	fwrite(&maxElements, sizeof(maxElements), 1, prefFile);
-	fwrite(&maxItemLength, sizeof(maxItemLength), 1, prefFile);
-	fwrite(&usePrimary, sizeof(usePrimary), 1, prefFile);
-	fwrite(&useDefault, sizeof(useDefault), 1, prefFile);
-	fwrite(&markDefault, sizeof(markDefault), 1, prefFile);
-	fwrite(&weSaveHistory, sizeof(weSaveHistory), 1, prefFile);
-	fclose(prefFile);
-	g_free(path);
-	g_free(directory);
 }
 
 //Shows an error message dialog and outputs warning
