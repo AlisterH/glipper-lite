@@ -21,7 +21,6 @@
 #include <sys/stat.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <signal.h>
 #include "preferences.h"
 #include "utils/eggtrayicon.h"
 #include "utils/glipper-i18n.h"
