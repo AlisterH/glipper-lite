@@ -8,4 +8,5 @@ bin_PROGRAMS=glipper
 
 glipper_SOURCES= \
 	eggtrayicon.c  main.c  preferences.c \
-	eggtrayicon.h  glipper-i18n.h  preferences.h 
+	eggtrayicon.h  glipper-i18n.h  preferences.h \
+	utils/keybinder.c utils/eggaccelerators.c
