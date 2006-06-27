@@ -67,7 +67,7 @@ void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data);
 //add history entry to menu:
 GtkWidget* addHistMenuItem(gchar* item)
 {
-	static GtkTooltips* toolTip; //The tooltip for bold item
+	static GtkTooltips* toolTip = gtk_tooltips_new(); //The tooltip for bold item
 
 	if (toolTip == NULL) toolTip = gtk_tooltips_new();
 
@@ -112,9 +112,7 @@ GtkWidget* addHistMenuItem(gchar* item)
 
 void createHistMenu()
 {
-	static GtkTooltips* toolTip; //The tooltip for first item
-
-	if (toolTip == NULL) toolTip = gtk_tooltips_new();
+	static GtkTooltips* toolTip = gtk_tooltips_new(); //The tooltip for first item
 
 	if (historyMenu != NULL)
 		gtk_widget_destroy(historyMenu);
