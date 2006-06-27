@@ -34,7 +34,7 @@
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
 
 	  <child>
-	    <widget class="GtkButton" id="closeButton">
+	    <widget class="GtkButton" id="applyButton">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
@@ -47,7 +47,7 @@
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="helpbutton">
+	    <widget class="GtkButton" id="helpButton">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>

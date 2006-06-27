@@ -364,12 +364,6 @@ void show_about(gpointer data)
 		NULL);
 }
 
-void show_preferences(gpointer data)
-{
-	//Shows preferences dialog
-	giveWindow();
-}
-
 void createPopupMenu()
 {
 	popupMenu = gtk_menu_new();
@@ -378,7 +372,7 @@ void createPopupMenu()
 	GtkWidget* about = gtk_image_menu_item_new_from_stock(GTK_STOCK_ABOUT, NULL);
     g_signal_connect(G_OBJECT(about), "activate", G_CALLBACK(show_about), NULL);
 	GtkWidget* preferences = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
-    g_signal_connect(G_OBJECT(preferences), "activate", G_CALLBACK(show_preferences), NULL);
+    g_signal_connect(G_OBJECT(preferences), "activate", G_CALLBACK(showPreferences), NULL);
 	gtk_menu_append((GtkMenu*)popupMenu, preferences);
 	gtk_menu_append((GtkMenu*)popupMenu, about);
 	gtk_menu_append((GtkMenu*)popupMenu, gtk_separator_menu_item_new());
