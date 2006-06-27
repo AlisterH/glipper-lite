@@ -66,8 +66,8 @@ msgid "Length of one history entry:"
 msgstr "Länge eines Verlaufeintrages:"
 
 #: ../data/glipper-properties.glade.h:8
-msgid "Save history entries on exit"
-msgstr "Sichere den Inhalt des Verlaufes beim Verlassen"
+msgid "Save history"
+msgstr "Sichere den Inhalt des Verlaufes"
 
 #: ../data/glipper-properties.glade.h:9
 msgid "Select - Mark/middle mouse button"
