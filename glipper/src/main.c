@@ -26,6 +26,8 @@
 #include "utils/glipper-i18n.h"
 #include "utils/keybinder.h"
 
+#define CHECK_INTERVAL 500 //The interval between the clipboard checks (ms)
+
 //Preferences variables
 int maxElements = 20; //Amount of elements in history
 int maxItemLength = 35; //Length of one history entry
@@ -515,7 +517,7 @@ void keyhandler (char *keystring, gpointer user_data)
 
 int main(int argc, char *argv[])
 {
-	gchar* keybinderString = "<Alt>i";
+	gchar* keybinderString = "<Ctrl><Alt>c";
 
 	setlocale( LC_ALL, "" );
 	bindtextdomain (GETTEXT_PACKAGE, GLIPPERLOCALEDIR);
@@ -523,7 +525,7 @@ int main(int argc, char *argv[])
 	textdomain (GETTEXT_PACKAGE);
     gtk_init (&argc, &argv);
 	getClipboards();
-	mainTimeout = g_timeout_add(500, checkClipboard, NULL);
+	mainTimeout = g_timeout_add(CHECK_INTERVAL, checkClipboard, NULL);
 	keybinder_init();
 	keybinder_bind(keybinderString, keyhandler, NULL);
 	createTrayIcon();
