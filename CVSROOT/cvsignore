@@ -20,3 +20,5 @@ missing
 po2tbl.sed
 po2tbl.sed.in
 stamp-cat-id
+.intltool-merge-cache
+po/Makefile.in
