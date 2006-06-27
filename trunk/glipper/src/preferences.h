@@ -5,8 +5,8 @@ void
 on_DefaultCheck_toggled                (GtkToggleButton *togglebutton,
                                         gpointer         user_data);
 
-//void giveWindow(GtkWidget* window);
-void giveWindow(void);
+void 
+showPreferences                        (gpointer data);
 
 void
 on_DefaultCheck_toggled                (GtkToggleButton *togglebutton,

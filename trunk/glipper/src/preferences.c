@@ -16,7 +16,7 @@ GtkWidget* primaryCheck;
 GtkWidget* defaultCheck;
 GtkWidget* markDefaultCheck;
 GtkWidget* saveHistCheck;
-GtkWidget* closeButton;
+GtkWidget* applyButton;
 GtkWidget* prefWin;
 
 //Sets initial state of widgets
@@ -46,7 +46,7 @@ on_clipCheck_toggled                   (GtkToggleButton *togglebutton,
 
 //Save preferences when window is closed via apply button
 void
-on_closeButton_clicked                 (GtkButton       *button,
+on_applyButton_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
 	maxElements = gtk_spin_button_get_value_as_int((GtkSpinButton*)historyLength); 
@@ -60,7 +60,7 @@ on_closeButton_clicked                 (GtkButton       *button,
 	gtk_widget_destroy(prefWin);
 }
 
-void giveWindow(void)
+void showPreferences(gpointer data)
 {
 	char* glade_file;
 	GladeXML* gladeWindow;
@@ -87,7 +87,7 @@ void giveWindow(void)
 	defaultCheck = glade_xml_get_widget(gladeWindow, "defaultCheck");
 	markDefaultCheck = glade_xml_get_widget(gladeWindow, "markDefaultCheck");
 	saveHistCheck = glade_xml_get_widget(gladeWindow, "saveHistCheck");
-	closeButton = glade_xml_get_widget(gladeWindow, "closeButton");
+	applyButton = glade_xml_get_widget(gladeWindow, "applyButton");
 	prefWin = glade_xml_get_widget(gladeWindow, "preferences-dialog");
 
 	//Connect signals to handlers
@@ -97,13 +97,14 @@ void giveWindow(void)
 	g_signal_connect_after ((gpointer) defaultCheck, "toggled",
 		G_CALLBACK (on_clipCheck_toggled),
 		NULL);
-	g_signal_connect ((gpointer) closeButton, "clicked",
-		G_CALLBACK (on_closeButton_clicked),
+	g_signal_connect ((gpointer) applyButton, "clicked",
+		G_CALLBACK (on_applyButton_clicked),
 		NULL);
 
 	//Show preferences dialog
 	setWidgets();
 	gtk_widget_show_all(prefWin);
 
+	//free the glade data
 	g_object_unref(gladeWindow);
 }
