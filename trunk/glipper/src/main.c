@@ -67,7 +67,9 @@ void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data);
 //add history entry to menu:
 GtkWidget* addHistMenuItem(gchar* item)
 {
-	GtkTooltips* toolTip; //The tooltip for bold item
+	static GtkTooltips* toolTip; //The tooltip for bold item
+
+	if (toolTip == NULL) toolTip = gtk_tooltips_new();
 
 	//we have to cut the string to "maxItemLength" characters:
 	GString* ellipseData = g_string_new(item);
@@ -98,9 +100,7 @@ GtkWidget* addHistMenuItem(gchar* item)
 			g_free(temp);
 
 			//Add description tooltip to bold entry
-			toolTip = gtk_tooltips_new();
 			gtk_tooltips_set_tip(toolTip, MenuItem, _("This entry was copied with ctrl+c.\nIt can be pasted with ctrl+v."), "Glipper");
-			g_free(toolTip);
 		}
 	g_string_free(ellipseData, TRUE);
 	gtk_menu_append(historyMenu, MenuItem);
@@ -112,7 +112,9 @@ GtkWidget* addHistMenuItem(gchar* item)
 
 void createHistMenu()
 {
-	GtkTooltips* toolTip; //The tooltip for first item
+	static GtkTooltips* toolTip; //The tooltip for first item
+
+	if (toolTip == NULL) toolTip = gtk_tooltips_new();
 
 	if (historyMenu != NULL)
 		gtk_widget_destroy(historyMenu);
@@ -127,15 +129,11 @@ void createHistMenu()
 		GSList* temp = history;
 
 		//We add the first item manually
-		//GtkWidget* firstItem = addHistMenuItem(temp->data);
-		addHistMenuItem(temp->data);
+		GtkWidget* firstItem = addHistMenuItem(temp->data);
+		//addHistMenuItem(temp->data);
 
 		//Add description tooltip to first item
-		//toolTip = gtk_tooltips_new();
-		//gtk_tooltips_set_tip(toolTip, firstItem, _("This is the last element to be copied.\nIt can be pasted with the middle mouse button."), "Glipper");
-		//g_free(toolTip);
-
-		//g_free(firstItem);
+		gtk_tooltips_set_tip(toolTip, firstItem, _("This is the last element to be copied.\nIt can be pasted with the middle mouse button."), "Glipper");
 
 		if (temp->next != NULL)
 		{
@@ -289,7 +287,6 @@ void createTrayIcon()
 	//Add description tooltip to the icon
 	toolTip = gtk_tooltips_new();
 	gtk_tooltips_set_tip(toolTip, eventbox, _("Glipper\nClipboardmanager"), "Glipper");
-	g_free(toolTip);
 
 	//connect and show everything:
 	gtk_container_add(GTK_CONTAINER(eventbox), tray_icon_image);
