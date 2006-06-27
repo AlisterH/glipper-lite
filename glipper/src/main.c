@@ -46,6 +46,8 @@ gint mainTimeout;
 int hasChanged = 1;
 gchar* keybinderLabel = "Alt+i";
 
+void errorDialog(gchar* error_msg, gchar* secondaryText);
+
 void getClipboards()
 {
 	/*There exists two different Clipboards:
@@ -113,40 +115,48 @@ GtkWidget* addHistMenuItem(gchar* item)
 
 void createHistMenu()
 {
-	static GtkTooltips* toolTip; //The tooltip for first item
-	GtkWidget* menuHeader; //!! Potential memory leek, maybe this should be static...
+	static GtkTooltips* toolTip = NULL; //The tooltip for first item
+	static GtkWidget* menuHeader = NULL; //A nice header for the menu 
 
-	if (toolTip == NULL) toolTip = gtk_tooltips_new();
-
+	if (toolTip == NULL) 
+		toolTip = gtk_tooltips_new();
 
 	//Create menu header
 	//TODO : replace the menu item with non interactive widgets
-	GdkPixbuf* pixbuf;
-	GError* pix_error = NULL;
-
-	menuHeader = gtk_image_menu_item_new_with_label (g_strdup_printf(
-		_("Glipper - Clipboardmanager  (%s)"), keybinderLabel));
-
-	pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error);
-
-	//In case we cannot load icon, display error message and exit
-	//FIXME: this loads icon from disk each time we show the menu...
-	if (pix_error != NULL)
+	if (menuHeader == NULL)
 	{
-		errorDialog(pix_error->message, _("Cannot load icon. Is the software properly installed ?"));
-		exit(1);
-	}
+		GdkPixbuf* pixbuf;
+		GError* pix_error = NULL;
 
-	gtk_image_menu_item_set_image(menuHeader, gtk_image_new_from_pixbuf(pixbuf));
+		menuHeader = gtk_image_menu_item_new_with_label (g_strdup_printf(
+			_("Glipper - Clipboardmanager  (%s)"), keybinderLabel));
+		pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error);
 
+		//In case we cannot load icon, display error message and exit
+		if (pix_error != NULL)
+		{
+			errorDialog(pix_error->message, 
+				_("Cannot load icon. Is the software properly installed ?"));
+			exit(1);
+		}
+
+		gtk_image_menu_item_set_image((GtkImageMenuItem*)menuHeader, 
+			gtk_image_new_from_pixbuf(pixbuf));
+	}	
 
 	if (historyMenu != NULL)
+	{
+		//We remove menuHeader from the old Menu. Before doing so,
+		//we have to add a reference, for that it will not be deleted:
+		gtk_widget_ref(menuHeader);  
+		gtk_container_remove((GtkContainer*)historyMenu, menuHeader); 
 		gtk_widget_destroy(historyMenu);
+	}	
 	historyMenu = gtk_menu_new();
 
 	//Append menu header
-	gtk_menu_append((GtkMenu*)historyMenu, menuHeader);
-	gtk_menu_append((GtkMenu*)historyMenu, gtk_separator_menu_item_new());
+	gtk_menu_append(historyMenu, menuHeader);
+	gtk_menu_append(historyMenu, gtk_separator_menu_item_new());
 
 	//Now add all history entrys:
 	if (history == NULL)
@@ -284,8 +294,6 @@ void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
 		gtk_clipboard_set_text(DefaultCl, (gchar*)user_data, -1);
 	checkClipboard(NULL);
 }
-
-void errorDialog(gchar* error_msg, gchar* secondaryText);
 
 void createTrayIcon()
 {
