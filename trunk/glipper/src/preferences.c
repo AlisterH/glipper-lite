@@ -5,8 +5,8 @@
 #include <gtk/gtk.h>
 #include <glade/glade.h>
 #include "preferences.h"
-#include "glipper-i18n.h"
 #include "main.h"
+#include "utils/glipper-i18n.h"
 
 #define GLADE_XML_FILE "glipper-properties.glade"
 
