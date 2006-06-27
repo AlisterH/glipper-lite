@@ -62,16 +62,16 @@ on_closeButton_clicked                 (GtkButton       *button,
 
 void giveWindow(void)
 {
-	char		*glade_file;
-	GladeXML	*prefWindow;
+	char* glade_file;
+	GladeXML* gladeWindow;
 
 	//Load interface from glade file
 	glade_file = g_build_filename(GLADEDIR, GLADE_XML_FILE, NULL);
 
-	prefWindow = glade_xml_new(glade_file, "preferences-dialog", NULL);
+	gladeWindow = glade_xml_new(glade_file, "preferences-dialog", NULL);
 
 	//In case we cannot load glade file
-	if (prefWindow == NULL)
+	if (gladeWindow == NULL)
 	{
 		errorDialog(_("Could not load the preferences interface"), glade_file);
 		g_free (glade_file);
@@ -81,14 +81,14 @@ void giveWindow(void)
 	g_free (glade_file);
 
 	//Get the widgets that we will need
-	historyLength = glade_xml_get_widget(prefWindow, "historyLength");
-	itemLength = glade_xml_get_widget(prefWindow, "itemLength");
-	primaryCheck = glade_xml_get_widget(prefWindow, "primaryCheck");
-	defaultCheck = glade_xml_get_widget(prefWindow, "defaultCheck");
-	markDefaultCheck = glade_xml_get_widget(prefWindow, "markDefaultCheck");
-	saveHistCheck = glade_xml_get_widget(prefWindow, "saveHistCheck");
-	closeButton = glade_xml_get_widget(prefWindow, "closeButton");
-	prefWin = glade_xml_get_widget(prefWindow, "preferences-dialog");
+	historyLength = glade_xml_get_widget(gladeWindow, "historyLength");
+	itemLength = glade_xml_get_widget(gladeWindow, "itemLength");
+	primaryCheck = glade_xml_get_widget(gladeWindow, "primaryCheck");
+	defaultCheck = glade_xml_get_widget(gladeWindow, "defaultCheck");
+	markDefaultCheck = glade_xml_get_widget(gladeWindow, "markDefaultCheck");
+	saveHistCheck = glade_xml_get_widget(gladeWindow, "saveHistCheck");
+	closeButton = glade_xml_get_widget(gladeWindow, "closeButton");
+	prefWin = glade_xml_get_widget(gladeWindow, "preferences-dialog");
 
 	//Connect signals to handlers
 	g_signal_connect_after ((gpointer) primaryCheck, "toggled",
@@ -102,9 +102,8 @@ void giveWindow(void)
 		NULL);
 
 	//Show preferences dialog
+	setWidgets();
 	gtk_widget_show_all(prefWin);
 
-	//FIXME : should probably destroy prefWindow here
-
-	setWidgets();
+	//FIXME : should probably destroy gladeWindow here
 }
