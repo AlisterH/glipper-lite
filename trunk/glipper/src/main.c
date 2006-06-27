@@ -25,6 +25,7 @@
 #include "eggtrayicon.h"
 #include "preferences.h"
 #include "glipper-i18n.h"
+#include "utils/keybinder.h"
 
 //Preferences variables
 int maxElements = 20; //Amount of elements in history
@@ -446,6 +447,14 @@ void errorDialog(gchar* error_msg, gchar* secondaryText)
 	gtk_widget_destroy (dialog);
 }
 
+void keyhandler (char *keystring, gpointer user_data)
+{
+	if (hasChanged)
+		createHistMenu();
+	gtk_menu_popup ((GtkMenu*)historyMenu, NULL, NULL, NULL, NULL,
+					0, gtk_get_current_event_time());
+}
+
 int main(int argc, char *argv[])
 {
 	setlocale( LC_ALL, "" );
@@ -455,11 +464,14 @@ int main(int argc, char *argv[])
     gtk_init (&argc, &argv);
 	getClipboards();
 	mainTimeout = g_timeout_add(500, checkClipboard, NULL);
+	keybinder_init();
+	keybinder_bind("<Alt>i", keyhandler, NULL);
 	createTrayIcon();
 	createPopupMenu();
 	readPreferences();
 	if (weSaveHistory)
 		readHistory();
     gtk_main ();
+	keybinder_unbind("<Alt>i", keyhandler);
     return 0;
 }
