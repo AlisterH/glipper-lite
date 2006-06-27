@@ -7,6 +7,6 @@ noinst_PROGRAMS=glipper
 bin_PROGRAMS=glipper
 
 glipper_SOURCES= \
-	eggtrayicon.c  main.c  preferences.c \
-	eggtrayicon.h  glipper-i18n.h  preferences.h \
+	main.c  preferences.c preferences.h \
+	utils/eggtrayicon.h  utils/glipper-i18n.h utils/eggtrayicon.c \
 	utils/keybinder.c utils/eggaccelerators.c

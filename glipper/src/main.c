@@ -22,9 +22,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
-#include "eggtrayicon.h"
 #include "preferences.h"
-#include "glipper-i18n.h"
+#include "utils/eggtrayicon.h"
+#include "utils/glipper-i18n.h"
 #include "utils/keybinder.h"
 
 //Preferences variables

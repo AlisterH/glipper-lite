@@ -48,8 +48,8 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS)
-am_glipper_OBJECTS = eggtrayicon.$(OBJEXT) main.$(OBJEXT) \
-	preferences.$(OBJEXT) keybinder.$(OBJEXT) \
+am_glipper_OBJECTS = main.$(OBJEXT) preferences.$(OBJEXT) \
+	eggtrayicon.$(OBJEXT) keybinder.$(OBJEXT) \
 	eggaccelerators.$(OBJEXT)
 glipper_OBJECTS = $(am_glipper_OBJECTS)
 glipper_LDADD = $(LDADD)
@@ -189,8 +189,8 @@ AM_CFLAGS = $(FR_CFLAGS) -I$(top_srcdir) \
 
 AM_LDFLAGS = $(FR_LIBS)
 glipper_SOURCES = \
-	eggtrayicon.c  main.c  preferences.c \
-	eggtrayicon.h  glipper-i18n.h  preferences.h \
+	main.c  preferences.c preferences.h \
+	utils/eggtrayicon.h  utils/glipper-i18n.h utils/eggtrayicon.c \
 	utils/keybinder.c utils/eggaccelerators.c
 
 all: all-am
@@ -281,6 +281,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+eggtrayicon.o: utils/eggtrayicon.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT eggtrayicon.o -MD -MP -MF "$(DEPDIR)/eggtrayicon.Tpo" -c -o eggtrayicon.o `test -f 'utils/eggtrayicon.c' || echo '$(srcdir)/'`utils/eggtrayicon.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/eggtrayicon.Tpo" "$(DEPDIR)/eggtrayicon.Po"; else rm -f "$(DEPDIR)/eggtrayicon.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='utils/eggtrayicon.c' object='eggtrayicon.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o eggtrayicon.o `test -f 'utils/eggtrayicon.c' || echo '$(srcdir)/'`utils/eggtrayicon.c
+
+eggtrayicon.obj: utils/eggtrayicon.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT eggtrayicon.obj -MD -MP -MF "$(DEPDIR)/eggtrayicon.Tpo" -c -o eggtrayicon.obj `if test -f 'utils/eggtrayicon.c'; then $(CYGPATH_W) 'utils/eggtrayicon.c'; else $(CYGPATH_W) '$(srcdir)/utils/eggtrayicon.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/eggtrayicon.Tpo" "$(DEPDIR)/eggtrayicon.Po"; else rm -f "$(DEPDIR)/eggtrayicon.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='utils/eggtrayicon.c' object='eggtrayicon.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o eggtrayicon.obj `if test -f 'utils/eggtrayicon.c'; then $(CYGPATH_W) 'utils/eggtrayicon.c'; else $(CYGPATH_W) '$(srcdir)/utils/eggtrayicon.c'; fi`
 
 keybinder.o: utils/keybinder.c
 @am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT keybinder.o -MD -MP -MF "$(DEPDIR)/keybinder.Tpo" -c -o keybinder.o `test -f 'utils/keybinder.c' || echo '$(srcdir)/'`utils/keybinder.c; \
