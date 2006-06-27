@@ -44,6 +44,7 @@ GtkWidget* popupMenu;
 GtkWidget* TrayIcon;
 gint mainTimeout;
 int hasChanged = 1;
+gchar* keybinderLabel = "Alt+i";
 
 void getClipboards()
 {
@@ -67,7 +68,7 @@ void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data);
 //add history entry to menu:
 GtkWidget* addHistMenuItem(gchar* item)
 {
-	static GtkTooltips* toolTip = gtk_tooltips_new(); //The tooltip for bold item
+	static GtkTooltips* toolTip; //The tooltip for bold item
 
 	if (toolTip == NULL) toolTip = gtk_tooltips_new();
 
@@ -112,11 +113,42 @@ GtkWidget* addHistMenuItem(gchar* item)
 
 void createHistMenu()
 {
-	static GtkTooltips* toolTip = gtk_tooltips_new(); //The tooltip for first item
+	static GtkTooltips* toolTip; //The tooltip for first item
+	static GtkWidget* menuHeader;
+
+	if (toolTip == NULL) toolTip = gtk_tooltips_new();
+
+	//Create menu header
+	//TODO : replace the menu item with non interactive widgets
+	if (menuHeader == NULL)
+	{
+		GdkPixbuf* pixbuf;
+		GError* pix_error = NULL;
+
+		menuHeader = gtk_image_menu_item_new_with_label (g_strdup_printf(
+			_("Glipper - Clipboardmanager  (%s)"), keybinderLabel));
+
+		pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error);
+
+		//In case we cannot load icon, display error message and exit
+		if (pix_error != NULL)
+		{
+			errorDialog(pix_error->message, _("Cannot load icon. Is the software properly installed ?"));
+			exit(1);
+		}
+
+		gtk_image_menu_item_set_image(menuHeader, gtk_image_new_from_pixbuf(pixbuf));
+
+		gdk_pixbuf_unref(pixbuf);
+	}
 
 	if (historyMenu != NULL)
 		gtk_widget_destroy(historyMenu);
 	historyMenu = gtk_menu_new();
+
+	//Append menu header
+	gtk_menu_append((GtkMenu*)historyMenu, menuHeader);
+	gtk_menu_append((GtkMenu*)historyMenu, gtk_separator_menu_item_new());
 
 	//Now add all history entrys:
 	if (history == NULL)
@@ -284,7 +316,8 @@ void createTrayIcon()
 
 	//Add description tooltip to the icon
 	toolTip = gtk_tooltips_new();
-	gtk_tooltips_set_tip(toolTip, eventbox, _("Glipper\nClipboardmanager"), "Glipper");
+	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
+		keybinderLabel), "Glipper");
 
 	//connect and show everything:
 	gtk_container_add(GTK_CONTAINER(eventbox), tray_icon_image);
@@ -483,6 +516,8 @@ void keyhandler (char *keystring, gpointer user_data)
 
 int main(int argc, char *argv[])
 {
+	gchar* keybinderString = "<Alt>i";
+
 	setlocale( LC_ALL, "" );
 	bindtextdomain (GETTEXT_PACKAGE, GLIPPERLOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -491,13 +526,13 @@ int main(int argc, char *argv[])
 	getClipboards();
 	mainTimeout = g_timeout_add(500, checkClipboard, NULL);
 	keybinder_init();
-	keybinder_bind("<Alt>i", keyhandler, NULL);
+	keybinder_bind(keybinderString, keyhandler, NULL);
 	createTrayIcon();
 	createPopupMenu();
 	readPreferences();
 	if (weSaveHistory)
 		readHistory();
     gtk_main ();
-	keybinder_unbind("<Alt>i", keyhandler);
+	keybinder_unbind(keybinderString, keyhandler);
     return 0;
 }

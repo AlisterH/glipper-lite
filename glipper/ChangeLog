@@ -1,20 +1,23 @@
+2006-06-27
+	Change popup menu.
+	Add tooltips to first and bold menu items.
+
 2006-06-26
 	We develop Glipper with the help of CVS now.
 	Cleaned up the code a little bit and moved some files in subdirectories.
 	Added support for keybindings.
+	Translated source code comments to english.
 
 Between 2006-06-21 and 2006-06-26
 	New preferences dialog.
 		Now uses libglade.
 		GNOME HIG conformant.
 		Access Keys.
-		Error dialog if cannot open gladfe file.
 	Remove prefcallbacks.c, prefcallbacks.c and header files.
 	Move version number to configure.in (handy if we want commandline --version option).
 	Transparent icon - new libegg.
 	New verbose readme.
-	Error dialog.
-	0.90-dev
+	Error dialog - soft fails on problems opening files.
 
 2006-06-21
 	Tooltip added (bugreport #1509519).
