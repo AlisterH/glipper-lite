@@ -65,8 +65,10 @@ void deleteHistory(GtkMenuItem* menuItem, gpointer user_data)
 void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data);
 
 //add history entry to menu:
-void addHistMenuItem(gchar* item)
+GtkWidget* addHistMenuItem(gchar* item)
 {
+	GtkTooltips* toolTip; //The tooltip for bold item
+
 	//we have to cut the string to "maxItemLength" characters:
 	GString* ellipseData = g_string_new(item);
 	if (ellipseData->len > maxItemLength)
@@ -91,28 +93,31 @@ void addHistMenuItem(gchar* item)
 		if ((lastDf!=NULL)&&(g_ascii_strcasecmp(lastDf, item)==0))
 		{
 			GtkLabel* label = (GtkLabel*)gtk_bin_get_child((GtkBin*)MenuItem); 
-			gchar* temp = g_strdup_printf("<span foreground=\"blue\">%s</span>", ellipseData->str);
+			gchar* temp = g_strdup_printf("<b>%s</b>", ellipseData->str);
 			gtk_label_set_markup(label, temp);
 			g_free(temp);
+
+			//Add description tooltip to bold entry
+			toolTip = gtk_tooltips_new();
+			gtk_tooltips_set_tip(toolTip, MenuItem, _("This entry was copied with ctrl+c.\nIt can be pasted with ctrl+v."), "Glipper");
+			g_free(toolTip);
 		}
 	g_string_free(ellipseData, TRUE);
 	gtk_menu_append(historyMenu, MenuItem);
 	g_signal_connect(G_OBJECT(MenuItem), "activate", 
 							 G_CALLBACK(historyEntryActivate), 
 							 item);
+	return MenuItem;
 }
 
 void createHistMenu()
 {
+	GtkTooltips* toolTip; //The tooltip for first item
+
 	if (historyMenu != NULL)
 		gtk_widget_destroy(historyMenu);
 	historyMenu = gtk_menu_new();
-	GtkWidget* deleteAll = 
-		gtk_image_menu_item_new_from_stock(GTK_STOCK_CLEAR, NULL);
-	g_signal_connect(G_OBJECT(deleteAll), "activate", 
-							 G_CALLBACK(deleteHistory), NULL);
-	gtk_menu_append((GtkMenu*)historyMenu, deleteAll);
-	gtk_menu_append((GtkMenu*)historyMenu, gtk_separator_menu_item_new());
+
 	//Now add all history entrys:
 	if (history == NULL)
 		gtk_menu_append(historyMenu, 
@@ -120,7 +125,18 @@ void createHistMenu()
 	else
 	{
 		GSList* temp = history;
-		addHistMenuItem(temp->data); //We add the first manually
+
+		//We add the first item manually
+		//GtkWidget* firstItem = addHistMenuItem(temp->data);
+		addHistMenuItem(temp->data);
+
+		//Add description tooltip to first item
+		//toolTip = gtk_tooltips_new();
+		//gtk_tooltips_set_tip(toolTip, firstItem, _("This is the last element to be copied.\nIt can be pasted with the middle mouse button."), "Glipper");
+		//g_free(toolTip);
+
+		//g_free(firstItem);
+
 		if (temp->next != NULL)
 		{
 			gtk_menu_append((GtkMenu*)historyMenu, gtk_separator_menu_item_new());
@@ -128,6 +144,15 @@ void createHistMenu()
 				addHistMenuItem(temp->data);
 		}
 	}
+
+	//Add the "clear" button at the bottom of the menu
+	gtk_menu_append((GtkMenu*)historyMenu, gtk_separator_menu_item_new());
+
+	GtkWidget* deleteAll =
+		gtk_image_menu_item_new_from_stock(GTK_STOCK_CLEAR, NULL);
+	g_signal_connect(G_OBJECT(deleteAll), "activate", G_CALLBACK(deleteHistory), NULL);
+	gtk_menu_append((GtkMenu*)historyMenu, deleteAll);
+
 	gtk_widget_show_all(historyMenu);
 }
 
@@ -242,7 +267,7 @@ void createTrayIcon()
 	GtkWidget* tray_icon_image;
 	GtkWidget* eventbox;
 	GError* pix_error = NULL;
-	GtkTooltips* toolTip; //The tooltip
+	GtkTooltips* toolTip; //The tray icon tooltip
 
 	//Load trayicon
 	TrayIcon = (GtkWidget*)egg_tray_icon_new("GLIPPER");
@@ -264,6 +289,7 @@ void createTrayIcon()
 	//Add description tooltip to the icon
 	toolTip = gtk_tooltips_new();
 	gtk_tooltips_set_tip(toolTip, eventbox, _("Glipper\nClipboardmanager"), "Glipper");
+	g_free(toolTip);
 
 	//connect and show everything:
 	gtk_container_add(GTK_CONTAINER(eventbox), tray_icon_image);
@@ -430,7 +456,7 @@ void errorDialog(gchar* error_msg, gchar* secondaryText)
 {
 	GtkWidget	*dialog;
 
-	g_warning (error_msg);
+	g_warning (g_strdup_printf("%s - %s", error_msg, secondaryText));
 
 	dialog = gtk_message_dialog_new (NULL,
 		0, GTK_MESSAGE_ERROR,
