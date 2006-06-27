@@ -68,17 +68,15 @@ void giveWindow(void)
 	//Load interface from glade file
 	glade_file = g_build_filename(GLADEDIR, GLADE_XML_FILE, NULL);
 
-        prefWindow = glade_xml_new(glade_file, "preferences-dialog", NULL);
+	prefWindow = glade_xml_new(glade_file, "preferences-dialog", NULL);
 
 	//In case we cannot load glade file
 	if (prefWindow == NULL)
 	{
 		errorDialog(_("Could not load the preferences interface"), glade_file);
-
 		g_free (glade_file);
-
 		return;
-        }
+	}
 
 	g_free (glade_file);
 
