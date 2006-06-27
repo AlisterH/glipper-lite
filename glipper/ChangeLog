@@ -1,4 +1,9 @@
-Date ?
+2006-06-26
+	We develop Glipper with the help of CVS now.
+	Cleaned up the code a little bit and moved some files in subdirectories.
+	Added support for keybindings.
+
+Between 2006-06-21 and 2006-06-26
 	New preferences dialog.
 		Now uses libglade.
 		GNOME HIG conformant.
@@ -24,15 +29,15 @@ Date ?
 	There is now a french translation for glipper. Thank you very much to Achraf cherti. 
 	Release 0.87
 
-05-10-2006
+2006-05-10
 	Release 0.86
 
 	Fixed a stupid bug with savefiles
 
-05-09-2006
+2006-05-09
 	Release 0.85
 
-05-04-2006
+2006-05-04
 	removed the icon inline method, which was crap. 
 
 	Changed the two buttons in the preferences dialog with one close button.
@@ -40,11 +45,11 @@ Date ?
 
 	Changed some gladefile infrastructure things.
 
-05-02-2006
+2006-05-02
 	fixed translation problems with dektop file 
 
-04-29-2006
+2006-04-29
 	new icon (thanks to Fredo)
 
-04-24-2006
+2006-04-24
 	Initial Release (0.8)
