@@ -105,5 +105,5 @@ void giveWindow(void)
 	setWidgets();
 	gtk_widget_show_all(prefWin);
 
-	//FIXME : should probably destroy gladeWindow here
+	g_object_unref(gladeWindow);
 }
