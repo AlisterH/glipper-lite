@@ -102,7 +102,9 @@ void giveWindow(void)
 		NULL);
 
 	//Show preferences dialog
-	gtk_widget_show_all(glade_xml_get_widget (prefWindow, "preferences-dialog"));
+	gtk_widget_show_all(prefWin);
+
+	//FIXME : should probably destroy prefWindow here
 
 	setWidgets();
 }

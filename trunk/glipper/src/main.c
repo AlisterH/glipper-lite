@@ -114,33 +114,31 @@ GtkWidget* addHistMenuItem(gchar* item)
 void createHistMenu()
 {
 	static GtkTooltips* toolTip; //The tooltip for first item
-	static GtkWidget* menuHeader;
+	GtkWidget* menuHeader; //!! Potential memory leek, maybe this should be static...
 
 	if (toolTip == NULL) toolTip = gtk_tooltips_new();
 
+
 	//Create menu header
 	//TODO : replace the menu item with non interactive widgets
-	if (menuHeader == NULL)
+	GdkPixbuf* pixbuf;
+	GError* pix_error = NULL;
+
+	menuHeader = gtk_image_menu_item_new_with_label (g_strdup_printf(
+		_("Glipper - Clipboardmanager  (%s)"), keybinderLabel));
+
+	pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error);
+
+	//In case we cannot load icon, display error message and exit
+	//FIXME: this loads icon from disk each time we show the menu...
+	if (pix_error != NULL)
 	{
-		GdkPixbuf* pixbuf;
-		GError* pix_error = NULL;
-
-		menuHeader = gtk_image_menu_item_new_with_label (g_strdup_printf(
-			_("Glipper - Clipboardmanager  (%s)"), keybinderLabel));
-
-		pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error);
-
-		//In case we cannot load icon, display error message and exit
-		if (pix_error != NULL)
-		{
-			errorDialog(pix_error->message, _("Cannot load icon. Is the software properly installed ?"));
-			exit(1);
-		}
-
-		gtk_image_menu_item_set_image(menuHeader, gtk_image_new_from_pixbuf(pixbuf));
-
-		gdk_pixbuf_unref(pixbuf);
+		errorDialog(pix_error->message, _("Cannot load icon. Is the software properly installed ?"));
+		exit(1);
 	}
+
+	gtk_image_menu_item_set_image(menuHeader, gtk_image_new_from_pixbuf(pixbuf));
+
 
 	if (historyMenu != NULL)
 		gtk_widget_destroy(historyMenu);

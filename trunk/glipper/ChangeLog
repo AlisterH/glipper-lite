@@ -1,6 +1,11 @@
 2006-06-27
 	Change popup menu.
-	Add tooltips to first and bold menu items.
+		Add tooltips to first and bold menu items.
+		Add menu header.
+		Add hints for keybindings.
+		Put "clear" button at bottom.
+		Ctrl+c entry is now bold not blue.
+	Fix a couple of memory leaks.
 
 2006-06-26
 	We develop Glipper with the help of CVS now.
