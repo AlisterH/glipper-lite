@@ -427,13 +427,17 @@ void savePreferences()
 	gchar* directory = g_build_path("/", g_get_home_dir(), ".glipper", NULL);
 	gchar* path= g_build_filename(directory, "prefs", NULL);
 	FILE* prefFile = fopen(path, "w");
-	g_free(path);
 	if (prefFile == NULL)
 	{
 		if (mkdir(directory, S_IRWXU)==0)
 			prefFile = fopen(path, "w");
 		else
+		{
+			g_warning ("Can't create the .glipper directory in user's home directory!");
+			g_free(path);
+			g_free(directory);
 			return;
+		}
 	}
 	if (prefFile == 0)
 		return;
@@ -444,6 +448,8 @@ void savePreferences()
 	fwrite(&markDefault, sizeof(markDefault), 1, prefFile);
 	fwrite(&weSaveHistory, sizeof(weSaveHistory), 1, prefFile);
 	fclose(prefFile);
+	g_free(path);
+	g_free(directory);
 }
 
 //Shows an error message dialog and outputs warning
