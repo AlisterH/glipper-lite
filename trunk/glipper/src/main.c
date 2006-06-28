@@ -295,6 +295,7 @@ void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
 	if (useDefault)
 		gtk_clipboard_set_text(DefaultCl, (gchar*)user_data, -1);
 	checkClipboard(NULL);
+	hasChanged = 1;
 }
 
 void createTrayIcon()
