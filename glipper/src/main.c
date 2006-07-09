@@ -21,6 +21,7 @@
 #include <sys/stat.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "preferences.h"
 #include "utils/eggtrayicon.h"
 #include "utils/glipper-i18n.h"
@@ -35,6 +36,7 @@ gboolean usePrimary = TRUE; //use Primary Clipboard
 gboolean useDefault = TRUE;; //use Default Clipboard
 gboolean markDefault = TRUE; //whether default entry should be tagged
 gboolean weSaveHistory = TRUE; //whether history should be saved
+char* keyComb;
 
 GtkClipboard* PrimaryCl;
 GtkClipboard* DefaultCl;
@@ -46,7 +48,6 @@ GtkWidget* popupMenu;
 GtkWidget* TrayIcon;
 gint mainTimeout;
 int hasChanged = 1;
-gchar* keybinderLabel = "Alt+i";
 
 void errorDialog(gchar* error_msg, gchar* secondaryText);
 
@@ -131,7 +132,7 @@ void createHistMenu()
 		GError* pix_error = NULL;
 
 		menuHeader = gtk_image_menu_item_new_with_label (g_strdup_printf(
-			_("Glipper - Clipboardmanager  (%s)"), keybinderLabel));
+			_("Glipper - Clipboardmanager  (%s)"), keyComb));
 		pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error);
 
 		//In case we cannot load icon, display error message and exit
@@ -325,8 +326,9 @@ void createTrayIcon()
 
 	//Add description tooltip to the icon
 	toolTip = gtk_tooltips_new();
-	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
-		keybinderLabel), "Glipper");
+	//gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
+	//	keyComb), "Glipper");
+	gtk_tooltips_set_tip(toolTip, eventbox, _("Glipper\nClipboardmanager"), "Glipper");
 
 	//connect and show everything:
 	gtk_container_add(GTK_CONTAINER(eventbox), tray_icon_image);
@@ -381,6 +383,14 @@ void createPopupMenu()
 	gtk_menu_append((GtkMenu*)popupMenu, gtk_separator_menu_item_new());
     gtk_menu_append((GtkMenu*)popupMenu, quit);
 	gtk_widget_show_all(popupMenu);
+}
+
+void keyhandler(char *keystring, gpointer user_data)
+{
+	if (hasChanged)
+		createHistMenu();
+	gtk_menu_popup ((GtkMenu*)historyMenu, NULL, NULL, NULL, NULL,
+					0, gtk_get_current_event_time());
 }
 
 //trys to open (or create) a file in "~/.glipper" for writing purposes:
@@ -456,8 +466,14 @@ void readPreferences()
 		fread(&useDefault, sizeof(useDefault), 1, prefFile);
 		fread(&markDefault, sizeof(markDefault), 1, prefFile);
 		fread(&weSaveHistory, sizeof(weSaveHistory), 1, prefFile);
+		size_t len;
+		fread(&len, sizeof(size_t), 1, prefFile);
+		free(keyComb);
+		keyComb = malloc(len+1);
+		fgets(keyComb, len+1, prefFile);
 		fclose(prefFile);
-	}
+	} else 
+		strcpy(keyComb, "<Ctrl><Alt>c");
 }
 
 /*Makes sure, that the current preferences are used:*/
@@ -470,6 +486,7 @@ void applyPreferences()
 		g_slist_free(deleteElement->next);
 		deleteElement->next = NULL;
 	}
+	keybinder_bind(keyComb, keyhandler, NULL);
 }
 
 void savePreferences()
@@ -483,6 +500,9 @@ void savePreferences()
 		fwrite(&useDefault, sizeof(useDefault), 1, prefFile);
 		fwrite(&markDefault, sizeof(markDefault), 1, prefFile);
 		fwrite(&weSaveHistory, sizeof(weSaveHistory), 1, prefFile);
+		size_t len = strlen(keyComb);
+		fwrite(&len, sizeof(size_t), 1, prefFile);
+		fputs(keyComb, prefFile);
 		fclose(prefFile);
 	}
 }
@@ -508,33 +528,30 @@ void errorDialog(gchar* error_msg, gchar* secondaryText)
 	gtk_widget_destroy (dialog);
 }
 
-void keyhandler (char *keystring, gpointer user_data)
+void unbindKey()
 {
-	if (hasChanged)
-		createHistMenu();
-	gtk_menu_popup ((GtkMenu*)historyMenu, NULL, NULL, NULL, NULL,
-					0, gtk_get_current_event_time());
+	keybinder_unbind(keyComb, keyhandler);
+	free(keyComb);
+	keyComb = NULL;
 }
 
 int main(int argc, char *argv[])
 {
-	gchar* keybinderString = "<Ctrl><Alt>c";
-
-	setlocale( LC_ALL, "" );
+	setlocale(LC_ALL, "");
 	bindtextdomain (GETTEXT_PACKAGE, GLIPPERLOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
     gtk_init (&argc, &argv);
 	getClipboards();
-	mainTimeout = g_timeout_add(CHECK_INTERVAL, checkClipboard, NULL);
+	readPreferences();
 	keybinder_init();
-	keybinder_bind(keybinderString, keyhandler, NULL);
+	keybinder_bind(keyComb, keyhandler, NULL);
 	createTrayIcon();
 	createPopupMenu();
-	readPreferences();
 	if (weSaveHistory)
 		readHistory();
+	mainTimeout = g_timeout_add(CHECK_INTERVAL, checkClipboard, NULL);
     gtk_main ();
-	keybinder_unbind(keybinderString, keyhandler);
+	unbindKey();
     return 0;
 }
