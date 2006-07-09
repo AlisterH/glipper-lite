@@ -16,6 +16,7 @@ GtkWidget* primaryCheck;
 GtkWidget* defaultCheck;
 GtkWidget* markDefaultCheck;
 GtkWidget* saveHistCheck;
+GtkWidget* keyCombEntry;
 GtkWidget* applyButton;
 GtkWidget* prefWin;
 
@@ -28,6 +29,7 @@ void setWidgets()
 	gtk_toggle_button_set_active((GtkToggleButton*)defaultCheck, useDefault);
 	gtk_toggle_button_set_active((GtkToggleButton*)markDefaultCheck, markDefault);
 	gtk_toggle_button_set_active((GtkToggleButton*)saveHistCheck, weSaveHistory);
+	gtk_entry_set_text((GtkEntry*)keyCombEntry, keyComb);
 	on_clipCheck_toggled(NULL, NULL); //can make markDefaultCheck possibly unsensitive
 }
 
@@ -49,12 +51,14 @@ void
 on_applyButton_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
+	unbindKey();
 	maxElements = gtk_spin_button_get_value_as_int((GtkSpinButton*)historyLength); 
 	maxItemLength = gtk_spin_button_get_value_as_int((GtkSpinButton*)itemLength); 
 	usePrimary = gtk_toggle_button_get_active((GtkToggleButton*)primaryCheck);
 	useDefault = gtk_toggle_button_get_active((GtkToggleButton*)defaultCheck);
 	markDefault = gtk_toggle_button_get_active((GtkToggleButton*)markDefaultCheck);
 	weSaveHistory = gtk_toggle_button_get_active((GtkToggleButton*)saveHistCheck);
+	keyComb = g_strdup(gtk_entry_get_text((GtkEntry*)keyCombEntry));
 	savePreferences();
 	applyPreferences();
 	gtk_widget_destroy(prefWin);
@@ -87,6 +91,7 @@ void showPreferences(gpointer data)
 	defaultCheck = glade_xml_get_widget(gladeWindow, "defaultCheck");
 	markDefaultCheck = glade_xml_get_widget(gladeWindow, "markDefaultCheck");
 	saveHistCheck = glade_xml_get_widget(gladeWindow, "saveHistCheck");
+	keyCombEntry = glade_xml_get_widget(gladeWindow, "keyComb");
 	applyButton = glade_xml_get_widget(gladeWindow, "applyButton");
 	prefWin = glade_xml_get_widget(gladeWindow, "preferences-dialog");
 
