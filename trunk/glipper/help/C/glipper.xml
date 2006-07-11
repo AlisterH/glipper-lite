@@ -302,6 +302,18 @@
 		</para>
               </entry>
             </row>
+            <row>
+              <entry colname="colspec0" valign="top">
+                <para>
+                  <guilabel>Key combination for popup</guilabel>
+                </para>
+              </entry>
+              <entry colname="colspec1" valign="top">
+                <para>
+			Enter a key combination to change the main menu keyboard shortcut.
+		</para>
+              </entry>
+            </row>
           </tbody>
         </tgroup>
       </table>
