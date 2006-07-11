@@ -311,7 +311,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar GETTEXT_PACKAGE CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CPP EGREP USE_NLS MSGFMT GMSGFMT XGETTEXT CATALOGS CATOBJEXT DATADIRNAME GMOFILES INSTOBJEXT INTLLIBS PO_IN_DATADIR_TRUE PO_IN_DATADIR_FALSE POFILES POSUB INTLTOOL_DESKTOP_RULE INTLTOOL_DIRECTORY_RULE INTLTOOL_KEYS_RULE INTLTOOL_PROP_RULE INTLTOOL_OAF_RULE INTLTOOL_PONG_RULE INTLTOOL_SERVER_RULE INTLTOOL_SHEET_RULE INTLTOOL_SOUNDLIST_RULE INTLTOOL_UI_RULE INTLTOOL_XAM_RULE INTLTOOL_KBD_RULE INTLTOOL_XML_RULE INTLTOOL_XML_NOMERGE_RULE INTLTOOL_CAVES_RULE INTLTOOL_SCHEMAS_RULE INTLTOOL_THEME_RULE INTLTOOL_EXTRACT INTLTOOL_MERGE INTLTOOL_UPDATE INTLTOOL_PERL INTLTOOL_ICONV INTLTOOL_MSGFMT INTLTOOL_MSGMERGE INTLTOOL_XGETTEXT glipperlocaledir GLIB_REQUIRED GTK_REQUIRED PKG_CONFIG ac_pt_PKG_CONFIG FR_CFLAGS FR_LIBS LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar GETTEXT_PACKAGE CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CPP EGREP USE_NLS MSGFMT GMSGFMT XGETTEXT CATALOGS CATOBJEXT DATADIRNAME GMOFILES INSTOBJEXT INTLLIBS PO_IN_DATADIR_TRUE PO_IN_DATADIR_FALSE POFILES POSUB MKINSTALLDIRS INTLTOOL_DESKTOP_RULE INTLTOOL_DIRECTORY_RULE INTLTOOL_KEYS_RULE INTLTOOL_PROP_RULE INTLTOOL_OAF_RULE INTLTOOL_PONG_RULE INTLTOOL_SERVER_RULE INTLTOOL_SHEET_RULE INTLTOOL_SOUNDLIST_RULE INTLTOOL_UI_RULE INTLTOOL_XAM_RULE INTLTOOL_KBD_RULE INTLTOOL_XML_RULE INTLTOOL_XML_NOMERGE_RULE INTLTOOL_CAVES_RULE INTLTOOL_SCHEMAS_RULE INTLTOOL_THEME_RULE INTLTOOL_SERVICE_RULE INTLTOOL_EXTRACT INTLTOOL_MERGE INTLTOOL_UPDATE INTLTOOL_PERL INTLTOOL_ICONV INTLTOOL_MSGFMT INTLTOOL_MSGMERGE INTLTOOL_XGETTEXT ALL_LINGUAS glipperlocaledir PKG_CONFIG ac_pt_PKG_CONFIG GDU_MODULE_VERSION_CHECK_CFLAGS GDU_MODULE_VERSION_CHECK_LIBS HELP_DIR OMF_DIR DOC_USER_FORMATS ENABLE_SK_TRUE ENABLE_SK_FALSE GLIB_REQUIRED GTK_REQUIRED FR_CFLAGS FR_LIBS LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -776,6 +776,14 @@ ac_env_PKG_CONFIG_set=${PKG_CONFIG+set}
 ac_env_PKG_CONFIG_value=$PKG_CONFIG
 ac_cv_env_PKG_CONFIG_set=${PKG_CONFIG+set}
 ac_cv_env_PKG_CONFIG_value=$PKG_CONFIG
+ac_env_GDU_MODULE_VERSION_CHECK_CFLAGS_set=${GDU_MODULE_VERSION_CHECK_CFLAGS+set}
+ac_env_GDU_MODULE_VERSION_CHECK_CFLAGS_value=$GDU_MODULE_VERSION_CHECK_CFLAGS
+ac_cv_env_GDU_MODULE_VERSION_CHECK_CFLAGS_set=${GDU_MODULE_VERSION_CHECK_CFLAGS+set}
+ac_cv_env_GDU_MODULE_VERSION_CHECK_CFLAGS_value=$GDU_MODULE_VERSION_CHECK_CFLAGS
+ac_env_GDU_MODULE_VERSION_CHECK_LIBS_set=${GDU_MODULE_VERSION_CHECK_LIBS+set}
+ac_env_GDU_MODULE_VERSION_CHECK_LIBS_value=$GDU_MODULE_VERSION_CHECK_LIBS
+ac_cv_env_GDU_MODULE_VERSION_CHECK_LIBS_set=${GDU_MODULE_VERSION_CHECK_LIBS+set}
+ac_cv_env_GDU_MODULE_VERSION_CHECK_LIBS_value=$GDU_MODULE_VERSION_CHECK_LIBS
 ac_env_FR_CFLAGS_set=${FR_CFLAGS+set}
 ac_env_FR_CFLAGS_value=$FR_CFLAGS
 ac_cv_env_FR_CFLAGS_set=${FR_CFLAGS+set}
@@ -863,6 +871,16 @@ Optional Features:
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
   --disable-dependency-tracking  speeds up one-time build
   --enable-dependency-tracking   do not reject slow dependency extractors
+  --disable-gnome        Remove GNOME support. This removes essential features
+  --disable-scrollkeeper  do not make updates to the scrollkeeper database
+
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-help-dir=DIR     path to help docs
+  --with-omf-dir=DIR      path to OMF files
+  --with-help-formats=FORMATS
+                          list of formats
 
 Some influential environment variables:
   CC          C compiler command
@@ -873,6 +891,11 @@ Some influential environment variables:
               headers in a nonstandard directory <include dir>
   CPP         C preprocessor
   PKG_CONFIG  path to pkg-config utility
+  GDU_MODULE_VERSION_CHECK_CFLAGS
+              C compiler flags for GDU_MODULE_VERSION_CHECK, overriding
+              pkg-config
+  GDU_MODULE_VERSION_CHECK_LIBS
+              linker flags for GDU_MODULE_VERSION_CHECK, overriding pkg-config
   FR_CFLAGS   C compiler flags for FR, overriding pkg-config
   FR_LIBS     linker flags for FR, overriding pkg-config
 
@@ -968,7 +991,7 @@ esac
     else
       echo "$as_me: WARNING: no configuration information is in $ac_dir" >&2
     fi
-    cd $ac_popdir
+    cd "$ac_popdir"
   done
 fi
 
@@ -1766,6 +1789,14 @@ am__tar='${AMTAR} chof - "$$tardir"'; am__untar='${AMTAR} xf -'
 
 
 
+# Default instalation root directory
+prefix=/usr
+
+
+###########################################################################
+# GETTEXT
+###########################################################################
+
 GETTEXT_PACKAGE="glipper"
 
 
@@ -2409,8 +2440,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -2468,8 +2498,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -2585,8 +2614,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -2640,8 +2668,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -2686,8 +2713,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -2731,8 +2757,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -3164,8 +3189,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -3335,8 +3359,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -3404,8 +3427,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -3550,8 +3572,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -3622,8 +3643,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -3767,8 +3787,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -3826,8 +3845,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -3924,8 +3942,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -4004,8 +4021,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -4069,8 +4085,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -4134,8 +4149,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -4212,8 +4226,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -4277,8 +4290,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -4394,8 +4406,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -4562,8 +4573,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -4696,8 +4706,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -4782,8 +4791,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -4914,6 +4922,15 @@ echo "${ECHO_T}$LINGUAS" >&6
      fi
    fi
 
+            MKINSTALLDIRS=
+   if test -n "$ac_aux_dir"; then
+     MKINSTALLDIRS="$ac_aux_dir/mkinstalldirs"
+   fi
+   if test -z "$MKINSTALLDIRS"; then
+     MKINSTALLDIRS="\$(top_srcdir)/mkinstalldirs"
+   fi
+
+
          test -d po || mkdir po
    if test "x$srcdir" != "x."; then
      if test "x`echo $srcdir | sed 's@/.*@@'`" = "x"; then
@@ -4929,25 +4946,30 @@ echo "${ECHO_T}$LINGUAS" >&6
 	< $srcdir/po/POTFILES.in > po/POTFILES
 
 
+case "$am__api_version" in
+    1.01234)
+	{ { echo "$as_me:$LINENO: error: Automake 1.5 or newer is required to use intltool" >&5
+echo "$as_me: error: Automake 1.5 or newer is required to use intltool" >&2;}
+   { (exit 1); exit 1; }; }
+    ;;
+    *)
+    ;;
+esac
 
 if test -n "0.23"; then
     echo "$as_me:$LINENO: checking for intltool >= 0.23" >&5
 echo $ECHO_N "checking for intltool >= 0.23... $ECHO_C" >&6
 
-    INTLTOOL_REQUIRED_VERSION_AS_INT=`echo 0.23 | awk -F. '{ printf "%d", $1 * 100 + $2; }'`
-    INTLTOOL_APPLIED_VERSION=`awk -F\" '/\\$VERSION / { printf $2; }'  < ${ac_aux_dir}/intltool-update.in`
+    INTLTOOL_REQUIRED_VERSION_AS_INT=`echo 0.23 | awk -F. '{ print $ 1 * 1000 + $ 2 * 100 + $ 3; }'`
+    INTLTOOL_APPLIED_VERSION=`awk -F\" '/\\$VERSION / { print $ 2; }' ${ac_aux_dir}/intltool-update.in`
+    INTLTOOL_APPLIED_VERSION_AS_INT=`awk -F\" '/\\$VERSION / { split($ 2, VERSION, "."); print VERSION[1] * 1000 + VERSION[2] * 100 + VERSION[3];}' ${ac_aux_dir}/intltool-update.in`
 
-    INTLTOOL_APPLIED_VERSION_AS_INT=`awk -F\" '/\\$VERSION / { split($2, VERSION, "."); printf "%d\n", VERSION[1] * 100 + VERSION[2];}' < ${ac_aux_dir}/intltool-update.in`
-
-
-    if test "$INTLTOOL_APPLIED_VERSION_AS_INT" -ge "$INTLTOOL_REQUIRED_VERSION_AS_INT"; then
-	echo "$as_me:$LINENO: result: $INTLTOOL_APPLIED_VERSION found" >&5
+    echo "$as_me:$LINENO: result: $INTLTOOL_APPLIED_VERSION found" >&5
 echo "${ECHO_T}$INTLTOOL_APPLIED_VERSION found" >&6
-    else
-	echo "$as_me:$LINENO: result: $INTLTOOL_APPLIED_VERSION found. Your intltool is too old.  You need intltool 0.23 or later." >&5
-echo "${ECHO_T}$INTLTOOL_APPLIED_VERSION found. Your intltool is too old.  You need intltool 0.23 or later." >&6
-	exit 1
-    fi
+    test "$INTLTOOL_APPLIED_VERSION_AS_INT" -ge "$INTLTOOL_REQUIRED_VERSION_AS_INT" ||
+	{ { echo "$as_me:$LINENO: error: Your intltool is too old.  You need intltool 0.23 or later." >&5
+echo "$as_me: error: Your intltool is too old.  You need intltool 0.23 or later." >&2;}
+   { (exit 1); exit 1; }; }
 fi
 
   INTLTOOL_DESKTOP_RULE='%.desktop:   %.desktop.in   $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; LC_ALL=C $(INTLTOOL_MERGE) -d -u -c $(top_builddir)/po/.intltool-merge-cache $(top_srcdir)/po $< $@'
@@ -4967,6 +4989,8 @@ INTLTOOL_SOUNDLIST_RULE='%.soundlist: %.soundlist.in $(INTLTOOL_MERGE) $(wildcar
     INTLTOOL_CAVES_RULE='%.caves:     %.caves.in     $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; LC_ALL=C $(INTLTOOL_MERGE) -d -u -c $(top_builddir)/po/.intltool-merge-cache $(top_srcdir)/po $< $@'
   INTLTOOL_SCHEMAS_RULE='%.schemas:   %.schemas.in   $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; LC_ALL=C $(INTLTOOL_MERGE) -s -u -c $(top_builddir)/po/.intltool-merge-cache $(top_srcdir)/po $< $@'
     INTLTOOL_THEME_RULE='%.theme:     %.theme.in     $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; LC_ALL=C $(INTLTOOL_MERGE) -d -u -c $(top_builddir)/po/.intltool-merge-cache $(top_srcdir)/po $< $@'
+    INTLTOOL_SERVICE_RULE='%.service: %.service.in   $(INTLTOOL_MERGE) $(wildcard $(top_srcdir)/po/*.po) ; LC_ALL=C $(INTLTOOL_MERGE) -d -u -c $(top_builddir)/po/.intltool-merge-cache $(top_srcdir)/po $< $@'
+
 
 
 
@@ -4987,13 +5011,11 @@ INTLTOOL_SOUNDLIST_RULE='%.soundlist: %.soundlist.in $(INTLTOOL_MERGE) $(wildcar
 
 
 # Use the tools built into the package, not the ones that are installed.
-
 INTLTOOL_EXTRACT='$(top_builddir)/intltool-extract'
+
 INTLTOOL_MERGE='$(top_builddir)/intltool-merge'
+
 INTLTOOL_UPDATE='$(top_builddir)/intltool-update'
-
-
-
 
 
 # Extract the first word of "perl", so it can be a program name with args.
@@ -5219,15 +5241,11 @@ echo "${ECHO_T}no" >&6
 fi
 
 
-# Remove file type tags (using []) from po/POTFILES.
+# Substitute ALL_LINGUAS so we can use it in po/Makefile
 
 
 
 
-
-
-
-# Manually sed perl in so people don't have to put the intltool scripts in AC_OUTPUT.
 
           ac_config_commands="$ac_config_commands intltool"
 
@@ -5236,6 +5254,31 @@ fi
 
 glipperlocaledir='${prefix}/${DATADIRNAME}/locale'
 
+
+
+###########################################################################
+# Disable GNOME support
+###########################################################################
+# Check whether --enable-gnome or --disable-gnome was given.
+if test "${enable_gnome+set}" = set; then
+  enableval="$enable_gnome"
+  disable_gnome=yes
+else
+  disable_gnome=no
+fi;
+
+echo "$as_me:$LINENO: checking whether GNOME support must be compiled in" >&5
+echo $ECHO_N "checking whether GNOME support must be compiled in... $ECHO_C" >&6
+if test x"${disable_gnome}" = xyes; then
+   echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+else
+   echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+fi
+#AM_CONDITIONAL(DISABLE_GNOME, test x"${disable_gnome}" = xyes)
+
+###########################################################################
 
 
 # Checks for programs.
@@ -5606,8 +5649,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -5665,8 +5707,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -5782,8 +5823,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -5837,8 +5877,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -5883,8 +5922,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -5928,8 +5966,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -6078,11 +6115,19 @@ fi
 
 
 
-# Checks for libraries.
-GLIB_REQUIRED=2.6.0
-GTK_REQUIRED=2.6.0
-GLADE_REQUIRED=2.0.0
 
+# GDU
+if test x"${disable_gnome}" = xno; then
+case m4 in
+  [\\/]* | ?:[\\/]* ) ac_macro_dir=m4         ;;
+  *)                      ac_macro_dir=$srcdir/m4 ;;
+esac
+if test -d "$ac_macro_dir"; then :
+else
+  { { echo "$as_me:$LINENO: error: cannot find macro directory \`m4'" >&5
+echo "$as_me: error: cannot find macro directory \`m4'" >&2;}
+   { (exit 1); exit 1; }; }
+fi
 
 
 
@@ -6190,6 +6235,212 @@ echo "${ECHO_T}no" >&6
 
 fi
 
+if test "x$PACKAGE" != "xgnome-doc-utils"; then
+  GDU_REQUIRED_VERSION=0.3.2
+  if test -n ""; then
+    GDU_REQUIRED_VERSION=
+  fi
+
+
+pkg_failed=no
+echo "$as_me:$LINENO: checking for GDU_MODULE_VERSION_CHECK" >&5
+echo $ECHO_N "checking for GDU_MODULE_VERSION_CHECK... $ECHO_C" >&6
+
+if test -n "$PKG_CONFIG"; then
+    if test -n "$GDU_MODULE_VERSION_CHECK_CFLAGS"; then
+        pkg_cv_GDU_MODULE_VERSION_CHECK_CFLAGS="$GDU_MODULE_VERSION_CHECK_CFLAGS"
+    else
+        if test -n "$PKG_CONFIG" && \
+    { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"gnome-doc-utils >= \$GDU_REQUIRED_VERSION\"") >&5
+  ($PKG_CONFIG --exists --print-errors "gnome-doc-utils >= $GDU_REQUIRED_VERSION") 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; then
+  pkg_cv_GDU_MODULE_VERSION_CHECK_CFLAGS=`$PKG_CONFIG --cflags "gnome-doc-utils >= $GDU_REQUIRED_VERSION" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+    fi
+else
+	pkg_failed=untried
+fi
+if test -n "$PKG_CONFIG"; then
+    if test -n "$GDU_MODULE_VERSION_CHECK_LIBS"; then
+        pkg_cv_GDU_MODULE_VERSION_CHECK_LIBS="$GDU_MODULE_VERSION_CHECK_LIBS"
+    else
+        if test -n "$PKG_CONFIG" && \
+    { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"gnome-doc-utils >= \$GDU_REQUIRED_VERSION\"") >&5
+  ($PKG_CONFIG --exists --print-errors "gnome-doc-utils >= $GDU_REQUIRED_VERSION") 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; then
+  pkg_cv_GDU_MODULE_VERSION_CHECK_LIBS=`$PKG_CONFIG --libs "gnome-doc-utils >= $GDU_REQUIRED_VERSION" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+    fi
+else
+	pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        GDU_MODULE_VERSION_CHECK_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "gnome-doc-utils >= $GDU_REQUIRED_VERSION"`
+        else
+	        GDU_MODULE_VERSION_CHECK_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "gnome-doc-utils >= $GDU_REQUIRED_VERSION"`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$GDU_MODULE_VERSION_CHECK_PKG_ERRORS" >&5
+
+	{ { echo "$as_me:$LINENO: error: Package requirements (gnome-doc-utils >= $GDU_REQUIRED_VERSION) were not met:
+
+$GDU_MODULE_VERSION_CHECK_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables GDU_MODULE_VERSION_CHECK_CFLAGS
+and GDU_MODULE_VERSION_CHECK_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+" >&5
+echo "$as_me: error: Package requirements (gnome-doc-utils >= $GDU_REQUIRED_VERSION) were not met:
+
+$GDU_MODULE_VERSION_CHECK_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables GDU_MODULE_VERSION_CHECK_CFLAGS
+and GDU_MODULE_VERSION_CHECK_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+" >&2;}
+   { (exit 1); exit 1; }; }
+elif test $pkg_failed = untried; then
+	{ { echo "$as_me:$LINENO: error: The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+Alternatively, you may set the environment variables GDU_MODULE_VERSION_CHECK_CFLAGS
+and GDU_MODULE_VERSION_CHECK_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://www.freedesktop.org/software/pkgconfig>.
+See \`config.log' for more details." >&5
+echo "$as_me: error: The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+Alternatively, you may set the environment variables GDU_MODULE_VERSION_CHECK_CFLAGS
+and GDU_MODULE_VERSION_CHECK_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://www.freedesktop.org/software/pkgconfig>.
+See \`config.log' for more details." >&2;}
+   { (exit 1); exit 1; }; }
+else
+	GDU_MODULE_VERSION_CHECK_CFLAGS=$pkg_cv_GDU_MODULE_VERSION_CHECK_CFLAGS
+	GDU_MODULE_VERSION_CHECK_LIBS=$pkg_cv_GDU_MODULE_VERSION_CHECK_LIBS
+        echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+	:
+fi
+fi
+
+
+# Check whether --with-help-dir or --without-help-dir was given.
+if test "${with_help_dir+set}" = set; then
+  withval="$with_help_dir"
+
+else
+  with_help_dir='${datadir}/gnome/help'
+fi;
+HELP_DIR="$with_help_dir"
+
+
+
+# Check whether --with-omf-dir or --without-omf-dir was given.
+if test "${with_omf_dir+set}" = set; then
+  withval="$with_omf_dir"
+
+else
+  with_omf_dir='${datadir}/omf'
+fi;
+OMF_DIR="$with_omf_dir"
+
+
+
+# Check whether --with-help-formats or --without-help-formats was given.
+if test "${with_help_formats+set}" = set; then
+  withval="$with_help_formats"
+
+else
+  with_help_formats=''
+fi;
+DOC_USER_FORMATS="$with_help_formats"
+
+
+# Check whether --enable-scrollkeeper or --disable-scrollkeeper was given.
+if test "${enable_scrollkeeper+set}" = set; then
+  enableval="$enable_scrollkeeper"
+
+else
+  enable_scrollkeeper=yes
+fi;
+
+
+if test "x$enable_scrollkeeper" = "xyes"; then
+  ENABLE_SK_TRUE=
+  ENABLE_SK_FALSE='#'
+else
+  ENABLE_SK_TRUE='#'
+  ENABLE_SK_FALSE=
+fi
+
+
+          ac_config_commands="$ac_config_commands default-2"
+
+
+fi
+
+
+###########################################################################
+# Checks for libraries.
+###########################################################################
+
+# Minimum versions.
+GLIB_REQUIRED=2.6.0
+GTK_REQUIRED=2.6.0
+GLADE_REQUIRED=2.0.0
+LIBGNOME_REQUIRED=2.0.0
+
+
+
+
+
+#if test x"${disable_gnome}" = xyes; then
+#PKG_CHECK_MODULES(FR,			\
+#	glib-2.0 >= $GLIB_REQUIRED	\
+#	gtk+-2.0 >= $GTK_REQUIRED	\
+#	libglade-2.0 >= $GLADE_REQUIRED)
+#fi
+#
+#if test x"${disable_gnome}" = xno; then
+#PKG_CHECK_MODULES(FR,			\
+#	glib-2.0 >= $GLIB_REQUIRED	\
+#	gtk+-2.0 >= $GTK_REQUIRED	\
+#	libglade-2.0 >= $GLADE_REQUIRED	\
+#	libgnome-2.0 >= $LIBGNOME_REQUIRED)
+#fi
+
+
 pkg_failed=no
 echo "$as_me:$LINENO: checking for FR" >&5
 echo $ECHO_N "checking for FR... $ECHO_C" >&6
@@ -6200,20 +6451,23 @@ if test -n "$PKG_CONFIG"; then
     else
         if test -n "$PKG_CONFIG" && \
     { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"\\
-	glib-2.0 >= \$GLIB_REQUIRED          \\
+	glib-2.0 >= \$GLIB_REQUIRED	\\
 	gtk+-2.0 >= \$GTK_REQUIRED	\\
-	libglade-2.0 >= \$GLADE_REQUIRED\"") >&5
+	libglade-2.0 >= \$GLADE_REQUIRED	\\
+	libgnome-2.0 >= \$LIBGNOME_REQUIRED\"") >&5
   ($PKG_CONFIG --exists --print-errors "\
-	glib-2.0 >= $GLIB_REQUIRED          \
+	glib-2.0 >= $GLIB_REQUIRED	\
 	gtk+-2.0 >= $GTK_REQUIRED	\
-	libglade-2.0 >= $GLADE_REQUIRED") 2>&5
+	libglade-2.0 >= $GLADE_REQUIRED	\
+	libgnome-2.0 >= $LIBGNOME_REQUIRED") 2>&5
   ac_status=$?
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); }; then
   pkg_cv_FR_CFLAGS=`$PKG_CONFIG --cflags "\
-	glib-2.0 >= $GLIB_REQUIRED          \
+	glib-2.0 >= $GLIB_REQUIRED	\
 	gtk+-2.0 >= $GTK_REQUIRED	\
-	libglade-2.0 >= $GLADE_REQUIRED" 2>/dev/null`
+	libglade-2.0 >= $GLADE_REQUIRED	\
+	libgnome-2.0 >= $LIBGNOME_REQUIRED" 2>/dev/null`
 else
   pkg_failed=yes
 fi
@@ -6227,20 +6481,23 @@ if test -n "$PKG_CONFIG"; then
     else
         if test -n "$PKG_CONFIG" && \
     { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"\\
-	glib-2.0 >= \$GLIB_REQUIRED          \\
+	glib-2.0 >= \$GLIB_REQUIRED	\\
 	gtk+-2.0 >= \$GTK_REQUIRED	\\
-	libglade-2.0 >= \$GLADE_REQUIRED\"") >&5
+	libglade-2.0 >= \$GLADE_REQUIRED	\\
+	libgnome-2.0 >= \$LIBGNOME_REQUIRED\"") >&5
   ($PKG_CONFIG --exists --print-errors "\
-	glib-2.0 >= $GLIB_REQUIRED          \
+	glib-2.0 >= $GLIB_REQUIRED	\
 	gtk+-2.0 >= $GTK_REQUIRED	\
-	libglade-2.0 >= $GLADE_REQUIRED") 2>&5
+	libglade-2.0 >= $GLADE_REQUIRED	\
+	libgnome-2.0 >= $LIBGNOME_REQUIRED") 2>&5
   ac_status=$?
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); }; then
   pkg_cv_FR_LIBS=`$PKG_CONFIG --libs "\
-	glib-2.0 >= $GLIB_REQUIRED          \
+	glib-2.0 >= $GLIB_REQUIRED	\
 	gtk+-2.0 >= $GTK_REQUIRED	\
-	libglade-2.0 >= $GLADE_REQUIRED" 2>/dev/null`
+	libglade-2.0 >= $GLADE_REQUIRED	\
+	libgnome-2.0 >= $LIBGNOME_REQUIRED" 2>/dev/null`
 else
   pkg_failed=yes
 fi
@@ -6260,22 +6517,25 @@ else
 fi
         if test $_pkg_short_errors_supported = yes; then
 	        FR_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "\
-	glib-2.0 >= $GLIB_REQUIRED          \
+	glib-2.0 >= $GLIB_REQUIRED	\
 	gtk+-2.0 >= $GTK_REQUIRED	\
-	libglade-2.0 >= $GLADE_REQUIRED"`
+	libglade-2.0 >= $GLADE_REQUIRED	\
+	libgnome-2.0 >= $LIBGNOME_REQUIRED"`
         else
 	        FR_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "\
-	glib-2.0 >= $GLIB_REQUIRED          \
+	glib-2.0 >= $GLIB_REQUIRED	\
 	gtk+-2.0 >= $GTK_REQUIRED	\
-	libglade-2.0 >= $GLADE_REQUIRED"`
+	libglade-2.0 >= $GLADE_REQUIRED	\
+	libgnome-2.0 >= $LIBGNOME_REQUIRED"`
         fi
 	# Put the nasty error message in config.log where it belongs
 	echo "$FR_PKG_ERRORS" >&5
 
 	{ { echo "$as_me:$LINENO: error: Package requirements (\
-	glib-2.0 >= $GLIB_REQUIRED          \
+	glib-2.0 >= $GLIB_REQUIRED	\
 	gtk+-2.0 >= $GTK_REQUIRED	\
-	libglade-2.0 >= $GLADE_REQUIRED) were not met:
+	libglade-2.0 >= $GLADE_REQUIRED	\
+	libgnome-2.0 >= $LIBGNOME_REQUIRED) were not met:
 
 $FR_PKG_ERRORS
 
@@ -6287,9 +6547,10 @@ and FR_LIBS to avoid the need to call pkg-config.
 See the pkg-config man page for more details.
 " >&5
 echo "$as_me: error: Package requirements (\
-	glib-2.0 >= $GLIB_REQUIRED          \
+	glib-2.0 >= $GLIB_REQUIRED	\
 	gtk+-2.0 >= $GTK_REQUIRED	\
-	libglade-2.0 >= $GLADE_REQUIRED) were not met:
+	libglade-2.0 >= $GLADE_REQUIRED	\
+	libgnome-2.0 >= $LIBGNOME_REQUIRED) were not met:
 
 $FR_PKG_ERRORS
 
@@ -6334,6 +6595,9 @@ fi
 
 
 
+###########################################################################
+
+
 # Checks for header files.
 echo "$as_me:$LINENO: checking for ANSI C header files" >&5
 echo $ECHO_N "checking for ANSI C header files... $ECHO_C" >&6
@@ -6368,8 +6632,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -6538,8 +6801,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -6731,8 +6993,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -6824,8 +7085,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -6880,8 +7140,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -6962,8 +7221,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -7061,8 +7319,7 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   cat conftest.err >&5
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); } &&
-	 { ac_try='test -z "$ac_c_werror_flag"
-			 || test ! -s conftest.err'
+	 { ac_try='test -z "$ac_c_werror_flag"			 || test ! -s conftest.err'
   { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
   (eval $ac_try) 2>&5
   ac_status=$?
@@ -7094,7 +7351,7 @@ _ACEOF
 fi
 done
 
-                              ac_config_files="$ac_config_files Makefile src/Makefile data/Makefile"
+                                        ac_config_files="$ac_config_files Makefile src/Makefile data/Makefile help/Makefile"
 
 
           ac_config_files="$ac_config_files po/Makefile.in"
@@ -7204,14 +7461,20 @@ Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
 
-       mv -f po/POTFILES po/POTFILES.tmp
-        sed -e '/[[]encoding.*]/d' -e 's/[[].*] *//' < po/POTFILES.tmp > po/POTFILES
-        rm -f po/POTFILES.tmp
+            ac_config_commands="$ac_config_commands po/stamp-it"
+
 
 if test -z "${am__fastdepCC_TRUE}" && test -z "${am__fastdepCC_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"am__fastdepCC\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
 echo "$as_me: error: conditional \"am__fastdepCC\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${ENABLE_SK_TRUE}" && test -z "${ENABLE_SK_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"ENABLE_SK\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"ENABLE_SK\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
@@ -7650,10 +7913,12 @@ cat >>$CONFIG_STATUS <<_ACEOF
 
 AMDEP_TRUE="$AMDEP_TRUE" ac_aux_dir="$ac_aux_dir"
 
-INTLTOOL_PERL='${INTLTOOL_PERL}' ac_aux_dir=${ac_aux_dir}
-INTLTOOL_EXTRACT='${INTLTOOL_EXTRACT}' ICONV='${INTLTOOL_ICONV}'
-MSGFMT='${INTLTOOL_MSGFMT}' MSGMERGE='${INTLTOOL_MSGMERGE}'
-XGETTEXT='${INTLTOOL_XGETTEXT}'
+INTLTOOL_PERL='${INTLTOOL_PERL}' ac_aux_dir='${ac_aux_dir}'
+prefix="$prefix" exec_prefix="$exec_prefix" INTLTOOL_LIBDIR="$libdir"
+INTLTOOL_EXTRACT='${INTLTOOL_EXTRACT}' INTLTOOL_ICONV='${INTLTOOL_ICONV}'
+INTLTOOL_MSGFMT='${INTLTOOL_MSGFMT}' INTLTOOL_MSGMERGE='${INTLTOOL_MSGMERGE}'
+INTLTOOL_XGETTEXT='${INTLTOOL_XGETTEXT}'
+
 
 _ACEOF
 
@@ -7667,10 +7932,13 @@ do
   "Makefile" ) CONFIG_FILES="$CONFIG_FILES Makefile" ;;
   "src/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
   "data/Makefile" ) CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
+  "help/Makefile" ) CONFIG_FILES="$CONFIG_FILES help/Makefile" ;;
   "po/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES po/Makefile.in" ;;
   "depfiles" ) CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
   "default-1" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-1" ;;
   "intltool" ) CONFIG_COMMANDS="$CONFIG_COMMANDS intltool" ;;
+  "default-2" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-2" ;;
+  "po/stamp-it" ) CONFIG_COMMANDS="$CONFIG_COMMANDS po/stamp-it" ;;
   "config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
@@ -7812,6 +8080,7 @@ s,@PO_IN_DATADIR_TRUE@,$PO_IN_DATADIR_TRUE,;t t
 s,@PO_IN_DATADIR_FALSE@,$PO_IN_DATADIR_FALSE,;t t
 s,@POFILES@,$POFILES,;t t
 s,@POSUB@,$POSUB,;t t
+s,@MKINSTALLDIRS@,$MKINSTALLDIRS,;t t
 s,@INTLTOOL_DESKTOP_RULE@,$INTLTOOL_DESKTOP_RULE,;t t
 s,@INTLTOOL_DIRECTORY_RULE@,$INTLTOOL_DIRECTORY_RULE,;t t
 s,@INTLTOOL_KEYS_RULE@,$INTLTOOL_KEYS_RULE,;t t
@@ -7829,6 +8098,7 @@ s,@INTLTOOL_XML_NOMERGE_RULE@,$INTLTOOL_XML_NOMERGE_RULE,;t t
 s,@INTLTOOL_CAVES_RULE@,$INTLTOOL_CAVES_RULE,;t t
 s,@INTLTOOL_SCHEMAS_RULE@,$INTLTOOL_SCHEMAS_RULE,;t t
 s,@INTLTOOL_THEME_RULE@,$INTLTOOL_THEME_RULE,;t t
+s,@INTLTOOL_SERVICE_RULE@,$INTLTOOL_SERVICE_RULE,;t t
 s,@INTLTOOL_EXTRACT@,$INTLTOOL_EXTRACT,;t t
 s,@INTLTOOL_MERGE@,$INTLTOOL_MERGE,;t t
 s,@INTLTOOL_UPDATE@,$INTLTOOL_UPDATE,;t t
@@ -7837,11 +8107,19 @@ s,@INTLTOOL_ICONV@,$INTLTOOL_ICONV,;t t
 s,@INTLTOOL_MSGFMT@,$INTLTOOL_MSGFMT,;t t
 s,@INTLTOOL_MSGMERGE@,$INTLTOOL_MSGMERGE,;t t
 s,@INTLTOOL_XGETTEXT@,$INTLTOOL_XGETTEXT,;t t
+s,@ALL_LINGUAS@,$ALL_LINGUAS,;t t
 s,@glipperlocaledir@,$glipperlocaledir,;t t
-s,@GLIB_REQUIRED@,$GLIB_REQUIRED,;t t
-s,@GTK_REQUIRED@,$GTK_REQUIRED,;t t
 s,@PKG_CONFIG@,$PKG_CONFIG,;t t
 s,@ac_pt_PKG_CONFIG@,$ac_pt_PKG_CONFIG,;t t
+s,@GDU_MODULE_VERSION_CHECK_CFLAGS@,$GDU_MODULE_VERSION_CHECK_CFLAGS,;t t
+s,@GDU_MODULE_VERSION_CHECK_LIBS@,$GDU_MODULE_VERSION_CHECK_LIBS,;t t
+s,@HELP_DIR@,$HELP_DIR,;t t
+s,@OMF_DIR@,$OMF_DIR,;t t
+s,@DOC_USER_FORMATS@,$DOC_USER_FORMATS,;t t
+s,@ENABLE_SK_TRUE@,$ENABLE_SK_TRUE,;t t
+s,@ENABLE_SK_FALSE@,$ENABLE_SK_FALSE,;t t
+s,@GLIB_REQUIRED@,$GLIB_REQUIRED,;t t
+s,@GTK_REQUIRED@,$GTK_REQUIRED,;t t
 s,@FR_CFLAGS@,$FR_CFLAGS,;t t
 s,@FR_LIBS@,$FR_LIBS,;t t
 s,@LIBOBJS@,$LIBOBJS,;t t
@@ -8012,11 +8290,6 @@ esac
   *) ac_INSTALL=$ac_top_builddir$INSTALL ;;
   esac
 
-  if test x"$ac_file" != x-; then
-    { echo "$as_me:$LINENO: creating $ac_file" >&5
-echo "$as_me: creating $ac_file" >&6;}
-    rm -f "$ac_file"
-  fi
   # Let's still pretend it is `configure' which instantiates (i.e., don't
   # use $as_me), people would be surprised to read:
   #    /* config.h.  Generated by config.status.  */
@@ -8055,6 +8328,12 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
 	 fi;;
       esac
     done` || { (exit 1); exit 1; }
+
+  if test x"$ac_file" != x-; then
+    { echo "$as_me:$LINENO: creating $ac_file" >&5
+echo "$as_me: creating $ac_file" >&6;}
+    rm -f "$ac_file"
+  fi
 _ACEOF
 cat >>$CONFIG_STATUS <<_ACEOF
   sed "$ac_vpsub
@@ -8533,44 +8812,63 @@ done
       esac ;;
     intltool )
 
-intltool_edit="-e 's#@INTLTOOL_EXTRACT@#`pwd`/intltool-extract#g' \
-               -e 's#@INTLTOOL_ICONV@#${INTLTOOL_ICONV}#g' \
-               -e 's#@INTLTOOL_MSGFMT@#${INTLTOOL_MSGFMT}#g' \
-               -e 's#@INTLTOOL_MSGMERGE@#${INTLTOOL_MSGMERGE}#g' \
-               -e 's#@INTLTOOL_XGETTEXT@#${INTLTOOL_XGETTEXT}#g' \
-               -e 's#@INTLTOOL_PERL@#${INTLTOOL_PERL}#g'"
-
-eval sed ${intltool_edit} < ${ac_aux_dir}/intltool-extract.in \
-  > intltool-extract.out
-if cmp -s intltool-extract intltool-extract.out 2>/dev/null; then
-  rm -f intltool-extract.out
-else
-  mv -f intltool-extract.out intltool-extract
-fi
-chmod ugo+x intltool-extract
-chmod u+w intltool-extract
-
-eval sed ${intltool_edit} < ${ac_aux_dir}/intltool-merge.in \
-  > intltool-merge.out
-if cmp -s intltool-merge intltool-merge.out 2>/dev/null; then
-  rm -f intltool-merge.out
-else
-  mv -f intltool-merge.out intltool-merge
-fi
-chmod ugo+x intltool-merge
-chmod u+w intltool-merge
-
-eval sed ${intltool_edit} < ${ac_aux_dir}/intltool-update.in \
-  > intltool-update.out
-if cmp -s intltool-update intltool-update.out 2>/dev/null; then
-  rm -f intltool-update.out
-else
-  mv -f intltool-update.out intltool-update
-fi
-chmod ugo+x intltool-update
-chmod u+w intltool-update
+for file in intltool-extract intltool-merge intltool-update; do
+  sed -e "s|@INTLTOOL_EXTRACT@|`pwd`/intltool-extract|g" \
+      -e "s|@INTLTOOL_LIBDIR@|${INTLTOOL_LIBDIR}|g" \
+      -e "s|@INTLTOOL_ICONV@|${INTLTOOL_ICONV}|g" \
+      -e "s|@INTLTOOL_MSGFMT@|${INTLTOOL_MSGFMT}|g" \
+      -e "s|@INTLTOOL_MSGMERGE@|${INTLTOOL_MSGMERGE}|g" \
+      -e "s|@INTLTOOL_XGETTEXT@|${INTLTOOL_XGETTEXT}|g" \
+      -e "s|@INTLTOOL_PERL@|${INTLTOOL_PERL}|g" \
+	< ${ac_aux_dir}/${file}.in > ${file}.out
+  if cmp -s ${file} ${file}.out 2>/dev/null; then
+    rm -f ${file}.out
+  else
+    mv -f ${file}.out ${file}
+  fi
+  chmod ugo+x ${file}
+  chmod u+w ${file}
+done
 
  ;;
+    default-2 )
+gdumk=`pkg-config --variable datadir gnome-doc-utils`/gnome-doc-utils/gnome-doc-utils.make
+if test -f $srcdir/gnome-doc-utils.m4; then
+  if ! cmp -s $srcdir/gnome-doc-utils.make gnome-doc-utils.make; then
+    cp $srcdir/gnome-doc-utils.make gnome-doc-utils.make
+  fi
+else
+  if ! cmp -s $gdumk gnome-doc-utils.make; then
+    cp $gdumk gnome-doc-utils.make
+  fi
+fi
+if ! grep 'gnome-doc-utils\.make' $ac_top_srcdir/Makefile.am >/dev/null; then
+  echo gnome-doc-utils.make should be added to EXTRA_DIST in Makefile.am
+fi
+ ;;
+    po/stamp-it )
+    rm -f "po/stamp-it" "po/stamp-it.tmp" "po/POTFILES" "po/Makefile.tmp"
+    >"po/stamp-it.tmp"
+    sed '/^#/d
+	 s/^[[].*] *//
+	 /^[ 	]*$/d
+	'"s|^|	$ac_top_srcdir/|" \
+      "$srcdir/po/POTFILES.in" | sed '$!s/$/ \\/' >"po/POTFILES"
+
+    if test ! -f "po/Makefile"; then
+      { { echo "$as_me:$LINENO: error: po/Makefile is not ready." >&5
+echo "$as_me: error: po/Makefile is not ready." >&2;}
+   { (exit 1); exit 1; }; }
+    fi
+    mv "po/Makefile" "po/Makefile.tmp"
+    sed '/^POTFILES =/,/[^\\]$/ {
+		/^POTFILES =/!d
+		r po/POTFILES
+	  }
+	 ' "po/Makefile.tmp" >"po/Makefile"
+    rm -f "po/Makefile.tmp"
+    mv "po/stamp-it.tmp" "po/stamp-it"
+   ;;
   esac
 done
 _ACEOF

@@ -32,6 +32,10 @@ To use Glipper you must have these libraries installed on your system :
 	gtk+
 	libglade
 
+If you use GNOME support (default) you will also require :
+
+	libgnome
+
 You must also have a freedesktop compliant notification area or system tray
 running.
 
@@ -40,8 +44,12 @@ Compilation and installation
 ----------------------------
 
 The first step is to compile the source code. Decompress the source archive if
-you have not already done so. Open a terminal and CD to the directory where
-your source code is, then type :
+you have not already done so.
+
+By default, glipper compiles with GNOME support (Yelp help etc.) to disable
+this, add --disable-gnome to the ./configure line.
+
+Open a terminal and CD to the directory where your source code is, then type :
 
 	./configure
 	make
@@ -58,6 +66,18 @@ uninstallation
 To uninstall (as root):
 
 	make uninstall
+
+
+Notes
+=====
+
+By default, glipper will install under /usr, if you want to install it elseware, 
+such as in /usr/local, or ~/glipper, run configure with the --prefix=<path>
+option.
+
+If you install in a prefix other than /usr, be sure to place a link to the
+documentation directory in /usr/share/gnome/help, otherwise Yelp will not be
+able to find the documentation (GNOME support only).
 
 
 See also

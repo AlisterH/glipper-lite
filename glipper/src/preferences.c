@@ -2,6 +2,8 @@
 #  include <config.h>
 #endif
 
+#include <libgnome/gnome-help.h>
+
 #include <gtk/gtk.h>
 #include <glade/glade.h>
 #include "preferences.h"
@@ -19,6 +21,7 @@ GtkWidget* saveHistCheck;
 GtkWidget* keyCombEntry;
 GtkWidget* applyButton;
 GtkWidget* prefWin;
+GtkWidget* helpButton;
 
 //Sets initial state of widgets
 void setWidgets()
@@ -64,6 +67,18 @@ on_applyButton_clicked                 (GtkButton       *button,
 	gtk_widget_destroy(prefWin);
 }
 
+on_helpButton_clicked                 (GtkButton       *button,
+                                        gpointer         user_data)
+{
+#ifndef DISABLE_GNOME
+    help("preferences");
+#endif /*DISABLE_GNOME*/
+
+#ifdef DISABLE_GNOME
+    errorDialog(_("Help support is not compiled in."), _("To see the documentation, consult the glipper website or compile glipper with GNOME support (see README file)."));
+#endif /*DISABLE_GNOME*/
+}
+
 void showPreferences(gpointer data)
 {
 	char* glade_file;
@@ -93,6 +108,7 @@ void showPreferences(gpointer data)
 	saveHistCheck = glade_xml_get_widget(gladeWindow, "saveHistCheck");
 	keyCombEntry = glade_xml_get_widget(gladeWindow, "keyComb");
 	applyButton = glade_xml_get_widget(gladeWindow, "applyButton");
+	helpButton = glade_xml_get_widget(gladeWindow, "helpButton");
 	prefWin = glade_xml_get_widget(gladeWindow, "preferences-dialog");
 
 	//Connect signals to handlers
@@ -104,6 +120,9 @@ void showPreferences(gpointer data)
 		NULL);
 	g_signal_connect ((gpointer) applyButton, "clicked",
 		G_CALLBACK (on_applyButton_clicked),
+		NULL);
+	g_signal_connect ((gpointer) helpButton, "clicked",
+		G_CALLBACK (on_helpButton_clicked),
 		NULL);
 
 	//Show preferences dialog

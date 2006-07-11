@@ -299,6 +299,11 @@ void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
 	hasChanged = 1;
 }
 
+void showHelp(gpointer data)
+{
+	help(NULL);
+}
+
 void createTrayIcon()
 {
 	GdkPixbuf* pixbuf, *scaled;
@@ -368,20 +373,36 @@ void show_about(gpointer data)
 		"version", VERSION,
 		NULL);
 }
-
+//Creates context menu that we popup on right click on the trayicon
 void createPopupMenu()
 {
+	//Create new popup menu
 	popupMenu = gtk_menu_new();
+
+	//Create widgets to be plced in the popup menu
 	GtkWidget* quit = gtk_image_menu_item_new_from_stock(GTK_STOCK_QUIT, NULL);
-    g_signal_connect(G_OBJECT(quit), "activate", G_CALLBACK(gtk_main_quit), NULL);
+	g_signal_connect(G_OBJECT(quit), "activate", G_CALLBACK(gtk_main_quit), NULL);
+
 	GtkWidget* about = gtk_image_menu_item_new_from_stock(GTK_STOCK_ABOUT, NULL);
-    g_signal_connect(G_OBJECT(about), "activate", G_CALLBACK(show_about), NULL);
+	g_signal_connect(G_OBJECT(about), "activate", G_CALLBACK(show_about), NULL);
+
+#ifndef DISABLE_GNOME
+	GtkWidget* help = gtk_image_menu_item_new_from_stock(GTK_STOCK_HELP, NULL);
+	g_signal_connect(G_OBJECT(help), "activate", G_CALLBACK(showHelp), NULL);
+#endif /*DISABLE_GNOME*/
+
 	GtkWidget* preferences = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
-    g_signal_connect(G_OBJECT(preferences), "activate", G_CALLBACK(showPreferences), NULL);
+	g_signal_connect(G_OBJECT(preferences), "activate", G_CALLBACK(showPreferences), NULL);
+
+	//Add the widgets to the menu
 	gtk_menu_append((GtkMenu*)popupMenu, preferences);
+#ifndef DISABLE_GNOME
+	gtk_menu_append((GtkMenu*)popupMenu, help);
+#endif /*DISABLE_GNOME*/
 	gtk_menu_append((GtkMenu*)popupMenu, about);
 	gtk_menu_append((GtkMenu*)popupMenu, gtk_separator_menu_item_new());
-    gtk_menu_append((GtkMenu*)popupMenu, quit);
+	gtk_menu_append((GtkMenu*)popupMenu, quit);
+
 	gtk_widget_show_all(popupMenu);
 }
 
@@ -528,6 +549,23 @@ void errorDialog(gchar* error_msg, gchar* secondaryText)
 	gtk_widget_destroy (dialog);
 }
 
+//Displays help in Yelp
+void help(gchar* section)
+{
+	GError *error;
+
+	error = NULL;
+	//gnome_help_display ("glipper", NULL, &error);
+        gnome_help_display_desktop(NULL, "glipper", "glipper", 
+                                   section, &error);
+
+	if (error)
+	{
+		errorDialog(_("Could not display help for Glipper"), "Is the help properly installed ?");
+		g_error_free (error);
+	}
+}
+
 void unbindKey()
 {
 	keybinder_unbind(keyComb, keyhandler);
@@ -537,21 +575,36 @@ void unbindKey()
 
 int main(int argc, char *argv[])
 {
+	//gettext configuration
 	setlocale(LC_ALL, "");
 	bindtextdomain (GETTEXT_PACKAGE, GLIPPERLOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
-    gtk_init (&argc, &argv);
+
+	//Init GTK+ (and optionally GNOME libs)
+#ifndef DISABLE_GNOME
+	gnome_program_init("glipper", VERSION, NULL, argc, argv,
+		NULL, NULL, NULL);
+#endif /*DISABLE_GNOME*/
+	gtk_init (&argc, &argv);
+
 	getClipboards();
 	readPreferences();
+
+	//Setup keyboard shortcut
 	keybinder_init();
 	keybinder_bind(keyComb, keyhandler, NULL);
+
 	createTrayIcon();
 	createPopupMenu();
+
 	if (weSaveHistory)
 		readHistory();
+
 	mainTimeout = g_timeout_add(CHECK_INTERVAL, checkClipboard, NULL);
-    gtk_main ();
+	gtk_main ();
+
 	unbindKey();
-    return 0;
+
+	return 0;
 }
