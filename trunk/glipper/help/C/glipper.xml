@@ -6,7 +6,7 @@
 	<!ENTITY manrevision "0.90">
 	<!ENTITY date "2006-06-27">
 	<!ENTITY app "<application>Glipper</application>">
-	<!ENTITY appname "Glipper">
+	<!ENTITY appname "glipper">
 ]>
 
 <!-- =============Document Header ============================= -->
