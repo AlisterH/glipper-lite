@@ -10,8 +10,19 @@ AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE
 
+
+###########################################################################
+# MAIN SETTINGS
+###########################################################################
+
+# Modify these settings to change behaviour
+
 # Default instalation root directory
 prefix=/usr
+
+
+
+###########################################################################
 
 
 ###########################################################################
@@ -30,6 +41,8 @@ AC_PROG_INTLTOOL([0.23])
 glipperlocaledir='${prefix}/${DATADIRNAME}/locale'
 AC_SUBST(glipperlocaledir)
 
+###########################################################################
+
 
 ###########################################################################
 # Disable GNOME support
@@ -44,7 +57,7 @@ if test x"${disable_gnome}" = xyes; then
 else
    AC_MSG_RESULT([yes])
 fi
-#AM_CONDITIONAL(DISABLE_GNOME, test x"${disable_gnome}" = xyes)
+AM_CONDITIONAL(DISABLE_GNOME, test x"${disable_gnome}" = xyes)
 
 ###########################################################################
 
@@ -54,10 +67,9 @@ AC_PROG_CC
 
 
 # GDU
-if test x"${disable_gnome}" = xno; then
-AC_CONFIG_MACRO_DIR([m4])
 GNOME_DOC_INIT
-fi
+AC_CONFIG_MACRO_DIR([m4])
+
 
 
 ###########################################################################
@@ -74,26 +86,21 @@ AC_SUBST(GLIB_REQUIRED)
 AC_SUBST(GTK_REQUIRED)
 
 
-#if test x"${disable_gnome}" = xyes; then
-#PKG_CHECK_MODULES(FR,			\
-#	glib-2.0 >= $GLIB_REQUIRED	\
-#	gtk+-2.0 >= $GTK_REQUIRED	\
-#	libglade-2.0 >= $GLADE_REQUIRED) 
-#fi
-#
-#if test x"${disable_gnome}" = xno; then
-#PKG_CHECK_MODULES(FR,			\
-#	glib-2.0 >= $GLIB_REQUIRED	\
-#	gtk+-2.0 >= $GTK_REQUIRED	\
-#	libglade-2.0 >= $GLADE_REQUIRED	\
-#	libgnome-2.0 >= $LIBGNOME_REQUIRED) 
-#fi
+if test x"${disable_gnome}" = xyes; then
+PKG_CHECK_MODULES(FR,			\
+	glib-2.0 >= $GLIB_REQUIRED	\
+	gtk+-2.0 >= $GTK_REQUIRED	\
+	libglade-2.0 >= $GLADE_REQUIRED) 
+AC_DEFINE(DISABLE_GNOME, 1, [ Remove GNOME support. ])
+fi
 
+if test x"${disable_gnome}" = xno; then
 PKG_CHECK_MODULES(FR,			\
 	glib-2.0 >= $GLIB_REQUIRED	\
 	gtk+-2.0 >= $GTK_REQUIRED	\
 	libglade-2.0 >= $GLADE_REQUIRED	\
 	libgnome-2.0 >= $LIBGNOME_REQUIRED) 
+fi
 
 AC_SUBST(FR_CFLAGS)
 AC_SUBST(FR_LIBS)

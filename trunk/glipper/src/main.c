@@ -27,6 +27,10 @@
 #include "utils/glipper-i18n.h"
 #include "utils/keybinder.h"
 
+#ifndef DISABLE_GNOME
+#include <libgnome/gnome-help.h>
+#endif /*DISABLE_GNOME*/
+
 #define CHECK_INTERVAL 500 //The interval between the clipboard checks (ms)
 
 //Preferences variables
@@ -299,10 +303,30 @@ void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
 	hasChanged = 1;
 }
 
+#ifndef DISABLE_GNOME
 void showHelp(gpointer data)
 {
 	help(NULL);
 }
+
+//Displays help in Yelp
+void help(gchar* section)
+{
+	GError *error;
+
+	error = NULL;
+	//gnome_help_display ("glipper", NULL, &error);
+        gnome_help_display_desktop(NULL, "glipper", "glipper", 
+                                   section, &error);
+
+	if (error)
+	{
+		errorDialog(_("Could not display help for Glipper"), "Is the help properly installed ?");
+		g_error_free (error);
+	}
+}
+#endif /*DISABLE_GNOME*/
+
 
 void createTrayIcon()
 {
@@ -547,23 +571,6 @@ void errorDialog(gchar* error_msg, gchar* secondaryText)
 	gtk_dialog_run (GTK_DIALOG (dialog));
 
 	gtk_widget_destroy (dialog);
-}
-
-//Displays help in Yelp
-void help(gchar* section)
-{
-	GError *error;
-
-	error = NULL;
-	//gnome_help_display ("glipper", NULL, &error);
-        gnome_help_display_desktop(NULL, "glipper", "glipper", 
-                                   section, &error);
-
-	if (error)
-	{
-		errorDialog(_("Could not display help for Glipper"), "Is the help properly installed ?");
-		g_error_free (error);
-	}
 }
 
 void unbindKey()

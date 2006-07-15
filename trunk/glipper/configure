@@ -311,7 +311,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar GETTEXT_PACKAGE CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CPP EGREP USE_NLS MSGFMT GMSGFMT XGETTEXT CATALOGS CATOBJEXT DATADIRNAME GMOFILES INSTOBJEXT INTLLIBS PO_IN_DATADIR_TRUE PO_IN_DATADIR_FALSE POFILES POSUB MKINSTALLDIRS INTLTOOL_DESKTOP_RULE INTLTOOL_DIRECTORY_RULE INTLTOOL_KEYS_RULE INTLTOOL_PROP_RULE INTLTOOL_OAF_RULE INTLTOOL_PONG_RULE INTLTOOL_SERVER_RULE INTLTOOL_SHEET_RULE INTLTOOL_SOUNDLIST_RULE INTLTOOL_UI_RULE INTLTOOL_XAM_RULE INTLTOOL_KBD_RULE INTLTOOL_XML_RULE INTLTOOL_XML_NOMERGE_RULE INTLTOOL_CAVES_RULE INTLTOOL_SCHEMAS_RULE INTLTOOL_THEME_RULE INTLTOOL_SERVICE_RULE INTLTOOL_EXTRACT INTLTOOL_MERGE INTLTOOL_UPDATE INTLTOOL_PERL INTLTOOL_ICONV INTLTOOL_MSGFMT INTLTOOL_MSGMERGE INTLTOOL_XGETTEXT ALL_LINGUAS glipperlocaledir PKG_CONFIG ac_pt_PKG_CONFIG GDU_MODULE_VERSION_CHECK_CFLAGS GDU_MODULE_VERSION_CHECK_LIBS HELP_DIR OMF_DIR DOC_USER_FORMATS ENABLE_SK_TRUE ENABLE_SK_FALSE GLIB_REQUIRED GTK_REQUIRED FR_CFLAGS FR_LIBS LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar GETTEXT_PACKAGE CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CPP EGREP USE_NLS MSGFMT GMSGFMT XGETTEXT CATALOGS CATOBJEXT DATADIRNAME GMOFILES INSTOBJEXT INTLLIBS PO_IN_DATADIR_TRUE PO_IN_DATADIR_FALSE POFILES POSUB MKINSTALLDIRS INTLTOOL_DESKTOP_RULE INTLTOOL_DIRECTORY_RULE INTLTOOL_KEYS_RULE INTLTOOL_PROP_RULE INTLTOOL_OAF_RULE INTLTOOL_PONG_RULE INTLTOOL_SERVER_RULE INTLTOOL_SHEET_RULE INTLTOOL_SOUNDLIST_RULE INTLTOOL_UI_RULE INTLTOOL_XAM_RULE INTLTOOL_KBD_RULE INTLTOOL_XML_RULE INTLTOOL_XML_NOMERGE_RULE INTLTOOL_CAVES_RULE INTLTOOL_SCHEMAS_RULE INTLTOOL_THEME_RULE INTLTOOL_SERVICE_RULE INTLTOOL_EXTRACT INTLTOOL_MERGE INTLTOOL_UPDATE INTLTOOL_PERL INTLTOOL_ICONV INTLTOOL_MSGFMT INTLTOOL_MSGMERGE INTLTOOL_XGETTEXT ALL_LINGUAS glipperlocaledir DISABLE_GNOME_TRUE DISABLE_GNOME_FALSE PKG_CONFIG ac_pt_PKG_CONFIG GDU_MODULE_VERSION_CHECK_CFLAGS GDU_MODULE_VERSION_CHECK_LIBS HELP_DIR OMF_DIR DOC_USER_FORMATS ENABLE_SK_TRUE ENABLE_SK_FALSE GLIB_REQUIRED GTK_REQUIRED FR_CFLAGS FR_LIBS LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -1789,8 +1789,19 @@ am__tar='${AMTAR} chof - "$$tardir"'; am__untar='${AMTAR} xf -'
 
 
 
+
+###########################################################################
+# MAIN SETTINGS
+###########################################################################
+
+# Modify these settings to change behaviour
+
 # Default instalation root directory
 prefix=/usr
+
+
+
+###########################################################################
 
 
 ###########################################################################
@@ -5255,6 +5266,8 @@ fi
 glipperlocaledir='${prefix}/${DATADIRNAME}/locale'
 
 
+###########################################################################
+
 
 ###########################################################################
 # Disable GNOME support
@@ -5276,7 +5289,16 @@ else
    echo "$as_me:$LINENO: result: yes" >&5
 echo "${ECHO_T}yes" >&6
 fi
-#AM_CONDITIONAL(DISABLE_GNOME, test x"${disable_gnome}" = xyes)
+
+
+if test x"${disable_gnome}" = xyes; then
+  DISABLE_GNOME_TRUE=
+  DISABLE_GNOME_FALSE='#'
+else
+  DISABLE_GNOME_TRUE='#'
+  DISABLE_GNOME_FALSE=
+fi
+
 
 ###########################################################################
 
@@ -6117,18 +6139,6 @@ fi
 
 
 # GDU
-if test x"${disable_gnome}" = xno; then
-case m4 in
-  [\\/]* | ?:[\\/]* ) ac_macro_dir=m4         ;;
-  *)                      ac_macro_dir=$srcdir/m4 ;;
-esac
-if test -d "$ac_macro_dir"; then :
-else
-  { { echo "$as_me:$LINENO: error: cannot find macro directory \`m4'" >&5
-echo "$as_me: error: cannot find macro directory \`m4'" >&2;}
-   { (exit 1); exit 1; }; }
-fi
-
 
 
 if test "x$ac_cv_env_PKG_CONFIG_set" != "xset"; then
@@ -6408,7 +6418,18 @@ fi
           ac_config_commands="$ac_config_commands default-2"
 
 
+case m4 in
+  [\\/]* | ?:[\\/]* ) ac_macro_dir=m4         ;;
+  *)                      ac_macro_dir=$srcdir/m4 ;;
+esac
+if test -d "$ac_macro_dir"; then :
+else
+  { { echo "$as_me:$LINENO: error: cannot find macro directory \`m4'" >&5
+echo "$as_me: error: cannot find macro directory \`m4'" >&2;}
+   { (exit 1); exit 1; }; }
 fi
+
+
 
 
 ###########################################################################
@@ -6425,21 +6446,156 @@ LIBGNOME_REQUIRED=2.0.0
 
 
 
-#if test x"${disable_gnome}" = xyes; then
-#PKG_CHECK_MODULES(FR,			\
-#	glib-2.0 >= $GLIB_REQUIRED	\
-#	gtk+-2.0 >= $GTK_REQUIRED	\
-#	libglade-2.0 >= $GLADE_REQUIRED)
-#fi
-#
-#if test x"${disable_gnome}" = xno; then
-#PKG_CHECK_MODULES(FR,			\
-#	glib-2.0 >= $GLIB_REQUIRED	\
-#	gtk+-2.0 >= $GTK_REQUIRED	\
-#	libglade-2.0 >= $GLADE_REQUIRED	\
-#	libgnome-2.0 >= $LIBGNOME_REQUIRED)
-#fi
+if test x"${disable_gnome}" = xyes; then
 
+pkg_failed=no
+echo "$as_me:$LINENO: checking for FR" >&5
+echo $ECHO_N "checking for FR... $ECHO_C" >&6
+
+if test -n "$PKG_CONFIG"; then
+    if test -n "$FR_CFLAGS"; then
+        pkg_cv_FR_CFLAGS="$FR_CFLAGS"
+    else
+        if test -n "$PKG_CONFIG" && \
+    { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"\\
+	glib-2.0 >= \$GLIB_REQUIRED	\\
+	gtk+-2.0 >= \$GTK_REQUIRED	\\
+	libglade-2.0 >= \$GLADE_REQUIRED\"") >&5
+  ($PKG_CONFIG --exists --print-errors "\
+	glib-2.0 >= $GLIB_REQUIRED	\
+	gtk+-2.0 >= $GTK_REQUIRED	\
+	libglade-2.0 >= $GLADE_REQUIRED") 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; then
+  pkg_cv_FR_CFLAGS=`$PKG_CONFIG --cflags "\
+	glib-2.0 >= $GLIB_REQUIRED	\
+	gtk+-2.0 >= $GTK_REQUIRED	\
+	libglade-2.0 >= $GLADE_REQUIRED" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+    fi
+else
+	pkg_failed=untried
+fi
+if test -n "$PKG_CONFIG"; then
+    if test -n "$FR_LIBS"; then
+        pkg_cv_FR_LIBS="$FR_LIBS"
+    else
+        if test -n "$PKG_CONFIG" && \
+    { (echo "$as_me:$LINENO: \$PKG_CONFIG --exists --print-errors \"\\
+	glib-2.0 >= \$GLIB_REQUIRED	\\
+	gtk+-2.0 >= \$GTK_REQUIRED	\\
+	libglade-2.0 >= \$GLADE_REQUIRED\"") >&5
+  ($PKG_CONFIG --exists --print-errors "\
+	glib-2.0 >= $GLIB_REQUIRED	\
+	gtk+-2.0 >= $GTK_REQUIRED	\
+	libglade-2.0 >= $GLADE_REQUIRED") 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; then
+  pkg_cv_FR_LIBS=`$PKG_CONFIG --libs "\
+	glib-2.0 >= $GLIB_REQUIRED	\
+	gtk+-2.0 >= $GTK_REQUIRED	\
+	libglade-2.0 >= $GLADE_REQUIRED" 2>/dev/null`
+else
+  pkg_failed=yes
+fi
+    fi
+else
+	pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        FR_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "\
+	glib-2.0 >= $GLIB_REQUIRED	\
+	gtk+-2.0 >= $GTK_REQUIRED	\
+	libglade-2.0 >= $GLADE_REQUIRED"`
+        else
+	        FR_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "\
+	glib-2.0 >= $GLIB_REQUIRED	\
+	gtk+-2.0 >= $GTK_REQUIRED	\
+	libglade-2.0 >= $GLADE_REQUIRED"`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$FR_PKG_ERRORS" >&5
+
+	{ { echo "$as_me:$LINENO: error: Package requirements (\
+	glib-2.0 >= $GLIB_REQUIRED	\
+	gtk+-2.0 >= $GTK_REQUIRED	\
+	libglade-2.0 >= $GLADE_REQUIRED) were not met:
+
+$FR_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables FR_CFLAGS
+and FR_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+" >&5
+echo "$as_me: error: Package requirements (\
+	glib-2.0 >= $GLIB_REQUIRED	\
+	gtk+-2.0 >= $GTK_REQUIRED	\
+	libglade-2.0 >= $GLADE_REQUIRED) were not met:
+
+$FR_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables FR_CFLAGS
+and FR_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+" >&2;}
+   { (exit 1); exit 1; }; }
+elif test $pkg_failed = untried; then
+	{ { echo "$as_me:$LINENO: error: The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+Alternatively, you may set the environment variables FR_CFLAGS
+and FR_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://www.freedesktop.org/software/pkgconfig>.
+See \`config.log' for more details." >&5
+echo "$as_me: error: The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+Alternatively, you may set the environment variables FR_CFLAGS
+and FR_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://www.freedesktop.org/software/pkgconfig>.
+See \`config.log' for more details." >&2;}
+   { (exit 1); exit 1; }; }
+else
+	FR_CFLAGS=$pkg_cv_FR_CFLAGS
+	FR_LIBS=$pkg_cv_FR_LIBS
+        echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+	:
+fi
+
+cat >>confdefs.h <<\_ACEOF
+#define DISABLE_GNOME 1
+_ACEOF
+
+fi
+
+if test x"${disable_gnome}" = xno; then
 
 pkg_failed=no
 echo "$as_me:$LINENO: checking for FR" >&5
@@ -6590,6 +6746,7 @@ else
         echo "$as_me:$LINENO: result: yes" >&5
 echo "${ECHO_T}yes" >&6
 	:
+fi
 fi
 
 
@@ -7464,6 +7621,13 @@ fi
             ac_config_commands="$ac_config_commands po/stamp-it"
 
 
+if test -z "${DISABLE_GNOME_TRUE}" && test -z "${DISABLE_GNOME_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"DISABLE_GNOME\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"DISABLE_GNOME\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
 if test -z "${am__fastdepCC_TRUE}" && test -z "${am__fastdepCC_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"am__fastdepCC\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
@@ -8109,6 +8273,8 @@ s,@INTLTOOL_MSGMERGE@,$INTLTOOL_MSGMERGE,;t t
 s,@INTLTOOL_XGETTEXT@,$INTLTOOL_XGETTEXT,;t t
 s,@ALL_LINGUAS@,$ALL_LINGUAS,;t t
 s,@glipperlocaledir@,$glipperlocaledir,;t t
+s,@DISABLE_GNOME_TRUE@,$DISABLE_GNOME_TRUE,;t t
+s,@DISABLE_GNOME_FALSE@,$DISABLE_GNOME_FALSE,;t t
 s,@PKG_CONFIG@,$PKG_CONFIG,;t t
 s,@ac_pt_PKG_CONFIG@,$ac_pt_PKG_CONFIG,;t t
 s,@GDU_MODULE_VERSION_CHECK_CFLAGS@,$GDU_MODULE_VERSION_CHECK_CFLAGS,;t t

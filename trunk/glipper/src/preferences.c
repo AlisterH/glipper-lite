@@ -2,8 +2,6 @@
 #  include <config.h>
 #endif
 
-#include <libgnome/gnome-help.h>
-
 #include <gtk/gtk.h>
 #include <glade/glade.h>
 #include "preferences.h"
