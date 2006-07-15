@@ -1,0 +1,251 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2006-07-15 21:32+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: base.xml:19(title) 
+msgid "<application>Glipper</application> Manual V0.90"
+msgstr "<application>Glipper</application> Handbuch V0.90"
+
+#: base.xml:22(year) 
+msgid "2006"
+msgstr "2006"
+
+#: base.xml:23(holder) base.xml:34(publishername) base.xml:65(para) 
+msgid "Glipper devs"
+msgstr "Glipper Entwickler"
+
+#: base.xml:39(firstname) 
+msgid "Karderio"
+msgstr "Karderio"
+
+#: base.xml:41(orgname) 
+msgid "Glipper dev"
+msgstr "Glipper dev"
+
+#: base.xml:42(email) 
+msgid "kardeio at gmail dot com"
+msgstr "kardeio at gmail dot com"
+
+#: base.xml:61(revnumber) 
+msgid "glipper Manual V0.90"
+msgstr "glipper Handbuch V0.90"
+
+#: base.xml:62(date) 
+msgid "2006-06-27"
+msgstr "2006-06-27"
+
+#: base.xml:64(para) 
+msgid "karderio"
+msgstr "karderio"
+
+#: base.xml:70(releaseinfo) 
+msgid "This manual describes version 0.90 of glipper."
+msgstr "Dieses Handbuch beschreibt die Version 0.90 von Glipper."
+
+#: base.xml:73(title) 
+msgid "Feedback"
+msgstr "Feedback"
+
+#: base.xml:74(para) 
+msgid "To report a bug or make a suggestion regarding the <application>Glipper</application> application or this manual, follow the directions in the <ulink url=\"http://sourceforge.net/projects/glipper/\" type=\"help\">Glipper project page</ulink>."
+msgstr "Um einen Fehler zu melden oder einen Vorschlag betreffend dem Programm <application>Glipper</application> oder diesem Handbuch zu machen, folge den Anweisungen auf der  <ulink url=\"http://sourceforge.net/projects/glipper/\" type=\"help\">Glipper Projektseite</ulink>."
+
+#: base.xml:85(primary) 
+msgid "Glipper"
+msgstr "Glipper"
+
+#: base.xml:92(title) 
+msgid "Introduction"
+msgstr "Einführung"
+
+#: base.xml:94(para) 
+msgid "<application>Glipper</application> is a clipboardmanager for GNOME. <application>Glipper</application> can also be made to work with other desktop environments and window managers."
+msgstr "<application>Glipper</application> ist ein Zwischenablagenverwalter für GNOME. <application>Glipper</application> kann ebenfalls mit anderen Umgebungen und Windows Managern benutzt werden."
+
+#: base.xml:100(para) 
+msgid "<application>Glipper</application> sits in the notification area and collects everything that is copied to the clipboard. Glipper maintains a history both of the \"copy\" clipboard, usually filled with <keycombo><keycap>Ctrl+C</keycap></keycombo> and of the \"select\" clipboard, filled when text is selected."
+msgstr "<application>Glipper</application> sitzt im Benachrichtigungsfeld und sammelt alles, was in die Zwischenablage kopiert wird. Glipper verwaltet einen Verlauf sowohl von der \"Kopiere\" Zwischenablage, überlicherweise mit Hilfe von  <keycombo><keycap>Strg+C</keycap></keycombo> gefüllt, und der \"Markiere\" Zwischenablage, welche durch markierung gefüllt wird."
+
+#: base.xml:107(para) 
+msgid "<application>Glipper</application> lets you choose an entry from the history to fill the current clipboards."
+msgstr "<application>Glipper</application> lässt dich einen Eintrag aus dem Verlauf auswählen, welche die derzeitige Zwischenablage füllen soll."
+
+#: base.xml:112(para) 
+msgid "The webpage for <application>Glipper</application> can be found at the <ulink url=\"http://sourceforge.net/projects/glipper/\">Glipper project page</ulink>."
+msgstr "Die Webseite von <application>Glipper</application> kann auf der <ulink url=\"http://sourceforge.net/pro        jects/glipper/\">Glipper Projektseite</ulink> gefunden werden."
+
+#: base.xml:123(title) 
+msgid "Usage"
+msgstr "Benutzung"
+
+#: base.xml:126(title) 
+msgid "Starting glipper"
+msgstr "Glipper starten"
+
+#: base.xml:128(para) 
+msgid "To start <application>glipper</application>, select <guimenuitem>Glipper</guimenuitem> from the <guisubmenu>Accessories</guisubmenu> submenu of the <guimenuitem>Places</guimenuitem> menu.You may also start <application>glipper</application> by typing <command>glipper</command> in a terminal."
+msgstr "Um <application>Glipper</application> zu starten, wähle <guimenuitem>Glipper</guimenuitem> aus dem <guisubmenu>Zubehör</guisubmenu> Untermenü des <guimenuitem>Anwendungen</guimenuitem> menu. Du kannst <application>Glipper</application> auch starten indem du <command>glipper</command> in ein Terminal eingibst."
+
+#: base.xml:135(para) 
+msgid "Under GNOME, you may want to add <application>glipper</application> to your list of startup programs. You may do this from the <application>sessions</application> preference tool. To access the the <application>sessions</application> preference tool choose <menuchoice><guimenu> System</guimenu><guisubmenu>Preferences</guisubmenu><guimenuitem> Sessions</guimenuitem></menuchoice>. Use the <guilabel>Startup Programs</guilabel> tab to add <application>glipper</application>."
+msgstr "Unter GNOME möchstest du <application>Glipper</application> vielleicht in die Liste deiner Startprogramme hinzufügen. Du kannst dies mit Hilfe des <application>Sitzungen</application> Einstellungsprogramm tun. Um das <application>Sitzungen</application> Einstellungsprogramm zu erreichen, wähle <menuchoice><guimenu> System</guimenu><guisubmenu>Einstellungen</guisubmenu><guimenuitem>Sitzungen</guimenuitem></menuchoice>. Benutze den <guilabel>Startprogramme</guilabel> Reiter um <application>glipper</application> hinzuzufügen."
+
+#: base.xml:145(title) 
+msgid "The two different clipboards"
+msgstr "Die zwei verschiedenen Zwischenablagen"
+
+#: base.xml:147(para) 
+msgid "Under <application>X</application>, the windowing system for which <application>glipper</application> is designed, there are two separate clipboards."
+msgstr "Unter <application>X</application>, das Fenstersystem für welches <application>Glipper</application> ausgelegt ist, existieren zwei unterschiedliche Zwischenablagen."
+
+#: base.xml:152(para) 
+msgid "The \"copy\" clipboard is filled when you use the copy function of an application. Usually the copy function is used by selecting text and pressing <keycombo><keycap>Ctrl+C</keycap></keycombo>, or with a <guibutton>Copy</guibutton> button. Use the paste function of an application to paste the contents of the \"copy\" clipboard. The paste function is usually used by pressing <keycombo><keycap>Ctrl+V</keycap></keycombo>, or with a <guibutton>Paste</guibutton> button."
+msgstr "Die \"Kopieren\" Zwischenablage wird gefüllt sobald du die kopieren Funktion einer Anwendung benutzt. Oft wird diese kopieren Funktion benutzt indem man Text auswählt und <keycombo><keycap>Strg+C</keycap></keycombo> drückt, oder mit einem <guibutton>Kopieren</guibutton> Schalter. Benutze die einfüge Funktion einer Anwendung um den Inhalt der \"Kopieren\" Zwischenablage einzufügen. Die einfüge Funktion wird normalerweise benutzt indem man <keycombo><keycap>Strg+V</keycap></keycombo> drückt, oder mit Hilfe eines <guibutton>Einfügen</guibutton> Schalters."
+
+#: base.xml:160(para) 
+msgid "The \"select\" clipboard is filled when you select text in any application. As soon as you select any text, it is put in the \"select\" clipboard. To paste text from the \"select\" clipboard, simply press the middle mouse button."
+msgstr "Die \"Markieren\" Zwischenablage wird gefüllt sobald man den Text einer Anwendung markiert. Sobald du einen Text markierst, wird er in die \"Markieren\" Zwischenablage übernommen. Um Text von der \"Markieren\" Zwischenablage einzufügen, drücke einfach die mittlere Maustaste."
+
+#: base.xml:167(para) 
+msgid "By default, the contents of the \"copy\" clipboard are marked as bold in the <guimenu>main menu</guimenu>. The contents of the \"select\" clipboard are shown at the top of the list."
+msgstr "Standardmäßig, der Inhalt der \"Kopieren\" Zwischenablage wird im <guimenu>Verlauf</guimenu> fett markiert. Der Inhalt der \"Markieren\" Zwischenablage wird an der Spitze der Liste gezeigt."
+
+#: base.xml:176(title) 
+msgid "Selecting an element from the clipboard history"
+msgstr "Ein Element aus dem Verlauf auswählen"
+
+#: base.xml:185(para) 
+msgid "Open the <guimenu>main menu</guimenu> by clicking on the <application>glipper</application> icon in the notification area. You can also use the keyboard shortcut, which is <keycombo><keycap>Ctrl+Alt+C</keycap></keycombo> by default."
+msgstr "Öffne den <guimenu>Verlauf</guimenu> indem du auf das <application>Glipper</application> Icon im Benachrichtigungsfeld klickst. Du kannst auch die Tastatur Kurztaste, welche standardmäßig <keycombo><keycap>Strg+Alt+C</keycap></keycombo> ist, benutzen."
+
+#: base.xml:192(para) 
+msgid "Click on an item from the history."
+msgstr "Klicke auf einen Eintrag im Verlauf."
+
+#: base.xml:199(para) 
+msgid "Both the contents of the \"copy\" and of the \"select\" clipboards are replaced when you choose an element from the clipboard history. The new item can be pasted both with the paste function of your application and with the middle mouse button."
+msgstr "Beide Inhalte der \"Kopieren\" und der \"Markieren\" Zwischenablage werden ersetzt sobald du ein Element aus dem Zwischenablagenverlauf auswählst. Das neue Element kann sowohl mit der einfüge Funktion deiner Anwendung, als auch mit der mittleren Maustaste eingefügt werden."
+
+#: base.xml:178(para) 
+msgid "<application>Glipper</application> lets you replace the current contents of the clipboards with an element from the clipboard history. To use an element previously copied to the clipboard as the current contents of the clipboards : <placeholder-1/><placeholder-2/>"
+msgstr "<application>Glipper</application> lässt dich die derzeitigen Inhalte der Zwischenablagen mit einem Element des Zwischenablagenverlaufes ersetzen. Um ein vorheriges Element welches in der Zwischenablage war als jetzigen Inhalt der Zwischenablage zu benutzen: <placeholder-1/><placeholder-2/>"
+
+#: base.xml:211(title) 
+msgid "Preferences"
+msgstr "Einstellungen"
+
+#: base.xml:213(para) 
+msgid "Use the <guilabel>Preferences</guilabel> dialog to customize <application>Glipper</application> to suit your requirements and preferences."
+msgstr "Benutze den <guilabel>Einstellungen</guilabel> Dialog um  <application>Glipper</application> an deinen Bedarf und Vorlieben anzupassen."
+
+#: base.xml:217(para) 
+msgid "To display the <guilabel>Preferences</guilabel> dialog, right click on the <application>Glipper</application> icon in the notification area and choose <menuchoice><guimenuitem>Preferences</guimenuitem></menuchoice>."
+msgstr "Um den <guilabel>Einstellungen</guilabel> dialog anzuzeigen, rechtsklicke auf das <application>Glipper</application> Icon im Benachrichtigungsfeld and wähle <menuchoice><guimenuitem>Einstellungen</guimenuitem></menuchoice>."
+
+#: base.xml:222(title) 
+msgid "Glipper Preferences"
+msgstr "Glipper Einstellungen"
+
+#: base.xml:229(para) 
+msgid "Dialog Element"
+msgstr "Dialog Element"
+
+#: base.xml:232(para) 
+msgid "Description"
+msgstr "Beschreibung"
+
+#: base.xml:240(guilabel) 
+msgid "Amount of entries in history"
+msgstr "Anzahl der Einträge im Verlauf"
+
+#: base.xml:244(para) 
+msgid "Use this spin box to specify how many clipboard entrys should be saved and shown in the <guimenu>main menu</guimenu>."
+msgstr "Benutze dieses Feld um anzugeben wieviele Zwischenablageneinträge gespeichert und im <guimenu>Verlauf</guimenu> angezeigt werden sollen."
+
+#: base.xml:253(guilabel) 
+msgid "Length of one history entry"
+msgstr "Länge eines Verlaufeintrages"
+
+#: base.xml:257(para) 
+msgid "Use this spin box to specify how wide the history list should be."
+msgstr "Benutze dieses Feld um anzugeben wie breit die Verlaufsliste sein soll."
+
+#: base.xml:265(guilabel) 
+msgid "Select - Mark/middle mouse button"
+msgstr "Auswählen - Markieren/mittlere Maustaste"
+
+#: base.xml:269(para) 
+msgid "Select this option to maintain a history of the \"select\" clipboard."
+msgstr "Wähle diese Option um einen Verlauf der \"Markieren\" Zwischenablage zu verwalten."
+
+#: base.xml:275(guilabel) 
+msgid "Copy - Ctrl+C/Ctrl+V"
+msgstr "Copy - Ctrl+C/Ctrl+V"
+
+#: base.xml:279(para) 
+msgid "Select this option to maintain a history of the \"copy\" clipboard."
+msgstr "Select this option to maintain a history of the \"copy\" clipboard."
+
+#: base.xml:285(guilabel) 
+msgid "Tag Ctrl+C clipboard's content in history (bold)"
+msgstr "Tag Ctrl+C clipboard's content in history (bold)"
+
+#: base.xml:289(para) 
+msgid "Select this option to have <application>glipper</application> mark the contents of the \"copy\" clipboard."
+msgstr "Select this option to have <application>glipper</application> mark the contents of the \"copy\" clipboard."
+
+#: base.xml:295(guilabel) 
+msgid "Save history"
+msgstr "Save history"
+
+#: base.xml:299(para) 
+msgid "Select this option to save the contents of the clipboards. If you select this, you will keep the history of clipboards from your last session."
+msgstr "Select this option to save the contents of the clipboards. If you select this, you will keep the history of clipboards from your last session."
+
+#: base.xml:308(guilabel) 
+msgid "Key combination for popup"
+msgstr "Key combination for popup"
+
+#: base.xml:312(para) 
+msgid "Enter a key combination to change the main menu keyboard shortcut."
+msgstr "Enter a key combination to change the main menu keyboard shortcut."
+
+#: base.xml:323(title) 
+msgid "Legal"
+msgstr "Legal"
+
+#: base.xml:326(title) 
+msgid "Glipper Licence"
+msgstr "Glipper Licence"
+
+#: base.xml:327(para) 
+msgid "Glipper is licenced under the LGPL, see the <application>glipper</application> about box for details."
+msgstr "Glipper is licenced under the LGPL, see the <application>glipper</application> about box for details."
+
+#: base.xml:333(title) 
+msgid "Glipper Documentation Licence"
+msgstr "Glipper Documentation Licence"
+
+#: base.xml:334(para) 
+msgid "Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any later version published by the Free Software Foundation with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink>."
+msgstr "Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any later version published by the Free Software Foundation with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink>."
+
+#: base.xml:351(para) 
+msgid "DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
+msgstr "DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
+
+#: base.xml:371(para) 
+msgid "UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES OR LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES."
+msgstr "UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES OR LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES."
+
+#: base.xml:344(para) 
+msgid "DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: <placeholder-1/>"
+msgstr "DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: <placeholder-1/>"
+
