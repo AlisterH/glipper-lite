@@ -306,11 +306,6 @@ void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
 }
 
 #ifndef DISABLE_GNOME
-void showHelp(gpointer data)
-{
-	help(NULL);
-}
-
 //Displays help in Yelp
 void help(gchar* section)
 {
@@ -326,6 +321,11 @@ void help(gchar* section)
 		errorDialog(_("Could not display help for Glipper"), "Is the help properly installed ?");
 		g_error_free (error);
 	}
+}
+
+void showHelp(gpointer data)
+{
+	help(NULL);
 }
 #endif /*DISABLE_GNOME*/
 
