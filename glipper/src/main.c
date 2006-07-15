@@ -50,6 +50,8 @@ GSList* history = NULL;
 GtkWidget* historyMenu = NULL;
 GtkWidget* popupMenu;
 GtkWidget* TrayIcon;
+GtkTooltips* toolTip; //The trayicon's tooltip
+GtkWidget* eventbox; //The trayicon's eventbox
 gint mainTimeout;
 int hasChanged = 1;
 
@@ -332,9 +334,7 @@ void createTrayIcon()
 {
 	GdkPixbuf* pixbuf, *scaled;
 	GtkWidget* tray_icon_image;
-	GtkWidget* eventbox;
 	GError* pix_error = NULL;
-	GtkTooltips* toolTip; //The tray icon tooltip
 
 	//Load trayicon
 	TrayIcon = (GtkWidget*)egg_tray_icon_new("GLIPPER");
@@ -355,9 +355,8 @@ void createTrayIcon()
 
 	//Add description tooltip to the icon
 	toolTip = gtk_tooltips_new();
-	//gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
-	//	keyComb), "Glipper");
-	gtk_tooltips_set_tip(toolTip, eventbox, _("Glipper\nClipboardmanager"), "Glipper");
+	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
+		keyComb), "Glipper");
 
 	//connect and show everything:
 	gtk_container_add(GTK_CONTAINER(eventbox), tray_icon_image);
@@ -503,6 +502,7 @@ void readPreferences()
 	gchar* path= g_build_filename(g_get_home_dir(), ".glipper/prefs", NULL);
 	FILE* prefFile = fopen(path, "r");
 	g_free(path);
+	free(keyComb);
 	if (prefFile != 0)
 	{
 		fread(&maxElements, sizeof(maxElements), 1, prefFile);
@@ -513,12 +513,17 @@ void readPreferences()
 		fread(&weSaveHistory, sizeof(weSaveHistory), 1, prefFile);
 		size_t len;
 		fread(&len, sizeof(size_t), 1, prefFile);
-		free(keyComb);
-		keyComb = malloc(len+1);
-		fgets(keyComb, len+1, prefFile);
+		if (!feof(prefFile))
+		{
+			keyComb = malloc(len+1);
+			fgets(keyComb, len+1, prefFile);
+			fclose(prefFile);
+			return;
+		}
 		fclose(prefFile);
-	} else 
-		strcpy(keyComb, "<Ctrl><Alt>c");
+	}
+	keyComb = malloc(strlen("<Ctrl><Alt>c")+1);
+	strcpy(keyComb, "<Ctrl><Alt>c");
 }
 
 /*Makes sure, that the current preferences are used:*/
@@ -532,6 +537,8 @@ void applyPreferences()
 		deleteElement->next = NULL;
 	}
 	keybinder_bind(keyComb, keyhandler, NULL);
+	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
+		keyComb), "Glipper");
 }
 
 void savePreferences()
