@@ -137,8 +137,7 @@ void createHistMenu()
 		GdkPixbuf* pixbuf;
 		GError* pix_error = NULL;
 
-		menuHeader = gtk_image_menu_item_new_with_label (g_strdup_printf(
-			_("Glipper - Clipboardmanager  (%s)"), keyComb));
+		menuHeader = gtk_image_menu_item_new_with_label("");
 		pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error);
 
 		//In case we cannot load icon, display error message and exit
@@ -152,6 +151,8 @@ void createHistMenu()
 		gtk_image_menu_item_set_image((GtkImageMenuItem*)menuHeader, 
 			gtk_image_new_from_pixbuf(pixbuf));
 	}	
+	gtk_label_set_text((GtkLabel*)gtk_bin_get_child((GtkBin*)menuHeader), 
+			g_strdup_printf(_("Glipper - Clipboardmanager  (%s)"), keyComb));
 
 	if (historyMenu != NULL)
 	{
