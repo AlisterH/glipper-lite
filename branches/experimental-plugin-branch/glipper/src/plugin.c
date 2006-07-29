@@ -1,20 +1,94 @@
 #include <Python.h>
 #include "plugin.h"
+#include <string.h>
+#include <stdlib.h>
 
-void init_plugin_system()
-{
-	Py_Initialize();
+struct plugin {
+	plugin* next; //linked list
+	char* modulename; 
+	PyObject* module;
+	//references to the event functions:
+	PyObject* newItemFunc;
+	//TODO: add more
 }
 
-struct plugin_info get_plugin_info(char* file)
+int pyInit = 0;
+plugin pluginList; //first element in list is dummy
+
+void init()
 {
+	if (!pyInit)
+	{
+		Py_Initialize();
+		pyInit = 1;
+	}
 }
 
-void start_plugin(char* file)
+struct plugin_info get_plugin_info(char* module)
 {
+	init();
+
+	PyObject* name = PyString_FromString(module);
+	PyObject* m = PyImport_Import(name);
+	Py_DECREF(name);
+	if (m != NULL)
+	{
+		plugin_info info;
+		PyObject* infoFunc = PyObject_GetAttrString(m, "getInfo");
+		if (infoFunc && PyCallable_Check(infoFunc))
+		{
+			PyObject* result = PyObject_CallObject(infoFunc);
+			PyObject* name = PyDict_GetItemString(result, "Name");
+			PyObject* descr = PyDict_GetItemString(result, "Description");
+			info.name = PyString_AsString(name);
+			info.descr = PyString_AsString(descr);
+			Py_DECREF(name);
+			Py_DECREF(descr);
+			Py_DECREF(result);
+		}
+		Py_DECREF(infoFunc);
+		Py_DECREF(m);
+		return info;
+	}
 }
 
-void stop_plugin(char* file)
+void start_plugin(char* module)
 {
+	init();
+
+	PyObject* name = PyString_FromString(module);
+	PyObject* m = PyImport_Import(name);
+	Py_DECREF(name);
+	if (m != NULL)
+	{
+		plugin* new = malloc(sizeof(plugin));
+		new->next = pluginList.next;
+		pluginList.next = new;
+		new->modulename = module;
+		new->module = m;
+		new->newItemFunc = PyObject_GetAttrString(m, "newItem");
+		//TODO: other event functions
+		if (!PyCallable_Check(new->newItemFunc))
+			new->newItemFunc = NULL;
+	}
+}
+
+void stop_plugin(char* module)
+{
+	plugin* i = &pluginList;
+	while (i->next != NULL)
+	{
+			plugin* c = i->next;
+			if (strcmp(c->modulename, module) == 0)
+			{
+				//TODO: STOP PYTHON THINGS HERE
+				Py_DECREF(c->module);
+				Py_DECREF(c->newItemFunc);
+				free(c->modulename);
+				i->next = c->next;
+				free(c);
+			}
+			i = i->next;
+	}
 }
 
