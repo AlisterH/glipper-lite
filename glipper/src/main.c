@@ -232,9 +232,9 @@ void insertInHistory(gchar* content)
 			g_slist_free(deleteElement->next);
 			deleteElement->next = NULL;
 		}
+		if (weSaveHistory)
+			saveHistory();
 	}
-	if (weSaveHistory)
-		saveHistory();
 }
 
 void processContent(gchar* newContent, gchar** lastContent, GtkClipboard* Clipboard)
