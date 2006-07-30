@@ -14,5 +14,5 @@ void start_plugin(char* module);
 void stop_plugin(char* module);
 
 //Sending Events to the plugins:
-//
-//TODO
+
+void plugins_newItem();
