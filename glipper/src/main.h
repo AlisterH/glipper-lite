@@ -8,6 +8,7 @@ extern gboolean weSaveHistory;
 extern char* keyComb;
 
 extern GSList* history;
+extern int hasChanged;
 
 //extern functions:
 void savePreferences();
