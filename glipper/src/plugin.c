@@ -20,10 +20,8 @@ plugin pluginList; //first element in list is dummy (makes it easier to delete o
 
 void plugins_newItem()
 {
-	if (pluginList.next == NULL)
-		return;
 	plugin* i; 
-	for (i = pluginList.next; i->next != NULL; i = i->next)
+	for (i = pluginList.next; i != NULL; i = i->next)
 	{
 		PyObject* args = PyTuple_New(1);
 		if (args != NULL)
@@ -85,7 +83,18 @@ void init()
 	if (!pyInit)
 	{
 		Py_Initialize();
+
+		PyObject* name = PyString_FromString("sys");
+		PyObject* m = PyImport_Import(name);
+		Py_DECREF(name);
+		PyObject* path = PyObject_GetAttrString(m, "path");
+		char* searchModule = g_build_filename(g_get_home_dir(), ".glipper/plugins", NULL);
+		PyList_Append(path, PyString_FromString(searchModule));
+		free(searchModule);
+		PyList_Append(path, PyString_FromString(PLUGINDIR));
+
 		Py_InitModule("glipper", glipperFunctions);
+		pluginList.next = NULL;
 		pyInit = 1;
 	}
 }
@@ -119,6 +128,7 @@ plugin_info get_plugin_info(char* module)
 
 void start_plugin(char* module)
 {
+	printf("plugin %s started", module);
 	init();
 	PyObject* name = PyString_FromString(module);
 	PyObject* m = PyImport_Import(name);
