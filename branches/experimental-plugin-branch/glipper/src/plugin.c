@@ -1,9 +1,11 @@
 #include <Python.h>
-#include "plugin.h"
 #include <string.h>
 #include <stdlib.h>
+#include <gtk/gtk.h>
+#include "plugin.h"
+#include "main.h"
 
-struct plugin {
+static struct plugin {
 	plugin* next; //linked list
 	char* modulename; 
 	PyObject* module;
@@ -11,6 +13,11 @@ struct plugin {
 	PyObject* newItemFunc;
 	//TODO: add more
 }
+
+static PyMethodDef glipperFunctions[] = {
+	{"getItem", module_getItem, METH_VARARGS, "Returns the history item specified in the argument"},
+	{NULL, NULL, 0, NULL}
+};
 
 int pyInit = 0;
 plugin pluginList; //first element in list is dummy
@@ -20,6 +27,7 @@ void init()
 	if (!pyInit)
 	{
 		Py_Initialize();
+		Py_InitModule("glipper", glipperFunctions);
 		pyInit = 1;
 	}
 }
@@ -37,7 +45,7 @@ struct plugin_info get_plugin_info(char* module)
 		PyObject* infoFunc = PyObject_GetAttrString(m, "getInfo");
 		if (infoFunc && PyCallable_Check(infoFunc))
 		{
-			PyObject* result = PyObject_CallObject(infoFunc);
+			PyObject* result = PyObject_CallObject(infoFunc, NULL);
 			PyObject* name = PyDict_GetItemString(result, "Name");
 			PyObject* descr = PyDict_GetItemString(result, "Description");
 			info.name = PyString_AsString(name);
@@ -92,3 +100,31 @@ void stop_plugin(char* module)
 	}
 }
 
+////////////////////////////////////Events:///////////////////////////////////////
+
+void plugins_newItem()
+{
+	if (pluginList.next == NULL)
+		return;
+	plugin* i; 
+	for (i = pluginList.next; i->next != NULL; i = i->next)
+	{
+		PyObject* args = PyTuple_New(1);
+		if (args != NULL)
+			PyTuple_SetItem(args, 0, PyString_FromString(history->data));
+		PyObject_CallObject(i->newItemFunc, args);	
+		Py_DECREF(args);
+	}
+}
+
+///////////////////functions callable by python scripts://///////////////////////
+
+PyObject* module_getItem(PyObject* self, PyObject* args)
+{
+	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
+	GSList* c = g_slist_nth(history, index);
+	if (c == NULL)
+		return NULL;
+	char* item = c->data;
+	return PyString_FromString(item);
+}

@@ -26,12 +26,15 @@
 #include "utils/eggtrayicon.h"
 #include "utils/glipper-i18n.h"
 #include "utils/keybinder.h"
+#include "plugin.h"
 
 #ifndef DISABLE_GNOME
 #include <libgnome/gnome-help.h>
 #endif /*DISABLE_GNOME*/
 
 #define CHECK_INTERVAL 500 //The interval between the clipboard checks (ms)
+
+#define PLUGINS
 
 //Preferences variables
 int maxElements = 20; //Amount of elements in history
@@ -232,6 +235,9 @@ void insertInHistory(gchar* content)
 			g_slist_free(deleteElement->next);
 			deleteElement->next = NULL;
 		}
+#ifdef PLUGINS
+		plugins_newItem();
+#endif
 	}
 	if (weSaveHistory)
 		saveHistory();
