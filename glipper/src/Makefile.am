@@ -1,7 +1,7 @@
-AM_CFLAGS = $(FR_CFLAGS) -I$(top_srcdir) \
+AM_CFLAGS = $(FR_CFLAGS) -I$(top_srcdir) -I/usr/include/python2.4/\
 	-DGLIPPERLOCALEDIR=\""$(glipperlocaledir)"\" -DPIXMAPDIR=\""$(datadir)/pixmaps"\" \
 	-DGLADEDIR=\""$(datadir)/glipper"\" 
-AM_LDFLAGS = $(FR_LIBS)
+AM_LDFLAGS = $(FR_LIBS) -lpython2.4
 
 noinst_PROGRAMS=glipper
 bin_PROGRAMS=glipper

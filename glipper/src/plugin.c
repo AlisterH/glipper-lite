@@ -5,13 +5,68 @@
 #include "plugin.h"
 #include "main.h"
 
-static struct plugin {
-	plugin* next; //linked list
+typedef struct plugin {
+	struct plugin* next; //linked list
 	char* modulename; 
 	PyObject* module;
 	//references to the event functions:
 	PyObject* newItemFunc;
 	//TODO: add more
+} plugin;
+
+plugin pluginList; //first element in list is dummy (makes it easier to delete one special item)
+
+////////////////////////////////////Events:///////////////////////////////////////
+
+void plugins_newItem()
+{
+	if (pluginList.next == NULL)
+		return;
+	plugin* i; 
+	for (i = pluginList.next; i->next != NULL; i = i->next)
+	{
+		PyObject* args = PyTuple_New(1);
+		if (args != NULL)
+			PyTuple_SetItem(args, 0, PyString_FromString(history->data));
+		PyObject_CallObject(i->newItemFunc, args);	
+		Py_DECREF(args);
+	}
+}
+
+///////////////////functions callable by python scripts://///////////////////////
+
+PyObject* module_getItem(PyObject* self, PyObject* args)
+{
+	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
+	GSList* c = g_slist_nth(history, index);
+	if (c == NULL)
+		return NULL;
+	char* item = c->data;
+	return PyString_FromString(item);
+}
+
+PyObject* module_setItem(PyObject* self, PyObject* args)
+{
+	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
+	GSList* c = g_slist_nth(history, index);
+	if (c != NULL)
+	{
+		free(c->data);
+		char* intstr = PyString_AsString(PyTuple_GetItem(args, 1));
+		char* str = malloc(strlen(intstr)+1);
+		strcpy(str, intstr);
+		c->data = str;
+		hasChanged = 1;
+	}
+	return NULL;
+}
+	
+PyObject* module_clearHistory(PyObject* self, PyObject* args)
+{
+	g_slist_free(history);
+	history = NULL;
+	hasChanged = 1;
+	return NULL;
 }
 
 static PyMethodDef glipperFunctions[] = {
@@ -21,13 +76,12 @@ static PyMethodDef glipperFunctions[] = {
 	{NULL, NULL, 0, NULL}
 };
 
-int pyInit = 0;
-plugin pluginList; //first element in list is dummy (makes it easier to delete one special item)
 
 ///////////////////////Functions for the plugin system://////////////////////////
 
 void init()
 {
+	static int pyInit = 0;
 	if (!pyInit)
 	{
 		Py_Initialize();
@@ -36,7 +90,7 @@ void init()
 	}
 }
 
-struct plugin_info get_plugin_info(char* module)
+plugin_info get_plugin_info(char* module)
 {
 	init();
 	PyObject* name = PyString_FromString(module);
@@ -99,55 +153,4 @@ void stop_plugin(char* module)
 			}
 			i = i->next;
 	}
-}
-
-////////////////////////////////////Events:///////////////////////////////////////
-
-void plugins_newItem()
-{
-	if (pluginList.next == NULL)
-		return;
-	plugin* i; 
-	for (i = pluginList.next; i->next != NULL; i = i->next)
-	{
-		PyObject* args = PyTuple_New(1);
-		if (args != NULL)
-			PyTuple_SetItem(args, 0, PyString_FromString(history->data));
-		PyObject_CallObject(i->newItemFunc, args);	
-		Py_DECREF(args);
-	}
-}
-
-///////////////////functions callable by python scripts://///////////////////////
-
-PyObject* module_getItem(PyObject* self, PyObject* args)
-{
-	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
-	GSList* c = g_slist_nth(history, index);
-	if (c == NULL)
-		return NULL;
-	char* item = c->data;
-	return PyString_FromString(item);
-}
-
-void module_setItem(PyObject* self, PyObject* args)
-{
-	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
-	GSList* c = g_slist_nth(history, index);
-	if (c != NULL)
-	{
-		free(c->data);
-		char* intstr = PyString_AsString(PyTuple_GetItem(args, 1));
-		char* str = malloc(strlen(intstr)+1);
-		strcpy(str, intstr);
-		c->data = str;
-		hasChanged = 1;
-	}
-}
-	
-void module_clearHistory(PyObject* self, PyObject* args)
-{
-	g_slist_free(history);
-	history = NULL;
-	hasChanged = 1;
 }

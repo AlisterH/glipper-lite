@@ -1,13 +1,13 @@
 
-struct plugin_info {
+typedef struct {
 	char* name;
 	char* descr;
 	//Maybe options??
-};
+} plugin_info;
 
 //Common functions for the plugin system:
 
-struct plugin_info get_plugin_info(char* module);
+plugin_info get_plugin_info(char* module);
 
 void start_plugin(char* module);
 
