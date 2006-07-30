@@ -15,12 +15,16 @@ static struct plugin {
 }
 
 static PyMethodDef glipperFunctions[] = {
-	{"getItem", module_getItem, METH_VARARGS, "Returns the history item specified in the argument"},
+	{"getItem", module_getItem, METH_VARARGS, "Returns the history item specified by the argument"},
+	{"setItem", module_setItem, METH_VARARGS, "Sets the history item specified by the argument"},
+	{"clearHistory", module_clearHistory, METH_VARARGS, "Clears the whole history"},
 	{NULL, NULL, 0, NULL}
 };
 
 int pyInit = 0;
-plugin pluginList; //first element in list is dummy
+plugin pluginList; //first element in list is dummy (makes it easier to delete one special item)
+
+///////////////////////Functions for the plugin system://////////////////////////
 
 void init()
 {
@@ -35,7 +39,6 @@ void init()
 struct plugin_info get_plugin_info(char* module)
 {
 	init();
-
 	PyObject* name = PyString_FromString(module);
 	PyObject* m = PyImport_Import(name);
 	Py_DECREF(name);
@@ -63,7 +66,6 @@ struct plugin_info get_plugin_info(char* module)
 void start_plugin(char* module)
 {
 	init();
-
 	PyObject* name = PyString_FromString(module);
 	PyObject* m = PyImport_Import(name);
 	Py_DECREF(name);
@@ -89,7 +91,6 @@ void stop_plugin(char* module)
 			plugin* c = i->next;
 			if (strcmp(c->modulename, module) == 0)
 			{
-				//TODO: STOP PYTHON THINGS HERE
 				Py_DECREF(c->module);
 				Py_DECREF(c->newItemFunc);
 				free(c->modulename);
@@ -127,4 +128,26 @@ PyObject* module_getItem(PyObject* self, PyObject* args)
 		return NULL;
 	char* item = c->data;
 	return PyString_FromString(item);
+}
+
+void module_setItem(PyObject* self, PyObject* args)
+{
+	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
+	GSList* c = g_slist_nth(history, index);
+	if (c != NULL)
+	{
+		free(c->data);
+		char* intstr = PyString_AsString(PyTuple_GetItem(args, 1));
+		char* str = malloc(strlen(intstr)+1);
+		strcpy(str, intstr);
+		c->data = str;
+		hasChanged = 1;
+	}
+}
+	
+void module_clearHistory(PyObject* self, PyObject* args)
+{
+	g_slist_free(history);
+	history = NULL;
+	hasChanged = 1;
 }
