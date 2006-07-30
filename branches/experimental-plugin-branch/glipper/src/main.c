@@ -623,6 +623,7 @@ int main(int argc, char *argv[])
 		readHistory();
 
 	mainTimeout = g_timeout_add(CHECK_INTERVAL, checkClipboard, NULL);
+	start_plugin("newline");
 	gtk_main ();
 
 	unbindKey();

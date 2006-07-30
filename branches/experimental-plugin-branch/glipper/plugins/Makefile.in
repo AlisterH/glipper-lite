@@ -34,7 +34,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-subdir = data
+subdir = plugins
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.in
@@ -51,12 +51,9 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(gladedir)" \
-	"$(DESTDIR)$(icondir)"
-desktopDATA_INSTALL = $(INSTALL_DATA)
-gladeDATA_INSTALL = $(INSTALL_DATA)
-iconDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(desktop_DATA) $(glade_DATA) $(icon_DATA)
+am__installdirs = "$(DESTDIR)$(plugindir)"
+pluginDATA_INSTALL = $(INSTALL_DATA)
+DATA = $(plugin_DATA)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 ALL_LINGUAS = @ALL_LINGUAS@
@@ -188,22 +185,9 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-desktopdir = $(datadir)/applications
-desktop_in_files = glipper.desktop.in
-desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-icondir = $(datadir)/pixmaps
-icon_DATA = glipper.png
-gladedir = $(datadir)/glipper
-glade_DATA = glipper-properties.glade
-EXTRA_DIST = \
-	$(desktop_in_files) \
-	$(icon_DATA)        \
-	$(glade_DATA)	\
-	#$(desktop_DATA)
-
-DISTCLEANFILES = \
-	$(desktop_DATA)				
-
+plugindir = $(datadir)/glipper/plugins
+plugin_DATA = *.py
+EXTRA_DIST = $(plugin_DATA)
 all: all-am
 
 .SUFFIXES:
@@ -216,9 +200,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  data/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  plugins/Makefile'; \
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  data/Makefile
+	  $(AUTOMAKE) --gnu  plugins/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \
@@ -237,56 +221,22 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 uninstall-info-am:
-install-desktopDATA: $(desktop_DATA)
+install-pluginDATA: $(plugin_DATA)
 	@$(NORMAL_INSTALL)
-	test -z "$(desktopdir)" || $(mkdir_p) "$(DESTDIR)$(desktopdir)"
-	@list='$(desktop_DATA)'; for p in $$list; do \
+	test -z "$(plugindir)" || $(mkdir_p) "$(DESTDIR)$(plugindir)"
+	@list='$(plugin_DATA)'; for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  f=$(am__strip_dir) \
-	  echo " $(desktopDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(desktopdir)/$$f'"; \
-	  $(desktopDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(desktopdir)/$$f"; \
+	  echo " $(pluginDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(plugindir)/$$f'"; \
+	  $(pluginDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(plugindir)/$$f"; \
 	done
 
-uninstall-desktopDATA:
+uninstall-pluginDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(desktop_DATA)'; for p in $$list; do \
+	@list='$(plugin_DATA)'; for p in $$list; do \
 	  f=$(am__strip_dir) \
-	  echo " rm -f '$(DESTDIR)$(desktopdir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(desktopdir)/$$f"; \
-	done
-install-gladeDATA: $(glade_DATA)
-	@$(NORMAL_INSTALL)
-	test -z "$(gladedir)" || $(mkdir_p) "$(DESTDIR)$(gladedir)"
-	@list='$(glade_DATA)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f=$(am__strip_dir) \
-	  echo " $(gladeDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(gladedir)/$$f'"; \
-	  $(gladeDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(gladedir)/$$f"; \
-	done
-
-uninstall-gladeDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(glade_DATA)'; for p in $$list; do \
-	  f=$(am__strip_dir) \
-	  echo " rm -f '$(DESTDIR)$(gladedir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(gladedir)/$$f"; \
-	done
-install-iconDATA: $(icon_DATA)
-	@$(NORMAL_INSTALL)
-	test -z "$(icondir)" || $(mkdir_p) "$(DESTDIR)$(icondir)"
-	@list='$(icon_DATA)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f=$(am__strip_dir) \
-	  echo " $(iconDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(icondir)/$$f'"; \
-	  $(iconDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(icondir)/$$f"; \
-	done
-
-uninstall-iconDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(icon_DATA)'; for p in $$list; do \
-	  f=$(am__strip_dir) \
-	  echo " rm -f '$(DESTDIR)$(icondir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(icondir)/$$f"; \
+	  echo " rm -f '$(DESTDIR)$(plugindir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(plugindir)/$$f"; \
 	done
 tags: TAGS
 TAGS:
@@ -326,7 +276,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(desktopdir)" "$(DESTDIR)$(gladedir)" "$(DESTDIR)$(icondir)"; do \
+	for dir in "$(DESTDIR)$(plugindir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-am
@@ -349,7 +299,6 @@ clean-generic:
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
-	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -372,8 +321,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-desktopDATA install-gladeDATA \
-	install-iconDATA
+install-data-am: install-pluginDATA
 
 install-exec-am:
 
@@ -399,21 +347,17 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-desktopDATA uninstall-gladeDATA \
-	uninstall-iconDATA uninstall-info-am
+uninstall-am: uninstall-info-am uninstall-pluginDATA
 
 .PHONY: all all-am check check-am clean clean-generic distclean \
 	distclean-generic distdir dvi dvi-am html html-am info info-am \
-	install install-am install-data install-data-am \
-	install-desktopDATA install-exec install-exec-am \
-	install-gladeDATA install-iconDATA install-info \
-	install-info-am install-man install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
-	pdf-am ps ps-am uninstall uninstall-am uninstall-desktopDATA \
-	uninstall-gladeDATA uninstall-iconDATA uninstall-info-am
+	install install-am install-data install-data-am install-exec \
+	install-exec-am install-info install-info-am install-man \
+	install-pluginDATA install-strip installcheck installcheck-am \
+	installdirs maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-generic pdf pdf-am ps ps-am uninstall \
+	uninstall-am uninstall-info-am uninstall-pluginDATA
 
-@INTLTOOL_DESKTOP_RULE@
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

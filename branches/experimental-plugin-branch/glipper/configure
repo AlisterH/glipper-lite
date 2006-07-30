@@ -7508,7 +7508,7 @@ _ACEOF
 fi
 done
 
-                                        ac_config_files="$ac_config_files Makefile src/Makefile data/Makefile help/Makefile"
+                                                  ac_config_files="$ac_config_files Makefile src/Makefile data/Makefile help/Makefile plugins/Makefile"
 
 
           ac_config_files="$ac_config_files po/Makefile.in"
@@ -8097,6 +8097,7 @@ do
   "src/Makefile" ) CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;
   "data/Makefile" ) CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
   "help/Makefile" ) CONFIG_FILES="$CONFIG_FILES help/Makefile" ;;
+  "plugins/Makefile" ) CONFIG_FILES="$CONFIG_FILES plugins/Makefile" ;;
   "po/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES po/Makefile.in" ;;
   "depfiles" ) CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
   "default-1" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-1" ;;
