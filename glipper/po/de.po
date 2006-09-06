@@ -108,7 +108,7 @@ msgstr "Glipper Einstellungen"
 
 #: ../data/glipper-properties.glade.h:8
 msgid "Key combination for popup: "
-msgstr "Tastenkombination für Pop-Up Menü"
+msgstr "Tastenkombination für Pop-Up Menü:"
 
 #: ../data/glipper-properties.glade.h:9
 msgid "Length of one history entry:"
