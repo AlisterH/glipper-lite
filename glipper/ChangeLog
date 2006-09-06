@@ -1,3 +1,7 @@
+2006-09-06  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am (EXTRA_DIST): Add config.rpath, mkinstalldirs, m4/ChangeLog.
+
 2006-06-27
 	Change popup menu.
 		Add tooltips to first and bold menu items.
