@@ -71,7 +71,7 @@ msgstr "<application>Glipper</application> ist ein Zwischenablagenverwalter für
 
 #: base.xml:100(para) 
 msgid "<application>Glipper</application> sits in the notification area and collects everything that is copied to the clipboard. Glipper maintains a history both of the \"copy\" clipboard, usually filled with <keycombo><keycap>Ctrl+C</keycap></keycombo> and of the \"select\" clipboard, filled when text is selected."
-msgstr "<application>Glipper</application> sitzt im Benachrichtigungsfeld und sammelt alles, was in die Zwischenablage kopiert wird. Glipper verwaltet einen Verlauf sowohl von der \"Kopiere\" Zwischenablage, überlicherweise mit Hilfe von  <keycombo><keycap>Strg+C</keycap></keycombo> gefüllt, und der \"Markiere\" Zwischenablage, welche durch markierung gefüllt wird."
+msgstr "<application>Glipper</application> sitzt im Benachrichtigungsfeld und sammelt alles, was in die Zwischenablage kopiert wird. Glipper verwaltet einen Verlauf sowohl von der \"Kopieren\" Zwischenablage, überlicherweise mit Hilfe von  <keycombo><keycap>Strg+C</keycap></keycombo> gefüllt, und der \"Markieren\" Zwischenablage, welche durch markierung gefüllt wird."
 
 #: base.xml:107(para) 
 msgid "<application>Glipper</application> lets you choose an entry from the history to fill the current clipboards."
@@ -187,47 +187,47 @@ msgstr "Wähle diese Option um einen Verlauf der \"Markieren\" Zwischenablage zu
 
 #: base.xml:275(guilabel) 
 msgid "Copy - Ctrl+C/Ctrl+V"
-msgstr "Copy - Ctrl+C/Ctrl+V"
+msgstr "Kopieren - Strg+C/Strg+V"
 
 #: base.xml:279(para) 
 msgid "Select this option to maintain a history of the \"copy\" clipboard."
-msgstr "Select this option to maintain a history of the \"copy\" clipboard."
+msgstr "Wähle diese Option um einen Verlauf der \"Kopieren\" Zwischenablage zu führen."
 
 #: base.xml:285(guilabel) 
 msgid "Tag Ctrl+C clipboard's content in history (bold)"
-msgstr "Tag Ctrl+C clipboard's content in history (bold)"
+msgstr "Markiere die Einträge der Strg+C Zwischenablage im Verlauf (fett)"
 
 #: base.xml:289(para) 
 msgid "Select this option to have <application>glipper</application> mark the contents of the \"copy\" clipboard."
-msgstr "Select this option to have <application>glipper</application> mark the contents of the \"copy\" clipboard."
+msgstr "Wähle diese Options, damit <application>glipper</application> den Inhalt der \"Kopieren\" Zwischenablage markiert."
 
 #: base.xml:295(guilabel) 
 msgid "Save history"
-msgstr "Save history"
+msgstr "Speichere Verlauf"
 
 #: base.xml:299(para) 
 msgid "Select this option to save the contents of the clipboards. If you select this, you will keep the history of clipboards from your last session."
-msgstr "Select this option to save the contents of the clipboards. If you select this, you will keep the history of clipboards from your last session."
+msgstr "Wähle diese Option um den Inhalt der Zwischenablage zu sichern. Wenn du dies auswählst, bleibt dein Verlauf der Zwischenablagen der letzten Sitzung erhalten."
 
 #: base.xml:308(guilabel) 
 msgid "Key combination for popup"
-msgstr "Key combination for popup"
+msgstr "Tastenkombination für Pop-up Menü"
 
 #: base.xml:312(para) 
 msgid "Enter a key combination to change the main menu keyboard shortcut."
-msgstr "Enter a key combination to change the main menu keyboard shortcut."
+msgstr "Gib eine Tastenkombination ein, um die Schnelltaste für das Menü zu ändern."
 
 #: base.xml:323(title) 
 msgid "Legal"
-msgstr "Legal"
+msgstr "Rechtliches"
 
 #: base.xml:326(title) 
 msgid "Glipper Licence"
-msgstr "Glipper Licence"
+msgstr "Glipper Lizenz"
 
 #: base.xml:327(para) 
 msgid "Glipper is licenced under the LGPL, see the <application>glipper</application> about box for details."
-msgstr "Glipper is licenced under the LGPL, see the <application>glipper</application> about box for details."
+msgstr "Glipper steht unter der LGPL Lizenz. Siehe den <application>glipper</application> Über Dialog für Details."
 
 #: base.xml:333(title) 
 msgid "Glipper Documentation Licence"
