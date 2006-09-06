@@ -262,13 +262,11 @@ gboolean checkClipboard(gpointer data)
 	g_source_remove(mainTimeout);
 	if (usePrimary)
 	{
-		void* infos[] = {PrimaryCl, lastPr};
 		gchar* newContentPr = gtk_clipboard_wait_for_text(PrimaryCl);
 		processContent(newContentPr, &lastPr, PrimaryCl);
 	}
 	if (useDefault)
 	{
-		void* infos[] = {DefaultCl, lastDf};
 		gchar* newContentCl = gtk_clipboard_wait_for_text(DefaultCl);
 		processContent(newContentCl, &lastDf, DefaultCl);
 	}
