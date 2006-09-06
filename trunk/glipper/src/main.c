@@ -72,6 +72,8 @@ void deleteHistory(GtkMenuItem* menuItem, gpointer user_data)
 	hasChanged = 1;
 	g_slist_free(history);
 	history = NULL;
+	if (weSaveHistory)
+		saveHistory();
 }
 
 void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data);
