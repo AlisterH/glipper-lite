@@ -35,6 +35,7 @@ To use Glipper you must have these libraries installed on your system :
 If you use GNOME support (default) you will also require :
 
 	libgnome
+	gnome-doc-utils
 
 You must also have a freedesktop compliant notification area or system tray
 running.
