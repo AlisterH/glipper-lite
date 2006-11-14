@@ -56,6 +56,7 @@ gint mainTimeout;
 int hasChanged = 1;
 
 void errorDialog(gchar* error_msg, gchar* secondaryText);
+void saveHistory();
 
 void getClipboards()
 {
@@ -203,9 +204,6 @@ void createHistMenu()
 
 	gtk_widget_show_all(historyMenu);
 }
-
-
-void saveHistory();
 
 void insertInHistory(gchar* content)
 {
@@ -397,6 +395,7 @@ void show_about(gpointer data)
 		"version", VERSION,
 		NULL);
 }
+
 //Creates context menu that we popup on right click on the trayicon
 void createPopupMenu()
 {

@@ -1,0 +1,71 @@
+2006-11-12
+	Release 0.95
+
+Between 2006-06-27 and 2006-11-08
+	Add documentation support.
+		Documentation for Yelp (when GnomeSupport compiled in)
+		English, French and German versions.
+
+2006-06-27
+	Change popup menu.
+		Add tooltips to first and bold menu items.
+		Add menu header.
+		Add hints for keybindings.
+		Put "clear" button at bottom.
+		Ctrl+c entry is now bold not blue.
+	Fix a couple of memory leaks.
+
+2006-06-26
+	We develop Glipper with the help of CVS now.
+	Cleaned up the code a little bit and moved some files in subdirectories.
+	Added support for keybindings.
+	Translated source code comments to english.
+
+Between 2006-06-21 and 2006-06-26
+	New preferences dialog.
+		Now uses libglade.
+		GNOME HIG conformant.
+		Access Keys.
+	Remove prefcallbacks.c, prefcallbacks.c and header files.
+	Move version number to configure.in (handy if we want commandline --version option).
+	Transparent icon - new libegg.
+	New verbose readme.
+	Error dialog - soft fails on problems opening files.
+
+2006-06-21
+	Tooltip added (bugreport #1509519).
+	Thanks to Karderio for this patch.
+	Release 0.89
+
+2006-06-07
+	Thanks to Daniel Nylander, swedish translation is now available.
+	Release 0.88
+
+2006-05-22
+	There is now a french translation for glipper. Thank you very much to Achraf cherti. 
+	Release 0.87
+
+2006-05-10
+	Release 0.86
+
+	Fixed a stupid bug with savefiles
+
+2006-05-09
+	Release 0.85
+
+2006-05-04
+	removed the icon inline method, which was crap. 
+
+	Changed the two buttons in the preferences dialog with one close button.
+	This is more GNOME Style.
+
+	Changed some gladefile infrastructure things.
+
+2006-05-02
+	fixed translation problems with dektop file 
+
+2006-04-29
+	new icon (thanks to Fredo)
+
+2006-04-24
+	Initial Release (0.8)
