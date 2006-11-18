@@ -367,7 +367,7 @@ void createTrayIcon()
 
 void show_about(gpointer data)
 {
-	gchar* authors[] = {"Sven Rech <svenrech@gmx.de>", NULL};
+	gchar* authors[] = {"Sven Rech <svenrech@gmx.de>", "Karderio <karderio at gmail dot com>", NULL};
 
 	gchar* license = 
 "This library is free software; you can redistribute it and/or\n"
