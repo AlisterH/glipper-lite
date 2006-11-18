@@ -41,6 +41,10 @@ AC_PROG_INTLTOOL([0.23])
 glipperlocaledir='${prefix}/${DATADIRNAME}/locale'
 AC_SUBST(glipperlocaledir)
 
+# This makes gettext use system gettext, if absent, internationalisation will
+# be disabled.
+AM_GNU_GETTEXT([external])
+
 ###########################################################################
 
 
@@ -119,7 +123,7 @@ AC_HEADER_STDBOOL
 # Checks for library functions.
 AC_TYPE_SIGNAL
 AC_CHECK_FUNCS([mkdir])
-AC_CONFIG_FILES([Makefile m4/Makefile
+AC_CONFIG_FILES([Makefile
 src/Makefile
 data/Makefile
 help/Makefile ])
