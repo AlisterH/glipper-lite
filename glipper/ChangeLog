@@ -1,3 +1,7 @@
+2006-11-21  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am (EXTRA_DIST): Add config.rpath, m4/ChangeLog.
+
 2006-11-15 
 	Fix --as-needed build issue, thanks Sven Wegen.
 	Fix problem when compiling with gcc 3.x.
