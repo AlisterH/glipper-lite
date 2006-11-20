@@ -387,11 +387,13 @@ void show_about(gpointer data)
 	GError* pix_error = NULL;
 	gtk_show_about_dialog(NULL, 
 		"authors", authors,
-		"copyright", "Copyright © 2006 Sven Rech", 
+		"copyright", "Copyright © 2006 Sven Rech",
+		"translator-credits", _("translator-credits"),
 		"license", license,
 		"name", "Glipper",
 		"comments", _("Clipboardmanager for Gnome"),
 		"logo", gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error),
+		"website", "http://glipper.sourceforge.net/",
 		"version", VERSION,
 		NULL);
 }
