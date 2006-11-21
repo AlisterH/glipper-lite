@@ -5,6 +5,18 @@
 2006-11-21  gettextize  <bug-gnu-gettext@gnu.org>
 
 	* Makefile.in.in: Upgrade to gettext-0.15.
+
+2006-11-21  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.15.
+
+2006-11-21  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.15.
+
+2006-11-21  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.15.
 	* Rules-quot: New file, from gettext-0.15.
 	* boldquot.sed: New file, from gettext-0.15.
 	* en@boldquot.header: New file, from gettext-0.15.

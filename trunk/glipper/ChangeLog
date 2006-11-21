@@ -1,6 +1,10 @@
-2006-11-21  gettextize  <bug-gnu-gettext@gnu.org>
-
-	* Makefile.am (EXTRA_DIST): Add config.rpath, m4/ChangeLog.
+2006-11-21
+	Add config.guess, config.sub, po/Makevars to fix build issues (hopfully)
+	Mod about dialog to add website, translator credits.
+	Russian translation, thanks Евгений Вдовин <evdovin at pochta dot ru>
+	FIXME: Website URL is text, does not open browser on click as elsewhere.
+	Translators should now add themselves to translator-credits in each .po.
+	Release 0.95.1
 
 2006-11-15 
 	Fix --as-needed build issue, thanks Sven Wegen.
