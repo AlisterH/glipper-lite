@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: glipper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-09-06 17:28+0200\n"
-"PO-Revision-Date: 2006-06-26 21:30+0200\n"
-"Last-Translator: Sven Rech <svenrech@gmx.de>\n"
+"PO-Revision-Date: 2006-11-21 01:27+0100\n"
+"Last-Translator: karderio <karderio at gmail dot com>\n"
 "Language-Team: German <svenrech@gmx.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,8 @@ msgstr ""
 "Dieser Eintrag wurde mit Strg+C kopiert.\n"
 "Es kann mit Strg+V eingefügt werden."
 
-#: ../src/main.c:150 ../src/main.c:353
+#: ../src/main.c:150
+#: ../src/main.c:345
 msgid "Cannot load icon. Is the software properly installed ?"
 msgstr "Kann Icon nicht laden. Wurde die Software ordnungsgemäß installiert?"
 
@@ -47,18 +48,23 @@ msgstr ""
 "Dies ist das letzte kopierte Element.\n"
 "Es kan mit der mittleren Maustaste eingefügt werden."
 
-#: ../src/main.c:328
+#: ../src/main.c:320
 msgid "Could not display help for Glipper"
 msgstr "Konnte Hilfe für Glipper nicht anzeigen"
 
-#: ../src/main.c:365 ../src/main.c:547
+#: ../src/main.c:357
+#: ../src/main.c:542
 #, fuzzy, c-format
 msgid ""
 "Glipper (%s)\n"
 "Clipboardmanager"
 msgstr "Zwischenablagenverwalter"
 
-#: ../src/main.c:401
+#: ../src/main.c:391
+msgid "translator-credits"
+msgstr "Sven Rech <svenrech at gmx dot de>"
+
+#: ../src/main.c:394
 msgid "Clipboardmanager for Gnome"
 msgstr "Zwischenablagenverwalter für GNOME"
 
@@ -67,12 +73,8 @@ msgid "Help support is not compiled in."
 msgstr "Hilfe Unterstützung ist nicht einkompiliert."
 
 #: ../src/preferences.c:76
-msgid ""
-"To see the documentation, consult the glipper website or compile glipper "
-"with GNOME support (see README file)."
-msgstr ""
-"Um die Dokumentation zu sehen, ziehe die Glipper Webseite zu Rate, oder "
-"kompiliere Glipper mit GNOME Unterstützung (siehe README Datei)."
+msgid "To see the documentation, consult the glipper website or compile glipper with GNOME support (see README file)."
+msgstr "Um die Dokumentation zu sehen, ziehe die Glipper Webseite zu Rate, oder kompiliere Glipper mit GNOME Unterstützung (siehe README Datei)."
 
 #: ../src/preferences.c:93
 msgid "Could not load the preferences interface"
@@ -137,3 +139,4 @@ msgstr "Zwischenablagenverwalter"
 #: ../data/glipper.desktop.in.h:2
 msgid "Glipper"
 msgstr "Glipper"
+

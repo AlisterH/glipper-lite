@@ -395,7 +395,7 @@ void show_about(gpointer data)
 		"logo", gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error),
 		"website", "http://glipper.sourceforge.net/",
 		"version", VERSION,
-		NULL);
+		 NULL);
 }
 
 //Creates context menu that we popup on right click on the trayicon
