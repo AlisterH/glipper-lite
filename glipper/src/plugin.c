@@ -59,6 +59,16 @@ PyObject* module_setItem(PyObject* self, PyObject* args)
 	return NULL;
 }
 	
+PyObject* module_newItem(PyObject* self, PyObject* args)
+{
+	char* intstr = PyString_AsString(PyTuple_GetItem(args, 0));
+	char* str = malloc(strlen(intstr)+1);
+	strcpy(str, intstr);
+	history = g_slist_prepend(history, str);
+	hasChanged = 1;
+	return NULL;
+}
+	
 PyObject* module_clearHistory(PyObject* self, PyObject* args)
 {
 	g_slist_free(history);
@@ -70,6 +80,7 @@ PyObject* module_clearHistory(PyObject* self, PyObject* args)
 static PyMethodDef glipperFunctions[] = {
 	{"getItem", module_getItem, METH_VARARGS, "Returns the history item specified by the argument"},
 	{"setItem", module_setItem, METH_VARARGS, "Sets the history item specified by the argument"},
+	{"newItem", module_newItem, METH_VARARGS, "Adds a new item at the top of the list"},
 	{"clearHistory", module_clearHistory, METH_VARARGS, "Clears the whole history"},
 	{NULL, NULL, 0, NULL}
 };

@@ -1,4 +1,4 @@
-SUBDIRS = src po data help plugins
+SUBDIRS = m4 src po data help plugins
 EXTRA_DIST = config.rpath m4/ChangeLog  intltool-extract.in intltool-merge.in intltool-update.in  gnome-doc-utils.make  m4
 
 DISTCLEANFILES = *.bak gnome-doc-utils.make
