@@ -113,9 +113,24 @@ void init()
 int get_plugin_info(char* module, plugin_info* info)
 {
 	init();
-	PyObject* name = PyString_FromString(module);
-	PyObject* m = PyImport_Import(name);
-	Py_DECREF(name);
+	PyObject* m = NULL;
+	info->isrunning = 0;
+	//search if the plugin is already started:
+	plugin* i;
+	for (i = pluginList.next; i != NULL; i = i->next)
+		if (strcmp(i->modulename, module) == 0)
+		{
+			m = i->module;
+			info->isrunning = 1;
+			break;
+		}
+	//if not:
+	if (m == NULL)
+	{
+		PyObject* name = PyString_FromString(module);
+		m = PyImport_Import(name);
+		Py_DECREF(name);
+	}
 	if (m != NULL)
 	{
 		PyObject* infoFunc = PyObject_GetAttrString(m, "getInfo");

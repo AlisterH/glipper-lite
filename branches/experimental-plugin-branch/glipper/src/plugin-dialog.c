@@ -22,6 +22,7 @@ GtkListStore* pluginStore;
 
 enum {
 FILE_COLUMN,
+ISRUNNING_COLUMN,
 NAME_COLUMN,
 DESCRIPTION_COLUMN,
 N_COLUMNS
@@ -36,6 +37,7 @@ void addPluginToList(char* plugin)
 		gtk_list_store_append(pluginStore, &iter);
 		gtk_list_store_set(pluginStore, &iter,
 			FILE_COLUMN, plugin,
+			ISRUNNING_COLUMN, info->isrunning,
 			NAME_COLUMN, info->name,
 			DESCRIPTION_COLUMN, info->descr,
 			-1);
@@ -79,14 +81,27 @@ on_startButton_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
         GtkTreeIter iter;
-        char* file;
 	if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection(GTK_TREE_VIEW(pluginList)), &pluginStore, &iter))
         {
-                gtk_tree_model_get(GTK_TREE_MODEL(pluginStore), &iter, FILE_COLUMN, &file, -1);
-                g_print("You want to start plugin %s\n", file);
-                free(file);
+		char* file;
+		gtk_tree_model_get(GTK_TREE_MODEL(pluginStore), &iter, FILE_COLUMN, &file, -1);
+		int isrunning;
+		gtk_tree_model_get(GTK_TREE_MODEL(pluginStore), &iter, ISRUNNING_COLUMN, &isrunning, -1);
+		if (!isrunning)
+		{
+			start_plugin(file);
+			gtk_button_set_label(GTK_BUTTON(startButton), _("stop plugin"));
+		}
+		else
+		{
+			stop_plugin(file);
+			gtk_button_set_label(GTK_BUTTON(startButton), _("start plugin"));
+		}
+		gtk_list_store_set(pluginStore, &iter,
+			ISRUNNING_COLUMN, !isrunning,
+			NULL);
+		free(file);
         }
-
 }
 
 on_refreshButton_clicked                 (GtkButton       *button,
@@ -140,9 +155,15 @@ void showPluginDialog(gpointer data)
 		NULL);
 
 	//Set up the plugin list model + widget
-	pluginStore = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
+	pluginStore = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING);
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
+	renderer = gtk_cell_renderer_toggle_new ();
+	g_object_set(renderer, "activatable", 0, NULL);
+	column = gtk_tree_view_column_new_with_attributes ("Name", renderer,
+							   "active", ISRUNNING_COLUMN,
+							   NULL);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (pluginList), column);
 	renderer = gtk_cell_renderer_text_new ();
 	column = gtk_tree_view_column_new_with_attributes ("Name", renderer,
 							   "text", NAME_COLUMN,
