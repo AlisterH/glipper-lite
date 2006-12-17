@@ -2,6 +2,7 @@
 typedef struct {
 	char* name;
 	char* descr;
+	int isrunning;
 	//Maybe options??
 } plugin_info;
 
