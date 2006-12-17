@@ -144,7 +144,7 @@ int get_plugin_info(char* module, plugin_info* info)
 
 void start_plugin(char* module)
 {
-	printf("plugin %s started", module);
+	printf("plugin %s started\n", module);
 	init();
 	PyObject* name = PyString_FromString(module);
 	PyObject* m = PyImport_Import(name);
