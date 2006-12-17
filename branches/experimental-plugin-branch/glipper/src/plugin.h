@@ -7,7 +7,7 @@ typedef struct {
 
 //Common functions for the plugin system:
 
-plugin_info get_plugin_info(char* module);
+int get_plugin_info(char* module, plugin_info* info);
 
 void start_plugin(char* module);
 

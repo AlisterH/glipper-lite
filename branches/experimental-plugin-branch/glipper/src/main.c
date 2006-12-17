@@ -23,6 +23,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "preferences.h"
+#include "plugin-dialog.h"
 #include "utils/eggtrayicon.h"
 #include "utils/glipper-i18n.h"
 #include "utils/keybinder.h"
@@ -409,7 +410,7 @@ void createPopupMenu()
 	//Create new popup menu
 	popupMenu = gtk_menu_new();
 
-	//Create widgets to be plced in the popup menu
+	//Create widgets to be placed in the popup menu
 	GtkWidget* quit = gtk_image_menu_item_new_from_stock(GTK_STOCK_QUIT, NULL);
 	g_signal_connect(G_OBJECT(quit), "activate", G_CALLBACK(gtk_main_quit), NULL);
 
@@ -424,8 +425,12 @@ void createPopupMenu()
 	GtkWidget* preferences = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
 	g_signal_connect(G_OBJECT(preferences), "activate", G_CALLBACK(showPreferences), NULL);
 
+	GtkWidget* plugins = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
+	g_signal_connect(G_OBJECT(plugins), "activate", G_CALLBACK(showPluginDialog), NULL);
+
 	//Add the widgets to the menu
 	gtk_menu_append((GtkMenu*)popupMenu, preferences);
+	gtk_menu_append((GtkMenu*)popupMenu, plugins);
 #ifndef DISABLE_GNOME
 	gtk_menu_append((GtkMenu*)popupMenu, help);
 #endif /*DISABLE_GNOME*/

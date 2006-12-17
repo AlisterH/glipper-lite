@@ -7,7 +7,7 @@ icondir = $(datadir)/pixmaps
 icon_DATA = glipper.png
 
 gladedir = $(datadir)/glipper
-glade_DATA = glipper-properties.glade
+glade_DATA = glipper-properties.glade glipper-plugins.glade
 
 EXTRA_DIST =            \
 	$(desktop_in_files) \

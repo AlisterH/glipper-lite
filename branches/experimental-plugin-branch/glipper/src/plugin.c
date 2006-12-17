@@ -110,7 +110,7 @@ void init()
 	}
 }
 
-plugin_info get_plugin_info(char* module)
+int get_plugin_info(char* module, plugin_info* info)
 {
 	init();
 	PyObject* name = PyString_FromString(module);
@@ -118,23 +118,28 @@ plugin_info get_plugin_info(char* module)
 	Py_DECREF(name);
 	if (m != NULL)
 	{
-		plugin_info info;
 		PyObject* infoFunc = PyObject_GetAttrString(m, "getInfo");
 		if (infoFunc && PyCallable_Check(infoFunc))
 		{
 			PyObject* result = PyObject_CallObject(infoFunc, NULL);
 			PyObject* name = PyDict_GetItemString(result, "Name");
 			PyObject* descr = PyDict_GetItemString(result, "Description");
-			info.name = PyString_AsString(name);
-			info.descr = PyString_AsString(descr);
+			info->name = PyString_AsString(name);
+			info->descr = PyString_AsString(descr);
 			Py_DECREF(name);
 			Py_DECREF(descr);
 			Py_DECREF(result);
+			Py_DECREF(infoFunc);
+			Py_DECREF(m);
+			return 1;
 		}
-		Py_DECREF(infoFunc);
-		Py_DECREF(m);
-		return info;
+		else
+		{
+			Py_DECREF(infoFunc);
+			Py_DECREF(m);
+		}
 	}
+	return 0;
 }
 
 void start_plugin(char* module)
