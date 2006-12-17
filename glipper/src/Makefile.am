@@ -9,4 +9,5 @@ bin_PROGRAMS=glipper
 glipper_SOURCES= \
 	main.c  preferences.c preferences.h plugin.c plugin.h\
 	utils/eggtrayicon.h  utils/glipper-i18n.h utils/eggtrayicon.c \
-	utils/keybinder.c utils/eggaccelerators.c
+	utils/keybinder.c utils/eggaccelerators.c \
+	plugin-dialog.c plugin-dialog.h

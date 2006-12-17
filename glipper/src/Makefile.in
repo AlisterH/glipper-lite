@@ -50,7 +50,7 @@ binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS) $(noinst_PROGRAMS)
 am_glipper_OBJECTS = main.$(OBJEXT) preferences.$(OBJEXT) \
 	plugin.$(OBJEXT) eggtrayicon.$(OBJEXT) keybinder.$(OBJEXT) \
-	eggaccelerators.$(OBJEXT)
+	eggaccelerators.$(OBJEXT) plugin-dialog.$(OBJEXT)
 glipper_OBJECTS = $(am_glipper_OBJECTS)
 glipper_LDADD = $(LDADD)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -209,7 +209,8 @@ AM_LDFLAGS = $(FR_LIBS) -lpython2.4
 glipper_SOURCES = \
 	main.c  preferences.c preferences.h plugin.c plugin.h\
 	utils/eggtrayicon.h  utils/glipper-i18n.h utils/eggtrayicon.c \
-	utils/keybinder.c utils/eggaccelerators.c
+	utils/keybinder.c utils/eggaccelerators.c \
+	plugin-dialog.c plugin-dialog.h
 
 all: all-am
 
@@ -284,6 +285,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/eggtrayicon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/keybinder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugin-dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugin.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/preferences.Po@am__quote@
 

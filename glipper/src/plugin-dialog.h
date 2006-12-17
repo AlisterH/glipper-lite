@@ -1,0 +1,2 @@
+
+void showPluginDialog(gpointer data);
