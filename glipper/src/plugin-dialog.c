@@ -14,10 +14,14 @@
 
 GtkWidget* pluginWin;
 GtkWidget* pluginList;
+GtkWidget* startButton;
+GtkWidget* refreshButton;
+GtkWidget* closeButton;
 
 GtkListStore* pluginStore;
 
 enum {
+FILE_COLUMN,
 NAME_COLUMN,
 DESCRIPTION_COLUMN,
 N_COLUMNS
@@ -31,12 +35,13 @@ void addPluginToList(char* plugin)
 		GtkTreeIter iter;
 		gtk_list_store_append(pluginStore, &iter);
 		gtk_list_store_set(pluginStore, &iter,
+			FILE_COLUMN, plugin,
 			NAME_COLUMN, info->name,
 			DESCRIPTION_COLUMN, info->descr,
 			-1);
 	}
 	else
-		g_print("Konnte plugininformationen von plugin %s nicht kriegen.", plugin);
+		g_print("couldn't retrieve informations for plugin %s!\n", plugin);
 	free(info);
 }
 
@@ -61,10 +66,40 @@ void addDirToList(char* dir)
 
 void refreshPluginList()
 {
+	gtk_list_store_clear(pluginStore);
 	addDirToList(PLUGINDIR);
 	char* searchModule = g_build_filename(g_get_home_dir(), ".glipper/plugins", NULL);
 	addDirToList(searchModule);
 	free(searchModule);
+}
+
+////////////////////Button signals/////////////////////////////////////////
+
+on_startButton_clicked                 (GtkButton       *button,
+                                        gpointer         user_data)
+{
+        GtkTreeIter iter;
+        char* file;
+	if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection(GTK_TREE_VIEW(pluginList)), &pluginStore, &iter))
+        {
+                gtk_tree_model_get(GTK_TREE_MODEL(pluginStore), &iter, FILE_COLUMN, &file, -1);
+                g_print("You want to start plugin %s\n", file);
+                free(file);
+        }
+
+}
+
+on_refreshButton_clicked                 (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	refreshPluginList();
+}
+
+on_closeButton_clicked                 (GtkButton       *button,
+                                        gpointer         user_data)
+{
+	//Maybe save something?
+	gtk_widget_destroy(pluginWin);
 }
 
 void showPluginDialog(gpointer data)
@@ -89,9 +124,23 @@ void showPluginDialog(gpointer data)
 
 	pluginWin = glade_xml_get_widget(gladeWindow, "plugin-dialog");
 	pluginList = glade_xml_get_widget(gladeWindow, "pluginList");
+	startButton = glade_xml_get_widget(gladeWindow, "startButton");
+	refreshButton = glade_xml_get_widget(gladeWindow, "refreshButton");
+	closeButton = glade_xml_get_widget(gladeWindow, "closeButton");
+
+	//Connect signals to handlers
+	g_signal_connect ((gpointer) startButton, "clicked",
+		G_CALLBACK (on_startButton_clicked),
+		NULL);
+	g_signal_connect ((gpointer) refreshButton, "clicked",
+		G_CALLBACK (on_refreshButton_clicked),
+		NULL);
+	g_signal_connect ((gpointer) closeButton, "clicked",
+		G_CALLBACK (on_closeButton_clicked),
+		NULL);
 
 	//Set up the plugin list model + widget
-	pluginStore = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING);
+	pluginStore = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 	renderer = gtk_cell_renderer_text_new ();
