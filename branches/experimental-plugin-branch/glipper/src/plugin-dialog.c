@@ -12,20 +12,20 @@
 
 #define GLADE_XML_FILE "glipper-plugins.glade"
 
-GtkWidget* pluginWin;
-GtkWidget* pluginList;
-GtkWidget* startButton;
-GtkWidget* refreshButton;
-GtkWidget* closeButton;
+static GtkWidget* pluginWin;
+static GtkWidget* pluginList;
+static GtkWidget* startButton;
+static GtkWidget* refreshButton;
+static GtkWidget* closeButton;
 
-GtkListStore* pluginStore;
+static GtkListStore* pluginStore;
 
 enum {
-FILE_COLUMN,
-ISRUNNING_COLUMN,
-NAME_COLUMN,
-DESCRIPTION_COLUMN,
-N_COLUMNS
+	FILE_COLUMN,
+	ISRUNNING_COLUMN,
+	NAME_COLUMN,
+	DESCRIPTION_COLUMN,
+	N_COLUMNS
 };
 
 void addPluginToList(char* plugin)
@@ -77,7 +77,7 @@ void refreshPluginList()
 
 ////////////////////Button signals/////////////////////////////////////////
 
-on_startButton_clicked                 (GtkButton       *button,
+void on_startButton_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
         GtkTreeIter iter;
@@ -99,18 +99,18 @@ on_startButton_clicked                 (GtkButton       *button,
 		}
 		gtk_list_store_set(pluginStore, &iter,
 			ISRUNNING_COLUMN, !isrunning,
-			NULL);
+			-1);
 		free(file);
         }
 }
 
-on_refreshButton_clicked                 (GtkButton       *button,
+void on_refreshButton_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
 	refreshPluginList();
 }
 
-on_closeButton_clicked                 (GtkButton       *button,
+void on_closeButton_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
 	//Maybe save something?
@@ -160,7 +160,7 @@ void showPluginDialog(gpointer data)
 	GtkTreeViewColumn *column;
 	renderer = gtk_cell_renderer_toggle_new ();
 	g_object_set(renderer, "activatable", 0, NULL);
-	column = gtk_tree_view_column_new_with_attributes ("Name", renderer,
+	column = gtk_tree_view_column_new_with_attributes ("Running?", renderer,
 							   "active", ISRUNNING_COLUMN,
 							   NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (pluginList), column);

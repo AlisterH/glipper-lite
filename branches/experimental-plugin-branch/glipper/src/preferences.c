@@ -35,8 +35,7 @@ void setWidgets()
 }
 
 //Set markDefaultCheck checkbox (ctrl+c in blue) active or not
-void
-on_clipCheck_toggled                   (GtkToggleButton *togglebutton,
+void on_clipCheck_toggled                   (GtkToggleButton *togglebutton,
                                         gpointer         user_data)
 {
 	//Only permit to distinguish ctrl+c entry if both types of clipboard are present
@@ -48,8 +47,7 @@ on_clipCheck_toggled                   (GtkToggleButton *togglebutton,
 }
 
 //Save preferences when window is closed via apply button
-void
-on_applyButton_clicked                 (GtkButton       *button,
+void on_applyButton_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
 	unbindKey();
@@ -65,7 +63,7 @@ on_applyButton_clicked                 (GtkButton       *button,
 	gtk_widget_destroy(prefWin);
 }
 
-on_helpButton_clicked                 (GtkButton       *button,
+void on_helpButton_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
 #ifndef DISABLE_GNOME

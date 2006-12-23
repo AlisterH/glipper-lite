@@ -14,7 +14,7 @@ typedef struct plugin {
 	//TODO: add more
 } plugin;
 
-plugin pluginList; //first element in list is dummy (makes it easier to delete one special item)
+static plugin pluginList; //first element in list is dummy (makes it easier to delete one special item)
 
 ////////////////////////////////////Events:///////////////////////////////////////
 
@@ -159,7 +159,6 @@ int get_plugin_info(char* module, plugin_info* info)
 
 void start_plugin(char* module)
 {
-	printf("plugin %s started\n", module);
 	init();
 	PyObject* name = PyString_FromString(module);
 	PyObject* m = PyImport_Import(name);
@@ -175,6 +174,7 @@ void start_plugin(char* module)
 		//TODO: other event functions
 		if (!PyCallable_Check(new->newItemFunc))
 			new->newItemFunc = NULL;
+		printf("plugin %s started\n", module);
 	}
 }
 
@@ -191,6 +191,8 @@ void stop_plugin(char* module)
 				free(c->modulename);
 				i->next = c->next;
 				free(c);
+				printf("plugin %s stopped\n", module);
+				break;
 			}
 			i = i->next;
 	}
