@@ -168,7 +168,8 @@ void start_plugin(char* module)
 		plugin* new = malloc(sizeof(plugin));
 		new->next = pluginList.next;
 		pluginList.next = new;
-		new->modulename = module;
+		new->modulename = malloc(strlen(module)+1);
+		strcpy(new->modulename, module);
 		new->module = m;
 		new->newItemFunc = PyObject_GetAttrString(m, "newItem");
 		//TODO: other event functions

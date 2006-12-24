@@ -87,15 +87,25 @@ void on_startButton_clicked                 (GtkButton       *button,
 		gtk_tree_model_get(GTK_TREE_MODEL(pluginStore), &iter, FILE_COLUMN, &file, -1);
 		int isrunning;
 		gtk_tree_model_get(GTK_TREE_MODEL(pluginStore), &iter, ISRUNNING_COLUMN, &isrunning, -1);
+
+		static GtkImage* startImage = NULL;
+		if (startImage == NULL)
+			startImage = gtk_image_new_from_stock(GTK_STOCK_APPLY, GTK_ICON_SIZE_SMALL_TOOLBAR);
+		static GtkImage* stopImage = NULL;
+		if (stopImage == NULL)
+			stopImage = gtk_image_new_from_stock(GTK_STOCK_CANCEL, GTK_ICON_SIZE_SMALL_TOOLBAR);
+
 		if (!isrunning)
 		{
 			start_plugin(file);
 			gtk_button_set_label(GTK_BUTTON(startButton), _("stop plugin"));
+			gtk_button_set_image(GTK_BUTTON(startButton), stopImage);
 		}
 		else
 		{
 			stop_plugin(file);
 			gtk_button_set_label(GTK_BUTTON(startButton), _("start plugin"));
+			gtk_button_set_image(GTK_BUTTON(startButton), startImage);
 		}
 		gtk_list_store_set(pluginStore, &iter,
 			ISRUNNING_COLUMN, !isrunning,
