@@ -1,3 +1,22 @@
+/* Glipper - Clipboardmanager for Gnome
+ * Copyright (C) 2006 Sven Rech <svenrech@gmx.de>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+	
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -21,6 +40,18 @@ GtkWidget* applyButton;
 GtkWidget* prefWin;
 GtkWidget* helpButton;
 
+//Set markDefaultCheck checkbox (ctrl+c in blue) active or not
+void on_clipCheck_toggled                   (GtkToggleButton *togglebutton,
+                                        gpointer         user_data)
+{
+	//Only permit to distinguish ctrl+c entry if both types of clipboard are present
+	if (!(gtk_toggle_button_get_active((GtkToggleButton*)primaryCheck) && 
+	  gtk_toggle_button_get_active((GtkToggleButton*)defaultCheck)))
+		gtk_widget_set_sensitive(markDefaultCheck, FALSE);
+	else
+		gtk_widget_set_sensitive(markDefaultCheck, TRUE);
+}
+
 //Sets initial state of widgets
 void setWidgets()
 {
@@ -32,18 +63,6 @@ void setWidgets()
 	gtk_toggle_button_set_active((GtkToggleButton*)saveHistCheck, weSaveHistory);
 	gtk_entry_set_text((GtkEntry*)keyCombEntry, keyComb);
 	on_clipCheck_toggled(NULL, NULL); //can make markDefaultCheck possibly unsensitive
-}
-
-//Set markDefaultCheck checkbox (ctrl+c in blue) active or not
-void on_clipCheck_toggled                   (GtkToggleButton *togglebutton,
-                                        gpointer         user_data)
-{
-	//Only permit to distinguish ctrl+c entry if both types of clipboard are present
-	if (!(gtk_toggle_button_get_active((GtkToggleButton*)primaryCheck) && 
-	  gtk_toggle_button_get_active((GtkToggleButton*)defaultCheck)))
-		gtk_widget_set_sensitive(markDefaultCheck, FALSE);
-	else
-		gtk_widget_set_sensitive(markDefaultCheck, TRUE);
 }
 
 //Save preferences when window is closed via apply button
