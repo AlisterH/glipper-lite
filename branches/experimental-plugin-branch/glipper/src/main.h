@@ -33,3 +33,4 @@ extern int hasChanged;
 void savePreferences();
 void applyPreferences();
 void unbindKey();
+void insertInHistory(gchar* content);
