@@ -244,6 +244,10 @@ void insertInHistory(gchar* content)
 		saveHistory();
 }
 
+/*
+ * This procedure just makes sure, that the result of the gtk clipboard functions are valid
+ * and that the clipboard doesn't lost it's content
+ */
 void processContent(gchar* newContent, gchar** lastContent, GtkClipboard* Clipboard)
 {
 	if (newContent == NULL)
@@ -269,13 +273,11 @@ gboolean checkClipboard(gpointer data)
 	g_source_remove(mainTimeout);
 	if (usePrimary)
 	{
-		void* infos[] = {PrimaryCl, lastPr};
 		gchar* newContentPr = gtk_clipboard_wait_for_text(PrimaryCl);
 		processContent(newContentPr, &lastPr, PrimaryCl);
 	}
 	if (useDefault)
 	{
-		void* infos[] = {DefaultCl, lastDf};
 		gchar* newContentCl = gtk_clipboard_wait_for_text(DefaultCl);
 		processContent(newContentCl, &lastDf, DefaultCl);
 	}
@@ -425,7 +427,8 @@ void createPopupMenu()
 	GtkWidget* preferences = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
 	g_signal_connect(G_OBJECT(preferences), "activate", G_CALLBACK(showPreferences), NULL);
 
-	GtkWidget* plugins = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
+	GtkWidget* plugins = gtk_image_menu_item_new_with_label("Plugins");
+	gtk_image_menu_item_set_image(plugins, gtk_image_new_from_stock(GTK_STOCK_EXECUTE, GTK_ICON_SIZE_MENU));
 	g_signal_connect(G_OBJECT(plugins), "activate", G_CALLBACK(showPluginDialog), NULL);
 
 	//Add the widgets to the menu

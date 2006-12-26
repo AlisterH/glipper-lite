@@ -34,11 +34,14 @@ typedef struct plugin {
 } plugin;
 
 static plugin pluginList; //first element in list is dummy (makes it easier to delete one special item)
+static int eventsActive; //controls if the plugin events are triggered or not 
 
 ////////////////////////////////////Events:///////////////////////////////////////
 
 void plugins_newItem()
 {
+	if (!eventsActive)
+		return;
 	plugin* i; 
 	for (i = pluginList.next; i != NULL; i = i->next)
 	{
@@ -78,13 +81,24 @@ PyObject* module_setItem(PyObject* self, PyObject* args)
 	return NULL;
 }
 	
-PyObject* module_newItem(PyObject* self, PyObject* args)
+PyObject* module_insertItem(PyObject* self, PyObject* args)
 {
+	eventsActive = 0;
 	char* intstr = PyString_AsString(PyTuple_GetItem(args, 0));
-	char* str = malloc(strlen(intstr)+1);
-	strcpy(str, intstr);
-	history = g_slist_prepend(history, str);
-	hasChanged = 1;
+	insertInHistory(intstr);
+	eventsActive = 1;
+	return NULL;
+}
+
+PyObject* module_setActiveItem(PyObject* self, PyObject* args)
+{
+	eventsActive = 0;
+	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
+	GSList* c = g_slist_nth(history, index);
+	if (c == NULL)
+		return NULL;
+	historyEntryActivate(NULL, c->data);
+	eventsActive = 1;
 	return NULL;
 }
 	
@@ -97,10 +111,11 @@ PyObject* module_clearHistory(PyObject* self, PyObject* args)
 }
 
 static PyMethodDef glipperFunctions[] = {
-	{"getItem", module_getItem, METH_VARARGS, "Returns the history item specified by the argument"},
-	{"setItem", module_setItem, METH_VARARGS, "Sets the history item specified by the argument"},
-	{"newItem", module_newItem, METH_VARARGS, "Adds a new item at the top of the list"},
-	{"clearHistory", module_clearHistory, METH_VARARGS, "Clears the whole history"},
+	{"getItem", module_getItem, METH_VARARGS, "returns the history item specified by the argument"},
+	{"setItem", module_setItem, METH_VARARGS, "sets the history item specified by the argument"},
+	{"insertItem", module_insertItem, METH_VARARGS, "adds a new item at the top of the list"},
+	{"setActiveItem", module_setActiveItem, METH_VARARGS, "sets an item in the history to the current active item"},
+	{"clearHistory", module_clearHistory, METH_VARARGS, "clears the whole history"},
 	{NULL, NULL, 0, NULL}
 };
 
@@ -126,6 +141,7 @@ void init()
 		Py_InitModule("glipper", glipperFunctions);
 		pluginList.next = NULL;
 		pyInit = 1;
+		eventsActive = 1;
 	}
 }
 
