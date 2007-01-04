@@ -1,0 +1,144 @@
+# Deutsche ц°bersetzung
+# Copyright (C) 2006 Sven Rech
+# This file is distributed under the same license as the glipper package.
+# Sven Rech <svenrech@gmx.de>, 2006
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: glipper\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-09-06 17:28+0200\n"
+"PO-Revision-Date: 2006-11-21 01:25+0100\n"
+"Last-Translator: karderio <karderio at gmail dot com>\n"
+"Language-Team: German <svenrech@gmx.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Add description tooltip to bold entry
+#: ../src/main.c:118
+msgid ""
+"This entry was copied with ctrl+c.\n"
+"It can be pasted with ctrl+v."
+msgstr ""
+"Эта строка была скопирована при помощи Ctrl-C.\n"
+"Эта строка вставлена при помощи Ctrl-V."
+
+#: ../src/main.c:150
+#: ../src/main.c:345
+msgid "Cannot load icon. Is the software properly installed ?"
+msgstr "Не могу загрузить иконку. Возможно Gclipper установлен неполностью?"
+
+#: ../src/main.c:158
+#, fuzzy, c-format
+msgid "Glipper - Clipboardmanager  (%s)"
+msgstr "Glipper - Менеджер буфера обмена (%s)"
+
+#: ../src/main.c:177
+msgid "<No Content>"
+msgstr "<Kein Inhalt>"
+
+#. addHistMenuItem(temp->data);
+#. Add description tooltip to first item
+#: ../src/main.c:187
+msgid ""
+"This is the last element to be copied.\n"
+"It can be pasted with the middle mouse button."
+msgstr ""
+"Этот элемент был скопирован последним.\n"
+"Он может быть вставле средней кнопкой мыши."
+
+#: ../src/main.c:320
+msgid "Could not display help for Glipper"
+msgstr "Не могу показать справку Glipper'а"
+
+#: ../src/main.c:357
+#: ../src/main.c:542
+#, fuzzy, c-format
+msgid ""
+"Glipper (%s)\n"
+"Clipboardmanager"
+msgstr ""
+"Glipper (%s)\n"
+"Менеджер буфера обмена"
+
+#: ../src/main.c:391
+msgid "translator-credits"
+msgstr "Евгений Вдовин <evdovin at pochta dot ru>"
+
+#: ../src/main.c:394
+msgid "Clipboardmanager for Gnome"
+msgstr "Менеджер буфера обмена для Гнома"
+
+#: ../src/preferences.c:76
+msgid "Help support is not compiled in."
+msgstr "Справка не была встроена при сборке."
+
+#: ../src/preferences.c:76
+msgid "To see the documentation, consult the glipper website or compile glipper with GNOME support (see README file)."
+msgstr "Для просмотра документации посетите сайт Glipper'а, или соберите Glipperс поддержкой Гнома (см. README)."
+
+#: ../src/preferences.c:93
+msgid "Could not load the preferences interface"
+msgstr "Не могу загрузить интерфейс настроек"
+
+#: ../data/glipper-properties.glade.h:1
+msgid "<Ctrl><Alt>c"
+msgstr "<Ctrl><Atl>c"
+
+#: ../data/glipper-properties.glade.h:2
+msgid "<b>Behaviour</b>"
+msgstr "<b>Свойства</b>"
+
+#: ../data/glipper-properties.glade.h:3
+msgid "<b>Clipboards</b>"
+msgstr "<b>Буферы обмена</b>"
+
+#: ../data/glipper-properties.glade.h:4
+msgid "<b>Limits</b>"
+msgstr "<b>Пределы</b>"
+
+#: ../data/glipper-properties.glade.h:5
+msgid "Amount of entries in history:"
+msgstr "Количество элементов истории:"
+
+#: ../data/glipper-properties.glade.h:6
+msgid "Copy - Ctrl+C/Ctrl+V"
+msgstr "\"Буфер копирования\" - Ctrl+C/Ctrl+V"
+
+#: ../data/glipper-properties.glade.h:7
+msgid "Glipper Preferences"
+msgstr "Свойства Glipper'а"
+
+#: ../data/glipper-properties.glade.h:8
+msgid "Key combination for popup: "
+msgstr "Комбинация клавиш для всплытия: "
+
+#: ../data/glipper-properties.glade.h:9
+msgid "Length of one history entry:"
+msgstr "Длина элемента истории:"
+
+#: ../data/glipper-properties.glade.h:10
+msgid "Save history"
+msgstr "История сохранения"
+
+#: ../data/glipper-properties.glade.h:11
+msgid "Select - Mark/middle mouse button"
+msgstr "\"Буфер выделения\" - Выделение/Вставка средней кнопкой мыши"
+
+#: ../data/glipper-properties.glade.h:12
+msgid "Tag Ctrl+C clipboard's content in history (bold)"
+msgstr "Отмечать содержимое \"буфера копирования\" в истории жирным шрифтом"
+
+#: ../data/glipper-properties.glade.h:13
+msgid "Which clipboards should be managed by Glipper?"
+msgstr "За какими буферами обмена должен наблюдать Glipper?"
+
+#: ../data/glipper.desktop.in.h:1
+msgid "Clipboard Manager"
+msgstr "Менеджер буфера обмена"
+
+#: ../data/glipper.desktop.in.h:2
+msgid "Glipper"
+msgstr "Glipper"
+
