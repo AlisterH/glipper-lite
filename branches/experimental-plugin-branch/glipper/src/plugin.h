@@ -24,6 +24,8 @@ typedef struct {
 	//Maybe options??
 } plugin_info;
 
+extern int pluginDebug;
+
 //Common functions for the plugin system:
 
 int get_plugin_info(char* module, plugin_info* info);
