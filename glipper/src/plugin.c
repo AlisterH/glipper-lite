@@ -36,6 +36,8 @@ typedef struct plugin {
 static plugin pluginList; //first element in list is dummy (makes it easier to delete one special item)
 static int eventsActive; //controls if the plugin events are triggered or not 
 
+int pluginDebug = 1;
+
 ////////////////////////////////////Events:///////////////////////////////////////
 
 void plugins_newItem()
@@ -45,11 +47,14 @@ void plugins_newItem()
 	plugin* i; 
 	for (i = pluginList.next; i != NULL; i = i->next)
 	{
-		PyObject* args = PyTuple_New(1);
-		if (args != NULL)
-			PyTuple_SetItem(args, 0, PyString_FromString(history->data));
-		PyObject_CallObject(i->newItemFunc, args);	
-		Py_DECREF(args);
+		if (i->newItemFunc)
+		{
+			PyObject* args = PyTuple_New(1);
+			if (args != NULL)
+				PyTuple_SetItem(args, 0, PyString_FromString(history->data));
+			PyObject_CallObject(i->newItemFunc, args);	
+			Py_DECREF(args);
+		}
 	}
 }
 
@@ -186,6 +191,9 @@ int get_plugin_info(char* module, plugin_info* info)
                 if (!info->isrunning)
                     Py_DECREF(m);
 	}
+	else
+		if (pluginDebug)
+			PyErr_Print();
         return res;
 }
 
@@ -205,10 +213,17 @@ void start_plugin(char* module)
 		new->module = m;
 		new->newItemFunc = PyObject_GetAttrString(m, "newItem");
 		//TODO: other event functions
-		if (!PyCallable_Check(new->newItemFunc))
+		if (new->newItemFunc && !PyCallable_Check(new->newItemFunc))
 			new->newItemFunc = NULL;
 		printf("plugin %s started\n", module);
+		PyObject* startFunction = PyObject_GetAttrString(m, "start");
+		if (startFunction && PyCallable_Check(startFunction))
+			PyObject_CallObject(startFunction, NULL);
+		Py_DECREF(startFunction);
 	}
+	else
+		if (pluginDebug)
+			PyErr_Print();
 }
 
 void stop_plugin(char* module)
