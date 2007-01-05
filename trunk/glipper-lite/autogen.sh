@@ -27,14 +27,6 @@ fi
 
 intltoolize --copy --force --automake
 
-(gnome-doc-prepare --version) < /dev/null > /dev/null 2>&1 || {
- echo
- echo "**ERROR**: You must have \'gnome-dox-prepare\' installed" \
-	  "to compile Glipper."
- exit
-}
-gnome-doc-prepare
-
 autoheader
 aclocal
 automake -ac

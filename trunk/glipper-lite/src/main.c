@@ -27,10 +27,6 @@
 #include "utils/glipper-i18n.h"
 #include "utils/keybinder.h"
 
-#ifndef DISABLE_GNOME
-#include <libgnome/gnome-help.h>
-#endif /*DISABLE_GNOME*/
-
 #define CHECK_INTERVAL 500 //The interval between the clipboard checks (ms)
 
 //Preferences variables
@@ -304,31 +300,6 @@ void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
 	hasChanged = 1;
 }
 
-#ifndef DISABLE_GNOME
-//Displays help in Yelp
-void help(gchar* section)
-{
-	GError *error;
-
-	error = NULL;
-	//gnome_help_display ("glipper", NULL, &error);
-        gnome_help_display_desktop(NULL, "glipper", "glipper", 
-                                   section, &error);
-
-	if (error)
-	{
-		errorDialog(_("Could not display help for Glipper"), "Is the help properly installed ?");
-		g_error_free (error);
-	}
-}
-
-void showHelp(gpointer data)
-{
-	help(NULL);
-}
-#endif /*DISABLE_GNOME*/
-
-
 void createTrayIcon()
 {
 	GdkPixbuf* pixbuf, *scaled;
@@ -390,8 +361,8 @@ void show_about(gpointer data)
 		"copyright", "Copyright © 2006 Sven Rech",
 		"translator-credits", _("translator-credits"),
 		"license", license,
-		"name", "Glipper",
-		"comments", _("Clipboardmanager for Gnome"),
+		"name", "Glipper-Lite",
+		"comments", _("Clipboardmanager"),
 		"logo", gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error),
 		"website", "http://glipper.sourceforge.net/",
 		"version", VERSION,
@@ -411,19 +382,15 @@ void createPopupMenu()
 	GtkWidget* about = gtk_image_menu_item_new_from_stock(GTK_STOCK_ABOUT, NULL);
 	g_signal_connect(G_OBJECT(about), "activate", G_CALLBACK(show_about), NULL);
 
-#ifndef DISABLE_GNOME
 	GtkWidget* help = gtk_image_menu_item_new_from_stock(GTK_STOCK_HELP, NULL);
-	g_signal_connect(G_OBJECT(help), "activate", G_CALLBACK(showHelp), NULL);
-#endif /*DISABLE_GNOME*/
+	//g_signal_connect(G_OBJECT(help), "activate", G_CALLBACK(showHelp), NULL);
 
 	GtkWidget* preferences = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
 	g_signal_connect(G_OBJECT(preferences), "activate", G_CALLBACK(showPreferences), NULL);
 
 	//Add the widgets to the menu
 	gtk_menu_append((GtkMenu*)popupMenu, preferences);
-#ifndef DISABLE_GNOME
 	gtk_menu_append((GtkMenu*)popupMenu, help);
-#endif /*DISABLE_GNOME*/
 	gtk_menu_append((GtkMenu*)popupMenu, about);
 	gtk_menu_append((GtkMenu*)popupMenu, gtk_separator_menu_item_new());
 	gtk_menu_append((GtkMenu*)popupMenu, quit);
@@ -597,11 +564,7 @@ int main(int argc, char *argv[])
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	//Init GTK+ (and optionally GNOME libs)
-#ifndef DISABLE_GNOME
-	gnome_program_init("glipper", VERSION, NULL, argc, argv,
-		NULL, NULL, NULL);
-#endif /*DISABLE_GNOME*/
+	//Init GTK+
 	gtk_init (&argc, &argv);
 
 	getClipboards();
