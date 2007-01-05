@@ -31,16 +31,7 @@
 #include <libgnome/gnome-help.h>
 #endif /*DISABLE_GNOME*/
 
-#define CHECK_INTERVAL 500 //The interval between the clipboard checks (ms)
-
-//Preferences variables
-int maxElements = 20; //Amount of elements in history
-int maxItemLength = 35; //Length of one history entry
-gboolean usePrimary = TRUE; //use Primary Clipboard
-gboolean useDefault = TRUE;; //use Default Clipboard
-gboolean markDefault = TRUE; //whether default entry should be tagged
-gboolean weSaveHistory = TRUE; //whether history should be saved
-char* keyComb;
+static GConfClient* conf = NULL;
 
 GtkClipboard* PrimaryCl;
 GtkClipboard* DefaultCl;
@@ -73,7 +64,7 @@ void deleteHistory(GtkMenuItem* menuItem, gpointer user_data)
 	hasChanged = 1;
 	g_slist_free(history);
 	history = NULL;
-	if (weSaveHistory)
+	if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
 		saveHistory();
 }
 
@@ -88,6 +79,7 @@ GtkWidget* addHistMenuItem(gchar* item)
 
 	//we have to cut the string to "maxItemLength" characters:
 	GString* ellipseData = g_string_new(item);
+	gint maxItemLength = gconf_client_get_int(conf, MAX_ITEM_LENGTH_KEY, NULL);
 	if (ellipseData->len > maxItemLength)
 	{
 		ellipseData = g_string_erase(ellipseData, maxItemLength/2, 
@@ -106,7 +98,9 @@ GtkWidget* addHistMenuItem(gchar* item)
 	//The cutted string is now stored in "ellipseData"
 	GtkWidget* MenuItem = gtk_menu_item_new_with_label(ellipseData->str);
 	//if this string belongs to the default Clipboard, we tag it (presumed markDefault is true):
-	if (markDefault && useDefault && usePrimary)
+	if (gconf_client_get_bool(conf, MARK_DEFAULT_ENTRY_KEY, NULL) &&
+		gconf_client_get_bool(conf, USE_DEFAULT_CLIPBOARD_KEY, NULL) &&
+		gconf_client_get_bool(conf, USE_PRIMARY_CLIPBOARD_KEY, NULL))
 		if ((lastDf!=NULL)&&(g_ascii_strcasecmp(lastDf, item)==0))
 		{
 			GtkLabel* label = (GtkLabel*)gtk_bin_get_child((GtkBin*)MenuItem); 
@@ -155,7 +149,7 @@ void createHistMenu()
 			gtk_image_new_from_pixbuf(pixbuf));
 	}	
 	gtk_label_set_text((GtkLabel*)gtk_bin_get_child((GtkBin*)menuHeader), 
-			g_strdup_printf(_("Glipper - Clipboardmanager  (%s)"), keyComb));
+			g_strdup_printf(_("Glipper - Clipboardmanager  (%s)"), gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL)));
 
 	if (historyMenu != NULL)
 	{
@@ -226,13 +220,13 @@ void insertInHistory(gchar* content)
 			g_slist_free_1(dummy);
 		}
 		//We shorten the history if it gets longer than "maxElements":
-		GSList* deleteElement = g_slist_nth(history, maxElements-1);
+		GSList* deleteElement = g_slist_nth(history, gconf_client_get_int(conf, MAX_ELEMENTS_KEY, NULL)-1);
 		if (deleteElement != NULL)
 		{
 			g_slist_free(deleteElement->next);
 			deleteElement->next = NULL;
 		}
-		if (weSaveHistory)
+		if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
 			saveHistory();
 	}
 }
@@ -260,17 +254,17 @@ void processContent(gchar* newContent, gchar** lastContent, GtkClipboard* Clipbo
 gboolean checkClipboard(gpointer data)
 {
 	g_source_remove(mainTimeout);
-	if (usePrimary)
+	if (gconf_client_get_bool(conf, USE_PRIMARY_CLIPBOARD_KEY, NULL))
 	{
 		gchar* newContentPr = gtk_clipboard_wait_for_text(PrimaryCl);
 		processContent(newContentPr, &lastPr, PrimaryCl);
 	}
-	if (useDefault)
+	if (gconf_client_get_bool(conf, USE_DEFAULT_CLIPBOARD_KEY, NULL))
 	{
 		gchar* newContentCl = gtk_clipboard_wait_for_text(DefaultCl);
 		processContent(newContentCl, &lastDf, DefaultCl);
 	}
-	mainTimeout = g_timeout_add(500, checkClipboard, NULL);
+	mainTimeout = g_timeout_add(gconf_client_get_int(conf, CHECK_INTERVAL_KEY, NULL), checkClipboard, NULL);
 	return 1;
 }
 
@@ -296,9 +290,9 @@ void TrayIconClicked(GtkWidget* widget, GdkEventButton *event, gpointer user_dat
 
 void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
 {
-	if (usePrimary)
+	if (gconf_client_get_bool(conf, USE_PRIMARY_CLIPBOARD_KEY, NULL))
 		gtk_clipboard_set_text(PrimaryCl, (gchar*)user_data, -1);
-	if (useDefault)
+	if (gconf_client_get_bool(conf, USE_DEFAULT_CLIPBOARD_KEY, NULL))
 		gtk_clipboard_set_text(DefaultCl, (gchar*)user_data, -1);
 	checkClipboard(NULL);
 	hasChanged = 1;
@@ -355,7 +349,7 @@ void createTrayIcon()
 	//Add description tooltip to the icon
 	toolTip = gtk_tooltips_new();
 	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
-		keyComb), "Glipper");
+		gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL)), "Glipper");
 
 	//connect and show everything:
 	gtk_container_add(GTK_CONTAINER(eventbox), tray_icon_image);
@@ -499,68 +493,6 @@ void readHistory()
 	}
 }
 
-void readPreferences()
-{
-	gchar* path= g_build_filename(g_get_home_dir(), ".glipper/prefs", NULL);
-	FILE* prefFile = fopen(path, "r");
-	g_free(path);
-	free(keyComb);
-	if (prefFile != 0)
-	{
-		fread(&maxElements, sizeof(maxElements), 1, prefFile);
-		fread(&maxItemLength, sizeof(maxItemLength), 1, prefFile);
-		fread(&usePrimary, sizeof(usePrimary), 1, prefFile);
-		fread(&useDefault, sizeof(useDefault), 1, prefFile);
-		fread(&markDefault, sizeof(markDefault), 1, prefFile);
-		fread(&weSaveHistory, sizeof(weSaveHistory), 1, prefFile);
-		size_t len;
-		fread(&len, sizeof(size_t), 1, prefFile);
-		if (!feof(prefFile))
-		{
-			keyComb = malloc(len+1);
-			fgets(keyComb, len+1, prefFile);
-			fclose(prefFile);
-			return;
-		}
-		fclose(prefFile);
-	}
-	keyComb = malloc(strlen("<Ctrl><Alt>c")+1);
-	strcpy(keyComb, "<Ctrl><Alt>c");
-}
-
-/*Makes sure, that the current preferences are used:*/
-void applyPreferences()
-{
-	hasChanged=1; 
-	GSList* deleteElement = g_slist_nth(history, maxElements-1);
-	if (deleteElement != NULL)
-	{
-		g_slist_free(deleteElement->next);
-		deleteElement->next = NULL;
-	}
-	keybinder_bind(keyComb, keyhandler, NULL);
-	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
-		keyComb), "Glipper");
-}
-
-void savePreferences()
-{
-	FILE* prefFile = writeGlipperFile("prefs");
-	if (prefFile != 0)
-	{
-		fwrite(&maxElements, sizeof(maxElements), 1, prefFile);
-		fwrite(&maxItemLength, sizeof(maxItemLength), 1, prefFile);
-		fwrite(&usePrimary, sizeof(usePrimary), 1, prefFile);
-		fwrite(&useDefault, sizeof(useDefault), 1, prefFile);
-		fwrite(&markDefault, sizeof(markDefault), 1, prefFile);
-		fwrite(&weSaveHistory, sizeof(weSaveHistory), 1, prefFile);
-		size_t len = strlen(keyComb);
-		fwrite(&len, sizeof(size_t), 1, prefFile);
-		fputs(keyComb, prefFile);
-		fclose(prefFile);
-	}
-}
-
 //Shows an error message dialog and outputs warning
 void errorDialog(gchar* error_msg, gchar* secondaryText)
 {
@@ -584,9 +516,7 @@ void errorDialog(gchar* error_msg, gchar* secondaryText)
 
 void unbindKey()
 {
-	keybinder_unbind(keyComb, keyhandler);
-	free(keyComb);
-	keyComb = NULL;
+	keybinder_unbind(gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL), keyhandler);
 }
 
 int main(int argc, char *argv[])
@@ -596,7 +526,7 @@ int main(int argc, char *argv[])
 	bindtextdomain (GETTEXT_PACKAGE, GLIPPERLOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
-
+	
 	//Init GTK+ (and optionally GNOME libs)
 #ifndef DISABLE_GNOME
 	gnome_program_init("glipper", VERSION, NULL, argc, argv,
@@ -605,21 +535,24 @@ int main(int argc, char *argv[])
 	gtk_init (&argc, &argv);
 
 	getClipboards();
-	readPreferences();
+
+	conf = gconf_client_get_default();
 
 	//Setup keyboard shortcut
 	keybinder_init();
-	keybinder_bind(keyComb, keyhandler, NULL);
+	keybinder_bind(gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL), keyhandler, NULL);
 
 	createTrayIcon();
 	createPopupMenu();
 
-	if (weSaveHistory)
+	if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
 		readHistory();
 
-	mainTimeout = g_timeout_add(CHECK_INTERVAL, checkClipboard, NULL);
-	gtk_main ();
+	mainTimeout = g_timeout_add(gconf_client_get_int(conf, CHECK_INTERVAL_KEY, NULL), checkClipboard, NULL);
 
+	initPreferences(conf);
+
+	gtk_main ();
 	unbindKey();
 
 	return 0;

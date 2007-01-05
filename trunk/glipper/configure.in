@@ -34,7 +34,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext package])
 
 # Add languages here, on fo each .po file
-ALL_LINGUAS="de fr ru pl nl es hu"
+ALL_LINGUAS="de fr ru nl es hu"
 AM_GLIB_GNU_GETTEXT
 AC_PROG_INTLTOOL([0.23])
 
