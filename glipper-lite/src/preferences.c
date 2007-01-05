@@ -68,13 +68,7 @@ on_applyButton_clicked                 (GtkButton       *button,
 on_helpButton_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
-#ifndef DISABLE_GNOME
-    help("preferences");
-#endif /*DISABLE_GNOME*/
-
-#ifdef DISABLE_GNOME
     errorDialog(_("Help support is not compiled in."), _("To see the documentation, consult the glipper website or compile glipper with GNOME support (see README file)."));
-#endif /*DISABLE_GNOME*/
 }
 
 void showPreferences(gpointer data)
