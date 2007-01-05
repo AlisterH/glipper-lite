@@ -9,11 +9,17 @@ icon_DATA = glipper.png
 gladedir = $(datadir)/glipper
 glade_DATA = glipper-properties.glade
 
+schemasdir = $(datadir)/gconf/schemas
+schemas_DATA = glipper.schemas
+
 EXTRA_DIST =            \
 	$(desktop_in_files) \
 	$(icon_DATA)        \
 	$(glade_DATA)	\
-	#$(desktop_DATA)
+	$(schemas_DATA)
 
 DISTCLEANFILES =		\
 	$(desktop_DATA)				
+
+install-data-hook:
+	gconf-schemas --register $(datadir)/gconf/schemas/glipper.schemas
