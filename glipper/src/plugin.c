@@ -219,7 +219,7 @@ void start_plugin(char* module)
 		PyObject* startFunction = PyObject_GetAttrString(m, "start");
 		if (startFunction && PyCallable_Check(startFunction))
 			PyObject_CallObject(startFunction, NULL);
-		Py_DECREF(startFunction);
+		Py_XDECREF(startFunction);
 	}
 	else
 		if (pluginDebug)
