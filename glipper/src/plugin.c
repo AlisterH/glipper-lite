@@ -182,9 +182,9 @@ int get_plugin_info(char* module, plugin_info* info)
 			PyObject* descr = PyDict_GetItemString(result, "Description");
 			info->name = PyString_AsString(name);
 			info->descr = PyString_AsString(descr);
-			Py_DECREF(name);
-			Py_DECREF(descr);
-			//Py_DECREF(result);
+			//Py_DECREF(name);
+			//Py_DECREF(descr);
+			Py_DECREF(result);
 			res = 1;                        
 		}
 		Py_XDECREF(infoFunc);
