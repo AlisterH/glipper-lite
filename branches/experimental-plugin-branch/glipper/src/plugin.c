@@ -184,10 +184,10 @@ int get_plugin_info(char* module, plugin_info* info)
 			info->descr = PyString_AsString(descr);
 			Py_DECREF(name);
 			Py_DECREF(descr);
-			Py_DECREF(result);
+			//Py_DECREF(result);
 			res = 1;                        
 		}
-		Py_DECREF(infoFunc);
+		Py_XDECREF(infoFunc);
                 if (!info->isrunning)
                     Py_DECREF(m);
 	}
