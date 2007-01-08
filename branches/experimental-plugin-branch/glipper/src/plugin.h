@@ -21,7 +21,7 @@ typedef struct {
 	char* name;
 	char* descr;
 	int isrunning;
-	//Maybe options??
+	int preferences;
 } plugin_info;
 
 extern int pluginDebug;
@@ -37,3 +37,5 @@ void stop_plugin(char* module);
 //Sending Events to the plugins:
 
 void plugins_newItem();
+
+void plugin_showPreferences(char* module);

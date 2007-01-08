@@ -30,7 +30,7 @@ typedef struct plugin {
 	PyObject* module;
 	//references to the event functions:
 	PyObject* newItemFunc;
-	//TODO: add more
+	PyObject* showPreferences;
 } plugin;
 
 static plugin pluginList; //first element in list is dummy (makes it easier to delete one special item)
@@ -180,10 +180,10 @@ int get_plugin_info(char* module, plugin_info* info)
                         PyObject* result = PyObject_CallObject(infoFunc, NULL);
 			PyObject* name = PyDict_GetItemString(result, "Name");
 			PyObject* descr = PyDict_GetItemString(result, "Description");
+			PyObject* preferences = PyDict_GetItemString(result, "Preferences");
 			info->name = PyString_AsString(name);
 			info->descr = PyString_AsString(descr);
-			//Py_DECREF(name);
-			//Py_DECREF(descr);
+			info->preferences = PyInt_AsLong(preferences);
 			Py_DECREF(result);
 			res = 1;                        
 		}
@@ -212,7 +212,7 @@ void start_plugin(char* module)
 		strcpy(new->modulename, module);
 		new->module = m;
 		new->newItemFunc = PyObject_GetAttrString(m, "newItem");
-		//TODO: other event functions
+		new->showPreferences = PyObject_GetAttrString(m, "showPreferences");
 		if (new->newItemFunc && !PyCallable_Check(new->newItemFunc))
 			new->newItemFunc = NULL;
 		printf("plugin %s started\n", module);
@@ -244,4 +244,16 @@ void stop_plugin(char* module)
 			}
 			i = i->next;
 	}
+}
+
+void plugin_showPreferences(char* module)
+{
+	plugin* i; 
+	for (i = pluginList.next; i != NULL; i = i->next)
+		if (strcmp(module, i->modulename) == 0)
+			break;
+	if (i == NULL)
+		return;
+	if (i->showPreferences != NULL)
+		PyObject_CallObject(i->showPreferences, NULL);	
 }

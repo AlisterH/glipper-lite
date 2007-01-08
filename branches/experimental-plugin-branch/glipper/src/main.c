@@ -428,7 +428,7 @@ void createPopupMenu()
 	g_signal_connect(G_OBJECT(preferences), "activate", G_CALLBACK(showPreferences), NULL);
 
 	GtkWidget* plugins = gtk_image_menu_item_new_with_label("Plugins");
-	gtk_image_menu_item_set_image(plugins, gtk_image_new_from_stock(GTK_STOCK_EXECUTE, GTK_ICON_SIZE_MENU));
+	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(plugins), gtk_image_new_from_stock(GTK_STOCK_EXECUTE, GTK_ICON_SIZE_MENU));
 	g_signal_connect(G_OBJECT(plugins), "activate", G_CALLBACK(showPluginDialog), NULL);
 
 	//Add the widgets to the menu
