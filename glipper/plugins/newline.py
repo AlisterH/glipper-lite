@@ -6,5 +6,6 @@ def newItem(arg):
 
 def getInfo():
 	info = {"Name": "New Line",
-		"Description": "This plugin adds a newline character at the end of items in the clipboard"}
+		"Description": "This plugin adds a newline character at the end of items in the clipboard",
+		"Preferences": False}
 	return info

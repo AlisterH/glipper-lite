@@ -34,6 +34,7 @@
 static GtkWidget* pluginWin;
 static GtkWidget* pluginList;
 static GtkWidget* startButton;
+static GtkWidget* preferencesButton;
 static GtkWidget* refreshButton;
 static GtkWidget* closeButton;
 
@@ -44,6 +45,7 @@ enum {
 	ISRUNNING_COLUMN,
 	NAME_COLUMN,
 	DESCRIPTION_COLUMN,
+	PREFERENCES_COLUMN,
 	N_COLUMNS
 };
 
@@ -59,6 +61,7 @@ void addPluginToList(char* plugin)
 			ISRUNNING_COLUMN, info->isrunning,
 			NAME_COLUMN, info->name,
 			DESCRIPTION_COLUMN, info->descr,
+			PREFERENCES_COLUMN, info->preferences,
 			-1);
 	}
 	else
@@ -88,16 +91,35 @@ void addDirToList(char* dir)
 void refreshPluginList()
 {
 	gtk_list_store_clear(pluginStore);
+	gtk_widget_set_sensitive(preferencesButton, 0);
+	gtk_widget_set_sensitive(startButton, 0);
+	setStartButton(0);
+
 	addDirToList(PLUGINDIR);
 	char* searchModule = g_build_filename(g_get_home_dir(), ".glipper/plugins", NULL);
 	addDirToList(searchModule);
 	free(searchModule);
 }
 
+void setStartButton(int running)
+{
+		if (running)
+		{
+			gtk_button_set_label(GTK_BUTTON(startButton), _("stop plugin"));
+			gtk_button_set_image(GTK_BUTTON(startButton), 
+                            gtk_image_new_from_stock(GTK_STOCK_CANCEL, GTK_ICON_SIZE_SMALL_TOOLBAR));
+		}
+		else
+		{
+			gtk_button_set_label(GTK_BUTTON(startButton), _("start plugin"));
+			gtk_button_set_image(GTK_BUTTON(startButton), 
+                            gtk_image_new_from_stock(GTK_STOCK_APPLY, GTK_ICON_SIZE_SMALL_TOOLBAR));
+		}
+}
+
 ////////////////////Button signals/////////////////////////////////////////
 
-void on_startButton_clicked                 (GtkButton       *button,
-                                        gpointer         user_data)
+void on_startButton_clicked (GtkButton *button, gpointer user_data)
 {
         GtkTreeIter iter;
 	if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection(GTK_TREE_VIEW(pluginList)), &pluginStore, &iter))
@@ -107,19 +129,10 @@ void on_startButton_clicked                 (GtkButton       *button,
 		int isrunning;
 		gtk_tree_model_get(GTK_TREE_MODEL(pluginStore), &iter, ISRUNNING_COLUMN, &isrunning, -1);
 		if (!isrunning)
-		{
 			start_plugin(file);
-			gtk_button_set_label(GTK_BUTTON(startButton), _("stop plugin"));
-			gtk_button_set_image(GTK_BUTTON(startButton), 
-                            gtk_image_new_from_stock(GTK_STOCK_CANCEL, GTK_ICON_SIZE_SMALL_TOOLBAR));
-		}
 		else
-		{
 			stop_plugin(file);
-			gtk_button_set_label(GTK_BUTTON(startButton), _("start plugin"));
-			gtk_button_set_image(GTK_BUTTON(startButton), 
-                            gtk_image_new_from_stock(GTK_STOCK_APPLY, GTK_ICON_SIZE_SMALL_TOOLBAR));
-		}
+		setStartButton(!isrunning);
 		gtk_list_store_set(pluginStore, &iter,
 			ISRUNNING_COLUMN, !isrunning,
 			-1);
@@ -127,17 +140,40 @@ void on_startButton_clicked                 (GtkButton       *button,
         }
 }
 
-void on_refreshButton_clicked                 (GtkButton       *button,
-                                        gpointer         user_data)
+void on_preferencesButton_clicked (GtkButton *button, gpointer user_data)
+{
+        GtkTreeIter iter;
+	if (gtk_tree_selection_get_selected (gtk_tree_view_get_selection(GTK_TREE_VIEW(pluginList)), &pluginStore, &iter))
+        {
+		char* file;
+		gtk_tree_model_get(GTK_TREE_MODEL(pluginStore), &iter, FILE_COLUMN, &file, -1);
+		plugin_showPreferences(file);
+		free(file);
+        }
+}
+
+void on_refreshButton_clicked (GtkButton *button, gpointer user_data)
 {
 	refreshPluginList();
 }
 
-void on_closeButton_clicked                 (GtkButton       *button,
-                                        gpointer         user_data)
+void on_closeButton_clicked (GtkButton *button, gpointer user_data)
 {
-	//Maybe save something?
 	gtk_widget_destroy(pluginWin);
+}
+
+void on_pluginList_selection_changed (GtkTreeSelection *selection, gpointer data)
+{
+	gtk_widget_set_sensitive(startButton, 1);
+        GtkTreeIter iter;
+	if (gtk_tree_selection_get_selected (selection, &pluginStore, &iter))
+        {
+		int isrunning, preferences;
+		gtk_tree_model_get(GTK_TREE_MODEL(pluginStore), &iter, ISRUNNING_COLUMN, &isrunning, 
+				PREFERENCES_COLUMN, &preferences, -1);
+		gtk_widget_set_sensitive(preferencesButton, preferences);
+		setStartButton(isrunning);
+	}
 }
 
 void showPluginDialog(gpointer data)
@@ -163,22 +199,24 @@ void showPluginDialog(gpointer data)
 	pluginWin = glade_xml_get_widget(gladeWindow, "plugin-dialog");
 	pluginList = glade_xml_get_widget(gladeWindow, "pluginList");
 	startButton = glade_xml_get_widget(gladeWindow, "startButton");
+	preferencesButton = glade_xml_get_widget(gladeWindow, "preferencesButton");
 	refreshButton = glade_xml_get_widget(gladeWindow, "refreshButton");
 	closeButton = glade_xml_get_widget(gladeWindow, "closeButton");
 
 	//Connect signals to handlers
-	g_signal_connect ((gpointer) startButton, "clicked",
-		G_CALLBACK (on_startButton_clicked),
-		NULL);
-	g_signal_connect ((gpointer) refreshButton, "clicked",
-		G_CALLBACK (on_refreshButton_clicked),
-		NULL);
-	g_signal_connect ((gpointer) closeButton, "clicked",
-		G_CALLBACK (on_closeButton_clicked),
-		NULL);
+	g_signal_connect(startButton, "clicked",
+		G_CALLBACK (on_startButton_clicked), NULL);
+	g_signal_connect(preferencesButton, "clicked",
+		G_CALLBACK (on_preferencesButton_clicked), NULL);
+	g_signal_connect(refreshButton, "clicked",
+		G_CALLBACK (on_refreshButton_clicked), NULL);
+	g_signal_connect(closeButton, "clicked",
+		G_CALLBACK (on_closeButton_clicked), NULL);
+	g_signal_connect(gtk_tree_view_get_selection(GTK_TREE_VIEW(pluginList)), "changed",
+		G_CALLBACK(on_pluginList_selection_changed), NULL);
 
 	//Set up the plugin list model + widget
-	pluginStore = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING);
+	pluginStore = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_BOOLEAN);
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 	renderer = gtk_cell_renderer_toggle_new ();

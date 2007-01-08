@@ -6,7 +6,8 @@ allConnections = []
 
 def getInfo():
 	info = {"Name": "network connection", 
-		'Description': 'Let\'s you connect multiple glipper processes via network to synchronize their history'}
+		"Description": "Let\'s you connect multiple glipper processes via network to synchronize their history",
+		"Preferences": True}
 	return info
 
 def newItem(newItem):
