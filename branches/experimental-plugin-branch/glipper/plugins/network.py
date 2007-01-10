@@ -54,7 +54,7 @@ class ServerListener(threading.Thread):
 
 connectWith = ('127.0.0.1')
 
-def start():
+def init():
 	print "Test"
 	#First connect:
 	for x in connectWith:
@@ -71,3 +71,17 @@ def start():
 
 	#Then listen:
 	ServerListener().start()
+
+
+import pygtk
+pygtk.require('2.0')
+import gtk
+
+def showPreferences():
+	window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+	mainVBox = gtk.VBox()
+	ApplyButton = gtk.Button(stock=gtk.STOCK_APPLY)
+	mainVBox.pack_start(ApplyButton)
+	window.add(mainVBox)
+	window.show()
+	gtk.main()

@@ -216,7 +216,7 @@ void start_plugin(char* module)
 		if (new->newItemFunc && !PyCallable_Check(new->newItemFunc))
 			new->newItemFunc = NULL;
 		printf("plugin %s started\n", module);
-		PyObject* startFunction = PyObject_GetAttrString(m, "start");
+		PyObject* startFunction = PyObject_GetAttrString(m, "init");
 		if (startFunction && PyCallable_Check(startFunction))
 			PyObject_CallObject(startFunction, NULL);
 		Py_XDECREF(startFunction);
@@ -248,12 +248,33 @@ void stop_plugin(char* module)
 
 void plugin_showPreferences(char* module)
 {
-	plugin* i; 
+	init();
+	//search if the plugin is already started:
+	plugin* i;
 	for (i = pluginList.next; i != NULL; i = i->next)
-		if (strcmp(module, i->modulename) == 0)
+		if (strcmp(i->modulename, module) == 0)
 			break;
-	if (i == NULL)
-		return;
-	if (i->showPreferences != NULL)
-		PyObject_CallObject(i->showPreferences, NULL);	
+	//if yes:
+	if (i != NULL)
+	{
+		if (i->showPreferences != NULL)
+			PyObject_CallObject(i->showPreferences, NULL);	
+	}
+	else //if not, we have to load the module:
+	{
+		PyObject* m;
+		PyObject* name = PyString_FromString(module);
+		m = PyImport_Import(name);
+		Py_DECREF(name);
+		if (m != NULL)
+		{
+			PyObject* prefFunc = PyObject_GetAttrString(m, "showPreferences");
+			if (prefFunc && PyCallable_Check(prefFunc))
+				PyObject_CallObject(prefFunc, NULL);
+			Py_XDECREF(prefFunc);
+			Py_DECREF(m);
+		} else
+			if (pluginDebug)
+				PyErr_Print();
+	}
 }
