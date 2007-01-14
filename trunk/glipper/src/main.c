@@ -26,10 +26,7 @@
 #include "utils/eggtrayicon.h"
 #include "utils/glipper-i18n.h"
 #include "utils/keybinder.h"
-
-#ifndef DISABLE_GNOME
 #include <libgnome/gnome-help.h>
-#endif /*DISABLE_GNOME*/
 
 static GConfClient* conf = NULL;
 
@@ -298,7 +295,6 @@ void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
 	hasChanged = 1;
 }
 
-#ifndef DISABLE_GNOME
 //Displays help in Yelp
 void help(gchar* section)
 {
@@ -320,7 +316,6 @@ void showHelp(gpointer data)
 {
 	help(NULL);
 }
-#endif /*DISABLE_GNOME*/
 
 
 void createTrayIcon()
@@ -405,19 +400,15 @@ void createPopupMenu()
 	GtkWidget* about = gtk_image_menu_item_new_from_stock(GTK_STOCK_ABOUT, NULL);
 	g_signal_connect(G_OBJECT(about), "activate", G_CALLBACK(show_about), NULL);
 
-#ifndef DISABLE_GNOME
 	GtkWidget* help = gtk_image_menu_item_new_from_stock(GTK_STOCK_HELP, NULL);
 	g_signal_connect(G_OBJECT(help), "activate", G_CALLBACK(showHelp), NULL);
-#endif /*DISABLE_GNOME*/
 
 	GtkWidget* preferences = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
 	g_signal_connect(G_OBJECT(preferences), "activate", G_CALLBACK(showPreferences), NULL);
 
 	//Add the widgets to the menu
 	gtk_menu_append((GtkMenu*)popupMenu, preferences);
-#ifndef DISABLE_GNOME
 	gtk_menu_append((GtkMenu*)popupMenu, help);
-#endif /*DISABLE_GNOME*/
 	gtk_menu_append((GtkMenu*)popupMenu, about);
 	gtk_menu_append((GtkMenu*)popupMenu, gtk_separator_menu_item_new());
 	gtk_menu_append((GtkMenu*)popupMenu, quit);
@@ -528,10 +519,8 @@ int main(int argc, char *argv[])
 	textdomain (GETTEXT_PACKAGE);
 	
 	//Init GTK+ (and optionally GNOME libs)
-#ifndef DISABLE_GNOME
 	gnome_program_init("glipper", VERSION, NULL, argc, argv,
 		NULL, NULL, NULL);
-#endif /*DISABLE_GNOME*/
 	gtk_init (&argc, &argv);
 
 	getClipboards();
