@@ -20,6 +20,7 @@
 #include <Python.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <gtk/gtk.h>
 #include "plugin.h"
 #include "main.h"
@@ -83,7 +84,7 @@ PyObject* module_setItem(PyObject* self, PyObject* args)
 		c->data = str;
 		hasChanged = 1;
 	}
-	return NULL;
+	Py_RETURN_NONE;
 }
 	
 PyObject* module_insertItem(PyObject* self, PyObject* args)
@@ -92,7 +93,7 @@ PyObject* module_insertItem(PyObject* self, PyObject* args)
 	char* intstr = PyString_AsString(PyTuple_GetItem(args, 0));
 	insertInHistory(intstr);
 	eventsActive = 1;
-	return NULL;
+	Py_RETURN_NONE;
 }
 
 PyObject* module_setActiveItem(PyObject* self, PyObject* args)
@@ -104,7 +105,7 @@ PyObject* module_setActiveItem(PyObject* self, PyObject* args)
 		return NULL;
 	historyEntryActivate(NULL, c->data);
 	eventsActive = 1;
-	return NULL;
+	Py_RETURN_NONE;
 }
 	
 PyObject* module_clearHistory(PyObject* self, PyObject* args)
@@ -112,7 +113,7 @@ PyObject* module_clearHistory(PyObject* self, PyObject* args)
 	g_slist_free(history);
 	history = NULL;
 	hasChanged = 1;
-	return NULL;
+	Py_RETURN_NONE;
 }
 
 static PyMethodDef glipperFunctions[] = {
