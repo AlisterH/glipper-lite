@@ -35,8 +35,6 @@
 
 #define CHECK_INTERVAL 500 //The interval between the clipboard checks (ms)
 
-#define PLUGINS
-
 //Preferences variables
 int maxElements = 20; //Amount of elements in history
 int maxItemLength = 35; //Length of one history entry
@@ -236,9 +234,7 @@ void insertInHistory(gchar* content)
 			g_slist_free(deleteElement->next);
 			deleteElement->next = NULL;
 		}
-#ifdef PLUGINS
 		plugins_newItem();
-#endif
 	}
 	if (weSaveHistory)
 		saveHistory();
