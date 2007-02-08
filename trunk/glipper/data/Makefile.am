@@ -28,10 +28,14 @@ EXTRA_DIST =            \
 	$(desktop_in_files) \
 	$(icon_DATA)        \
 	$(glade_DATA)	\
-	$(schemas_DATA)
+	$(schemas_DATA) \
+	$(ui_DATA) \
+	GlipperApplet_Factory.server.in.in
 
 DISTCLEANFILES =		\
-	$(desktop_DATA)				
+	$(desktop_DATA)		\
+	$(server_in_files)	\
+	$(server_DATA)	
 
 install-data-hook:
 	gconf-schemas --register $(datadir)/gconf/schemas/glipper.schemas
