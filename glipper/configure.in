@@ -31,8 +31,8 @@ ALL_LINGUAS="de fr ru nl es hu"
 AM_GLIB_GNU_GETTEXT
 AC_PROG_INTLTOOL([0.23])
 
-glipperlocaledir='${prefix}/${DATADIRNAME}/locale'
-AC_SUBST(glipperlocaledir)
+gnomelocaledir='${prefix}/${DATADIRNAME}/locale'
+AC_SUBST(gnomelocaledir)
 
 # This makes gettext use system gettext, if absent, internationalisation will
 # be disabled.
@@ -59,6 +59,7 @@ GLIB_REQUIRED=2.6.0
 GTK_REQUIRED=2.6.0
 GLADE_REQUIRED=2.0.0
 LIBGNOME_REQUIRED=2.0.0
+LIBPANELAPPLET_REQUIRED=2.0.6
 
 AC_SUBST(GLIB_REQUIRED)
 AC_SUBST(GTK_REQUIRED)
@@ -68,7 +69,8 @@ PKG_CHECK_MODULES(FR,			\
 	glib-2.0 >= $GLIB_REQUIRED	\
 	gtk+-2.0 >= $GTK_REQUIRED	\
 	libglade-2.0 >= $GLADE_REQUIRED	\
-	libgnome-2.0 >= $LIBGNOME_REQUIRED) 
+	libgnome-2.0 >= $LIBGNOME_REQUIRED \
+    libpanelapplet-2.0 >= $LIBPANELAPPLET_REQUIRED) 
 
 AC_SUBST(FR_CFLAGS)
 AC_SUBST(FR_LIBS)

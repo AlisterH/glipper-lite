@@ -1,0 +1,26 @@
+<oaf_info>
+<oaf_server iid="OAFIID:GlipperApplet_Factory" type="exe"
+            location="@prefix@/bin/glipper">
+
+        <oaf_attribute name="repo_ids" type="stringv">
+                <item value="IDL:Bonobo/GenericFactory:1.0"/>
+                <item value="IDL:Bonobo/Unknown:1.0"/>
+        </oaf_attribute>
+        <oaf_attribute name="name" type="string" value="Glipper Applet Factory"/>
+        <oaf_attribute name="description" type="string" value="Factory to create Glipper applet"/>
+</oaf_server>
+
+<oaf_server iid="OAFIID:GlipperApplet" type="factory"
+            location="OAFIID:GlipperApplet_Factory">
+
+        <oaf_attribute name="repo_ids" type="stringv">
+                <item value="IDL:GNOME/Vertigo/PanelAppletShell:1.0"/>
+                <item value="IDL:Bonobo/Control:1.0"/>
+                <item value="IDL:Bonobo/Unknown:1.0"/>
+        </oaf_attribute>
+        <oaf_attribute name="name" type="string" value="Clipboard manager"/>
+        <oaf_attribute name="description" type="string" value="Manages clipboards"/>
+        <oaf_attribute name="panel:category" type="string" value="Accessories"/>
+        <oaf_attribute name="panel:icon" type="string" value="glipper"/>
+</oaf_server>
+</oaf_info>

@@ -27,6 +27,7 @@
 #include "utils/glipper-i18n.h"
 #include "utils/keybinder.h"
 #include <libgnome/gnome-help.h>
+#include <panel-applet.h>
 
 static GConfClient* conf = NULL;
 
@@ -37,9 +38,8 @@ gchar* lastDf = NULL;
 GSList* history = NULL;
 GtkWidget* historyMenu = NULL;
 GtkWidget* popupMenu;
-GtkWidget* TrayIcon;
-GtkTooltips* toolTip; //The trayicon's tooltip
-GtkWidget* eventbox; //The trayicon's eventbox
+GtkTooltips* toolTip; //The applet's tooltip
+GtkWidget* eventbox; //The applet's eventbox
 gint mainTimeout;
 int hasChanged = 1;
 
@@ -265,24 +265,17 @@ gboolean checkClipboard(gpointer data)
 	return 1;
 }
 
-void TrayIconClicked(GtkWidget* widget, GdkEventButton *event, gpointer user_data)
+gboolean AppletIconClicked(GtkWidget* widget, GdkEventButton *event, gpointer user_data)
 {
-	if (event->type != GDK_BUTTON_PRESS)
-		return;
-	switch (event->button)
-	{
-		case 1:
-			if (hasChanged)
-				createHistMenu();
-			hasChanged = 0;
-			gtk_menu_popup ((GtkMenu*)historyMenu, NULL, NULL, NULL, NULL,
-				1, gtk_get_current_event_time());
-			break;
-		case 3:
-			gtk_menu_popup((GtkMenu*)popupMenu, NULL, NULL, NULL, NULL, 
-				1, gtk_get_current_event_time());
-			break;
-	}
+	if (event->button != 1)
+		return FALSE;
+
+    if (hasChanged)
+        createHistMenu();
+    hasChanged = 0;
+    gtk_menu_popup ((GtkMenu*)historyMenu, NULL, NULL, NULL, NULL,
+				    1, gtk_get_current_event_time());
+    return TRUE;
 }
 
 void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
@@ -312,49 +305,12 @@ void help(gchar* section)
 	}
 }
 
-void showHelp(gpointer data)
+void showHelp(BonoboUIComponent *uic, PanelApplet *glipper_applet, const gchar *verbname)
 {
 	help(NULL);
 }
 
-
-void createTrayIcon()
-{
-	GdkPixbuf* pixbuf, *scaled;
-	GtkWidget* tray_icon_image;
-	GError* pix_error = NULL;
-
-	//Load trayicon
-	TrayIcon = (GtkWidget*)egg_tray_icon_new("GLIPPER");
-	pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error);
-
-	//In case we cannot load icon, display error message and exit
-	if (pix_error != NULL)
-	{
-		errorDialog(pix_error->message, _("Cannot load icon. Is the software properly installed ?"));
-		exit(1);
-	}
-
-	tray_icon_image = gtk_image_new_from_pixbuf(pixbuf);
-	gdk_pixbuf_unref(pixbuf);
-
-	//create eventbox:
-	eventbox = gtk_event_box_new();
-
-	//Add description tooltip to the icon
-	toolTip = gtk_tooltips_new();
-	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
-		gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL)), "Glipper");
-
-	//connect and show everything:
-	gtk_container_add(GTK_CONTAINER(eventbox), tray_icon_image);
-	gtk_container_add (GTK_CONTAINER(TrayIcon), eventbox);
-	gtk_widget_show_all(GTK_WIDGET(TrayIcon));
-	g_signal_connect_swapped(G_OBJECT(eventbox), "button-press-event", 
-							 G_CALLBACK(TrayIconClicked), NULL);
-}
-
-void show_about(gpointer data)
+void show_about(BonoboUIComponent *uic, PanelApplet *glipper_applet, const gchar *verbname)
 {
 	gchar* authors[] = {"Sven Rech <svenrech@gmx.de>", "Karderio <karderio at gmail dot com>", NULL};
 
@@ -385,35 +341,6 @@ void show_about(gpointer data)
 		"website", "http://glipper.sourceforge.net/",
 		"version", VERSION,
 		 NULL);
-}
-
-//Creates context menu that we popup on right click on the trayicon
-void createPopupMenu()
-{
-	//Create new popup menu
-	popupMenu = gtk_menu_new();
-
-	//Create widgets to be plced in the popup menu
-	GtkWidget* quit = gtk_image_menu_item_new_from_stock(GTK_STOCK_QUIT, NULL);
-	g_signal_connect(G_OBJECT(quit), "activate", G_CALLBACK(gtk_main_quit), NULL);
-
-	GtkWidget* about = gtk_image_menu_item_new_from_stock(GTK_STOCK_ABOUT, NULL);
-	g_signal_connect(G_OBJECT(about), "activate", G_CALLBACK(show_about), NULL);
-
-	GtkWidget* help = gtk_image_menu_item_new_from_stock(GTK_STOCK_HELP, NULL);
-	g_signal_connect(G_OBJECT(help), "activate", G_CALLBACK(showHelp), NULL);
-
-	GtkWidget* preferences = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
-	g_signal_connect(G_OBJECT(preferences), "activate", G_CALLBACK(showPreferences), NULL);
-
-	//Add the widgets to the menu
-	gtk_menu_append((GtkMenu*)popupMenu, preferences);
-	gtk_menu_append((GtkMenu*)popupMenu, help);
-	gtk_menu_append((GtkMenu*)popupMenu, about);
-	gtk_menu_append((GtkMenu*)popupMenu, gtk_separator_menu_item_new());
-	gtk_menu_append((GtkMenu*)popupMenu, quit);
-
-	gtk_widget_show_all(popupMenu);
 }
 
 void keyhandler(char *keystring, gpointer user_data)
@@ -510,19 +437,15 @@ void unbindKey()
 	keybinder_unbind(gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL), keyhandler);
 }
 
-int main(int argc, char *argv[])
-{
-	//gettext configuration
-	setlocale(LC_ALL, "");
-	bindtextdomain (GETTEXT_PACKAGE, GLIPPERLOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
-	
-	//Init GTK+ (and optionally GNOME libs)
-	gnome_program_init("glipper", VERSION, NULL, argc, argv,
-		NULL, NULL, NULL);
-	gtk_init (&argc, &argv);
+const BonoboUIVerb glipper_menu_verbs [] = {
+        BONOBO_UI_UNSAFE_VERB ("GlipperPreferences", showPreferences),
+        BONOBO_UI_UNSAFE_VERB ("GlipperHelp", showHelp),
+        BONOBO_UI_UNSAFE_VERB ("GlipperAbout", show_about),
+        BONOBO_UI_VERB_END
+};
 
+void initGlipper()
+{	
 	getClipboards();
 
 	conf = gconf_client_get_default();
@@ -531,9 +454,6 @@ int main(int argc, char *argv[])
 	keybinder_init();
 	keybinder_bind(gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL), keyhandler, NULL);
 
-	createTrayIcon();
-	createPopupMenu();
-
 	if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
 		readHistory();
 
@@ -541,8 +461,54 @@ int main(int argc, char *argv[])
 
 	initPreferences(conf);
 
-	gtk_main ();
 	unbindKey();
-
-	return 0;
 }
+
+gboolean 
+glipper_applet_fill (PanelApplet *applet,
+		const char  *iid,
+		gpointer     data)
+{
+	GdkPixbuf *pixbuf;
+	GtkWidget *image;
+	
+	initGlipper();
+	
+	if (strcmp (iid, "OAFIID:GlipperApplet") != 0)
+		return FALSE;
+	
+	pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", NULL);
+	image = gtk_image_new_from_pixbuf(pixbuf);
+	eventbox = gtk_event_box_new ();
+	
+	toolTip = gtk_tooltips_new ();
+
+	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
+						gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL)), "Glipper");
+	
+	gtk_container_add (GTK_CONTAINER (eventbox), image);
+	gtk_container_add(GTK_CONTAINER(applet), eventbox);
+	
+	g_signal_connect (G_OBJECT (eventbox), 
+                  "button_press_event",
+                  G_CALLBACK (AppletIconClicked),
+                  NULL);
+	
+	panel_applet_setup_menu_from_file (PANEL_APPLET (applet),
+                                   NULL,
+                                   "GlipperApplet.xml",
+                                   NULL,
+                                   glipper_menu_verbs,
+                                   NULL);
+
+	gtk_widget_show_all(GTK_WIDGET(applet));
+	
+	return TRUE;
+}
+
+PANEL_APPLET_BONOBO_FACTORY ("OAFIID:GlipperApplet_Factory",
+                             PANEL_TYPE_APPLET,
+                             "Glipper Applet",
+                             "0",
+                             glipper_applet_fill,
+                             NULL);

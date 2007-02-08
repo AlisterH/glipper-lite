@@ -6,7 +6,9 @@
 #endif /* HAVE_CONFIG_H */
 
 #ifdef ENABLE_NLS
+#ifndef _LIBINTL_H
 #include <libintl.h>
+#endif /* _LIBINTL_H */
 #define _(String) gettext(String)
 #ifdef gettext_noop
 #define N_(String) gettext_noop(String)
