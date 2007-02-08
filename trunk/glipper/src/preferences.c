@@ -14,8 +14,8 @@ static GConfClient* global_conf;
 extern int hasChanged;
 extern GSList* history;
 extern void keyhandler(char *keystring, gpointer user_data);
-extern GtkTooltips* toolTip; //The trayicon's tooltip
-extern GtkWidget* eventbox; //The trayicon's eventbox
+extern GtkTooltips* toolTip; //The applet's tooltip
+extern GtkWidget* eventbox; //The applet's eventbox
 
 GtkWidget* historyLength;
 GtkWidget* itemLength;

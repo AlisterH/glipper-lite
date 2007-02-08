@@ -12,6 +12,18 @@ glade_DATA = glipper-properties.glade
 schemasdir = $(datadir)/gconf/schemas
 schemas_DATA = glipper.schemas
 
+serverdir       = $(libdir)/bonobo/servers
+server_in_files = GlipperApplet_Factory.server.in
+server_DATA     = $(server_in_files:.server.in=.server)
+
+$(server_in_files): $(server_in_files:.server.in=.server.in.in)
+	sed -e "s|\@prefix\@|$(prefix)|" $< > $@
+
+uidir = $(datadir)/gnome-2.0/ui
+ui_DATA = GlipperApplet.xml
+
+@INTLTOOL_SERVER_RULE@
+
 EXTRA_DIST =            \
 	$(desktop_in_files) \
 	$(icon_DATA)        \
