@@ -2,3 +2,5 @@ src/main.c
 src/preferences.c
 data/glipper-properties.glade
 data/glipper.desktop.in
+data/GlipperApplet_Factory.server.in.in
+data/GlipperApplet.xml.in
