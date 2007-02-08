@@ -15,14 +15,14 @@ schemas_DATA = glipper.schemas
 serverdir       = $(libdir)/bonobo/servers
 server_in_files = GlipperApplet_Factory.server.in
 server_DATA     = $(server_in_files:.server.in=.server)
-
 $(server_in_files): $(server_in_files:.server.in=.server.in.in)
 	sed -e "s|\@prefix\@|$(prefix)|" $< > $@
+@INTLTOOL_SERVER_RULE@
 
 uidir = $(datadir)/gnome-2.0/ui
-ui_DATA = GlipperApplet.xml
-
-@INTLTOOL_SERVER_RULE@
+ui_in_files = GlipperApplet.xml.in
+ui_DATA = $(ui_in_files:.xml.in=.xml)
+@INTLTOOL_XML_RULE@
 
 EXTRA_DIST =            \
 	$(desktop_in_files) \
@@ -30,12 +30,15 @@ EXTRA_DIST =            \
 	$(glade_DATA)	\
 	$(schemas_DATA) \
 	$(ui_DATA) \
-	GlipperApplet_Factory.server.in.in
+	$(server_in_files).in \
+	$(ui_in_files)
+
 
 DISTCLEANFILES =		\
 	$(desktop_DATA)		\
 	$(server_in_files)	\
-	$(server_DATA)	
+	$(server_DATA)		\
+	$(ui_DATA)
 
 install-data-hook:
 	gconf-schemas --register $(datadir)/gconf/schemas/glipper.schemas
