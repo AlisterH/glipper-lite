@@ -16,6 +16,8 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
+
+#include <Python.h>
 	
 typedef struct {
 	char* name;
@@ -23,6 +25,16 @@ typedef struct {
 	int isrunning;
 	int preferences;
 } plugin_info;
+
+
+typedef struct menuEntry {
+	struct menuEntry* next; //linked list
+	char* label;
+	PyObject* callback;
+	char* ownerModule;
+} menuEntry;
+
+extern menuEntry menuEntryList;
 
 extern int pluginDebug;
 
@@ -39,3 +51,5 @@ void stop_plugin(char* module);
 void plugins_newItem();
 
 void plugin_showPreferences(char* module);
+
+void plugin_menu_callback(GtkMenuItem* menuItem, gpointer user_data);
