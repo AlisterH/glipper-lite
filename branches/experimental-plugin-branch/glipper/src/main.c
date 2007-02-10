@@ -193,11 +193,17 @@ void createHistMenu()
 		}
 	}
 
-	//Add the "clear" button at the bottom of the menu
 	gtk_menu_append((GtkMenu*)historyMenu, gtk_separator_menu_item_new());
-
-	GtkWidget* deleteAll =
-		gtk_image_menu_item_new_from_stock(GTK_STOCK_CLEAR, NULL);
+	//Add all plugin entries:
+	menuEntry* it;
+	for (it = menuEntryList.next; it != NULL; it = it->next)
+	{
+		GtkWidget* widget = gtk_image_menu_item_new_with_label(it->label);
+		g_signal_connect(G_OBJECT(widget), "activate", G_CALLBACK(plugin_menu_callback), it->callback);
+		gtk_menu_append((GtkMenu*)historyMenu, widget);
+	}	
+	//Add the "clear" button at the bottom of the menu
+	GtkWidget* deleteAll = gtk_image_menu_item_new_from_stock(GTK_STOCK_CLEAR, NULL);
 	g_signal_connect(G_OBJECT(deleteAll), "activate", G_CALLBACK(deleteHistory), NULL);
 	gtk_menu_append((GtkMenu*)historyMenu, deleteAll);
 

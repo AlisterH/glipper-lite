@@ -17,7 +17,6 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include <Python.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -34,8 +33,11 @@ typedef struct plugin {
 	PyObject* showPreferences;
 } plugin;
 
+
 static plugin pluginList; //first element in list is dummy (makes it easier to delete one special item)
 static int eventsActive; //controls if the plugin events are triggered or not 
+
+menuEntry menuEntryList;
 
 int pluginDebug = 1;
 
@@ -59,6 +61,12 @@ void plugins_newItem()
 	}
 }
 
+void plugin_menu_callback(GtkMenuItem* menuItem, gpointer user_data)
+{
+	PyObject* callback = (PyObject*)user_data;
+	PyObject_CallObject(callback, NULL);
+}
+
 ///////////////////functions callable by python scripts://///////////////////////
 
 PyObject* module_getItem(PyObject* self, PyObject* args)
@@ -78,9 +86,7 @@ PyObject* module_setItem(PyObject* self, PyObject* args)
 	if (c != NULL)
 	{
 		free(c->data);
-		char* intstr = PyString_AsString(PyTuple_GetItem(args, 1));
-		char* str = malloc(strlen(intstr)+1);
-		strcpy(str, intstr);
+		char* str = g_strdup(PyString_AsString(PyTuple_GetItem(args, 1)));
 		c->data = str;
 		hasChanged = 1;
 	}
@@ -116,12 +122,31 @@ PyObject* module_clearHistory(PyObject* self, PyObject* args)
 	Py_RETURN_NONE;
 }
 
+PyObject* module_registerEntry(PyObject* self, PyObject* args)
+{
+	char* label = PyString_AsString(PyTuple_GetItem(args, 0));
+	PyObject* callback = PyTuple_GetItem(args, 1);
+	if (!callback || !PyCallable_Check(callback))
+		return NULL;
+
+	menuEntry* entry = malloc(sizeof(menuEntry));
+	entry->label = g_strdup(label);
+	entry->callback = callback;
+	entry->next = menuEntryList.next;
+	//TODO: set entry->ownerModule
+	menuEntryList.next = entry;
+
+	hasChanged = 1;
+	Py_RETURN_NONE;
+}
+
 static PyMethodDef glipperFunctions[] = {
 	{"getItem", module_getItem, METH_VARARGS, "returns the history item specified by the argument"},
 	{"setItem", module_setItem, METH_VARARGS, "sets the history item specified by the argument"},
 	{"insertItem", module_insertItem, METH_VARARGS, "adds a new item at the top of the list"},
 	{"setActiveItem", module_setActiveItem, METH_VARARGS, "sets an item in the history to the current active item"},
 	{"clearHistory", module_clearHistory, METH_VARARGS, "clears the whole history"},
+	{"registerEntry", module_registerEntry, METH_VARARGS, "registers an entry in the menu"},
 	{NULL, NULL, 0, NULL}
 };
 
@@ -146,6 +171,7 @@ void init()
 
 		Py_InitModule("glipper", glipperFunctions);
 		pluginList.next = NULL;
+		menuEntryList.next = NULL;
 		pyInit = 1;
 		eventsActive = 1;
 	}
@@ -237,6 +263,7 @@ void stop_plugin(char* module)
 			{
 				Py_DECREF(c->module);
 				Py_DECREF(c->newItemFunc);
+				//TODO: Delete his menu entries (if any)
 				free(c->modulename);
 				i->next = c->next;
 				free(c);
