@@ -39,8 +39,6 @@ static int eventsActive; //controls if the plugin events are triggered or not
 
 menuEntry menuEntryList;
 
-int pluginDebug = 1;
-
 ////////////////////////////////////Events:///////////////////////////////////////
 
 void plugins_newItem()
@@ -55,7 +53,8 @@ void plugins_newItem()
 			PyObject* args = PyTuple_New(1);
 			if (args != NULL)
 				PyTuple_SetItem(args, 0, PyString_FromString(history->data));
-			PyObject_CallObject(i->newItemFunc, args);	
+			if (!PyObject_CallObject(i->newItemFunc, args))
+				PyErr_Print();
 			Py_DECREF(args);
 		}
 	}
@@ -64,7 +63,8 @@ void plugins_newItem()
 void plugin_menu_callback(GtkMenuItem* menuItem, gpointer user_data)
 {
 	PyObject* callback = (PyObject*)user_data;
-	PyObject_CallObject(callback, NULL);
+	if (!PyObject_CallObject(callback, NULL))
+		PyErr_Print();
 }
 
 ///////////////////functions callable by python scripts://///////////////////////
@@ -205,22 +205,25 @@ int get_plugin_info(char* module, plugin_info* info)
 		if (infoFunc && PyCallable_Check(infoFunc))
 		{
                         PyObject* result = PyObject_CallObject(infoFunc, NULL);
-			PyObject* name = PyDict_GetItemString(result, "Name");
-			PyObject* descr = PyDict_GetItemString(result, "Description");
-			PyObject* preferences = PyDict_GetItemString(result, "Preferences");
-			info->name = PyString_AsString(name);
-			info->descr = PyString_AsString(descr);
-			info->preferences = PyInt_AsLong(preferences);
-			Py_DECREF(result);
-			res = 1;                        
+			if (result)
+			{
+				PyObject* name = PyDict_GetItemString(result, "Name");
+				PyObject* descr = PyDict_GetItemString(result, "Description");
+				PyObject* preferences = PyDict_GetItemString(result, "Preferences");
+				info->name = PyString_AsString(name);
+				info->descr = PyString_AsString(descr);
+				info->preferences = PyInt_AsLong(preferences);
+				Py_DECREF(result);
+				res = 1;                        
+			} else
+				PyErr_Print();
 		}
 		Py_XDECREF(infoFunc);
                 if (!info->isrunning)
                     Py_DECREF(m);
 	}
 	else
-		if (pluginDebug)
-			PyErr_Print();
+		PyErr_Print();
         return res;
 }
 
@@ -245,12 +248,12 @@ void start_plugin(char* module)
 		printf("plugin %s started\n", module);
 		PyObject* startFunction = PyObject_GetAttrString(m, "init");
 		if (startFunction && PyCallable_Check(startFunction))
-			PyObject_CallObject(startFunction, NULL);
+			if (!PyObject_CallObject(startFunction, NULL))
+				PyErr_Print();
 		Py_XDECREF(startFunction);
 	}
 	else
-		if (pluginDebug)
-			PyErr_Print();
+		PyErr_Print();
 }
 
 void stop_plugin(char* module)
@@ -286,7 +289,8 @@ void plugin_showPreferences(char* module)
 	if (i != NULL)
 	{
 		if (i->showPreferences != NULL)
-			PyObject_CallObject(i->showPreferences, NULL);	
+			if (!PyObject_CallObject(i->showPreferences, NULL))
+				PyErr_Print();
 	}
 	else //if not, we have to load the module:
 	{
@@ -298,11 +302,11 @@ void plugin_showPreferences(char* module)
 		{
 			PyObject* prefFunc = PyObject_GetAttrString(m, "showPreferences");
 			if (prefFunc && PyCallable_Check(prefFunc))
-				PyObject_CallObject(prefFunc, NULL);
+				if (!PyObject_CallObject(prefFunc, NULL))
+					PyErr_Print();
 			Py_XDECREF(prefFunc);
 			Py_DECREF(m);
 		} else
-			if (pluginDebug)
-				PyErr_Print();
+			PyErr_Print();
 	}
 }
