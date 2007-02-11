@@ -19,10 +19,3 @@ def getInfo():
 		"Description": "This plugin adds a newline character at the end of items in the clipboard",
 		"Preferences": False}
 	return info
-
-def test():
-	print "TEST2"
-
-def init():
-	glipper.registerEntry("Test", test)
-	print "TEST"

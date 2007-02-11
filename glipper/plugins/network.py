@@ -1,3 +1,5 @@
+#This plugin doesn't work yet, because python threads don't work in glipper at the moment.
+
 import threading, socket, os, os.path, glipper
 
 GLIPPERPORT = 10368
@@ -6,7 +8,7 @@ allConnections = []
 
 def getInfo():
 	info = {"Name": "network connection", 
-		"Description": "Let\'s you connect multiple glipper processes via network to synchronize their history",
+		"Description": "(Doesn't work!!!) Let\'s you connect multiple glipper processes via network to synchronize their history",
 		"Preferences": True}
 	return info
 
