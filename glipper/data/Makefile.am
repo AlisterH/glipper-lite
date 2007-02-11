@@ -15,23 +15,18 @@ $(server_in_files): $(server_in_files:.server.in=.server.in.in)
 @INTLTOOL_SERVER_RULE@
 
 uidir = $(datadir)/gnome-2.0/ui
-ui_in_files = GlipperApplet.xml.in
-ui_DATA = $(ui_in_files:.xml.in=.xml)
-@INTLTOOL_XML_RULE@
+ui_DATA = GlipperApplet.xml
 
 EXTRA_DIST =            \
 	$(icon_DATA)        \
 	$(glade_DATA)	\
 	$(schemas_DATA) \
 	$(ui_DATA) \
-	$(server_in_files).in \
-	$(ui_in_files)
-
+	$(server_in_files).in 
 
 DISTCLEANFILES =		\
 	$(server_in_files)	\
-	$(server_DATA)		\
-	$(ui_DATA)
+	$(server_DATA)	
 
 install-data-hook:
 	gconf-schemas --register $(datadir)/gconf/schemas/glipper.schemas
