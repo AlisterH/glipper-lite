@@ -29,6 +29,15 @@ GtkWidget* prefWin;
 GtkWidget* helpButton;
 GtkWidget* closeButton;
 
+void updateMarkDefaultCheck()
+{
+    if(gtk_toggle_button_get_active((GtkToggleButton*)primaryCheck) &&
+       gtk_toggle_button_get_active((GtkToggleButton*)defaultCheck))
+        gtk_widget_set_sensitive(markDefaultCheck, TRUE);
+    else
+        gtk_widget_set_sensitive(markDefaultCheck, FALSE);
+}
+
 //Callbacks needed to update the GUI and history after a key change
 
 void
@@ -124,7 +133,7 @@ void setWidgets()
 	gtk_toggle_button_set_active((GtkToggleButton*)markDefaultCheck, gconf_client_get_bool(global_conf, MARK_DEFAULT_ENTRY_KEY, NULL));
 	gtk_toggle_button_set_active((GtkToggleButton*)saveHistCheck, gconf_client_get_bool(global_conf, SAVE_HISTORY_KEY, NULL));
 	gtk_entry_set_text((GtkEntry*)keyCombEntry, gconf_client_get_string(global_conf, KEY_COMBINATION_KEY, NULL));
-	on_defaultCheck_toggled((GtkToggleButton*)defaultCheck,NULL);
+	updateMarkDefaultCheck();
 }
 
 //Every widget needs to update the key in the GConf database when he changes his status
@@ -132,7 +141,6 @@ void
 on_itemLength_value_changed                   (GtkSpinButton       *spinButton,
                                         		gpointer         user_data)
 {
-	hasChanged = 1;
 	gint value;
 	value = gtk_spin_button_get_value (spinButton);
 	gconf_client_set_int (global_conf, MAX_ITEM_LENGTH_KEY, value, NULL);
@@ -142,7 +150,6 @@ void
 on_historyLength_value_changed                   (GtkSpinButton       *spinButton,
                                         		gpointer         user_data)
 {
-	hasChanged = 1;
 	gint value;
 	value = gtk_spin_button_get_value (spinButton);
 	gconf_client_set_int (global_conf, MAX_ELEMENTS_KEY, value, NULL);
@@ -152,7 +159,6 @@ void
 on_keyCombEntry_changed                   (GtkEntry       *entry,
                                         		gpointer         user_data)
 {
-	hasChanged = 1;
 	const gchar* value = gtk_entry_get_text (entry);
 	gconf_client_set_string (global_conf, KEY_COMBINATION_KEY, value, NULL);
 }
@@ -162,6 +168,8 @@ void
 on_primaryCheck_toggled                   (GtkToggleButton *toggleButton,
                                         gpointer         user_data)
 {
+	updateMarkDefaultCheck();
+
 	gint value;
 	value = gtk_toggle_button_get_active (toggleButton);
 	gconf_client_set_bool (global_conf, USE_PRIMARY_CLIPBOARD_KEY, value, NULL);
@@ -171,12 +179,8 @@ void
 on_defaultCheck_toggled                   (GtkToggleButton *toggleButton,
                                         gpointer         user_data)
 {
-	//Only permit to distinguish ctrl+c entry if both types of clipboard are present
-	if (!(gtk_toggle_button_get_active((GtkToggleButton*)primaryCheck) && 
-	  gtk_toggle_button_get_active((GtkToggleButton*)toggleButton)))
-		gtk_widget_set_sensitive(markDefaultCheck, FALSE);
-	else
-		gtk_widget_set_sensitive(markDefaultCheck, TRUE);
+	updateMarkDefaultCheck();
+
 	gint value;
 	value = gtk_toggle_button_get_active (toggleButton);
 	gconf_client_set_bool (global_conf, USE_DEFAULT_CLIPBOARD_KEY, value, NULL);
