@@ -31,7 +31,7 @@ typedef struct menuEntry {
 	struct menuEntry* next; //linked list
 	char* label;
 	PyObject* callback;
-	char* ownerModule;
+	PyObject* ownerModule;
 } menuEntry;
 
 extern menuEntry menuEntryList;

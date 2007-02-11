@@ -37,7 +37,10 @@ typedef struct plugin {
 static plugin pluginList; //first element in list is dummy (makes it easier to delete one special item)
 static int eventsActive; //controls if the plugin events are triggered or not 
 
-menuEntry menuEntryList;
+menuEntry menuEntryList; //first element is dummy
+
+static PyObject* initCalled = NULL; //stores the module that is executing the init function 
+				    //atm. Needed for menu entry registration
 
 ////////////////////////////////////Events:///////////////////////////////////////
 
@@ -133,7 +136,7 @@ PyObject* module_registerEntry(PyObject* self, PyObject* args)
 	entry->label = g_strdup(label);
 	entry->callback = callback;
 	entry->next = menuEntryList.next;
-	//TODO: set entry->ownerModule
+	entry->ownerModule = initCalled;
 	menuEntryList.next = entry;
 
 	hasChanged = 1;
@@ -248,8 +251,12 @@ void start_plugin(char* module)
 		printf("plugin %s started\n", module);
 		PyObject* startFunction = PyObject_GetAttrString(m, "init");
 		if (startFunction && PyCallable_Check(startFunction))
+		{
+			initCalled = m;
 			if (!PyObject_CallObject(startFunction, NULL))
 				PyErr_Print();
+			initCalled = NULL;
+		}
 		Py_XDECREF(startFunction);
 	}
 	else
@@ -264,9 +271,25 @@ void stop_plugin(char* module)
 			plugin* c = i->next;
 			if (strcmp(c->modulename, module) == 0)
 			{
+				//search for all belonging menu entries and delete them:
+				if (menuEntryList.next != NULL)
+				{
+					menuEntry* it;
+					for (it = &menuEntryList; it->next != NULL;)
+						if (it->next->ownerModule == c->module)
+						{
+							menuEntry* tmp = it->next;
+							it->next = it->next->next;
+							free(tmp->label);
+							free(tmp);
+						} else
+							it = it->next;
+					hasChanged = 1;
+				}
+
 				Py_DECREF(c->module);
-				Py_DECREF(c->newItemFunc);
-				//TODO: Delete his menu entries (if any)
+				Py_XDECREF(c->newItemFunc);
+				Py_XDECREF(c->showPreferences);
 				free(c->modulename);
 				i->next = c->next;
 				free(c);
