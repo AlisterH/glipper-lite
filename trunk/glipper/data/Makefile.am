@@ -11,7 +11,7 @@ serverdir       = $(libdir)/bonobo/servers
 server_in_files = GlipperApplet_Factory.server.in
 server_DATA     = $(server_in_files:.server.in=.server)
 $(server_in_files): $(server_in_files:.server.in=.server.in.in)
-	sed -e "s|\@prefix\@|$(prefix)|" $< > $@
+	sed -e "s|\@libexecdir\@|$(libexecdir)|" $< > $@
 @INTLTOOL_SERVER_RULE@
 
 uidir = $(datadir)/gnome-2.0/ui

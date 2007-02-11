@@ -2,8 +2,7 @@ AM_CFLAGS = $(FR_CFLAGS) -I$(top_srcdir) \
 	-DGNOMELOCALEDIR=\""$(gnomelocaledir)"\" -DPIXMAPDIR=\""$(datadir)/pixmaps"\" \
 	-DGLADEDIR=\""$(datadir)/glipper"\" 
 
-noinst_PROGRAMS=glipper
-bin_PROGRAMS=glipper
+libexec_PROGRAMS=glipper
 
 glipper_SOURCES= \
 	main.c main.h preferences.c preferences.h \
