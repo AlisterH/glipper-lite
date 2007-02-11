@@ -1,9 +1,0 @@
-<Root>
-  <popups>
-    <popup name="button3">
-	    <menuitem name="GlipperPreferences" verb="GlipperPreferences" _label="_Preferences" pixtype="stock" pixname="gtk-preferences"/>
-	    <menuitem name="GlipperHelp" verb="GlipperHelp" _label="_Help" pixtype="stock" pixname="gtk-help"/>
-	    <menuitem name="GlipperAbout" verb="GlipperAbout" _label="_About" pixtype="stock" pixname="gnome-stock-about"/>
-    </popup>
-  </popups>
-</Root>

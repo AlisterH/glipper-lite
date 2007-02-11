@@ -2,6 +2,14 @@
 
 	* Makefile.in.in: Upgrade to gettext-0.15.
 
+2007-02-11  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.15.
+
+2007-02-11  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.15.
+
 2007-02-08  gettextize  <bug-gnu-gettext@gnu.org>
 
 	* Makefile.in.in: Upgrade to gettext-0.15.
