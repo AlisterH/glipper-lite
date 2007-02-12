@@ -17,7 +17,14 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#pragma once
+
 #include <Python.h>
+#include <gconf/gconf-client.h>
+
+#define PATH "/apps"
+#define KEY_PREFIX PATH "/glipper"
+#define AUTOSTART_PLUGINS_KEY KEY_PREFIX "/autostart_plugins"
 	
 typedef struct {
 	char* name;

@@ -473,7 +473,14 @@ void initGlipper()
 	mainTimeout = g_timeout_add(gconf_client_get_int(conf, CHECK_INTERVAL_KEY, NULL), checkClipboard, NULL);
 
 	initPreferences(conf);
-	start_plugin("nopaste"); //TODO: remove
+
+	//autostart plugins:
+	GSList* list = gconf_client_get_list(conf, AUTOSTART_PLUGINS_KEY, GCONF_VALUE_STRING, NULL);
+	for (;list != NULL; list = g_slist_next(list))
+	{
+		char* plugin = (char*)list->data;
+		start_plugin(plugin);
+	}
 }
 
 gboolean 
@@ -498,7 +505,7 @@ glipper_applet_fill (PanelApplet *applet,
 	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
 						gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL)), "Glipper");
 	
-	gtk_container_add (GTK_CONTAINER (eventbox), image);
+	gtk_container_add(GTK_CONTAINER (eventbox), image);
 	gtk_container_add(GTK_CONTAINER(applet), eventbox);
 	
 	g_signal_connect (G_OBJECT (eventbox), 

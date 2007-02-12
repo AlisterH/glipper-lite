@@ -17,4 +17,6 @@
  * Boston, MA 02111-1307, USA.
  */
 	
+#pragma once
+
 void showPluginDialog(gpointer data);
