@@ -1,4 +1,4 @@
-/* Glipper - Clipboardmanager for Gnome, 
+/* Glipper - Clipboardmanager for GNOME
  * Copyright (C) 2006 Sven Rech <svenrech@gmx.de>
  *
  * This library is free software; you can redistribute it and/or
