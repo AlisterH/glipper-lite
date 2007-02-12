@@ -29,4 +29,4 @@ DISTCLEANFILES =		\
 	$(server_DATA)	
 
 install-data-hook:
-	gconf-schemas --register $(datadir)/gconf/schemas/glipper.schemas
+	GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(schemas_DATA)
