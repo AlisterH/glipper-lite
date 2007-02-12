@@ -88,5 +88,17 @@
         <long>The interval between the clipboard checks (ms)</long>
       </locale>
     </schema>
+    <schema>
+      <key>/schemas/apps/glipper/autostart_plugins</key>
+      <applyto>/apps/glipper/autostart_plugins</applyto>
+      <owner>glipper</owner>
+      <type>list</type>
+      <list_type>string</list_type>
+      <default>[nopaste]</default>
+      <locale name="C">
+        <short>the plugins to start at startup</short>
+        <long>the plugins to start when starting glipper</long>
+      </locale>
+    </schema>
   </schemalist>
 </gconfschemafile>
