@@ -7,7 +7,11 @@ def getInfo():
 	return info
 
 def open():
-	webbrowser.open(glipper.getItem(0))
+	url = glipper.getItem(0)
+	try:
+		webbrowser.open(url)
+	except:
+		print "couldn't open \"" + url + "\""
 
 def init():
 	glipper.registerEntry("open in webbrowser", open)
