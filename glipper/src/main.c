@@ -1,4 +1,4 @@
-/* Glipper - Clipboardmanager for Gnome
+/* Glipper - Clipboardmanager for Gnome, 
  * Copyright (C) 2006 Sven Rech <svenrech@gmx.de>
  *
  * This library is free software; you can redistribute it and/or
@@ -23,8 +23,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "preferences.h"
+#include "plugin-dialog.h"
 #include "utils/glipper-i18n.h"
 #include "utils/keybinder.h"
+#include "plugin.h"
 #include <libgnome/gnome-help.h>
 #include <panel-applet.h>
 
@@ -184,11 +186,17 @@ void createHistMenu()
 		}
 	}
 
-	//Add the "clear" button at the bottom of the menu
 	gtk_menu_append((GtkMenu*)historyMenu, gtk_separator_menu_item_new());
-
-	GtkWidget* deleteAll =
-		gtk_image_menu_item_new_from_stock(GTK_STOCK_CLEAR, NULL);
+	//Add all plugin entries:
+	menuEntry* it;
+	for (it = menuEntryList.next; it != NULL; it = it->next)
+	{
+		GtkWidget* widget = gtk_image_menu_item_new_with_label(it->label);
+		g_signal_connect(G_OBJECT(widget), "activate", G_CALLBACK(plugin_menu_callback), it->callback);
+		gtk_menu_append((GtkMenu*)historyMenu, widget);
+	}	
+	//Add the "clear" button at the bottom of the menu
+	GtkWidget* deleteAll = gtk_image_menu_item_new_from_stock(GTK_STOCK_CLEAR, NULL);
 	g_signal_connect(G_OBJECT(deleteAll), "activate", G_CALLBACK(deleteHistory), NULL);
 	gtk_menu_append((GtkMenu*)historyMenu, deleteAll);
 
@@ -224,9 +232,14 @@ void insertInHistory(gchar* content)
 		}
 		if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
 			saveHistory();
+		plugins_newItem();
 	}
 }
 
+/*
+ * This procedure just makes sure, that the result of the gtk clipboard functions are valid
+ * and that the clipboard doesn't lost it's content
+ */
 void processContent(gchar* newContent, gchar** lastContent, GtkClipboard* Clipboard)
 {
 	if (newContent == NULL)
@@ -438,6 +451,7 @@ void unbindKey()
 
 const BonoboUIVerb glipper_menu_verbs [] = {
         BONOBO_UI_UNSAFE_VERB ("GlipperPreferences", showPreferences),
+        BONOBO_UI_UNSAFE_VERB ("GlipperPlugins", showPluginDialog),
         BONOBO_UI_UNSAFE_VERB ("GlipperHelp", showHelp),
         BONOBO_UI_UNSAFE_VERB ("GlipperAbout", show_about),
         BONOBO_UI_VERB_END

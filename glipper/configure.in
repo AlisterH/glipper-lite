@@ -70,7 +70,7 @@ PKG_CHECK_MODULES(FR,			\
 	gtk+-2.0 >= $GTK_REQUIRED	\
 	libglade-2.0 >= $GLADE_REQUIRED	\
 	libgnome-2.0 >= $LIBGNOME_REQUIRED \
-    libpanelapplet-2.0 >= $LIBPANELAPPLET_REQUIRED) 
+	libpanelapplet-2.0 >= $LIBPANELAPPLET_REQUIRED) 
 
 AC_SUBST(FR_CFLAGS)
 AC_SUBST(FR_LIBS)
@@ -89,9 +89,10 @@ AC_HEADER_STDBOOL
 # Checks for library functions.
 AC_TYPE_SIGNAL
 AC_CHECK_FUNCS([mkdir])
-AC_CONFIG_FILES([Makefile
+AC_CONFIG_FILES([Makefile 
 src/Makefile
 data/Makefile
-help/Makefile ])
+help/Makefile
+plugins/Makefile])
 
 AC_OUTPUT(po/Makefile.in)

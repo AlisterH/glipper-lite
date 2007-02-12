@@ -1,3 +1,22 @@
+/* Glipper - Clipboardmanager for Gnome
+ * Copyright (C) 2006 Sven Rech <svenrech@gmx.de>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+	
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
@@ -29,7 +48,7 @@ GtkWidget* prefWin;
 GtkWidget* helpButton;
 GtkWidget* closeButton;
 
-void updateMarkDefaultCheck()
+static void updateMarkDefaultCheck()
 {
     if(gtk_toggle_button_get_active((GtkToggleButton*)primaryCheck) &&
        gtk_toggle_button_get_active((GtkToggleButton*)defaultCheck))
@@ -40,7 +59,7 @@ void updateMarkDefaultCheck()
 
 //Callbacks needed to update the GUI and history after a key change
 
-void
+static void
 max_item_length_key_changed_callback(GConfClient *client,
 		    guint        cnxn_id,
 		    GConfEntry  *entry,
@@ -51,7 +70,7 @@ max_item_length_key_changed_callback(GConfClient *client,
 	gtk_spin_button_set_value((GtkSpinButton*)itemLength, gconf_value_get_int(value));
 }
 
-void
+static void
 max_elements_key_changed_callback(GConfClient *client,
 		    guint        cnxn_id,
 		    GConfEntry  *entry,
@@ -68,7 +87,7 @@ max_elements_key_changed_callback(GConfClient *client,
 	gtk_spin_button_set_value((GtkSpinButton*)historyLength, gconf_value_get_int(value));
 }
 
-void
+static void
 use_primary_clipboard_key_changed_callback(GConfClient *client,
 		    guint        cnxn_id,
 		    GConfEntry  *entry,
@@ -78,7 +97,7 @@ use_primary_clipboard_key_changed_callback(GConfClient *client,
 	gtk_toggle_button_set_active((GtkToggleButton*)primaryCheck, gconf_value_get_bool(value));
 }
 								
-void
+static void
 use_default_clipboard_key_changed_callback(GConfClient *client,
 		    guint        cnxn_id,
 		    GConfEntry  *entry,
@@ -88,7 +107,7 @@ use_default_clipboard_key_changed_callback(GConfClient *client,
 	gtk_toggle_button_set_active((GtkToggleButton*)defaultCheck, gconf_value_get_bool(value));
 }
 		
-void
+static void
 mark_default_entry_key_changed_callback(GConfClient *client,
 		    guint        cnxn_id,
 		    GConfEntry  *entry,
@@ -99,7 +118,7 @@ mark_default_entry_key_changed_callback(GConfClient *client,
 	gtk_toggle_button_set_active((GtkToggleButton*)markDefaultCheck, gconf_value_get_bool(value));
 }
 
-void
+static void
 save_history_key_changed_callback(GConfClient *client,
 		    guint        cnxn_id,
 		    GConfEntry  *entry,
@@ -109,7 +128,7 @@ save_history_key_changed_callback(GConfClient *client,
 	gtk_toggle_button_set_active((GtkToggleButton*)saveHistCheck, gconf_value_get_bool(value));
 }
 
-void
+static void
 key_combination_key_changed_callback(GConfClient *client,
 		    guint        cnxn_id,
 		    GConfEntry  *entry,
@@ -124,7 +143,7 @@ key_combination_key_changed_callback(GConfClient *client,
 }
 
 //Sets initial state of widgets
-void setWidgets()
+static void setWidgets()
 {
 	gtk_spin_button_set_value((GtkSpinButton*)historyLength, gconf_client_get_int(global_conf, MAX_ELEMENTS_KEY, NULL));
 	gtk_spin_button_set_value((GtkSpinButton*)itemLength, gconf_client_get_int(global_conf, MAX_ITEM_LENGTH_KEY, NULL));
@@ -137,7 +156,7 @@ void setWidgets()
 }
 
 //Every widget needs to update the key in the GConf database when he changes his status
-void
+static void
 on_itemLength_value_changed                   (GtkSpinButton       *spinButton,
                                         		gpointer         user_data)
 {
@@ -146,7 +165,7 @@ on_itemLength_value_changed                   (GtkSpinButton       *spinButton,
 	gconf_client_set_int (global_conf, MAX_ITEM_LENGTH_KEY, value, NULL);
 }
 
-void
+static void
 on_historyLength_value_changed                   (GtkSpinButton       *spinButton,
                                         		gpointer         user_data)
 {
@@ -155,7 +174,7 @@ on_historyLength_value_changed                   (GtkSpinButton       *spinButto
 	gconf_client_set_int (global_conf, MAX_ELEMENTS_KEY, value, NULL);
 }
 
-void
+static void
 on_keyCombEntry_changed                   (GtkEntry       *entry,
                                         		gpointer         user_data)
 {
@@ -164,7 +183,7 @@ on_keyCombEntry_changed                   (GtkEntry       *entry,
 }
 
 //Set markDefaultCheck checkbox (ctrl+c in blue) active or not
-void
+static void
 on_primaryCheck_toggled                   (GtkToggleButton *toggleButton,
                                         gpointer         user_data)
 {
@@ -175,7 +194,7 @@ on_primaryCheck_toggled                   (GtkToggleButton *toggleButton,
 	gconf_client_set_bool (global_conf, USE_PRIMARY_CLIPBOARD_KEY, value, NULL);
 }
 
-void
+static void
 on_defaultCheck_toggled                   (GtkToggleButton *toggleButton,
                                         gpointer         user_data)
 {
@@ -186,7 +205,7 @@ on_defaultCheck_toggled                   (GtkToggleButton *toggleButton,
 	gconf_client_set_bool (global_conf, USE_DEFAULT_CLIPBOARD_KEY, value, NULL);
 }
 
-void
+static void
 on_markDefaultCheck_toggled                   (GtkToggleButton *toggleButton,
                                         gpointer         user_data)
 {
@@ -196,7 +215,7 @@ on_markDefaultCheck_toggled                   (GtkToggleButton *toggleButton,
 	gconf_client_set_bool (global_conf, MARK_DEFAULT_ENTRY_KEY, value, NULL);
 }
 
-void
+static void
 on_saveHistCheck_toggled                   (GtkToggleButton *toggleButton,
                                         gpointer         user_data)
 {
@@ -205,7 +224,7 @@ on_saveHistCheck_toggled                   (GtkToggleButton *toggleButton,
 	gconf_client_set_bool (global_conf, SAVE_HISTORY_KEY, value, NULL);
 }
 
-void
+static void
 on_closeButton_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
@@ -213,7 +232,7 @@ on_closeButton_clicked                 (GtkButton       *button,
 }
 
 
-void on_helpButton_clicked                 (GtkButton       *button,
+static void on_helpButton_clicked                 (GtkButton       *button,
                                         gpointer         user_data)
 {
     help("preferences");

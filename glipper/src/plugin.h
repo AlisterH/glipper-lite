@@ -16,20 +16,40 @@
  * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
+
+#include <Python.h>
 	
-#include <gconf/gconf-client.h>
+typedef struct {
+	char* name;
+	char* descr;
+	int isrunning;
+	int preferences;
+} plugin_info;
 
-#define PATH "/apps"
-#define KEY_PREFIX PATH "/glipper"
-#define MAX_ELEMENTS_KEY KEY_PREFIX "/max_elements"
-#define MAX_ITEM_LENGTH_KEY KEY_PREFIX "/max_item_length"
-#define USE_PRIMARY_CLIPBOARD_KEY KEY_PREFIX "/use_primary_clipboard"
-#define USE_DEFAULT_CLIPBOARD_KEY KEY_PREFIX "/use_default_clipboard"
-#define MARK_DEFAULT_ENTRY_KEY KEY_PREFIX "/mark_default_entry"
-#define SAVE_HISTORY_KEY KEY_PREFIX "/save_history"
-#define CHECK_INTERVAL_KEY KEY_PREFIX "/check_interval"
-#define KEY_COMBINATION_KEY KEY_PREFIX "/key_combination"
 
-void showPreferences (gpointer data);
+typedef struct menuEntry {
+	struct menuEntry* next; //linked list
+	char* label;
+	PyObject* callback;
+	PyObject* ownerModule;
+} menuEntry;
 
-void initPreferences(GConfClient* conf);
+extern menuEntry menuEntryList;
+
+extern int pluginDebug;
+
+//Common functions for the plugin system:
+
+int get_plugin_info(char* module, plugin_info* info);
+
+void start_plugin(char* module);
+
+void stop_plugin(char* module);
+
+//Sending Events to the plugins:
+
+void plugins_newItem();
+
+void plugin_showPreferences(char* module);
+
+void plugin_menu_callback(GtkMenuItem* menuItem, gpointer user_data);

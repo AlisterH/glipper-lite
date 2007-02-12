@@ -2,7 +2,7 @@ icondir = $(datadir)/pixmaps
 icon_DATA = glipper.png
 
 gladedir = $(datadir)/glipper
-glade_DATA = glipper-properties.glade
+glade_DATA = glipper-properties.glade glipper-plugins.glade
 
 schemasdir = $(datadir)/gconf/schemas
 schemas_DATA = glipper.schemas
