@@ -2,6 +2,7 @@
   <popups>
     <popup name="button3">
 	    <menuitem name="GlipperPreferences" verb="GlipperPreferences" label="_Preferences" pixtype="stock" pixname="gtk-preferences"/>
+	    <menuitem name="GlipperPlugins" verb="GlipperPlugins" label="_Plugins" pixtype="stock" pixname="gtk-execute"/>
 	    <menuitem name="GlipperHelp" verb="GlipperHelp" label="_Help" pixtype="stock" pixname="gtk-help"/>
 	    <menuitem name="GlipperAbout" verb="GlipperAbout" label="_About" pixtype="stock" pixname="gnome-stock-about"/>
     </popup>

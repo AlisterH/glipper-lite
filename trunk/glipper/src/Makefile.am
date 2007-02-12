@@ -1,12 +1,15 @@
-AM_CFLAGS = $(FR_CFLAGS) -I$(top_srcdir) \
+AM_CFLAGS = $(FR_CFLAGS) -I$(top_srcdir) -I/usr/include/python2.4/\
 	-DGNOMELOCALEDIR=\""$(gnomelocaledir)"\" -DPIXMAPDIR=\""$(datadir)/pixmaps"\" \
-	-DGLADEDIR=\""$(datadir)/glipper"\" 
+	-DGLADEDIR=\""$(datadir)/glipper"\" -DPLUGINDIR=\""$(datadir)/glipper/plugins"\"
+AM_LDFLAGS = $(FR_LIBS) -lpython2.4
 
 libexec_PROGRAMS=glipper
 
 glipper_SOURCES= \
 	main.c main.h preferences.c preferences.h \
 	utils/glipper-i18n.h utils/keybinder.c \
-	utils/eggaccelerators.c utils/keybinder.h
+	utils/eggaccelerators.c utils/keybinder.h \
+	plugin-dialog.c plugin-dialog.h \
+	plugin.c plugin.h
 
 glipper_LDADD = $(FR_LIBS)
