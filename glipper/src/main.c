@@ -473,6 +473,7 @@ void initGlipper()
 	mainTimeout = g_timeout_add(gconf_client_get_int(conf, CHECK_INTERVAL_KEY, NULL), checkClipboard, NULL);
 
 	initPreferences(conf);
+	start_plugin("nopaste"); //TODO: remove
 }
 
 gboolean 
