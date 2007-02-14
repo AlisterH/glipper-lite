@@ -30,6 +30,8 @@ typedef struct plugin {
 	PyObject* module;
 	//references to the event functions:
 	PyObject* newItemFunc;
+    PyObject* afterDeleteListFunc;
+
 	PyObject* showPreferences;
 } plugin;
 
@@ -63,6 +65,21 @@ void plugins_newItem()
 	}
 }
 
+void plugins_afterDeleteList()
+{
+	if (!eventsActive)
+		return;
+	plugin* i; 
+	for (i = pluginList.next; i != NULL; i = i->next)
+	{
+		if (i->afterDeleteListFunc)
+		{
+			if (!PyObject_CallObject(i->afterDeleteListFunc, NULL))
+				PyErr_Print();
+		}
+	}
+}
+
 void plugin_menu_callback(GtkMenuItem* menuItem, gpointer user_data)
 {
 	PyObject* callback = (PyObject*)user_data;
@@ -77,7 +94,7 @@ PyObject* module_getItem(PyObject* self, PyObject* args)
 	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
 	GSList* c = g_slist_nth(history, index);
 	if (c == NULL)
-		return NULL;
+		Py_RETURN_NONE;
 	char* item = c->data;
 	return PyString_FromString(item);
 }
@@ -245,9 +262,12 @@ void start_plugin(char* module)
 		strcpy(new->modulename, module);
 		new->module = m;
 		new->newItemFunc = PyObject_GetAttrString(m, "newItem");
+		new->afterDeleteListFunc = PyObject_GetAttrString(m, "afterDeleteList");
 		new->showPreferences = PyObject_GetAttrString(m, "showPreferences");
 		if (new->newItemFunc && !PyCallable_Check(new->newItemFunc))
 			new->newItemFunc = NULL;
+		if (new->afterDeleteListFunc && !PyCallable_Check(new->afterDeleteListFunc))
+			new->afterDeleteListFunc = NULL;
 		printf("plugin %s started\n", module);
 		PyObject* startFunction = PyObject_GetAttrString(m, "init");
 		if (startFunction && PyCallable_Check(startFunction))
@@ -289,10 +309,19 @@ void stop_plugin(char* module)
 
 				Py_DECREF(c->module);
 				Py_XDECREF(c->newItemFunc);
+				Py_XDECREF(c->afterDeleteListFunc);
 				Py_XDECREF(c->showPreferences);
 				free(c->modulename);
 				i->next = c->next;
 				free(c);
+                PyObject* name = PyString_FromString(module);
+                PyObject* m = PyImport_Import(name);
+                Py_DECREF(name);
+		        PyObject* stopFunction = PyObject_GetAttrString(m, "stop");
+		        if (stopFunction && PyCallable_Check(stopFunction))
+			        if (!PyObject_CallObject(stopFunction, NULL))
+				        PyErr_Print();
+		        Py_XDECREF(stopFunction);
 				printf("plugin %s stopped\n", module);
 				break;
 			}
