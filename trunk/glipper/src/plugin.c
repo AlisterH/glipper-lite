@@ -116,8 +116,11 @@ PyObject* module_setItem(PyObject* self, PyObject* args)
 PyObject* module_insertItem(PyObject* self, PyObject* args)
 {
 	eventsActive = 0;
+    int ignoreMaxElements = 0;
 	char* intstr = PyString_AsString(PyTuple_GetItem(args, 0));
-	insertInHistory(intstr);
+    if(PyTuple_Size(args) > 1)
+        ignoreMaxElements = PyInt_AsLong(PyTuple_GetItem(args, 1));
+	insertInHistory(intstr, ignoreMaxElements);
 	eventsActive = 1;
 	Py_RETURN_NONE;
 }
