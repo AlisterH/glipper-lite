@@ -9,17 +9,17 @@ static_items = []
 
 def loadStaticItems():
     savedFile = open(os.environ["HOME"] + "/.glipper/plugins/staticitems", "r")
-    length = int(savedFile.readline())
+    length = savedFile.readline()[:-1]
     while(length):
-        static_items.append(savedFile.read(length))
-        length = int(savedFile.readline())
+        static_items.append(savedFile.read(int(length)+1)[:-1])
+        length = savedFile.readline()[:-1]
     savedFile.close()
 
 def saveStaticItems():
     savedFile = open(os.environ["HOME"] + "/.glipper/plugins/staticitems", "w")
     for item in static_items:
         savedFile.write(str(len(item)))
-        savedFile.write("\n" + item)
+        savedFile.write("\n" + item + "\n")
     savedFile.close()
 
 class manager:
