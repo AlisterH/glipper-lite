@@ -88,7 +88,7 @@ def init():
     glipper.registerEntry("Static Items Manager", showManager)
     loadStaticItems()
     for item in static_items:
-        glipper.insertItem(item)
+        glipper.insertItem(item, True)
 
 def stop():
     index = 0
@@ -101,11 +101,11 @@ def stop():
         item = glipper.getItem(index)
     glipper.clearHistory()
     for item in save_items:
-        glipper.insertItem(item)
+        glipper.insertItem(item, True)
 
 def afterDeleteList():
     for item in static_items:
-        glipper.insertItem(item)
+        glipper.insertItem(item, True)
 
 def getInfo():
 	info = {"Name": "Static Items",

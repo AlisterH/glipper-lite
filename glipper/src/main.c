@@ -224,7 +224,7 @@ void insertInHistory(gchar* content, int ignoreMaxElements)
 			temp->next = temp->next->next;
 			g_slist_free_1(dummy);
 		}
-        if(ignoreMaxElements) {
+        if(!ignoreMaxElements) {
 		//We shorten the history if it gets longer than "maxElements":
 		    GSList* deleteElement = g_slist_nth(history, gconf_client_get_int(conf, MAX_ELEMENTS_KEY, NULL)-1);
 		    if (deleteElement != NULL)
