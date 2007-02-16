@@ -5,6 +5,7 @@
 
 <widget class="GtkWindow" id="manager">
   <property name="visible">True</property>
+  <property name="events">GDK_EXPOSURE_MASK</property>
   <property name="title" translatable="yes">Static Items Manager</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
