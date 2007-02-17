@@ -71,7 +71,7 @@ void plugins_clearHistory()
 	plugin* i; 
 	for (i = pluginList.next; i != NULL; i = i->next)
 	{
-		if (i->newItemFunc)
+		if (i->clearHistoryFunc)
 		{
 			if (!PyObject_CallObject(i->clearHistoryFunc, NULL))
 				PyErr_Print();
@@ -115,11 +115,8 @@ PyObject* module_setItem(PyObject* self, PyObject* args)
 PyObject* module_insertItem(PyObject* self, PyObject* args)
 {
 	eventsActive = 0;
-    int ignoreMaxElements = 0;
 	char* intstr = PyString_AsString(PyTuple_GetItem(args, 0));
-    if(PyTuple_Size(args) > 1)
-        ignoreMaxElements = PyInt_AsLong(PyTuple_GetItem(args, 1));
-	insertInHistory(intstr, ignoreMaxElements);
+	insertInHistory(intstr);
 	eventsActive = 1;
 	Py_RETURN_NONE;
 }
@@ -130,7 +127,7 @@ PyObject* module_setActiveItem(PyObject* self, PyObject* args)
 	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
 	GSList* c = g_slist_nth(history, index);
 	if (c == NULL)
-		return NULL;
+		Py_RETURN_NONE;
 	historyEntryActivate(NULL, c->data);
 	eventsActive = 1;
 	Py_RETURN_NONE;
@@ -141,6 +138,7 @@ PyObject* module_clearHistory(PyObject* self, PyObject* args)
 	g_slist_free(history);
 	history = NULL;
 	hasChanged = 1;
+    plugins_clearHistory();
 	Py_RETURN_NONE;
 }
 
@@ -149,7 +147,7 @@ PyObject* module_registerEntry(PyObject* self, PyObject* args)
 	char* label = PyString_AsString(PyTuple_GetItem(args, 0));
 	PyObject* callback = PyTuple_GetItem(args, 1);
 	if (!callback || !PyCallable_Check(callback))
-		return NULL;
+		Py_RETURN_NONE;
 
 	menuEntry* entry = malloc(sizeof(menuEntry));
 	entry->label = g_strdup(label);
@@ -268,6 +266,8 @@ void start_plugin(char* module)
 		new->showPreferences = PyObject_GetAttrString(m, "showPreferences");
 		if (new->newItemFunc && !PyCallable_Check(new->newItemFunc))
 			new->newItemFunc = NULL;
+		if (new->clearHistoryFunc && !PyCallable_Check(new->clearHistoryFunc))
+			new->clearHistoryFunc = NULL;
 		printf("plugin %s started\n", module);
 		PyObject* startFunction = PyObject_GetAttrString(m, "init");
 		if (startFunction && PyCallable_Check(startFunction))
@@ -314,9 +314,6 @@ void stop_plugin(char* module)
 				free(c->modulename);
 				i->next = c->next;
 				free(c);
-                PyObject* name = PyString_FromString(module);
-                PyObject* m = PyImport_Import(name);
-                Py_DECREF(name);
 				printf("plugin %s stopped\n", module);
 				break;
 			}

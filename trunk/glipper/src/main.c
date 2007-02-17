@@ -204,7 +204,7 @@ void createHistMenu()
 	gtk_widget_show_all(historyMenu);
 }
 
-void insertInHistory(gchar* content, int ignoreMaxElements)
+void insertInHistory(gchar* content)
 {
 	if ((history == NULL) ||
 	  (g_ascii_strcasecmp(content, (gchar*)history->data)!=0))
@@ -224,14 +224,13 @@ void insertInHistory(gchar* content, int ignoreMaxElements)
 			temp->next = temp->next->next;
 			g_slist_free_1(dummy);
 		}
-        if(!ignoreMaxElements) {
+
 		//We shorten the history if it gets longer than "maxElements":
-		    GSList* deleteElement = g_slist_nth(history, gconf_client_get_int(conf, MAX_ELEMENTS_KEY, NULL)-1);
-		    if (deleteElement != NULL)
-		    {
-			    g_slist_free(deleteElement->next);
-			    deleteElement->next = NULL;
-		    }
+        GSList* deleteElement = g_slist_nth(history, gconf_client_get_int(conf, MAX_ELEMENTS_KEY, NULL)-1);
+        if (deleteElement != NULL)
+        {
+            g_slist_free(deleteElement->next);
+            deleteElement->next = NULL;
         }
 		if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
 			saveHistory();
@@ -253,7 +252,7 @@ void processContent(gchar* newContent, gchar** lastContent, GtkClipboard* Clipbo
 		if ((*lastContent==NULL)||
 		  ((*lastContent!=NULL)&&(g_ascii_strcasecmp(newContent, *lastContent)!=0)))
 		{
-			insertInHistory(newContent, 0);
+			insertInHistory(newContent);
 			if (*lastContent!=NULL)
 				g_free(*lastContent);
 			*lastContent = newContent;
