@@ -62,9 +62,9 @@ void deleteHistory(GtkMenuItem* menuItem, gpointer user_data)
 	hasChanged = 1;
 	g_slist_free(history);
 	history = NULL;
-    plugins_afterDeleteList();
 	if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
 		saveHistory();
+    plugins_clearHistory();
 }
 
 void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data);
@@ -231,7 +231,6 @@ void insertInHistory(gchar* content, int ignoreMaxElements)
 		    {
 			    g_slist_free(deleteElement->next);
 			    deleteElement->next = NULL;
-                plugins_afterDeleteList();
 		    }
         }
 		if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))

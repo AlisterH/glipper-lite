@@ -57,8 +57,6 @@ void stop_plugin(char* module);
 
 void plugins_newItem();
 
-void plugins_afterDeleteList();
-
 void plugin_showPreferences(char* module);
 
 void plugin_menu_callback(GtkMenuItem* menuItem, gpointer user_data);

@@ -84,7 +84,6 @@ max_elements_key_changed_callback(GConfClient *client,
 		g_slist_free(deleteElement->next);
 		deleteElement->next = NULL;
 	}
-    plugins_afterDeleteList();
 	gtk_spin_button_set_value((GtkSpinButton*)historyLength, gconf_value_get_int(value));
 }
 
