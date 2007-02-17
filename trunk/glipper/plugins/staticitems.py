@@ -3,50 +3,28 @@ import glipper, os, os.path
 static_items = []
 
 def loadStaticItems():
-    savedFile = open(os.environ["HOME"] + "/.glipper/plugins/staticitems", "r")
-    length = savedFile.readline()[:-1]
-    while(length):
-        static_items.append(savedFile.read(int(length)+1)[:-1])
-        length = savedFile.readline()[:-1]
-    savedFile.close()
+    dir = os.environ["HOME"] + "/.glipper/plugins"
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+    try: file = open(dir + "/staticitems", "r")
+    except IOError:
+        return
+    else:
+        length = file.readline()[:-1]
+        while(length):
+            static_items.append(file.read(int(length)+1)[:-1])
+            length = file.readline()[:-1]
+        file.close()
 
 def saveStaticItems():
-    savedFile = open(os.environ["HOME"] + "/.glipper/plugins/staticitems", "w")
+    dir = os.environ["HOME"] + "/.glipper/plugins"
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+    file = open(dir + "/staticitems", "w")
     for item in static_items:
-        savedFile.write(str(len(item)))
-        savedFile.write("\n" + item + "\n")
-    savedFile.close()
-
-def addStaticItems():
-    index = 0
-    non_static_items = []
-    item = glipper.getItem(index)
-    while(item):
-        if not static_items.__contains__(item):
-            non_static_items.append(item)
-        index = index + 1
-        item = glipper.getItem(index)
-    glipper.clearHistory()
-    non_static_items.reverse()
-    static_items.reverse()
-    for item in static_items:
-        glipper.insertItem(item, True)
-    for item in non_static_items:
-        glipper.insertItem(item, True)
-
-def removeStaticItems():
-    index = 0
-    non_static_items = []
-    item = glipper.getItem(index)
-    while(item):
-        if not static_items.__contains__(item):
-            non_static_items.append(item)
-        index = index + 1
-        item = glipper.getItem(index)
-    glipper.clearHistory()
-    non_static_items.reverse()
-    for item in non_static_items:
-        glipper.insertItem(item)
+        file.write(str(len(item)))
+        file.write("\n" + item + "\n")
+    file.close()
 
 import pygtk
 pygtk.require('2.0')
@@ -55,23 +33,18 @@ import gtk.glade
 
 class manager:
 
-    def updateModels(self):
-        try: self.historyModel and self.staticItemsModel
+    def updateHistoryModel(self):
+        try: self.historyModel
         except AttributeError:
             return
         else:
             self.historyModel.clear()
-            self.staticItemsModel.clear()
             index = 0
             item = glipper.getItem(index)
             while(item):
-                if not static_items.__contains__(item):
-                    self.historyModel.append ([item])
+                self.historyModel.append ([item])
                 index = index + 1
                 item = glipper.getItem(index)
-            static_items.reverse()
-            for item in static_items:
-                self.staticItemsModel.append ([item])
 
     def create(self):
         gladeFile = gtk.glade.XML(os.path.dirname(__file__) + "/staticitems.glade")
@@ -92,27 +65,33 @@ class manager:
         self.staticItemsTree.append_column (self.staticItemsColumn)
         self.staticItemsSelection = self.staticItemsTree.get_selection()
         self.staticItemsSelection.set_mode (gtk.SELECTION_SINGLE)
-        self.updateModels()
+        self.updateHistoryModel()
+        for item in static_items:
+            self.staticItemsModel.append([item])
         gladeFile.signal_autoconnect(self)
 
-	#EVENTS:
+	# Events:
 
     def on_addButton_clicked(self, widget):
         self.historyModel, iter = self.historySelection.get_selected()
         if iter:
-            static_items.append(self.historyModel.get_value(iter, 0))
-            addStaticItems()
-            self.updateModels()
-            saveStaticItems()
+            if not static_items.__contains__(self.historyModel.get_value(iter,0)):
+                static_items.append(self.historyModel.get_value(iter, 0))
+                self.staticItemsModel.append([self.historyModel.get_value(iter, 0)])
+                saveStaticItems()
 
     def on_removeButton_clicked(self, widget):
         self.staticItemsModel, iter = self.staticItemsSelection.get_selected()
         if iter:
             static_items.remove(self.staticItemsModel.get_value(iter, 0))
-            glipper.insertItem(self.staticItemsModel.get_value(iter, 0))
-            addStaticItems()
-            self.updateModels()
+            self.staticItemsModel.remove(iter)
             saveStaticItems()
+
+    def on_activateButton_clicked(self, widget):
+        self.staticItemsModel, iter = self.staticItemsSelection.get_selected()
+        if iter:
+            glipper.insertItem(self.staticItemsModel.get_value(iter, 0))
+            glipper.setActiveItem(0)
 
 static_items_manager = manager()
 
@@ -120,22 +99,17 @@ def showManager():
     static_items_manager.create()
 
 def init():
-    glipper.registerEntry("Static Items Manager", showManager)
+    glipper.registerEntry("Static Items", showManager)
     loadStaticItems()
-    addStaticItems()
-
-def stop():
-    removeStaticItems()
-
-def afterDeleteList():
-    addStaticItems()
-    static_items_manager.updateModels()
 
 def showPreferences():
     pass
 
 def newItem(arg):
-    static_items_manager.updateModels()
+    static_items_manager.updateHistoryModel()
+
+def clearHistory():
+    static_items_manager.updateHistoryModel()
 
 def getInfo():
 	info = {"Name": "Static Items",
