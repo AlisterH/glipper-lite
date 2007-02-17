@@ -30,7 +30,7 @@ typedef struct plugin {
 	PyObject* module;
 	//references to the event functions:
 	PyObject* newItemFunc;
-    PyObject* clearHistoryFunc;
+    PyObject* historyChangedFunc;
 	PyObject* showPreferences;
 } plugin;
 
@@ -64,16 +64,16 @@ void plugins_newItem()
 	}
 }
 
-void plugins_clearHistory()
+void plugins_historyChanged()
 {
 	if (!eventsActive)
 		return;
 	plugin* i; 
 	for (i = pluginList.next; i != NULL; i = i->next)
 	{
-		if (i->clearHistoryFunc)
+		if (i->historyChangedFunc)
 		{
-			if (!PyObject_CallObject(i->clearHistoryFunc, NULL))
+			if (!PyObject_CallObject(i->historyChangedFunc, NULL))
 				PyErr_Print();
 		}
 	}
@@ -109,6 +109,7 @@ PyObject* module_setItem(PyObject* self, PyObject* args)
 		c->data = str;
 		hasChanged = 1;
 	}
+    plugins_historyChanged();
 	Py_RETURN_NONE;
 }
 	
@@ -138,7 +139,7 @@ PyObject* module_clearHistory(PyObject* self, PyObject* args)
 	g_slist_free(history);
 	history = NULL;
 	hasChanged = 1;
-    plugins_clearHistory();
+    plugins_historyChanged();
 	Py_RETURN_NONE;
 }
 
@@ -262,12 +263,12 @@ void start_plugin(char* module)
 		strcpy(new->modulename, module);
 		new->module = m;
 		new->newItemFunc = PyObject_GetAttrString(m, "newItem");
-		new->clearHistoryFunc = PyObject_GetAttrString(m, "clearHistory");
+		new->historyChangedFunc = PyObject_GetAttrString(m, "historyChanged");
 		new->showPreferences = PyObject_GetAttrString(m, "showPreferences");
 		if (new->newItemFunc && !PyCallable_Check(new->newItemFunc))
 			new->newItemFunc = NULL;
-		if (new->clearHistoryFunc && !PyCallable_Check(new->clearHistoryFunc))
-			new->clearHistoryFunc = NULL;
+		if (new->historyChangedFunc && !PyCallable_Check(new->historyChangedFunc))
+			new->historyChangedFunc = NULL;
 		printf("plugin %s started\n", module);
 		PyObject* startFunction = PyObject_GetAttrString(m, "init");
 		if (startFunction && PyCallable_Check(startFunction))
@@ -309,7 +310,7 @@ void stop_plugin(char* module)
 
 				Py_DECREF(c->module);
 				Py_XDECREF(c->newItemFunc);
-				Py_XDECREF(c->clearHistoryFunc);
+				Py_XDECREF(c->historyChangedFunc);
 				Py_XDECREF(c->showPreferences);
 				free(c->modulename);
 				i->next = c->next;

@@ -64,7 +64,7 @@ void deleteHistory(GtkMenuItem* menuItem, gpointer user_data)
 	history = NULL;
 	if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
 		saveHistory();
-    plugins_clearHistory();
+    plugins_historyChanged();
 }
 
 void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data);
@@ -234,6 +234,7 @@ void insertInHistory(gchar* content)
         }
 		if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
 			saveHistory();
+        plugins_historyChanged();
 		plugins_newItem();
 	}
 }
@@ -284,8 +285,9 @@ gboolean AppletIconClicked(GtkWidget* widget, GdkEventButton *event, gpointer us
 	if (event->button != 1)
 		return FALSE;
 
-    if (hasChanged)
+    if (hasChanged) {
         createHistMenu();
+    }
     hasChanged = 0;
     gtk_menu_popup ((GtkMenu*)historyMenu, NULL, NULL, NULL, NULL,
 				    1, gtk_get_current_event_time());

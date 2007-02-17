@@ -75,7 +75,7 @@ class manager:
     def on_addButton_clicked(self, widget):
         self.historyModel, iter = self.historySelection.get_selected()
         if iter:
-            if not static_items.__contains__(self.historyModel.get_value(iter,0)):
+            if self.historyModel.get_value(iter,0) not in static_items:
                 static_items.append(self.historyModel.get_value(iter, 0))
                 self.staticItemsModel.append([self.historyModel.get_value(iter, 0)])
                 saveStaticItems()
@@ -105,10 +105,7 @@ def init():
 def showPreferences():
     pass
 
-def newItem(arg):
-    static_items_manager.updateHistoryModel()
-
-def clearHistory():
+def historyChanged():
     static_items_manager.updateHistoryModel()
 
 def getInfo():
