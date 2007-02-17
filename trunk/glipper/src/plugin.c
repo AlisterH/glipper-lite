@@ -66,8 +66,6 @@ void plugins_newItem()
 
 void plugins_historyChanged()
 {
-	if (!eventsActive)
-		return;
 	plugin* i; 
 	for (i = pluginList.next; i != NULL; i = i->next)
 	{
