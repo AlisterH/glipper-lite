@@ -102,9 +102,6 @@ def init():
     glipper.registerEntry("Static Items", showManager)
     loadStaticItems()
 
-def showPreferences():
-    pass
-
 def historyChanged():
     static_items_manager.updateHistoryModel()
 
