@@ -260,9 +260,18 @@ void start_plugin(char* module)
 		new->modulename = malloc(strlen(module)+1);
 		strcpy(new->modulename, module);
 		new->module = m;
-		new->newItemFunc = PyObject_GetAttrString(m, "newItem");
-		new->historyChangedFunc = PyObject_GetAttrString(m, "historyChanged");
-		new->showPreferences = PyObject_GetAttrString(m, "showPreferences");
+		if (PyObject_HasAttrString(m, "newItem"))
+			new->newItemFunc = PyObject_GetAttrString(m, "newItem");
+		else
+			new->newItemFunc = NULL;
+		if (PyObject_HasAttrString(m, "historyChanged"))
+			new->historyChangedFunc = PyObject_GetAttrString(m, "historyChanged");
+		else
+			new->historyChangedFunc = NULL;
+		if (PyObject_HasAttrString(m, "showPreferences"))
+			new->showPreferences = PyObject_GetAttrString(m, "showPreferences");
+		else
+			new->showPreferences = NULL;
 		if (new->newItemFunc && !PyCallable_Check(new->newItemFunc))
 			new->newItemFunc = NULL;
 		if (new->historyChangedFunc && !PyCallable_Check(new->historyChangedFunc))
