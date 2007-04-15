@@ -1,4 +1,4 @@
-import os, os.path, webbrowser
+import os, os.path, re
 import glipper
 
 import pygtk
@@ -7,25 +7,65 @@ import gtk
 import gtk.glade
 import pango
 
+popups = {}   # maps regex to popup
+immediately = False
+actionItem = "" #the item the action refers to
+
+def prepareActions():
+	global immediately
+	cf = confFile("r")
+	immediately = cf.getImmediately()
+	model = cf.getActionModel()
+
+	#read informations from model and create popups:
+	popups.clear()
+	for action in model:
+		menu = gtk.Menu()
+		regex = re.compile(action[0])
+		popups[regex] = menu
+		item = gtk.MenuItem(action[3])
+		menu.append(item)
+		menu.append(gtk.SeparatorMenuItem())
+		for cmd in action.iterchildren():
+			item = gtk.MenuItem(cmd[3])
+			menu.append(item)
+			item.connect("activate", commandActivated, cmd[0])
+		menu.show_all()
+
+	cf.close()
+
+def commandActivated(menu, cmd):
+	global actionItem
+	command = cmd.replace("%s", actionItem)
+	os.system(command)
+
+def doAction(item):
+	global actionItem
+	actionItem = item
+	for regex in popups:
+		if regex.match(item) != None:
+			popups[regex].popup(None, None, None, 0, 0)
+
+def activated():
+	doAction(glipper.getItem(0))
+
+def init():
+	glipper.registerEntry("Actions", activated)
+	prepareActions()
+
+def newItem(newItem):
+	if immediately:
+		doAction(newItem)
+
+def showPreferences():
+	preferences().show()
+	prepareActions()
+
 def getInfo():
 	info = {"Name": "Actions", 
 		"Description": "Let\'s you define actions for new items",
 		"Preferences": True}
 	return info
-
-def activated():
-	cf = confFile("r")
-	cf.close()
-
-def init():
-	glipper.registerEntry("Actions", activated)
-
-def newItem(newItem):
-	pass
-
-def showPreferences():
-	preferences().show()
-
 
 #config file class:
 class confFile:
@@ -35,23 +75,27 @@ class confFile:
 		dir = os.environ["HOME"] + "/.glipper/plugins"
 		if (mode == "r") and (not os.path.exists(dir + "/actions.conf")):
 			self.immediately = False
-			self.actionModel = gtk.TreeStore(str, str)
+			self.actionModel = gtk.TreeStore(str, pango.Style, str, str, pango.Style, str)
+			#Todo: provide some standard entries here
 			return
 		if not os.path.exists(dir):
 			os.makedirs(dir)
 		self.file = open(dir + "/actions.conf", mode)
 
 		if mode == "r":
-			self.immediately = bool(self.file.readline()[:-1])
-			self.actionModel = gtk.TreeStore(str, str)
+			self.immediately = self.file.readline()[:-1] == "True"
+			self.actionModel = gtk.TreeStore(str, pango.Style, str, str, pango.Style, str)
 			regex = self.file.readline()[:-1]
 			while (regex):
 				descr = self.file.readline()[:-1]
-				iter = self.actionModel.append(None, row=(regex, descr))
+				iter = self.actionModel.append(None, 
+					row=(regex, pango.STYLE_NORMAL, "#000", descr, pango.STYLE_NORMAL, "#000",))
 				cmd = self.file.readline()[:-1]
 				while (cmd and cmd[0] == "\t"):
 					descr = self.file.readline()[:-1]
-					self.actionModel.append(iter, row=(cmd[1:], descr[1:]))
+					self.actionModel.append(iter, 
+						row=(cmd[1:], pango.STYLE_NORMAL, "#000", 
+						     descr[1:], pango.STYLE_NORMAL, "#000"))
 					cmd = self.file.readline()[:-1]
 				regex = cmd
 
@@ -70,11 +114,13 @@ class confFile:
 			if self.mode == "w":
 				self.file.write(str(self.immediately) + "\n")
 				for regex in self.actionModel:
-					self.file.write(regex[0] + "\n")
-					self.file.write(regex[1] + "\n")
-					for cmd in regex.iterchildren():
-						self.file.write("\t" + cmd[0] + "\n")
-						self.file.write("\t" + cmd[1] + "\n")
+					if regex[1] == pango.STYLE_NORMAL:
+						self.file.write(regex[0] + "\n")
+						self.file.write(regex[3] + "\n")
+						for cmd in regex.iterchildren():
+							if cmd[1] == pango.STYLE_NORMAL:
+								self.file.write("\t" + cmd[0] + "\n")
+								self.file.write("\t" + cmd[3] + "\n")
 		finally:
 			self.file.close()
 
@@ -102,21 +148,15 @@ class preferences:
 		cellRenderer = gtk.CellRendererText()
 		cellRenderer.set_property("editable", True)
 		cellRenderer.connect("edited", self.cellEdited, 0)
-		cellRenderer.set_property("style", pango.STYLE_ITALIC)
-		cellRenderer.set_property("foreground", "#666")
-		column = gtk.TreeViewColumn("Action", cellRenderer, text=0)
+		column = gtk.TreeViewColumn("Action", cellRenderer, text=0, style=1, foreground=2)
 		column.set_resizable(True)
-		#column.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
 		self.actionTree.append_column(column)
 
 		cellRenderer = gtk.CellRendererText()
 		cellRenderer.set_property("editable", True)
-		cellRenderer.connect("edited", self.cellEdited, 1)
-		cellRenderer.set_property("style", pango.STYLE_ITALIC)
-		cellRenderer.set_property("foreground", "#666")
-		column = gtk.TreeViewColumn("Description", cellRenderer, text=1)
+		cellRenderer.connect("edited", self.cellEdited, 3)
+		column = gtk.TreeViewColumn("Description", cellRenderer, text=3, style=4, foreground=5)
 		column.set_resizable(True)
-		#column.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
 		self.actionTree.append_column(column)
 		self.actionTree.get_selection().set_mode(gtk.SELECTION_SINGLE)
 
@@ -140,7 +180,9 @@ class preferences:
 	
 	def addCommand(self, menu):
 		iter = self.actionTree.get_selection().get_selected()[1]
-		self.actionModel.append(iter, row=("command", "Description"))
+		self.actionModel.append(iter, 
+			row=("New command", pango.STYLE_ITALIC, "#666", 
+				"Enter description here", pango.STYLE_ITALIC, "#666"))
 		self.actionTree.expand_row(self.actionModel.get_path(iter), False)
 
 	def deleteEntry(self, menu):
@@ -150,7 +192,10 @@ class preferences:
 	#EVENTS:
 	def cellEdited(self, renderer, path, new_text, col):
 		iter = self.actionModel.get_iter(path)
-		self.actionModel.set_value(iter, col, new_text)
+		if self.actionModel.get_value(iter, col) != new_text:
+			self.actionModel.set_value(iter, col, new_text)
+			self.actionModel.set_value(iter, col+1, pango.STYLE_NORMAL)
+			self.actionModel.set_value(iter, col+2, "#000")
 
 	def on_applyButton_clicked(self, widget):
 		f = confFile("w")
@@ -160,7 +205,9 @@ class preferences:
 		self.prefWind.destroy()	
 				
 	def addButton_clicked(self, widget):
-		self.actionModel.append(None, row=("New regular expression", "Enter description here"))
+		self.actionModel.append(None, 
+			row=("New regular expression", pango.STYLE_ITALIC, "#666", 
+				"Enter description here", pango.STYLE_ITALIC, "#666"))
 
 	def deleteButton_clicked(self, widget):
 		iter = self.actionTree.get_selection().get_selected()[1]
