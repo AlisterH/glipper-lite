@@ -132,6 +132,8 @@ class preferences:
 		self.prefWind = gladeFile.get_widget("preferences")
 		self.prefWind.connect("destroy", self.destroy)
 		self.prefWind.show()
+		self.addCommandButton = gladeFile.get_widget("addCommandButton")
+		self.addCommandButton.set_sensitive(False);
 		self.immediatelyCheck = gladeFile.get_widget("immediatelyCheck")
 		self.actionTree = gladeFile.get_widget("actionTree")
 
@@ -159,6 +161,8 @@ class preferences:
 		column.set_resizable(True)
 		self.actionTree.append_column(column)
 		self.actionTree.get_selection().set_mode(gtk.SELECTION_SINGLE)
+
+		self.actionTree.get_selection().connect("changed", self.selectionChanged)
 
 		self.menu1 = gtk.Menu()
 		item = gtk.MenuItem("add command")
@@ -190,6 +194,9 @@ class preferences:
 		self.actionModel.remove(iter)
 
 	#EVENTS:
+	def selectionChanged(self, selection):
+		self.addCommandButton.set_sensitive(selection.get_selected()[1] != None)
+
 	def cellEdited(self, renderer, path, new_text, col):
 		iter = self.actionModel.get_iter(path)
 		if self.actionModel.get_value(iter, col) != new_text:
@@ -212,6 +219,15 @@ class preferences:
 	def deleteButton_clicked(self, widget):
 		iter = self.actionTree.get_selection().get_selected()[1]
 		self.actionModel.remove(iter)
+
+	def addCommandButton_clicked(self, widget):
+		iter = self.actionTree.get_selection().get_selected()[1]
+		if self.actionModel.iter_depth(iter) == 1:
+			iter = self.actionModel.iter_parent(iter)
+		self.actionModel.append(iter, 
+			row=("New command", pango.STYLE_ITALIC, "#666", 
+				"Enter description here", pango.STYLE_ITALIC, "#666"))
+		self.actionTree.expand_row(self.actionModel.get_path(iter), False)
 
 	def actionTree_button_press_event_cb(self, widget, event):
 		if event.button == 3:
