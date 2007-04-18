@@ -314,10 +314,6 @@ void initPreferences(GConfClient* conf)
 
 	global_conf = conf;
 	g_object_ref (G_OBJECT (global_conf));
-	
-	gconf_client_add_dir (conf, PATH,
-                           GCONF_CLIENT_PRELOAD_NONE,
-                           NULL);
 
 	gconf_client_notify_add (conf,
                            MAX_ITEM_LENGTH_KEY,

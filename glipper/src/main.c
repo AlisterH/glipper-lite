@@ -476,7 +476,12 @@ void initGlipper()
 
 	mainTimeout = g_timeout_add(gconf_client_get_int(conf, CHECK_INTERVAL_KEY, NULL), checkClipboard, NULL);
 
+	gconf_client_add_dir (conf, PATH,
+                         GCONF_CLIENT_PRELOAD_NONE,
+                         NULL);
+
 	initPreferences(conf);
+   initPluginDialog(conf);
 
 	//autostart plugins:
 	GSList* list = gconf_client_get_list(conf, AUTOSTART_PLUGINS_KEY, GCONF_VALUE_STRING, NULL);

@@ -19,4 +19,7 @@
 	
 #pragma once
 
+#include <gconf/gconf-client.h>
+
 void showPluginDialog(gpointer data);
+void initPluginDialog(GConfClient *conf);

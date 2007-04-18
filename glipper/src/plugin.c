@@ -24,6 +24,8 @@
 #include "plugin.h"
 #include "main.h"
 
+static GConfClient *global_conf;
+
 typedef struct plugin {
 	struct plugin* next; //linked list
 	char* modulename; 

@@ -13,7 +13,7 @@ server_DATA     = $(server_in_files:.server.in=.server)
 $(server_in_files): $(server_in_files:.server.in=.server.in.in)
 	sed -e "s|\@libexecdir\@|$(libexecdir)|" $< > $@
 @INTLTOOL_SERVER_RULE@
-
+@INTLTOOL_SCHEMAS_RULE@
 uidir = $(datadir)/gnome-2.0/ui
 ui_DATA = GlipperApplet.xml
 
