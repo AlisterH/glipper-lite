@@ -328,7 +328,7 @@ void showHelp(BonoboUIComponent *uic, PanelApplet *glipper_applet, const gchar *
 
 void show_about(BonoboUIComponent *uic, PanelApplet *glipper_applet, const gchar *verbname)
 {
-	gchar* authors[] = {"Sven Rech <svenrech@gmx.de>", "Karderio <karderio at gmail dot com>", NULL};
+	gchar* authors[] = {"Sven Rech <svenrech@gmx.de>", "Karderio <karderio at gmail dot com>", "Eugenio Depalo <eugeniodepalo@mac.com>", NULL};
 
 	gchar* license = 
 "This library is free software; you can redistribute it and/or\n"
