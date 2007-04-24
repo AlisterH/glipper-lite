@@ -280,6 +280,24 @@ gboolean checkClipboard(gpointer data)
 	return 1;
 }
 
+void historyMenuDeactivate(GtkMenu *menu, gpointer user_data)
+{
+    GtkWidget *applet = GTK_WIDGET(user_data);
+	gtk_widget_set_state (applet, GTK_STATE_NORMAL);
+}
+
+void historyMenuPosition(GtkMenu *menu, gint *_x, gint *_y, gboolean *push_in, gpointer user_data)
+{
+    GtkWidget *widget = GTK_WIDGET (user_data);
+    gint x, y;
+
+    gdk_window_get_origin (widget->window, &x, &y);
+
+    y += widget->allocation.height;
+    *_x = x;
+    *_y = y;
+}
+
 gboolean AppletIconClicked(GtkWidget* widget, GdkEventButton *event, gpointer user_data)
 {
 	if (event->button != 1)
@@ -288,8 +306,15 @@ gboolean AppletIconClicked(GtkWidget* widget, GdkEventButton *event, gpointer us
     if (hasChanged) {
         createHistMenu();
     }
+
+    // This is needed to set back the normal state to the applet when the history menu gets deactivated
+    g_signal_connect(G_OBJECT(historyMenu), "deactivate", G_CALLBACK(historyMenuDeactivate), widget);
+
     hasChanged = 0;
-    gtk_menu_popup ((GtkMenu*)historyMenu, NULL, NULL, NULL, NULL,
+
+	gtk_widget_set_state (GTK_WIDGET (widget), GTK_STATE_SELECTED);
+
+    gtk_menu_popup ((GtkMenu*)historyMenu, NULL, NULL, historyMenuPosition, widget,
 				    1, gtk_get_current_event_time());
     return TRUE;
 }
