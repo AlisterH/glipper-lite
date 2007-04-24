@@ -1,10 +1,10 @@
 <Root>
   <popups>
     <popup name="button3">
-	    <menuitem name="GlipperPreferences" verb="GlipperPreferences" label="_Preferences" pixtype="stock" pixname="gtk-preferences"/>
-	    <menuitem name="GlipperPlugins" verb="GlipperPlugins" label="_Plugins" pixtype="stock" pixname="gtk-execute"/>
-	    <menuitem name="GlipperHelp" verb="GlipperHelp" label="_Help" pixtype="stock" pixname="gtk-help"/>
-	    <menuitem name="GlipperAbout" verb="GlipperAbout" label="_About" pixtype="stock" pixname="gnome-stock-about"/>
+	    <menuitem name="Item 1" verb="GlipperPreferences" _label="_Preferences" pixtype="stock" pixname="gtk-preferences"/>
+	    <menuitem name="Item 2" verb="GlipperPlugins" _label="_Plugins" pixtype="stock" pixname="gtk-execute"/>
+	    <menuitem name="Item 3" verb="GlipperHelp" _label="_Help" pixtype="stock" pixname="gtk-help"/>
+	    <menuitem name="Item 4" verb="GlipperAbout" _label="_About" pixtype="stock" pixname="gnome-stock-about"/>
     </popup>
   </popups>
 </Root>
