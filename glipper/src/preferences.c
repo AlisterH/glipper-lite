@@ -78,13 +78,7 @@ max_elements_key_changed_callback(GConfClient *client,
 {
 	hasChanged = 1;
 	GConfValue *value = gconf_entry_get_value (entry);
-	GSList* deleteElement = g_slist_nth(history, gconf_value_get_int(value)-1);
-	if (deleteElement != NULL)
-	{
-		g_slist_free(deleteElement->next);
-		deleteElement->next = NULL;
-        plugins_historyChanged();
-	}
+	deleteOldElement(gconf_value_get_int(value));
 	gtk_spin_button_set_value((GtkSpinButton*)historyLength, gconf_value_get_int(value));
 }
 
@@ -136,6 +130,7 @@ key_combination_key_changed_callback(GConfClient *client,
 		    gpointer     user_data)
 {
 	hasChanged = 1;
+	keybinder_unbind(gconf_client_get_string(client, KEY_COMBINATION_KEY, NULL), keyhandler); //TODO: doesn't work
 	GConfValue *value = gconf_entry_get_value(entry);
 	keybinder_bind(gconf_value_get_string(value), keyhandler, NULL);
 	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
