@@ -32,10 +32,15 @@
 
 static GConfClient* conf = NULL;
 
-GtkClipboard* PrimaryCl;
-GtkClipboard* DefaultCl;
-gchar* lastPr = NULL;
-gchar* lastDf = NULL;
+typedef struct {
+    GtkClipboard* board; //The clipboard object itself
+    gchar* data;	 //A pointer to the data on the history list
+    gboolean afterClear; //TRUE when "data" is allocated after a clear
+    gboolean isBin;	 //TRUE when clipboard set to binary data w/o text
+} ClipStruct;
+
+ClipStruct PrimaryClip;
+ClipStruct DefaultClip;
 GSList* history = NULL;
 GtkWidget* historyMenu = NULL;
 GtkWidget* popupMenu;
@@ -53,13 +58,25 @@ void getClipboards()
 	  PrimaryClipboard: Marked with mouse
 	  DefaultClipboard: copied with Strg+C
 	*/
-	DefaultCl = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
-	PrimaryCl = gtk_clipboard_get (GDK_SELECTION_PRIMARY);
+	DefaultClip.board = gtk_clipboard_get(GDK_SELECTION_CLIPBOARD);
+	PrimaryClip.board = gtk_clipboard_get(GDK_SELECTION_PRIMARY);
 }
 
 void deleteHistory(GtkMenuItem* menuItem, gpointer user_data)
 {
+	if (!history)
+		return;
 	hasChanged = 1;
+	if (PrimaryClip.data && !PrimaryClip.afterClear)
+	{
+		PrimaryClip.data = g_strdup(PrimaryClip.data);
+		PrimaryClip.afterClear = TRUE;
+	}
+	if (DefaultClip.data && !DefaultClip.afterClear)
+	{
+		DefaultClip.data = g_strdup(DefaultClip.data);
+		DefaultClip.afterClear = TRUE;
+	}
 	g_slist_free(history);
 	history = NULL;
 	if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
@@ -77,7 +94,7 @@ GtkWidget* addHistMenuItem(gchar* item)
 	if (toolTip == NULL) toolTip = gtk_tooltips_new();
 
 	//we have to cut the string to "maxItemLength" characters:
-	GString* ellipseData = g_string_new(item);
+	GString* ellipseData = g_string_new(item ? item : "(Binary Data)");
 	gint maxItemLength = gconf_client_get_int(conf, MAX_ITEM_LENGTH_KEY, NULL);
 	if (ellipseData->len > maxItemLength)
 	{
@@ -97,19 +114,22 @@ GtkWidget* addHistMenuItem(gchar* item)
 	//The cutted string is now stored in "ellipseData"
 	GtkWidget* MenuItem = gtk_menu_item_new_with_label(ellipseData->str);
 	//if this string belongs to the default Clipboard, we tag it (presumed markDefault is true):
-	if (gconf_client_get_bool(conf, MARK_DEFAULT_ENTRY_KEY, NULL) &&
-		gconf_client_get_bool(conf, USE_DEFAULT_CLIPBOARD_KEY, NULL) &&
-		gconf_client_get_bool(conf, USE_PRIMARY_CLIPBOARD_KEY, NULL))
-		if ((lastDf!=NULL)&&(g_ascii_strcasecmp(lastDf, item)==0))
-		{
-			GtkLabel* label = (GtkLabel*)gtk_bin_get_child((GtkBin*)MenuItem); 
-			gchar* temp = g_strdup_printf("<b>%s</b>", ellipseData->str);
-			gtk_label_set_markup(label, temp);
-			g_free(temp);
-
-			//Add description tooltip to bold entry
-			gtk_tooltips_set_tip(toolTip, MenuItem, _("This entry was copied with ctrl+c.\nIt can be pasted with ctrl+v."), "Glipper");
-		}
+	int markDefault = gconf_client_get_bool(conf, MARK_DEFAULT_ENTRY_KEY, NULL);
+	int useDefault = gconf_client_get_bool(conf, USE_DEFAULT_CLIPBOARD_KEY, NULL);
+	int usePrimary = gconf_client_get_bool(conf, USE_PRIMARY_CLIPBOARD_KEY, NULL);
+ 	if (markDefault && useDefault && usePrimary
+ 	 && ((item==NULL && DefaultClip.isBin)
+ 	  || (item!=NULL && !DefaultClip.isBin && DefaultClip.data == item)))
+	{
+ 		GtkLabel* label = (GtkLabel*)gtk_bin_get_child((GtkBin*)MenuItem); 
+ 		gchar* fmt = item ? "<b>%s</b>" : "<b><i>%s</i></b>";
+ 		gchar* temp = g_strdup_printf(fmt, ellipseData->str);
+ 		gtk_label_set_markup(label, temp);
+ 		g_free(temp);
+ 
+ 		//Add description tooltip to bold entry
+ 		gtk_tooltips_set_tip(toolTip, MenuItem, _("This entry was copied with ctrl+c.\nIt can be pasted with ctrl+v."), "Glipper");
+	}
 	g_string_free(ellipseData, TRUE);
 	gtk_menu_append(historyMenu, MenuItem);
 	g_signal_connect(G_OBJECT(MenuItem), "activate", 
@@ -173,17 +193,27 @@ void createHistMenu()
 		GSList* temp = history;
 
 		//We add the first item manually
-		GtkWidget* firstItem = addHistMenuItem(temp->data);
-		//addHistMenuItem(temp->data);
+		GtkWidget* firstItem;
+		if (PrimaryClip.isBin)
+			firstItem = addHistMenuItem(NULL);
+		else
+		{
+			firstItem = addHistMenuItem(temp->data);
+			temp = g_slist_next(temp);
+		}
 
 		//Add description tooltip to first item
 		gtk_tooltips_set_tip(toolTip, firstItem, _("This is the last element to be copied.\nIt can be pasted with the middle mouse button."), "Glipper");
 
-		if (temp->next != NULL)
+		if (temp != NULL || (DefaultClip.isBin && !PrimaryClip.isBin))
 		{
 			gtk_menu_append((GtkMenu*)historyMenu, gtk_separator_menu_item_new());
-			while ((temp = g_slist_next(temp)) != NULL)
+			if (DefaultClip.isBin && !PrimaryClip.isBin)
+				addHistMenuItem(NULL);
+			while (temp != NULL) {
 				addHistMenuItem(temp->data);
+				temp = g_slist_next(temp);
+			}
 		}
 	}
 
@@ -204,81 +234,146 @@ void createHistMenu()
 	gtk_widget_show_all(historyMenu);
 }
 
-void insertInHistory(gchar* content)
+//Delete the bottom element in the menu, or the 2nd-to-bottom if the
+//DefaultClipboard item is at the bottom.
+void deleteOldElement(int limit)
+  {
+	if (limit < 2)
+		limit = 2;
+
+	GSList* grandparentElement = g_slist_nth(history, limit-2);
+	if (grandparentElement == NULL)
+		return;
+
+	GSList* parentElement = grandparentElement->next;
+	if (parentElement == NULL || parentElement->next == NULL)
+		return;
+
+	GSList* cur;
+	GSList* prior = parentElement;
+	for (cur = prior->next; cur != NULL; prior = cur, cur = prior->next) {
+		if (cur->data == DefaultClip.data)
+		{
+			//Unlink DefaultClip's node from its current spot
+			prior->next = cur->next;
+			//Move it to the last spot in the retained list
+			grandparentElement->next = cur;
+			cur->next = parentElement;
+			parentElement = cur;
+			break;
+		}
+	}
+
+	g_slist_free(parentElement->next);
+	parentElement->next = NULL;
+	plugins_historyChanged();
+}
+
+void insertInHistory(ClipStruct *clip)
 {
-	if ((history == NULL) ||
-	  (g_ascii_strcasecmp(content, (gchar*)history->data)!=0))
-	{
-		//g_print(content);
-		history = g_slist_prepend(history, g_strdup(content));
-		hasChanged = 1;
+	gchar* content = clip->data;
+
+	if (history == NULL || strcmp(content, history->data)!=0)
+  	{
+  		//g_print(content);
+		history = g_slist_prepend(history, content);
+  		GSList* temp = history;
+		//If the primary selection is growing, replace the previous
+		//substring (as long as the string is not needed by the
+		//default clipboard).  If the newly-grown string duplicates
+		//a later entry, we'll also remove that below.
+		if (clip==&PrimaryClip && temp->next!=NULL && temp->next->data!=NULL
+		 && DefaultClip.data != temp->next->data) {
+			int old_len = strlen(temp->next->data);
+			int new_len = strlen(content);
+			if (new_len > old_len
+			 && (strncmp(temp->next->data, content, old_len) == 0
+			  || strcmp(temp->next->data, content+new_len-old_len) == 0))
+			{
+				GSList* dummy = temp->next;
+				if (DefaultClip.data == dummy->data)
+					DefaultClip.data = content;
+				temp->next = temp->next->next;
+				g_slist_free_1(dummy);
+			}
+		}
 		//We look whether the same entry still exists in the history and delete it:
-		GSList* temp = history;
-		while ((temp->next!=NULL)&&(temp->next->data!=NULL)&&
-		  (g_ascii_strcasecmp((gchar*)temp->next->data, content)!=0))
-		  	temp = temp->next;
-		//If the same entry was found:
-		if (temp->next!=NULL)
-		{
-			GSList* dummy = temp->next;
-			temp->next = temp->next->next;
-			g_slist_free_1(dummy);
-		}
-
-		//We shorten the history if it gets longer than "maxElements":
-        GSList* deleteElement = g_slist_nth(history, gconf_client_get_int(conf, MAX_ELEMENTS_KEY, NULL)-1);
-        if (deleteElement != NULL)
-        {
-            g_slist_free(deleteElement->next);
-            deleteElement->next = NULL;
-        }
-		if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
-			saveHistory();
-        plugins_historyChanged();
-		plugins_newItem();
-	}
-}
-
-/*
- * This procedure just makes sure, that the result of the gtk clipboard functions are valid
- * and that the clipboard doesn't lost it's content
- */
-void processContent(gchar* newContent, gchar** lastContent, GtkClipboard* Clipboard)
-{
-	if (newContent == NULL)
+  		while ((temp->next!=NULL)&&(temp->next->data!=NULL)&&
+		  (strcmp(temp->next->data, content)!=0))
+  		  	temp = temp->next;
+  		//If the same entry was found:
+  		if (temp->next!=NULL)
+  		{
+  			GSList* dummy = temp->next;
+			if (DefaultClip.data == dummy->data)
+				DefaultClip.data = content;
+  			temp->next = temp->next->next;
+  			g_slist_free_1(dummy);
+  		}
+  		//We shorten the history if it gets longer than "maxElements":
+		deleteOldElement(gconf_client_get_int(conf, MAX_ELEMENTS_KEY, NULL));
+  		if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
+  			saveHistory();
+  	}
+	else
 	{
-		if (*lastContent != NULL)
-			gtk_clipboard_set_text(Clipboard, *lastContent, -1);
-	} else {
-		if ((*lastContent==NULL)||
-		  ((*lastContent!=NULL)&&(g_ascii_strcasecmp(newContent, *lastContent)!=0)))
+		g_free(content);
+		clip->data = history->data;
+	}
+  }
+  
+void processContent(ClipStruct *clip)
+  {
+	gchar* newContent = gtk_clipboard_wait_for_text(clip->board);
+  	if (newContent == NULL)
+  	{
+		gint count;
+		GdkAtom *targets;
+		int ok = gtk_clipboard_wait_for_targets(clip->board, &targets, &count);
+		g_free(targets);
+		if (ok)
 		{
-			insertInHistory(newContent);
-			if (*lastContent!=NULL)
-				g_free(*lastContent);
-			*lastContent = newContent;
+			hasChanged |= !clip->isBin;
+			clip->isBin = TRUE;
 		}
-		else
-			g_free(newContent);
+		else if (clip->data != NULL)
+		{
+			gtk_clipboard_set_text(clip->board, clip->data, -1);
+			hasChanged = 1;
+			clip->isBin = FALSE;
+  		}
 	}
-}
-
-gboolean checkClipboard(gpointer data)
-{
-	g_source_remove(mainTimeout);
-	if (gconf_client_get_bool(conf, USE_PRIMARY_CLIPBOARD_KEY, NULL))
+	else if (clip->data==NULL || strcmp(newContent, clip->data)!=0
+	 || (clip == &PrimaryClip && history != NULL && strcmp(newContent, history->data)!=0))
 	{
-		gchar* newContentPr = gtk_clipboard_wait_for_text(PrimaryCl);
-		processContent(newContentPr, &lastPr, PrimaryCl);
+		if (clip->afterClear)
+		{
+			clip->afterClear = FALSE;
+			g_free(clip->data);
+		}
+		clip->data = newContent;
+		insertInHistory(clip);
+		hasChanged = 1;
+		clip->isBin = FALSE;
 	}
+	else
+	{
+		g_free(newContent);
+		hasChanged |= !clip->isBin;
+		clip->isBin = FALSE;
+  	}
+  }
+  
+  gboolean checkClipboard(gpointer data)
+  {
+  	g_source_remove(mainTimeout);
+  	if (gconf_client_get_bool(conf, USE_PRIMARY_CLIPBOARD_KEY, NULL))
+		processContent(&DefaultClip);
 	if (gconf_client_get_bool(conf, USE_DEFAULT_CLIPBOARD_KEY, NULL))
-	{
-		gchar* newContentCl = gtk_clipboard_wait_for_text(DefaultCl);
-		processContent(newContentCl, &lastDf, DefaultCl);
-	}
-	mainTimeout = g_timeout_add(gconf_client_get_int(conf, CHECK_INTERVAL_KEY, NULL), checkClipboard, NULL);
-	return 1;
-}
+		processContent(&PrimaryClip);
+  	mainTimeout = g_timeout_add(500, checkClipboard, NULL);
+  	return 1;
+  }
 
 void historyMenuDeactivate(GtkMenu *menu, gpointer user_data)
 {
@@ -322,9 +417,9 @@ gboolean AppletIconClicked(GtkWidget* widget, GdkEventButton *event, gpointer us
 void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
 {
 	if (gconf_client_get_bool(conf, USE_PRIMARY_CLIPBOARD_KEY, NULL))
-		gtk_clipboard_set_text(PrimaryCl, (gchar*)user_data, -1);
+		gtk_clipboard_set_text(PrimaryClip.board, (gchar*)user_data, -1);
 	if (gconf_client_get_bool(conf, USE_DEFAULT_CLIPBOARD_KEY, NULL))
-		gtk_clipboard_set_text(DefaultCl, (gchar*)user_data, -1);
+		gtk_clipboard_set_text(DefaultClip.board, (gchar*)user_data, -1);
 	checkClipboard(NULL);
 	hasChanged = 1;
 }
@@ -399,14 +494,16 @@ FILE* writeGlipperFile(char* filename)
 	gchar* path = g_build_filename(directory, filename, NULL);
 	FILE* file = fopen(path, "w");
 	if (file == NULL)
+	{
 		if (mkdir(directory, S_IRWXU)==0)  //Trys to create the folder if open failes
 		{
 			file = fopen(path, "w");
 			if (file == NULL)
-				g_warning("Can't open or create file %s!", file);
+				g_warning("Can't open or create file %s!", path);
 		}
 		else
 			g_warning ("Can't create directory '.glipper' in user's home directory!");
+	}
 	g_free(directory);
 	g_free(path);
 	return file;
@@ -448,6 +545,10 @@ void readHistory()
 			fread(data, size, 1, histFile);
 			data[size] = '\0';
 			history = g_slist_append(history, data);
+			if (!PrimaryClip.data)
+				PrimaryClip.data = data;
+			if (!DefaultClip.data)
+				DefaultClip.data = data;
 		}
 	}
 }
@@ -471,11 +572,6 @@ void errorDialog(gchar* error_msg, gchar* secondaryText)
 	gtk_dialog_run (GTK_DIALOG (dialog));
 
 	gtk_widget_destroy (dialog);
-}
-
-void unbindKey()
-{
-	keybinder_unbind(gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL), keyhandler);
 }
 
 const BonoboUIVerb glipper_menu_verbs [] = {
