@@ -109,7 +109,7 @@ PyObject* module_setItem(PyObject* self, PyObject* args)
 		c->data = str;
 		hasChanged = 1;
 	}
-    plugins_historyChanged();
+	plugins_historyChanged();
 	Py_RETURN_NONE;
 }
 	
@@ -117,7 +117,7 @@ PyObject* module_insertItem(PyObject* self, PyObject* args)
 {
 	eventsActive = 0;
 	char* intstr = PyString_AsString(PyTuple_GetItem(args, 0));
-	insertInHistory(intstr);
+	historyEntryActivate(NULL, intstr);
 	eventsActive = 1;
 	Py_RETURN_NONE;
 }
@@ -139,7 +139,7 @@ PyObject* module_clearHistory(PyObject* self, PyObject* args)
 	g_slist_free(history);
 	history = NULL;
 	hasChanged = 1;
-    plugins_historyChanged();
+	plugins_historyChanged();
 	Py_RETURN_NONE;
 }
 

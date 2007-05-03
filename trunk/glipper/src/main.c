@@ -81,7 +81,7 @@ void deleteHistory(GtkMenuItem* menuItem, gpointer user_data)
 	history = NULL;
 	if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
 		saveHistory();
-    plugins_historyChanged();
+	plugins_historyChanged();
 }
 
 void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data);
@@ -314,6 +314,8 @@ void insertInHistory(ClipStruct *clip)
 		deleteOldElement(gconf_client_get_int(conf, MAX_ELEMENTS_KEY, NULL));
   		if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
   			saveHistory();
+		plugins_historyChanged();
+		plugins_newItem();
   	}
 	else
 	{
