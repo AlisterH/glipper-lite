@@ -55,7 +55,6 @@ class ServerListener(threading.Thread):
 		
 
 def init():
-	print "Test"
 	#read configfile:
 	f = confFile("r")
 	password = f.getPassword()
