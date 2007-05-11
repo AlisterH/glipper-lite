@@ -20,6 +20,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <assert.h>
 #include <gtk/gtk.h>
 #include "plugin.h"
 #include "main.h"
@@ -45,12 +46,18 @@ menuEntry menuEntryList; //first element is dummy
 static PyObject* initCalled = NULL; //stores the module that is executing the init function 
 				    //atm. Needed for menu entry registration
 
+static PyThreadState* threadStateSave;
+#define LOCK PyEval_RestoreThread(threadStateSave);
+#define UNLOCK threadStateSave = PyEval_SaveThread();
+/* call LOCK before doing any operations that concern python and UNLOCK after that */
+
 ////////////////////////////////////Events:///////////////////////////////////////
 
 void plugins_newItem()
 {
 	if (!eventsActive)
 		return;
+	LOCK
 	plugin* i; 
 	for (i = pluginList.next; i != NULL; i = i->next)
 	{
@@ -64,10 +71,12 @@ void plugins_newItem()
 			Py_DECREF(args);
 		}
 	}
+	UNLOCK
 }
 
 void plugins_historyChanged()
 {
+	LOCK
 	plugin* i; 
 	for (i = pluginList.next; i != NULL; i = i->next)
 	{
@@ -77,29 +86,39 @@ void plugins_historyChanged()
 				PyErr_Print();
 		}
 	}
+	UNLOCK
 }
 
 void plugin_menu_callback(GtkMenuItem* menuItem, gpointer user_data)
 {
+	LOCK
 	PyObject* callback = (PyObject*)user_data;
 	if (!PyObject_CallObject(callback, NULL))
 		PyErr_Print();
+	UNLOCK
 }
 
 ///////////////////functions callable by python scripts://///////////////////////
 
 PyObject* module_getItem(PyObject* self, PyObject* args)
 {
+	LOCK
 	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
 	GSList* c = g_slist_nth(history, index);
 	if (c == NULL)
+	{
+		UNLOCK
 		Py_RETURN_NONE;
+	}
 	char* item = c->data;
-	return PyString_FromString(item);
+	PyObject res = PyString_FromString(item);
+	UNLOCK
+	return res;
 }
 
 PyObject* module_setItem(PyObject* self, PyObject* args)
 {
+	LOCK
 	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
 	GSList* c = g_slist_nth(history, index);
 	if (c != NULL)
@@ -109,23 +128,28 @@ PyObject* module_setItem(PyObject* self, PyObject* args)
 		c->data = str;
 		hasChanged = 1;
 	}
+	UNLOCK
 	plugins_historyChanged();
 	Py_RETURN_NONE;
 }
 	
 PyObject* module_insertItem(PyObject* self, PyObject* args)
 {
+	LOCK
 	eventsActive = 0;
 	char* intstr = PyString_AsString(PyTuple_GetItem(args, 0));
 	historyEntryActivate(NULL, intstr);
 	eventsActive = 1;
+	UNLOCK
 	Py_RETURN_NONE;
 }
 
 PyObject* module_setActiveItem(PyObject* self, PyObject* args)
 {
 	eventsActive = 0;
+	LOCK
 	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
+	UNLOCK
 	GSList* c = g_slist_nth(history, index);
 	if (c == NULL)
 		Py_RETURN_NONE;
@@ -145,10 +169,15 @@ PyObject* module_clearHistory(PyObject* self, PyObject* args)
 
 PyObject* module_registerEntry(PyObject* self, PyObject* args)
 {
+	LOCK
 	char* label = PyString_AsString(PyTuple_GetItem(args, 0));
 	PyObject* callback = PyTuple_GetItem(args, 1);
 	if (!callback || !PyCallable_Check(callback))
+	{
+		UNLOCK
 		Py_RETURN_NONE;
+	}
+	UNLOCK
 
 	menuEntry* entry = malloc(sizeof(menuEntry));
 	entry->label = g_strdup(label);
@@ -195,12 +224,16 @@ void init()
 		menuEntryList.next = NULL;
 		pyInit = 1;
 		eventsActive = 1;
+		PyEval_InitThreads();
+		threadStateSave = PyEval_SaveThread();
+		assert(threadStateSave);
 	}
 }
 
 int get_plugin_info(char* module, plugin_info* info)
 {
 	init();
+	LOCK
 	PyObject* m = NULL;
 	info->isrunning = 0;
 	//search if the plugin is already started:
@@ -245,12 +278,14 @@ int get_plugin_info(char* module, plugin_info* info)
 	}
 	else
 		PyErr_Print();
+	UNLOCK
         return res;
 }
 
 void start_plugin(char* module)
 {
 	init();
+	LOCK
 	PyObject* name = PyString_FromString(module);
 	PyObject* m = PyImport_Import(name);
 	Py_DECREF(name);
@@ -291,10 +326,14 @@ void start_plugin(char* module)
 	}
 	else
 		PyErr_Print();
+	UNLOCK
 }
 
 void stop_plugin(char* module)
 {
+	/*Notice: it seems that we can't stop the threads that were started by a plugin,
+	  so the plugin has to stop them itself. */
+	LOCK
 	plugin* i = &pluginList;
 	while (i->next != NULL)
 	{
@@ -329,11 +368,13 @@ void stop_plugin(char* module)
 			}
 			i = i->next;
 	}
+	UNLOCK
 }
 
 void plugin_showPreferences(char* module)
 {
 	init();
+	LOCK
 	//search if the plugin is already started:
 	plugin* i;
 	for (i = pluginList.next; i != NULL; i = i->next)
@@ -363,4 +404,5 @@ void plugin_showPreferences(char* module)
 		} else
 			PyErr_Print();
 	}
+	UNLOCK
 }
