@@ -33,7 +33,7 @@ typedef struct plugin {
 	PyObject* module;
 	//references to the event functions:
 	PyObject* newItemFunc;
-    PyObject* historyChangedFunc;
+	PyObject* historyChangedFunc;
 	PyObject* showPreferences;
 } plugin;
 
@@ -49,7 +49,8 @@ static PyObject* initCalled = NULL; //stores the module that is executing the in
 static PyThreadState* threadStateSave;
 #define LOCK PyEval_RestoreThread(threadStateSave);
 #define UNLOCK threadStateSave = PyEval_SaveThread();
-/* call LOCK before doing any operations that concern python and UNLOCK after that */
+/* call LOCK before doing any operations that concern python (except in the functions that were called
+ * by a python script), and UNLOCK after that. The functions callable by the plugins are NOT thread safe! */
 
 ////////////////////////////////////Events:///////////////////////////////////////
 
@@ -102,23 +103,16 @@ void plugin_menu_callback(GtkMenuItem* menuItem, gpointer user_data)
 
 PyObject* module_getItem(PyObject* self, PyObject* args)
 {
-	LOCK
 	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
 	GSList* c = g_slist_nth(history, index);
 	if (c == NULL)
-	{
-		UNLOCK
 		Py_RETURN_NONE;
-	}
 	char* item = c->data;
-	PyObject res = PyString_FromString(item);
-	UNLOCK
-	return res;
+	return PyString_FromString(item);
 }
 
 PyObject* module_setItem(PyObject* self, PyObject* args)
 {
-	LOCK
 	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
 	GSList* c = g_slist_nth(history, index);
 	if (c != NULL)
@@ -128,28 +122,23 @@ PyObject* module_setItem(PyObject* self, PyObject* args)
 		c->data = str;
 		hasChanged = 1;
 	}
-	UNLOCK
 	plugins_historyChanged();
 	Py_RETURN_NONE;
 }
 	
 PyObject* module_insertItem(PyObject* self, PyObject* args)
 {
-	LOCK
 	eventsActive = 0;
 	char* intstr = PyString_AsString(PyTuple_GetItem(args, 0));
 	historyEntryActivate(NULL, intstr);
 	eventsActive = 1;
-	UNLOCK
 	Py_RETURN_NONE;
 }
 
 PyObject* module_setActiveItem(PyObject* self, PyObject* args)
 {
 	eventsActive = 0;
-	LOCK
 	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
-	UNLOCK
 	GSList* c = g_slist_nth(history, index);
 	if (c == NULL)
 		Py_RETURN_NONE;
@@ -169,15 +158,10 @@ PyObject* module_clearHistory(PyObject* self, PyObject* args)
 
 PyObject* module_registerEntry(PyObject* self, PyObject* args)
 {
-	LOCK
 	char* label = PyString_AsString(PyTuple_GetItem(args, 0));
 	PyObject* callback = PyTuple_GetItem(args, 1);
 	if (!callback || !PyCallable_Check(callback))
-	{
-		UNLOCK
 		Py_RETURN_NONE;
-	}
-	UNLOCK
 
 	menuEntry* entry = malloc(sizeof(menuEntry));
 	entry->label = g_strdup(label);
@@ -285,6 +269,12 @@ int get_plugin_info(char* module, plugin_info* info)
 void start_plugin(char* module)
 {
 	init();
+	//search if the plugin was already started:
+	plugin* plugins;
+	for (plugins = pluginList.next; plugins != NULL; plugins = plugins->next)
+		if (strcmp(plugins->modulename, module) == 0)
+			return;
+
 	LOCK
 	PyObject* name = PyString_FromString(module);
 	PyObject* m = PyImport_Import(name);
