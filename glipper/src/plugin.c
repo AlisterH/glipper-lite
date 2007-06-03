@@ -187,36 +187,30 @@ static PyMethodDef glipperFunctions[] = {
 
 ///////////////////////Functions for the plugin system://////////////////////////
 
-void init()
+void initPlugins()
 {
-	static int pyInit = 0;
-	if (!pyInit)
-	{
-		Py_Initialize();
+	Py_Initialize();
 
-		PyObject* name = PyString_FromString("sys");
-		PyObject* m = PyImport_Import(name);
-		Py_DECREF(name);
-		PyObject* path = PyObject_GetAttrString(m, "path");
-		char* searchModule = g_build_filename(g_get_home_dir(), ".glipper/plugins", NULL);
-		PyList_Append(path, PyString_FromString(searchModule));
-		free(searchModule);
-		PyList_Append(path, PyString_FromString(PLUGINDIR));
+	PyObject* name = PyString_FromString("sys");
+	PyObject* m = PyImport_Import(name);
+	Py_DECREF(name);
+	PyObject* path = PyObject_GetAttrString(m, "path");
+	char* searchModule = g_build_filename(g_get_home_dir(), ".glipper/plugins", NULL);
+	PyList_Append(path, PyString_FromString(searchModule));
+	free(searchModule);
+	PyList_Append(path, PyString_FromString(PLUGINDIR));
 
-		Py_InitModule("glipper", glipperFunctions);
-		pluginList.next = NULL;
-		menuEntryList.next = NULL;
-		pyInit = 1;
-		eventsActive = 1;
-		PyEval_InitThreads();
-		threadStateSave = PyEval_SaveThread();
-		assert(threadStateSave);
-	}
+	Py_InitModule("glipper", glipperFunctions);
+	pluginList.next = NULL;
+	menuEntryList.next = NULL;
+	eventsActive = 1;
+	PyEval_InitThreads();
+	threadStateSave = PyEval_SaveThread();
+	assert(threadStateSave);
 }
 
 int get_plugin_info(char* module, plugin_info* info)
 {
-	init();
 	LOCK
 	PyObject* m = NULL;
 	info->isrunning = 0;
@@ -268,7 +262,6 @@ int get_plugin_info(char* module, plugin_info* info)
 
 void start_plugin(char* module)
 {
-	init();
 	//search if the plugin was already started:
 	plugin* plugins;
 	for (plugins = pluginList.next; plugins != NULL; plugins = plugins->next)
@@ -363,7 +356,6 @@ void stop_plugin(char* module)
 
 void plugin_showPreferences(char* module)
 {
-	init();
 	LOCK
 	//search if the plugin is already started:
 	plugin* i;

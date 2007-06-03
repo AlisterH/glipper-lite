@@ -379,8 +379,8 @@ void processContent(ClipStruct *clip)
 
 void historyMenuDeactivate(GtkMenu *menu, gpointer user_data)
 {
-    GtkWidget *applet = GTK_WIDGET(user_data);
-	gtk_widget_set_state (applet, GTK_STATE_NORMAL);
+    GtkWidget *image = GTK_WIDGET(user_data);
+	gtk_widget_set_state (image, GTK_STATE_NORMAL);
 }
 
 void historyMenuPosition(GtkMenu *menu, gint *_x, gint *_y, gboolean *push_in, gpointer user_data)
@@ -605,7 +605,8 @@ void initGlipper()
 
 	initPreferences(conf);
    initPluginDialog(conf);
-
+   initPlugins();
+   
 	//autostart plugins:
 	GSList* list = gconf_client_get_list(conf, AUTOSTART_PLUGINS_KEY, GCONF_VALUE_STRING, NULL);
 	for (;list != NULL; list = g_slist_next(list))
@@ -644,6 +645,8 @@ glipper_applet_fill (PanelApplet *applet,
                   "button_press_event",
                   G_CALLBACK (AppletIconClicked),
                   NULL);
+	
+	panel_applet_set_flags(PANEL_APPLET (applet), PANEL_APPLET_EXPAND_MINOR);
 	
 	panel_applet_setup_menu_from_file (PANEL_APPLET (applet),
                                    NULL,

@@ -62,3 +62,7 @@ void plugins_historyChanged();
 void plugin_showPreferences(char* module);
 
 void plugin_menu_callback(GtkMenuItem* menuItem, gpointer user_data);
+
+//Extern functions:
+void initPlugins();
+
