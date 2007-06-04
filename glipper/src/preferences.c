@@ -34,7 +34,8 @@ extern int hasChanged;
 extern GSList* history;
 extern void keyhandler(char *keystring, gpointer user_data);
 extern GtkTooltips* toolTip; //The applet's tooltip
-extern GtkWidget* eventbox; //The applet's eventbox
+extern GtkWidget* image;
+extern gchar* popupKey;
 
 GtkWidget* historyLength;
 GtkWidget* itemLength;
@@ -130,12 +131,13 @@ key_combination_key_changed_callback(GConfClient *client,
 		    gpointer     user_data)
 {
 	hasChanged = 1;
-	keybinder_unbind(gconf_client_get_string(client, KEY_COMBINATION_KEY, NULL), keyhandler); //TODO: doesn't work
+	keybinder_unbind(popupKey, keyhandler);
 	GConfValue *value = gconf_entry_get_value(entry);
-	keybinder_bind(gconf_value_get_string(value), keyhandler, NULL);
-	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
-						gconf_value_get_string(value)), "Glipper");
-	gtk_entry_set_text((GtkEntry*)keyCombEntry, gconf_value_get_string(value));
+	popupKey = g_strdup(gconf_value_get_string(value));
+	keybinder_bind(popupKey, keyhandler, NULL);
+	gtk_tooltips_set_tip(toolTip, GTK_WIDGET(user_data), g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
+						popupKey), "Glipper");
+	gtk_entry_set_text((GtkEntry*)keyCombEntry, popupKey);
 }
 
 //Sets initial state of widgets
@@ -302,7 +304,7 @@ void showPreferences(gpointer data)
 	g_object_unref(gladeWindow);
 }
 
-void initPreferences(GConfClient* conf)
+void initPreferences(GConfClient* conf, PanelApplet *applet)
 {
 	g_return_if_fail (conf != NULL);
 	g_return_if_fail (global_conf == NULL);
@@ -349,6 +351,6 @@ void initPreferences(GConfClient* conf)
 	gconf_client_notify_add (conf,
                            KEY_COMBINATION_KEY,
                            key_combination_key_changed_callback,
-                           NULL,
+                           applet,
                            NULL, NULL);
 }
