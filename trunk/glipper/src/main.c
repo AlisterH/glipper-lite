@@ -45,8 +45,9 @@ GSList* history = NULL;
 GtkWidget* historyMenu = NULL;
 GtkWidget* popupMenu;
 GtkTooltips* toolTip; //The applet's tooltip
-GtkWidget* eventbox; //The applet's eventbox
+GtkWidget* image;
 gint mainTimeout;
+gchar* popupKey;
 int hasChanged = 1;
 
 void errorDialog(gchar* error_msg, gchar* secondaryText);
@@ -584,7 +585,7 @@ const BonoboUIVerb glipper_menu_verbs [] = {
         BONOBO_UI_VERB_END
 };
 
-void initGlipper()
+void initGlipper(PanelApplet *applet)
 {	
 	getClipboards();
 
@@ -602,8 +603,10 @@ void initGlipper()
 	gconf_client_add_dir (conf, PATH,
                          GCONF_CLIENT_PRELOAD_NONE,
                          NULL);
-
-	initPreferences(conf);
+   
+   popupKey = g_strdup(gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL));
+   
+	initPreferences(conf, applet);
    initPluginDialog(conf);
    initPlugins();
    
@@ -622,26 +625,23 @@ glipper_applet_fill (PanelApplet *applet,
 		gpointer     data)
 {
 	GdkPixbuf *pixbuf;
-	GtkWidget *image;
 	
-	initGlipper();
+	initGlipper(applet);
 	
 	if (strcmp (iid, "OAFIID:GlipperApplet") != 0)
 		return FALSE;
 	
 	pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", NULL);
 	image = gtk_image_new_from_pixbuf(pixbuf);
-	eventbox = gtk_event_box_new ();
 	
 	toolTip = gtk_tooltips_new ();
 
-	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
-						gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL)), "Glipper");
+	gtk_tooltips_set_tip(toolTip, GTK_WIDGET(applet), g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
+						popupKey), "Glipper");
 	
-	gtk_container_add(GTK_CONTAINER (eventbox), image);
-	gtk_container_add(GTK_CONTAINER(applet), eventbox);
+	gtk_container_add(GTK_CONTAINER (applet), GTK_WIDGET(image));
 	
-	g_signal_connect (G_OBJECT (eventbox), 
+	g_signal_connect (G_OBJECT (applet), 
                   "button_press_event",
                   G_CALLBACK (AppletIconClicked),
                   NULL);

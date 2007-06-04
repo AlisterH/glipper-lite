@@ -20,6 +20,7 @@
 #pragma once
 	
 #include <gconf/gconf-client.h>
+#include <panel-applet.h>
 
 #define PATH "/apps"
 #define KEY_PREFIX PATH "/glipper"
@@ -34,4 +35,4 @@
 
 void showPreferences (gpointer data);
 
-void initPreferences(GConfClient* conf);
+void initPreferences(GConfClient* conf, PanelApplet *applet);
