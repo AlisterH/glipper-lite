@@ -48,6 +48,7 @@ GtkTooltips* toolTip; //The applet's tooltip
 GtkWidget* image;
 gint mainTimeout;
 gchar* popupKey;
+gint appletSize = 22;
 int hasChanged = 1;
 
 void errorDialog(gchar* error_msg, gchar* secondaryText);
@@ -155,7 +156,7 @@ void createHistMenu()
 		GError* pix_error = NULL;
 
 		menuHeader = gtk_image_menu_item_new_with_label("");
-		pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error);
+		pixbuf = gtk_icon_theme_load_icon (gtk_icon_theme_get_default(), "glipper", 22, 0, &pix_error);
 
 		//In case we cannot load icon, display error message and exit
 		if (pix_error != NULL)
@@ -380,8 +381,8 @@ void processContent(ClipStruct *clip)
 
 void historyMenuDeactivate(GtkMenu *menu, gpointer user_data)
 {
-    GtkWidget *image = GTK_WIDGET(user_data);
-	gtk_widget_set_state (image, GTK_STATE_NORMAL);
+   GtkWidget *image = GTK_WIDGET(user_data);
+   gtk_widget_set_state (image, GTK_STATE_NORMAL);
 }
 
 void historyMenuPosition(GtkMenu *menu, gint *_x, gint *_y, gboolean *push_in, gpointer user_data)
@@ -468,7 +469,6 @@ void show_about(BonoboUIComponent *uic, PanelApplet *glipper_applet, const gchar
 "License along with this library; if not, write to the Free Software\n"
 "Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA";
 
-	GError* pix_error = NULL;
 	gtk_show_about_dialog(NULL, 
 		"authors", authors,
 		"copyright", "Copyright © 2006 Sven Rech",
@@ -476,7 +476,7 @@ void show_about(BonoboUIComponent *uic, PanelApplet *glipper_applet, const gchar
 		"license", license,
 		"name", "Glipper",
 		"comments", _("Clipboardmanager for Gnome"),
-		"logo", gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error),
+		"logo-icon-name", "glipper",
 		"website", "http://glipper.sourceforge.net/",
 		"version", VERSION,
 		 NULL);
@@ -598,7 +598,7 @@ void initGlipper(PanelApplet *applet)
 	if (gconf_client_get_bool(conf, SAVE_HISTORY_KEY, NULL))
 		readHistory();
 
-	mainTimeout = g_timeout_add(gconf_client_get_int(conf, CHECK_INTERVAL_KEY, NULL), checkClipboard, NULL);
+	mainTimeout = g_timeout_add(gconf_client_get_int(conf, CHECK_INTERVAL_KEY, NULL), checkClipboard, applet);
 
 	gconf_client_add_dir (conf, PATH,
                          GCONF_CLIENT_PRELOAD_NONE,
@@ -619,20 +619,41 @@ void initGlipper(PanelApplet *applet)
 	}
 }
 
+void AppletSizeAllocate (GtkWidget *widget, GtkAllocation *allocation)
+{
+	int iconSize;
+   GdkPixbuf *pixbuf;
+   
+   if(allocation->height == appletSize) return;
+   
+   appletSize = allocation->height;
+   iconSize = appletSize - 2; // Padding
+   
+   // We do this to prevent icon scaling
+   if (iconSize <= 21)
+      iconSize = 16;
+   else if (iconSize <= 31)
+      iconSize = 22;
+   else if (iconSize <= 47)
+      iconSize = 32;
+      
+   pixbuf = gtk_icon_theme_load_icon( gtk_icon_theme_get_default(), "glipper", iconSize, 0, NULL);
+   gtk_image_set_from_pixbuf(GTK_IMAGE(image), pixbuf);
+   g_object_unref(pixbuf);
+}
+
 gboolean 
 glipper_applet_fill (PanelApplet *applet,
 		const char  *iid,
 		gpointer     data)
-{
-	GdkPixbuf *pixbuf;
-	
+{	
 	initGlipper(applet);
 	
 	if (strcmp (iid, "OAFIID:GlipperApplet") != 0)
 		return FALSE;
-	
-	pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", NULL);
-	image = gtk_image_new_from_pixbuf(pixbuf);
+		
+	gtk_window_set_default_icon_name ("glipper");
+	image = gtk_image_new();
 	
 	toolTip = gtk_tooltips_new ();
 
@@ -645,6 +666,11 @@ glipper_applet_fill (PanelApplet *applet,
                   "button_press_event",
                   G_CALLBACK (AppletIconClicked),
                   NULL);
+	
+	g_signal_connect (GTK_WIDGET (applet),
+	               "size_allocate",
+	               G_CALLBACK (AppletSizeAllocate),
+	               NULL);
 	
 	panel_applet_set_flags(PANEL_APPLET (applet), PANEL_APPLET_EXPAND_MINOR);
 	
