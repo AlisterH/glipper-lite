@@ -380,22 +380,28 @@ void processContent(ClipStruct *clip)
   	return 1;
   }
 
-void historyMenuDeactivate(GtkMenu *menu, gpointer user_data)
-{
-   GtkWidget *image = GTK_WIDGET(user_data);
-   gtk_widget_set_state (image, GTK_STATE_NORMAL);
-}
-
 void historyMenuPosition(GtkMenu *menu, gint *_x, gint *_y, gboolean *push_in, gpointer user_data)
 {
-    GtkWidget *widget = GTK_WIDGET (user_data);
+    GtkRequisition requisition;
+    gtk_widget_size_request(GTK_WIDGET (menu), &requisition);
+    GtkWidget *applet = gtk_menu_get_attach_widget(menu);
     gint x, y;
+    
+    gdk_window_get_origin (applet->window, &x, &y);
 
-    gdk_window_get_origin (widget->window, &x, &y);
-
-    y += widget->allocation.height;
-    *_x = x;
+    if(y + requisition.height > gdk_screen_get_height(gtk_widget_get_screen(applet)))
+      y -= requisition.height;
+    else
+      y += applet->allocation.height;
+      
     *_y = y;
+    *_x = x;
+}
+
+void historyMenuDeactivate(GtkMenu *menu, gpointer user_data)
+{
+   GtkWidget *applet = gtk_menu_get_attach_widget(menu);
+   gtk_widget_set_state (applet, GTK_STATE_NORMAL);
 }
 
 gboolean AppletIconClicked(GtkWidget* widget, GdkEventButton *event, gpointer user_data)
@@ -407,16 +413,14 @@ gboolean AppletIconClicked(GtkWidget* widget, GdkEventButton *event, gpointer us
         createHistMenu();
     }
 
-    // This is needed to set back the normal state to the applet when the history menu gets deactivated
-    g_signal_connect(G_OBJECT(historyMenu), "deactivate", G_CALLBACK(historyMenuDeactivate), widget);
-
     hasChanged = 0;
 
 	gtk_widget_set_state (GTK_WIDGET (widget), GTK_STATE_SELECTED);
-
-    gtk_menu_popup ((GtkMenu*)historyMenu, NULL, NULL, historyMenuPosition, widget,
-				    1, gtk_get_current_event_time());
-    return TRUE;
+	gtk_menu_attach_to_widget(GTK_MENU (historyMenu), widget, NULL);
+   g_signal_connect(G_OBJECT (historyMenu), "deactivate", G_CALLBACK (historyMenuDeactivate), NULL);
+   gtk_menu_popup (GTK_MENU (historyMenu), NULL, NULL, historyMenuPosition, NULL, 1, gtk_get_current_event_time()); 
+   
+   return TRUE;
 }
 
 void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
