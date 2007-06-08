@@ -91,7 +91,7 @@ class manager:
         self.staticItemsModel, iter = self.staticItemsSelection.get_selected()
         if iter:
             glipper.insertItem(self.staticItemsModel.get_value(iter, 0))
-            glipper.setActiveItem(0)
+            #glipper.setActiveItem(0)  #not really needed
 
 static_items_manager = manager()
 

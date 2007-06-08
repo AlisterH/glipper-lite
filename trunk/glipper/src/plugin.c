@@ -21,7 +21,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-#include <gtk/gtk.h>
 #include "plugin.h"
 #include "main.h"
 
@@ -46,11 +45,12 @@ menuEntry menuEntryList; //first element is dummy
 static PyObject* initCalled = NULL; //stores the module that is executing the init function 
 				    //atm. Needed for menu entry registration
 
-static PyThreadState* threadStateSave;
-#define LOCK PyEval_RestoreThread(threadStateSave);
-#define UNLOCK threadStateSave = PyEval_SaveThread();
-/* call LOCK before doing any operations that concern python (except in the functions that were called
- * by a python script), and UNLOCK after that. The functions callable by the plugins are NOT thread safe! */
+static int lockCount;
+static PyGILState_STATE threadStateSave;
+#define LOCK if (lockCount == 0) { threadStateSave = PyGILState_Ensure(); g_printf("LOCK\n"); } lockCount++;
+#define UNLOCK if (lockCount == 1) { PyGILState_Release(threadStateSave); g_printf("UNLOCK\n"); } lockCount--; g_assert(lockCount > -1);
+/* call LOCK before doing any operations that concern python, and UNLOCK after that. These operations also work recursive.
+ * The functions callable by the plugins are thread safe! */
 
 ////////////////////////////////////Events:///////////////////////////////////////
 
@@ -59,6 +59,7 @@ void plugins_newItem()
 	if (!eventsActive)
 		return;
 	LOCK
+	g_static_rec_mutex_lock(&mutex);
 	plugin* i; 
 	for (i = pluginList.next; i != NULL; i = i->next)
 	{
@@ -72,6 +73,7 @@ void plugins_newItem()
 			Py_DECREF(args);
 		}
 	}
+	g_static_rec_mutex_unlock(&mutex);
 	UNLOCK
 }
 
@@ -103,17 +105,27 @@ void plugin_menu_callback(GtkMenuItem* menuItem, gpointer user_data)
 
 PyObject* module_getItem(PyObject* self, PyObject* args)
 {
+	LOCK
 	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
+	g_static_rec_mutex_lock(&mutex);
 	GSList* c = g_slist_nth(history, index);
+	g_static_rec_mutex_unlock(&mutex);
 	if (c == NULL)
+	{
+		UNLOCK
 		Py_RETURN_NONE;
+	}
 	char* item = c->data;
-	return PyString_FromString(item);
+	PyObject* res = PyString_FromString(item);
+	UNLOCK
+	return res;
 }
 
 PyObject* module_setItem(PyObject* self, PyObject* args)
 {
+	LOCK
 	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
+	g_static_rec_mutex_lock(&mutex);
 	GSList* c = g_slist_nth(history, index);
 	if (c != NULL)
 	{
@@ -122,53 +134,78 @@ PyObject* module_setItem(PyObject* self, PyObject* args)
 		c->data = str;
 		hasChanged = 1;
 	}
+	g_static_rec_mutex_unlock(&mutex);
+	UNLOCK
 	plugins_historyChanged();
 	Py_RETURN_NONE;
+}
+
+gboolean insertItemSignal(gpointer data)
+{
+	char* str = (char*)data;
+	historyEntryActivate(NULL, str);
+	g_free(data);
+	return FALSE;
 }
 	
 PyObject* module_insertItem(PyObject* self, PyObject* args)
 {
+	LOCK
 	eventsActive = 0;
 	char* intstr = PyString_AsString(PyTuple_GetItem(args, 0));
-	historyEntryActivate(NULL, intstr);
+	g_idle_add(&insertItemSignal, g_strdup(intstr));
 	eventsActive = 1;
+	UNLOCK
 	Py_RETURN_NONE;
 }
 
 PyObject* module_setActiveItem(PyObject* self, PyObject* args)
 {
+	LOCK
 	eventsActive = 0;
 	int index = PyInt_AsLong(PyTuple_GetItem(args, 0));
+	g_static_rec_mutex_lock(&mutex);
 	GSList* c = g_slist_nth(history, index);
+	g_static_rec_mutex_unlock(&mutex);
 	if (c == NULL)
 		Py_RETURN_NONE;
-	historyEntryActivate(NULL, c->data);
+	g_idle_add(&insertItemSignal, g_strdup(c->data));
 	eventsActive = 1;
+	UNLOCK
 	Py_RETURN_NONE;
 }
 	
 PyObject* module_clearHistory(PyObject* self, PyObject* args)
 {
+	g_static_rec_mutex_lock(&mutex);
 	g_slist_free(history);
 	history = NULL;
 	hasChanged = 1;
+	g_static_rec_mutex_unlock(&mutex);
 	plugins_historyChanged();
 	Py_RETURN_NONE;
 }
 
 PyObject* module_registerEntry(PyObject* self, PyObject* args)
 {
+	LOCK
 	char* label = PyString_AsString(PyTuple_GetItem(args, 0));
 	PyObject* callback = PyTuple_GetItem(args, 1);
 	if (!callback || !PyCallable_Check(callback))
+	{
+		UNLOCK
 		Py_RETURN_NONE;
+	}
+	UNLOCK
 
+	g_static_rec_mutex_lock(&mutex);
 	menuEntry* entry = malloc(sizeof(menuEntry));
 	entry->label = g_strdup(label);
 	entry->callback = callback;
 	entry->next = menuEntryList.next;
 	entry->ownerModule = initCalled;
 	menuEntryList.next = entry;
+	g_static_rec_mutex_unlock(&mutex);
 
 	hasChanged = 1;
 	Py_RETURN_NONE;
@@ -204,9 +241,9 @@ void initPlugins()
 	pluginList.next = NULL;
 	menuEntryList.next = NULL;
 	eventsActive = 1;
+	lockCount = 0;
 	PyEval_InitThreads();
-	threadStateSave = PyEval_SaveThread();
-	assert(threadStateSave);
+	//PyEval_ReleaseLock();
 }
 
 int get_plugin_info(char* module, plugin_info* info)

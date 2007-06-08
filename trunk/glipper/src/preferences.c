@@ -25,6 +25,7 @@
 #include <glade/glade.h>
 #include "preferences.h"
 #include "utils/glipper-i18n.h"
+#include "main.h"
 
 #define GLADE_XML_FILE "glipper-properties.glade"
 
@@ -32,7 +33,6 @@ static GConfClient* global_conf;
 
 extern int hasChanged;
 extern GSList* history;
-extern void keyhandler(char *keystring, gpointer user_data);
 extern GtkTooltips* toolTip; //The applet's tooltip
 extern GtkWidget* image;
 extern gchar* popupKey;

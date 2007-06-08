@@ -19,6 +19,7 @@
 
 #pragma once
 
+#include <gtk/gtk.h>
 #include <Python.h>
 #include <gconf/gconf-client.h>
 
