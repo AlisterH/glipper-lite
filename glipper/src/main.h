@@ -18,6 +18,8 @@
  */
 
 #pragma once
+
+#include <gtk/gtk.h>
 	
 //extern variables:
 extern int maxElements; 
@@ -26,14 +28,16 @@ extern gboolean usePrimary;
 extern gboolean useDefault; 
 extern gboolean markDefault; 
 extern gboolean weSaveHistory;
-extern char* keyComb;
+extern GtkTooltips* toolTip;
+extern GtkWidget* image;
+extern gchar* popupKey;
 
 extern GSList* history;
 extern int hasChanged;
+extern GStaticRecMutex mutex;
 
 //extern functions:
 void savePreferences();
 void applyPreferences();
-void unbindKey();
-void insertInHistory(gchar* content);
-void deleteOldElement(int limit);
+void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data);
+void keyhandler(char *keystring, gpointer user_data);

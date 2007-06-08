@@ -17,7 +17,6 @@
  * Boston, MA 02111-1307, USA.
  */
 				 
-#include <gtk/gtk.h>
 #include <sys/stat.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,6 +26,7 @@
 #include "utils/glipper-i18n.h"
 #include "utils/keybinder.h"
 #include "plugin.h"
+#include "main.h"
 #include <libgnome/gnome-help.h>
 #include <panel-applet.h>
 
@@ -50,6 +50,7 @@ gint mainTimeout;
 gchar* popupKey;
 gint appletSize = 22;
 int hasChanged = 1;
+GStaticRecMutex mutex; //a global mutex for making the used data structures thread safe
 
 void errorDialog(gchar* error_msg, gchar* secondaryText);
 void saveHistory();
@@ -85,8 +86,6 @@ void deleteHistory(GtkMenuItem* menuItem, gpointer user_data)
 		saveHistory();
 	plugins_historyChanged();
 }
-
-void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data);
 
 //add history entry to menu:
 GtkWidget* addHistMenuItem(gchar* item)
@@ -370,12 +369,14 @@ void processContent(ClipStruct *clip)
   
   gboolean checkClipboard(gpointer data)
   {
+	g_static_rec_mutex_lock(&mutex);
   	g_source_remove(mainTimeout);
   	if (gconf_client_get_bool(conf, USE_PRIMARY_CLIPBOARD_KEY, NULL))
 		processContent(&DefaultClip);
 	if (gconf_client_get_bool(conf, USE_DEFAULT_CLIPBOARD_KEY, NULL))
 		processContent(&PrimaryClip);
   	mainTimeout = g_timeout_add(500, checkClipboard, NULL);
+	g_static_rec_mutex_unlock(&mutex);
   	return 1;
   }
 
@@ -420,10 +421,12 @@ gboolean AppletIconClicked(GtkWidget* widget, GdkEventButton *event, gpointer us
 
 void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
 {
+	g_static_rec_mutex_lock(&mutex);
 	if (gconf_client_get_bool(conf, USE_PRIMARY_CLIPBOARD_KEY, NULL))
 		gtk_clipboard_set_text(PrimaryClip.board, (gchar*)user_data, -1);
 	if (gconf_client_get_bool(conf, USE_DEFAULT_CLIPBOARD_KEY, NULL))
 		gtk_clipboard_set_text(DefaultClip.board, (gchar*)user_data, -1);
+	g_static_rec_mutex_unlock(&mutex);
 	checkClipboard(NULL);
 	hasChanged = 1;
 }
@@ -587,8 +590,8 @@ const BonoboUIVerb glipper_menu_verbs [] = {
 
 void initGlipper(PanelApplet *applet)
 {	
+	g_static_rec_mutex_init(&mutex);
 	getClipboards();
-
 	conf = gconf_client_get_default();
 
 	//Setup keyboard shortcut
@@ -604,11 +607,11 @@ void initGlipper(PanelApplet *applet)
                          GCONF_CLIENT_PRELOAD_NONE,
                          NULL);
    
-   popupKey = g_strdup(gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL));
-   
+	popupKey = g_strdup(gconf_client_get_string(conf, KEY_COMBINATION_KEY, NULL));
+
 	initPreferences(conf, applet);
-   initPluginDialog(conf);
-   initPlugins();
+	initPluginDialog(conf);
+	initPlugins();
    
 	//autostart plugins:
 	GSList* list = gconf_client_get_list(conf, AUTOSTART_PLUGINS_KEY, GCONF_VALUE_STRING, NULL);

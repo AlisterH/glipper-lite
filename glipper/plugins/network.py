@@ -1,20 +1,25 @@
-#This plugin doesn't work yet, because python threads don't work in glipper at the moment.
+#TODO: communicate over a secure connection
+#TODO: think about a password mechanism that makes sense
 
 import threading, socket, os, os.path, glipper
 
 GLIPPERPORT = 10368
 
 allConnections = []
+inserting = False
 
 def getInfo():
 	info = {"Name": "network connection", 
-		"Description": "(Doesn't work!!!) Let\'s you connect multiple glipper processes via network to synchronize their history",
+		"Description": "Let\'s you connect multiple glipper processes via network to synchronize their history",
 		"Preferences": True}
 	return info
 
 def newItem(newItem):
+	if inserting:
+		return
 	if newItem == '':
 		return
+	print newItem
 	for sock in allConnections:
 		try:
 			sock.send(newItem)
@@ -25,17 +30,22 @@ def newItem(newItem):
 #listens for new items from the other side of the connection:
 class StringListener(threading.Thread):
 	def __init__(self, socket):
-		threading.__init__(self)
+		threading.Thread.__init__(self)
 		self.socket = socket
 	def run(self):
 		while 1:
 			try:
 				string = self.socket.recv(4096)
+				if not string:
+					raise socket.error
 			except socket.error:
 				allConnections.remove(self.socket)
 				self.socket.close()
 				return
+			print string
+			inserting = True
 			glipper.insertItem(string)
+			inserting = False
 
 #listens for incoming connections (like a server does):
 class ServerListener(threading.Thread):
@@ -47,7 +57,7 @@ class ServerListener(threading.Thread):
 			try:
 				s.listen(1)
 				conn, addr = s.accept()
-				print "connection %i accepted" % addr
+				print "connection %s accepted" % addr[0]
 			except socket.error:
 				continue
 			StringListener(conn).start()
@@ -71,9 +81,9 @@ def init():
 			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 			s.connect((x, GLIPPERPORT))
 			allConnections.append(s)
-			print "connected with %i" % x
+			print "connected with %s" % x
 		except socket.error:
-			print "can\'t connect with %i" % x
+			print "can\'t connect with %s" % x
 			s.close()
 			continue
 		StringListener(s).start()
