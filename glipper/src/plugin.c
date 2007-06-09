@@ -46,9 +46,9 @@ static PyObject* initCalled = NULL; //stores the module that is executing the in
 				    //atm. Needed for menu entry registration
 
 static int lockCount;
-static PyGILState_STATE threadStateSave;
-#define LOCK if (lockCount == 0) { threadStateSave = PyGILState_Ensure(); g_printf("LOCK\n"); } lockCount++;
-#define UNLOCK if (lockCount == 1) { PyGILState_Release(threadStateSave); g_printf("UNLOCK\n"); } lockCount--; g_assert(lockCount > -1);
+static PyThreadState* threadStateSave;
+#define LOCK if (lockCount == 0) { PyEval_RestoreThread(threadStateSave); } lockCount++;
+#define UNLOCK if (lockCount == 1) { threadStateSave = PyEval_SaveThread(); } lockCount--; g_assert(lockCount > -1);
 /* call LOCK before doing any operations that concern python, and UNLOCK after that. These operations also work recursive.
  * The functions callable by the plugins are thread safe! */
 
@@ -243,7 +243,7 @@ void initPlugins()
 	eventsActive = 1;
 	lockCount = 0;
 	PyEval_InitThreads();
-	//PyEval_ReleaseLock();
+	threadStateSave = PyEval_SaveThread(); //releases the lock
 }
 
 int get_plugin_info(char* module, plugin_info* info)
