@@ -69,6 +69,7 @@ class manager:
         for item in static_items:
             self.staticItemsModel.append([item])
         gladeFile.signal_autoconnect(self)
+	gtk.main()
 
 	# Events:
 

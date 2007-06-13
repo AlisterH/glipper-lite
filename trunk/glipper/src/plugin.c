@@ -47,8 +47,8 @@ static PyObject* initCalled = NULL; //stores the module that is executing the in
 
 static int lockCount;
 static PyThreadState* threadStateSave;
-#define LOCK if (lockCount == 0) { PyEval_RestoreThread(threadStateSave); } lockCount++;
-#define UNLOCK if (lockCount == 1) { threadStateSave = PyEval_SaveThread(); } lockCount--; g_assert(lockCount > -1);
+#define LOCK if (lockCount == 0) { PyEval_RestoreThread(threadStateSave); printf("LOCK\n"); } lockCount++;
+#define UNLOCK if (lockCount == 1) { threadStateSave = PyEval_SaveThread(); printf("UNLOCK\n"); } lockCount--; g_assert(lockCount > -1);
 /* call LOCK before doing any operations that concern python, and UNLOCK after that. These operations also work recursive.
  * The functions callable by the plugins are thread safe! */
 
