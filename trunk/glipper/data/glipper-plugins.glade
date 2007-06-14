@@ -6,7 +6,6 @@
     <property name="width_request">655</property>
     <property name="height_request">386</property>
     <property name="visible">True</property>
-    <property name="border_width">4</property>
     <property name="title" translatable="yes">Plugins</property>
     <property name="window_position">GTK_WIN_POS_CENTER</property>
     <child>

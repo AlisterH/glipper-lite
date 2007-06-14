@@ -649,6 +649,11 @@ void AppletSizeAllocate (GtkWidget *widget, GtkAllocation *allocation)
    g_object_unref(pixbuf);
 }
 
+void AppletDestroy (GtkWidget *widget, gpointer user_data)
+{
+   plugins_stop();
+}
+
 gboolean 
 glipper_applet_fill (PanelApplet *applet,
 		const char  *iid,
@@ -679,6 +684,11 @@ glipper_applet_fill (PanelApplet *applet,
 	               G_CALLBACK (AppletSizeAllocate),
 	               NULL);
 	
+	g_signal_connect (GTK_WIDGET (applet),
+	               "destroy",
+	               G_CALLBACK (AppletDestroy),
+	               NULL);
+	               
 	panel_applet_set_flags(PANEL_APPLET (applet), PANEL_APPLET_EXPAND_MINOR);
 	
 	panel_applet_setup_menu_from_file (PANEL_APPLET (applet),
