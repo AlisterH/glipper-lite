@@ -66,11 +66,16 @@ class manager:
         self.staticItemsSelection = self.staticItemsTree.get_selection()
         self.staticItemsSelection.set_mode (gtk.SELECTION_SINGLE)
         self.updateHistoryModel()
+        
         for item in static_items:
             self.staticItemsModel.append([item])
+            
         gladeFile.signal_autoconnect(self)
-	gtk.main()
-
+        gtk.main()
+   
+    def destroy(self):
+        self.managerWindow.destroy()
+        
 	# Events:
 
     def on_addButton_clicked(self, widget):
@@ -105,6 +110,9 @@ def init():
 
 def historyChanged():
     static_items_manager.updateHistoryModel()
+
+def stop():
+    gtk.main_quit()
 
 def getInfo():
 	info = {"Name": "Static Items",

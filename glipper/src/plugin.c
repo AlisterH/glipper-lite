@@ -33,6 +33,7 @@ typedef struct plugin {
 	//references to the event functions:
 	PyObject* newItemFunc;
 	PyObject* historyChangedFunc;
+	PyObject* stopFunc;
 	PyObject* showPreferences;
 } plugin;
 
@@ -90,6 +91,19 @@ void plugins_historyChanged()
 		}
 	}
 	UNLOCK
+}
+
+void plugins_stop()
+{
+   LOCK
+   plugin* i;
+   
+   for(i = pluginList.next; i != NULL; i = i->next)
+      if(i->stopFunc)
+         if(!PyObject_CallObject(i->stopFunc, NULL))
+            PyErr_Print();
+   
+   UNLOCK
 }
 
 void plugin_menu_callback(GtkMenuItem* menuItem, gpointer user_data)
@@ -325,6 +339,10 @@ void start_plugin(char* module)
 			new->historyChangedFunc = PyObject_GetAttrString(m, "historyChanged");
 		else
 			new->historyChangedFunc = NULL;
+		if (PyObject_HasAttrString(m, "stop"))
+			new->stopFunc = PyObject_GetAttrString(m, "stop");
+		else
+			new->stopFunc = NULL;
 		if (PyObject_HasAttrString(m, "showPreferences"))
 			new->showPreferences = PyObject_GetAttrString(m, "showPreferences");
 		else
