@@ -425,7 +425,9 @@ gboolean AppletIconClicked(GtkWidget* widget, GdkEventButton *event, gpointer us
 
 void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
 {
+	printf("locking mutex\n");
 	g_static_rec_mutex_lock(&mutex);
+	printf("finish locking mutex\n");
 	if (gconf_client_get_bool(conf, USE_PRIMARY_CLIPBOARD_KEY, NULL))
 		gtk_clipboard_set_text(PrimaryClip.board, (gchar*)user_data, -1);
 	if (gconf_client_get_bool(conf, USE_DEFAULT_CLIPBOARD_KEY, NULL))

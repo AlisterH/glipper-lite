@@ -19,7 +19,6 @@ def newItem(newItem):
 		return
 	if newItem == '':
 		return
-	print newItem
 	for sock in allConnections:
 		try:
 			sock.send(newItem)
@@ -43,6 +42,7 @@ class StringListener(threading.Thread):
 				self.socket.close()
 				return
 			print string
+			global inserting
 			inserting = True
 			glipper.insertItem(string)
 			inserting = False

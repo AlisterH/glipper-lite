@@ -154,20 +154,13 @@ PyObject* module_setItem(PyObject* self, PyObject* args)
 	Py_RETURN_NONE;
 }
 
-gboolean insertItemSignal(gpointer data)
-{
-	char* str = (char*)data;
-	historyEntryActivate(NULL, str);
-	g_free(data);
-	return FALSE;
-}
-	
 PyObject* module_insertItem(PyObject* self, PyObject* args)
 {
 	LOCK
 	eventsActive = 0;
 	char* intstr = PyString_AsString(PyTuple_GetItem(args, 0));
-	g_idle_add(&insertItemSignal, g_strdup(intstr));
+	historyEntryActivate(NULL, intstr);
+	//g_free(intstr);
 	eventsActive = 1;
 	UNLOCK
 	Py_RETURN_NONE;
@@ -183,7 +176,7 @@ PyObject* module_setActiveItem(PyObject* self, PyObject* args)
 	g_static_rec_mutex_unlock(&mutex);
 	if (c == NULL)
 		Py_RETURN_NONE;
-	g_idle_add(&insertItemSignal, g_strdup(c->data));
+	historyEntryActivate(NULL, c->data);
 	eventsActive = 1;
 	UNLOCK
 	Py_RETURN_NONE;
