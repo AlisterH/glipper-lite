@@ -3,11 +3,6 @@
 # (C) 2007 Sven Rech.
 # Licensed under the GNU GPL.
 
-PROFILE = False
-if PROFILE:
-	import statprof
-	statprof.start()
-
 import gobject
 gobject.threads_init()
 
@@ -76,7 +71,6 @@ $ glipper [OPTIONS]
 OPTIONS:
 	-h, --help		Print this help notice.
 	-w, --window	Launch the applet in a standalone window for test purposes (default=no).
-	-t, --trace		Use tracing (default=no).
 	"""
 	sys.exit()
 	
@@ -85,7 +79,7 @@ if __name__ == "__main__":
 	do_trace = False
 	
 	try:
-		opts, args = getopt.getopt(sys.argv[1:], "hwcpt", ["help", "window", "trace"])
+		opts, args = getopt.getopt(sys.argv[1:], "hw", ["help", "window"])
 	except getopt.GetoptError:
 		# Unknown args were passed, we fallback to bahave as if
 		# no options were passed
@@ -98,30 +92,17 @@ if __name__ == "__main__":
 			usage()
 		elif o in ("-w", "--window"):
 			standalone = True
-		elif o in ("-t", "--trace"):
-			do_trace = True
 
 	print 'Running with options:', {
 		'standalone': standalone,
-		'do_trace' : do_trace
 	}
 	
 	if standalone:
 		import gnome
 		gnome.init(glipper.defs.PACKAGE, glipper.defs.VERSION)
 		build_window()
-	
-		# run the new command using the given trace
-		if do_trace:
-			import trace
-			trace = trace.Trace(
-				ignoredirs=[sys.prefix],
-				ignoremods=['sys', 'os', 'getopt', 'libxml2', 'ltihooks'],
-				trace=True,
-				count=False)
-			trace.run('gtk.main()')
-		else:
-			gtk.main()
+		
+		gtk.main()
 		
 	else:
 		gnomeapplet.bonobo_factory(
@@ -130,8 +111,4 @@ if __name__ == "__main__":
 			glipper.defs.PACKAGE,
 			glipper.defs.VERSION,
 			applet_factory)
-	
-	if PROFILE:
-		statprof.stop()
-		statprof.display()
 
