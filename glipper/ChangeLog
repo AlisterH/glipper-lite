@@ -1,66 +1,15 @@
-2007-06-04  gettextize  <bug-gnu-gettext@gnu.org>
-
-	* Makefile.am (EXTRA_DIST): Add config.rpath, m4/ChangeLog.
-
-2007-04-23  gettextize  <bug-gnu-gettext@gnu.org>
-
-	* Makefile.am (EXTRA_DIST): Add config.rpath, m4/ChangeLog.
-
-2007-02-15  gettextize  <bug-gnu-gettext@gnu.org>
-
-	* Makefile.am (EXTRA_DIST): Add config.rpath, m4/ChangeLog.
-
-2007-01-05  gettextize  <bug-gnu-gettext@gnu.org>
-
-	* Makefile.am (EXTRA_DIST): Add config.rpath, m4/ChangeLog.
-
-2006-11-21
-	Add config.guess, config.sub, po/Makevars to fix build issues (hopfully)
-	Mod about dialog to add website, translator credits.
-	Russian translation, thanks Евгений Вдовин <evdovin at pochta dot ru>
-	FIXME: Website URL is text, does not open browser on click as elsewhere.
-	Translators should now add themselves to translator-credits in each .po.
-	Release 0.95.1
-
-2006-11-15 
-	Fix --as-needed build issue, thanks Sven Wegen.
-	Fix problem when compiling with gcc 3.x.
-	Fix a few minor build issues.
-
-2006-11-12
-	Release 0.95
-
-Between 2006-06-27 and 2006-11-08
-	Add documentation support.
-		Documentation for Yelp (when GnomeSupport compiled in)
-		English, French and German versions.
-	Autocreate configuration and history files when missing.
-
-2006-06-27
-	Change popup menu.
-		Add tooltips to first and bold menu items.
-		Add menu header.
-		Add hints for keybindings.
-		Put "clear" button at bottom.
-		Ctrl+c entry is now bold not blue.
-	Fix a couple of memory leaks.
-
-2006-06-26
-	We develop Glipper with the help of CVS now.
-	Cleaned up the code a little bit and moved some files in subdirectories.
-	Added support for keybindings.
-	Translated source code comments to english.
-
-Between 2006-06-21 and 2006-06-26
+Date ?
 	New preferences dialog.
 		Now uses libglade.
 		GNOME HIG conformant.
 		Access Keys.
+		Error dialog if cannot open gladfe file.
 	Remove prefcallbacks.c, prefcallbacks.c and header files.
 	Move version number to configure.in (handy if we want commandline --version option).
 	Transparent icon - new libegg.
 	New verbose readme.
-	Error dialog - soft fails on problems opening files.
+	Error dialog.
+	0.90-dev
 
 2006-06-21
 	Tooltip added (bugreport #1509519).
@@ -75,15 +24,15 @@ Between 2006-06-21 and 2006-06-26
 	There is now a french translation for glipper. Thank you very much to Achraf cherti. 
 	Release 0.87
 
-2006-05-10
+05-10-2006
 	Release 0.86
 
 	Fixed a stupid bug with savefiles
 
-2006-05-09
+05-09-2006
 	Release 0.85
 
-2006-05-04
+05-04-2006
 	removed the icon inline method, which was crap. 
 
 	Changed the two buttons in the preferences dialog with one close button.
@@ -91,11 +40,11 @@ Between 2006-06-21 and 2006-06-26
 
 	Changed some gladefile infrastructure things.
 
-2006-05-02
+05-02-2006
 	fixed translation problems with dektop file 
 
-2006-04-29
+04-29-2006
 	new icon (thanks to Fredo)
 
-2006-04-24
+04-24-2006
 	Initial Release (0.8)

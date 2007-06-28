@@ -1,89 +1,43 @@
-###########################################################################
+#                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
-###########################################################################
 
 AC_PREREQ(2.5)
 
 # Set VERSION number here
-AC_INIT(glipper, [0.95.1], [svenrech@gmx.de])
+AC_INIT(glipper, [0.90-dev], [svenrech@gmx.de])
 AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE
-
-
-###########################################################################
-# MAIN SETTINGS
-###########################################################################
-
-# Modify these settings to change behaviour
-
-
-###########################################################################
-# GETTEXT
-###########################################################################
 
 GETTEXT_PACKAGE="glipper"
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext package])
 
 # Add languages here, on fo each .po file
-ALL_LINGUAS="de fr ru nl es hu it"
+ALL_LINGUAS="de fr sv"
 AM_GLIB_GNU_GETTEXT
 AC_PROG_INTLTOOL([0.23])
 
-gnomelocaledir='${prefix}/${DATADIRNAME}/locale'
-AC_SUBST(gnomelocaledir)
+glipperlocaledir='${prefix}/${DATADIRNAME}/locale'
+AC_SUBST(glipperlocaledir)
 
-# This makes gettext use system gettext, if absent, internationalisation will
-# be disabled.
-AM_GNU_GETTEXT([external])
-
-###########################################################################
 
 # Checks for programs.
 AC_PROG_CC
 
-
-# GDU
-GNOME_DOC_INIT
-AC_CONFIG_MACRO_DIR([m4])
-
-
-AC_PATH_PROG(GCONFTOOL, gconftool-2, no) 
-
-if test x"$GCONFTOOL" = xno; then
-	AC_MSG_ERROR([gconftool-2 executable not found in your path - should be installed with GConf])
-fi
-
-AM_GCONF_SOURCE_2
-
-###########################################################################
 # Checks for libraries.
-###########################################################################
-
-# Minimum versions.
 GLIB_REQUIRED=2.6.0
 GTK_REQUIRED=2.6.0
 GLADE_REQUIRED=2.0.0
-LIBGNOME_REQUIRED=2.0.0
-LIBPANELAPPLET_REQUIRED=2.0.6
-
 AC_SUBST(GLIB_REQUIRED)
 AC_SUBST(GTK_REQUIRED)
-
-
-PKG_CHECK_MODULES(FR,			\
-	glib-2.0 >= $GLIB_REQUIRED	\
+PKG_CHECK_MODULES(FR,                   \
+	glib-2.0 >= $GLIB_REQUIRED          \
 	gtk+-2.0 >= $GTK_REQUIRED	\
-	libglade-2.0 >= $GLADE_REQUIRED	\
-	libgnome-2.0 >= $LIBGNOME_REQUIRED \
-	libpanelapplet-2.0 >= $LIBPANELAPPLET_REQUIRED) 
-
+	libglade-2.0 >= $GLADE_REQUIRED)  
 AC_SUBST(FR_CFLAGS)
 AC_SUBST(FR_LIBS)
-
-###########################################################################
-
+  
 
 # Checks for header files.
 AC_HEADER_STDC
@@ -96,10 +50,8 @@ AC_HEADER_STDBOOL
 # Checks for library functions.
 AC_TYPE_SIGNAL
 AC_CHECK_FUNCS([mkdir])
-AC_CONFIG_FILES([Makefile 
+AC_CONFIG_FILES([Makefile
 src/Makefile
-data/Makefile
-help/Makefile
-plugins/Makefile])
+data/Makefile ])
 
 AC_OUTPUT(po/Makefile.in)
