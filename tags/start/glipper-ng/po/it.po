@@ -1,0 +1,145 @@
+#
+# Italian translation of Glipper.
+#
+# This file is distributed under the same license as the Glipper package.
+#
+# Translated by Eugenio Depalo <eugeniodepalo@mac.com>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: glipper\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-05-19 12:26+0000\n"
+"PO-Revision-Date: 2006-11-21 01:19+0100\n"
+"Last-Translator: Eugenio Depalo <eugeniodepalo at mac dot com>\n"
+"Language-Team: Italian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Add description tooltip to bold entry
+#: ../src/main.c:118
+msgid ""
+"This entry was copied with ctrl+c.\n"
+"It can be pasted with ctrl+v."
+msgstr ""
+"Questa voce è stata copiata con ctrl+c\n"
+"Può essere incollata con ctrl+v"
+
+#: ../src/main.c:150
+#: ../src/main.c:345
+msgid "Cannot load icon. Is the software properly installed ?"
+msgstr "Impossibile caricare l'icona. Forse il software non è installato correttamente ?"
+
+#: ../src/main.c:158
+#, c-format
+msgid "Glipper - Clipboardmanager  (%s)"
+msgstr "Glipper - Gestore di appunti (%s)"
+
+#: ../src/main.c:177
+msgid "<No Content>"
+msgstr "<Nessun contenuto>"
+
+#. addHistMenuItem(temp->data);
+#. Add description tooltip to first item
+#: ../src/main.c:187
+msgid ""
+"This is the last element to be copied.\n"
+"It can be pasted with the middle mouse button."
+msgstr ""
+"Questa è l'ultima voce copiata\n"
+"Può essere incollata con il pulsante centrale del mouse."
+
+#: ../src/main.c:320
+msgid "Could not display help for Glipper"
+msgstr "Impossibile mostrare l'aiuto per Glipper"
+
+#: ../src/main.c:357
+#: ../src/main.c:542
+#, c-format
+msgid ""
+"Glipper (%s)\n"
+"Clipboardmanager"
+msgstr ""
+"Glipper (%s)\n"
+"Gestore di appunti"
+
+#: ../src/main.c:391
+msgid "translator-credits"
+msgstr "Eugenio Depalo <eugeniodepalo at mac dot com>"
+
+#: ../src/main.c:394
+msgid "Clipboardmanager for Gnome"
+msgstr "Gestore di appunti per Gnome"
+
+#: ../src/preferences.c:76
+msgid "Help support is not compiled in."
+msgstr "Il supporto per l'aiuto non è stato compilato"
+
+#: ../src/preferences.c:76
+msgid "To see the documentation, consult the glipper website or compile glipper with GNOME support (see README file)."
+msgstr "Per vedere la documentazione, consulta il sito web di glipper o compila glipper con il supporto per GNOME (vedi il file README)."
+
+#: ../src/preferences.c:93
+msgid "Could not load the preferences interface"
+msgstr "Non posso caricare l'interfaccia delle preferenze"
+
+#: ../data/glipper-properties.glade.h:1
+msgid "<Ctrl><Alt>c"
+msgstr "<Ctrl><Alt>c"
+
+#: ../data/glipper-properties.glade.h:2
+msgid "<b>Behaviour</b>"
+msgstr "<b>Comportamento</b>"
+
+#: ../data/glipper-properties.glade.h:3
+msgid "<b>Clipboards</b>"
+msgstr "<b>Appunti</b>"
+
+#: ../data/glipper-properties.glade.h:4
+msgid "<b>Limits</b>"
+msgstr "<b>Limiti</b>"
+
+#: ../data/glipper-properties.glade.h:5
+msgid "Amount of entries in history:"
+msgstr "Numero di voci nella cronologia:"
+
+#: ../data/glipper-properties.glade.h:6
+msgid "Copy - Ctrl+C/Ctrl+V"
+msgstr "Copia - Ctrl+C/Ctrl+V"
+
+#: ../data/glipper-properties.glade.h:7
+msgid "Glipper Preferences"
+msgstr "Preferenze di Glipper"
+
+#: ../data/glipper-properties.glade.h:8
+msgid "Key combination for popup: "
+msgstr "Scorciatoia da tastiera per il popup:"
+
+#: ../data/glipper-properties.glade.h:9
+msgid "Length of one history entry:"
+msgstr "Lunghezza di una voce della cronologia:"
+
+#: ../data/glipper-properties.glade.h:10
+msgid "Save history"
+msgstr "Salva cronologia"
+
+#: ../data/glipper-properties.glade.h:11
+msgid "Select - Mark/middle mouse button"
+msgstr "Seleziona - Evidenzia/pulsante centrale del mouse"
+
+#: ../data/glipper-properties.glade.h:12
+msgid "Tag Ctrl+C clipboard's content in history (bold)"
+msgstr "Evidenzia il contenuto degli appunti Ctrl+C nella cronologia (grassetto)"
+
+#: ../data/glipper-properties.glade.h:13
+msgid "Which clipboards should be managed by Glipper?"
+msgstr "Quali tipi di appunti devono essere gestiti da Glipper?"
+
+#: ../data/glipper.desktop.in.h:1
+msgid "Clipboard Manager"
+msgstr "Gestore di Appunti"
+
+#: ../data/glipper.desktop.in.h:2
+msgid "Glipper"
+msgstr ""

@@ -1,0 +1,96 @@
+#
+# French translation of Glipper.
+#
+# This file is distributed under the same license as the Glipper package.
+#
+# Translated by Achraf cherti <achrafcherti@gmail.com>, 2006.
+# My web site : http://asher256.tuxfamily.org
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: glipper\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-05-19 12:26+0000\n"
+"PO-Revision-Date: 2006-06-26 21:21+0100\n"
+"Last-Translator: karderio <karderio at gmail dot com>\n"
+"Language-Team: Achraf cherti <achrafcherti@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/main.c:121
+msgid "<No Content>"
+msgstr "<Vide>"
+
+#: ../src/main.c:277
+msgid "Cannot load icon. Is the software properly installed ?"
+msgstr "Ne peut charger l'icône. Le logiciel est-il bien installé ?"
+
+#: ../src/main.c:289
+msgid ""
+"Glipper\n"
+"Clipboardmanager"
+msgstr ""
+"Glipper\n"
+"Gestionnaire de presse-papiers"
+
+#: ../src/main.c:324
+msgid "Clipboardmanager for Gnome"
+msgstr "Gestionnaire de presse-papiers pour Gnome"
+
+#: ../src/preferences.c:86
+msgid "Could not load the preferences interface"
+msgstr "N'a pas pû charger l'interface pour les préférences"
+
+#: ../data/glipper-properties.glade.h:1
+msgid "<b>Behaviour</b>"
+msgstr "<b>Comportement</b>"
+
+#: ../data/glipper-properties.glade.h:2
+msgid "<b>Clipboards</b>"
+msgstr "<b>Presse-papiers</b>"
+
+#: ../data/glipper-properties.glade.h:3
+msgid "<b>Limits</b>"
+msgstr "<b>Limites</b>"
+
+#: ../data/glipper-properties.glade.h:4
+msgid "Amount of entries in history:"
+msgstr "Nombre d'entrées dans l'historique:"
+
+#: ../data/glipper-properties.glade.h:5
+msgid "Copy - Ctrl+C/Ctrl+V"
+msgstr "Copie - Ctrl+C/Ctrl+V"
+
+#: ../data/glipper-properties.glade.h:6
+msgid "Glipper Preferences"
+msgstr "Préférences de Glipper"
+
+#: ../data/glipper-properties.glade.h:7
+msgid "Length of one history entry:"
+msgstr "Taille maximale d'une entrée:"
+
+#: ../data/glipper-properties.glade.h:8
+msgid "Save history entries on exit"
+msgstr "Enregistrer l'historique en quittant"
+
+#: ../data/glipper-properties.glade.h:9
+msgid "Select - Mark/middle mouse button"
+msgstr "Sélection - Marquer/Bouton central de la souris"
+
+#: ../data/glipper-properties.glade.h:10
+msgid "Tag Ctrl+C clipboard's content in history (blue)"
+msgstr "Marquer le contenu du presse-papiers Ctrl+C dans l'historique (en bleu)"
+
+#: ../data/glipper-properties.glade.h:11
+msgid "Which clipboards should be managed by Glipper?"
+msgstr "Quels presses-papiers devront être gérés par Glipper?"
+
+#: ../data/glipper.desktop.in.h:1
+msgid "Clipboard Manager"
+msgstr "Gestionnaire de presse-papiers"
+
+#: ../data/glipper.desktop.in.h:2
+msgid "Glipper"
+msgstr "Glipper"
+
