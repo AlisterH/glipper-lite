@@ -76,3 +76,6 @@ class History(gobject.GObject):
       if value is None or value.type != gconf.VALUE_INT:
          return
       self.max_elements = value.get_int()
+      if len(self.history) > self.max_elements:
+         self.history = self.history[0:self.max_elements]
+         self.emit('changed', self.history)
