@@ -6,7 +6,7 @@
 import gobject
 gobject.threads_init()
 
-import gtk, gnomeapplet
+import gtk, gnomeapplet, gnome
 import getopt, sys
 from os.path import *
 
@@ -96,6 +96,8 @@ if __name__ == "__main__":
 	print 'Running with options:', {
 		'standalone': standalone,
 	}
+	
+	gnome.program_init('glipper', '1.0', properties= { gnome.PARAM_APP_DATADIR : glipper.DATA_DIR })
 	
 	if standalone:
 		import gnome

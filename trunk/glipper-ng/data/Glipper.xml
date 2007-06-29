@@ -1,10 +1,10 @@
 <Root>
    <popups>
      <popup name="button3">
-        <menuitem name="Item 1" verb="Properties" _label="_Properties" pixtype="stock" pixname="gtk-properties"/>
+        <menuitem name="Item 1" verb="Properties" _label="_Preferences" pixtype="stock" pixname="gtk-properties"/>
         <menuitem name="Item 3" verb="Help" _label="_Help" pixtype="stock" pixname="gtk-help"/>
         <menuitem name="Item 4" verb="About" _label="_About" pixtype="stock" pixname="gnome-stock-about"/>
-        <menuitem name="Item 2" verb="Plugins" _label="_Plugins" pixtype="stock" pixname="gtk-execute"/>
+        <menuitem name="Item 2" verb="Plugins" _label="Pl_ugins" pixtype="stock" pixname="gtk-execute"/>
      </popup>
    </popups>
 </Root>

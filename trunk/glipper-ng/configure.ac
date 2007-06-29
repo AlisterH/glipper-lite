@@ -1,4 +1,4 @@
-AC_INIT(glipper, 1.0, svenrech@gmx.de)
+AC_INIT([glipper],[1.0],[svenrech@gmx.de])
 AC_CONFIG_SRCDIR(glipper/__init__.py)
 AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_MACRO_DIR([m4])
@@ -118,7 +118,7 @@ fi
 dnl ****************************************************************************
 dnl * --------------------------------------------------------------------------
 dnl ****************************************************************************
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 glipper/Makefile
 glipper/defs.py
@@ -132,6 +132,7 @@ data/art/Makefile
 po/Makefile.in
 help/Makefile
 ])
+AC_OUTPUT
 
 echo
 echo $PACKAGE v$VERSION
