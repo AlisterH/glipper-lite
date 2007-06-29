@@ -4,7 +4,7 @@
 <glade-interface>
   <widget class="GtkDialog" id="properties_window">
     <property name="border_width">5</property>
-    <property name="title" translatable="yes">Glipper properties</property>
+    <property name="title" translatable="yes">Glipper preferences</property>
     <property name="resizable">False</property>
     <property name="icon_name">gtk-preferences</property>
     <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
@@ -46,19 +46,26 @@
                         <property name="column_spacing">12</property>
                         <property name="row_spacing">6</property>
                         <child>
-                          <widget class="GtkSpinButton" id="max_item_length">
+                          <widget class="GtkLabel" id="label8">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="adjustment">10 10 99 1 10 10</property>
-                            <property name="climb_rate">1</property>
-                            <signal name="value_changed" handler="on_max_item_length_value_changed"/>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Amount of entries in history:</property>
                           </widget>
                           <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
+                            <property name="x_options">GTK_FILL</property>
+                            <property name="y_options"></property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="label9">
+                            <property name="visible">True</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Length of one history entry:</property>
+                          </widget>
+                          <packing>
                             <property name="top_attach">1</property>
                             <property name="bottom_attach">2</property>
-                            <property name="x_options"></property>
+                            <property name="x_options">GTK_FILL</property>
                             <property name="y_options"></property>
                           </packing>
                         </child>
@@ -78,24 +85,19 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkLabel" id="label9">
+                          <widget class="GtkSpinButton" id="max_item_length">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">Length of one history entry:</property>
+                            <property name="can_focus">True</property>
+                            <property name="adjustment">10 10 99 1 10 10</property>
+                            <property name="climb_rate">1</property>
+                            <signal name="value_changed" handler="on_max_item_length_value_changed"/>
                           </widget>
                           <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
                             <property name="top_attach">1</property>
                             <property name="bottom_attach">2</property>
-                            <property name="x_options">GTK_FILL</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="label8">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Amount of entries in history:</property>
-                          </widget>
-                          <packing>
-                            <property name="x_options">GTK_FILL</property>
+                            <property name="x_options"></property>
                             <property name="y_options"></property>
                           </packing>
                         </child>

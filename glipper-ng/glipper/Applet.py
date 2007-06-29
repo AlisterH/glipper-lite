@@ -1,6 +1,6 @@
 import os, time
 from os.path import *
-import gnomeapplet, gtk, gtk.gdk, gconf, gnomevfs, gobject
+import gnomeapplet, gtk, gtk.gdk, gconf, gnomevfs, gobject, gnome
 from gettext import gettext as _
 
 import glipper, glipper.About, glipper.Properties
@@ -68,10 +68,17 @@ class Applet(object):
    
    def position_menu(self, menu, data=None):
       origin = self.applet.window.get_origin()
+      
+      requisition_height = self.menu.size_request()[1]
+      
       x = origin[0]
       y = origin[1]
       
-      y += self.applet.allocation.height
+      if y + self.applet.allocation.height + requisition_height > self.applet.get_screen().get_height():
+         y -= requisition_height
+         
+      else:
+         y += self.applet.allocation.height
       
       return x, y, True
    
@@ -113,7 +120,7 @@ class Applet(object):
       glipper.Properties.Properties(self.applet)
       
    def on_help (self, component, verb):
-      pass
+      gnome.help_display('glipper')
    
    def on_about (self, component, verb):
 	   glipper.About.show_about(self.applet)
