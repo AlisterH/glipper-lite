@@ -99,7 +99,10 @@ class Applet(object):
             menu_item = gtk.MenuItem(item, False)
             
             if len(item) > self.max_item_length:
-               menu_item.get_child().set_text(item[0:self.max_item_length] + '...')
+	       i = item.replace("\n", " ")
+	       i = item.replace("\t", " ")
+	       short = i[0:self.max_item_length/2] + '...' + i[-(self.max_item_length/2-3):]
+               menu_item.get_child().set_text(short)
                self.tooltips.set_tip(menu_item, item)
 
             if self.mark_default_entry and item == get_glipper_clipboards().get_default_clipboard_text():
