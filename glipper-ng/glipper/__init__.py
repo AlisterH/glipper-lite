@@ -87,9 +87,7 @@ from glipper.PluginsManager import *
 from glipper.History import *
 
 def registerEntry(label, callback):
-   entry = gtk.MenuItem(label)
-   entry.connect('activate', lambda x: callback())
-   get_glipper_plugins_manager().add_menu_item(callback.__module__, entry)
+   get_glipper_plugins_manager().add_menu_item(callback.__module__, label, callback)
    
 def setItem(index, item):
    get_glipper_history().set(index, item)

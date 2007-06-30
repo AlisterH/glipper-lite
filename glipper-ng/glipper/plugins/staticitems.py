@@ -71,7 +71,6 @@ class manager:
             self.staticItemsModel.append([item])
             
         gladeFile.signal_autoconnect(self)
-        gtk.main()
    
     def destroy(self):
         self.managerWindow.destroy()
@@ -110,9 +109,6 @@ def init():
 
 def historyChanged():
     static_items_manager.updateHistoryModel()
-
-def stop():
-    gtk.main_quit()
 
 def getInfo():
 	info = {"Name": "Static Items",
