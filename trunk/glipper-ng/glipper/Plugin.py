@@ -22,9 +22,8 @@ class Plugin(object):
    def get_preferences(self):
       return self.info['Preferences']
       
-   def call(self, name, *args):
+   def call(self, name, args=()):
       if hasattr(self.module, name):
          func = getattr(self.module, name)
          if callable(func):
             return apply(func, args)
-         

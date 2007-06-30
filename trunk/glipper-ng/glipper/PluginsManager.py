@@ -48,8 +48,8 @@ class PluginsManager(gobject.GObject):
       except KeyError:
          return
    
-   def add_menu_item(self, file_name, menuitem):
-      self.menu_items[file_name] = menuitem
+   def add_menu_item(self, file_name, label, callback):
+      self.menu_items[file_name] = (label, callback)
       self.emit('menu-items-changed')
       
    def has_started(self, plugin):

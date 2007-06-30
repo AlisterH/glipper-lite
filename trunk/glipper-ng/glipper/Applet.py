@@ -123,7 +123,10 @@ class Applet(object):
          self.menu.append(gtk.SeparatorMenuItem())
          
          for menu_item in plugins_menu_items:
-            self.menu.append(plugins_menu_items[menu_item])
+            label, callback = plugins_menu_items[menu_item]
+            item = gtk.MenuItem(label)
+            item.connect('activate', lambda x: callback())
+            self.menu.append(item)
             
       self.menu.connect('deactivate', self.on_menu_deactivate)
       
