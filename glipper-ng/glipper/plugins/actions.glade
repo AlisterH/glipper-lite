@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
+<!--*- mode: xml -*-->
+<glade-interface>
+  <widget class="GtkWindow" id="preferences">
+    <property name="visible">True</property>
+    <property name="title" translatable="yes">Actions Preferences</property>
+    <property name="modal">True</property>
+    <property name="window_position">GTK_WIN_POS_CENTER</property>
+    <property name="destroy_with_parent">True</property>
+    <child>
+      <widget class="GtkVBox" id="vbox1">
+        <property name="visible">True</property>
+        <child>
+          <widget class="GtkCheckButton" id="immediatelyCheck">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="label" translatable="yes">check new items immediately</property>
+            <property name="use_underline">True</property>
+            <property name="draw_indicator">True</property>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="padding">5</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkHBox" id="hbox1">
+            <property name="visible">True</property>
+            <child>
+              <widget class="GtkTreeView" id="actionTree">
+                <property name="width_request">376</property>
+                <property name="height_request">222</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="reorderable">True</property>
+                <property name="enable_tree_lines">True</property>
+                <signal name="button_press_event" handler="actionTree_button_press_event_cb"/>
+              </widget>
+              <packing>
+                <property name="padding">5</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkVButtonBox" id="vbuttonbox1">
+                <property name="visible">True</property>
+                <property name="spacing">11</property>
+                <property name="layout_style">GTK_BUTTONBOX_START</property>
+                <child>
+                  <widget class="GtkButton" id="addButton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <signal name="clicked" handler="addButton_clicked"/>
+                    <child>
+                      <widget class="GtkAlignment" id="alignment2">
+                        <property name="visible">True</property>
+                        <property name="xscale">0</property>
+                        <property name="yscale">0</property>
+                        <child>
+                          <widget class="GtkHBox" id="hbox3">
+                            <property name="visible">True</property>
+                            <property name="spacing">2</property>
+                            <child>
+                              <widget class="GtkImage" id="image2">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-add</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="label2">
+                                <property name="visible">True</property>
+                                <property name="label">add action</property>
+                                <property name="use_underline">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                </child>
+                <child>
+                  <widget class="GtkButton" id="addCommandButton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <signal name="clicked" handler="addCommandButton_clicked"/>
+                    <child>
+                      <widget class="GtkAlignment" id="alignment1">
+                        <property name="visible">True</property>
+                        <property name="xscale">0</property>
+                        <property name="yscale">0</property>
+                        <child>
+                          <widget class="GtkHBox" id="hbox2">
+                            <property name="visible">True</property>
+                            <property name="spacing">2</property>
+                            <child>
+                              <widget class="GtkImage" id="image1">
+                                <property name="visible">True</property>
+                                <property name="stock">gtk-add</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="label1">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">add command</property>
+                                <property name="use_underline">True</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkButton" id="deleteButton">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="label">gtk-remove</property>
+                    <property name="use_stock">True</property>
+                    <signal name="clicked" handler="deleteButton_clicked"/>
+                  </widget>
+                  <packing>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </widget>
+              <packing>
+                <property name="expand">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="padding">5</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkHButtonBox" id="hbuttonbox1">
+            <property name="visible">True</property>
+            <property name="border_width">8</property>
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <child>
+              <widget class="GtkButton" id="button1">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="label">gtk-apply</property>
+                <property name="use_stock">True</property>
+                <signal name="clicked" handler="on_applyButton_clicked"/>
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+</glade-interface>

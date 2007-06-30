@@ -43,8 +43,8 @@ if not exists(USER_GLIPPER_DIR):
 # when presenting save/open dialogs
 os.chdir(expanduser("~"))
 
-# Path to images, icons
-ART_DATA_DIR = join(SHARED_DATA_DIR, "art")
+# Path to plugins
+PLUGINS_DIR = join(SHARED_DATA_DIR, 'plugins')
 
 # Path to history file
 HISTORY_FILE = join(USER_GLIPPER_DIR, "history")
@@ -76,5 +76,26 @@ GCONF_MARK_DEFAULT_ENTRY = GCONF_DIR + "/mark_default_entry"
 # GConf key to the setting for whether the history should be saved
 GCONF_SAVE_HISTORY = GCONF_DIR + "/save_history"
 
+GCONF_AUTOSTART_PLUGINS = GCONF_DIR + "/autostart_plugins"
+
 # Preload gconf directories
 GCONF_CLIENT.add_dir(GCONF_DIR, gconf.CLIENT_PRELOAD_RECURSIVE)
+
+# Plugins stuff
+
+from glipper.PluginsManager import *
+from glipper.History import *
+
+def registerEntry(label, callback):
+   entry = gtk.MenuItem(label)
+   entry.connect('activate', lambda x: callback())
+   get_glipper_plugins_manager().add_menu_item(callback.__module__, entry)
+   
+def setItem(index, item):
+   get_glipper_history().set(index, item)
+
+def getItem(index):
+   return get_glipper_history().get(index)
+   
+def setActiveItem(index):
+   get_glipper_history().set_default(get_glipper_history().get(index))
