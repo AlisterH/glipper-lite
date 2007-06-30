@@ -1,6 +1,7 @@
 import gobject, gtk, gconf
 import glipper
 from glipper.Clipboards import *
+from glipper.PluginsManager import *
 from gettext import gettext as _
 
 class History(gobject.GObject):
@@ -10,27 +11,39 @@ class History(gobject.GObject):
 	
    def __init__(self):
       gobject.GObject.__init__(self)
-      self.clipboards = Clipboards()
       self.history = []
-      self.clipboards.connect('new-item', self.on_new_item)
+      get_glipper_clipboards().connect('new-item', self.on_new_item)
 
       self.max_elements = glipper.GCONF_CLIENT.get_int(glipper.GCONF_MAX_ELEMENTS)
       if self.max_elements == None:
          self.max_elements = 20
       glipper.GCONF_CLIENT.notify_add(glipper.GCONF_MAX_ELEMENTS, lambda x, y, z, a: self.on_max_elements_changed (z.value))
    
-   def get_clipboards(self):
-      return self.clipboards
-   
    def get_history(self):
       return self.history
    
    def on_new_item(self, clipboards, item):
       self.add(item)
-   
+      get_glipper_plugins_manager().call('newItem', item)
+         
    def clear(self):
       self.history = []
       self.emit('changed', self.history)
+   
+   def get(self, index):
+      try:
+         return self.history[index]
+      except IndexError:
+         return
+   
+   def set(self, index, item):
+      if item not in self.history:
+         try:
+            self.history[index] = item
+         except IndexError:
+            return
+            
+         self.emit('changed', self.history)
    
    def add(self, item):
       if item not in self.history:
@@ -41,7 +54,7 @@ class History(gobject.GObject):
    
    def set_default(self, item):
       self.add(item)
-      self.clipboards.set_default_clipboard_text(item)
+      get_glipper_clipboards().set_default_clipboard_text(item)
       self.emit('changed', self.history)
    
    def load(self):
@@ -79,3 +92,8 @@ class History(gobject.GObject):
       if len(self.history) > self.max_elements:
          self.history = self.history[0:self.max_elements]
          self.emit('changed', self.history)
+         
+history = History()
+
+def get_glipper_history():
+   return history

@@ -7,13 +7,13 @@ import glipper, glipper.About, glipper.Properties
 from glipper.Keybinder import *
 from glipper.History import *
 from glipper.Clipboards import *
+from glipper.PluginsManager import *
 
 class Applet(object):
    def __init__(self, applet):
       self.applet = applet
       self.menu = gtk.Menu()
       self.tooltips = gtk.Tooltips()
-      self.history = History()
       self.image = gtk.Image()
       self.image.set_from_pixbuf(gtk.IconTheme.load_icon(gtk.icon_theme_get_default(), "glipper", self.applet.get_size() - 2, 0))
       self.tooltips.set_tip(self.applet, _("Glipper - Popup shortcut: ") + get_glipper_keybinder().get_key_combination())
@@ -37,8 +37,10 @@ class Applet(object):
       
       get_glipper_keybinder().connect('activated', self.on_key_combination_press)
       get_glipper_keybinder().connect('changed', self.on_key_combination_changed)
-      self.history.connect('changed', self.on_history_changed)
-      self.history.load()
+      get_glipper_history().connect('changed', self.on_history_changed)
+      get_glipper_history().load()
+      get_glipper_plugins_manager().load()
+      get_glipper_plugins_manager().connect('new-menu-item', self.on_new_plugin_menu_item)
       
       self.applet.connect('change-size', lambda applet, orient: self.on_change_size(applet))
       self.applet.connect('button-press-event', self.on_clicked)
@@ -56,23 +58,23 @@ class Applet(object):
       self.applet.add(self.image)
       self.applet.set_flags(gnomeapplet.EXPAND_MINOR)
       self.applet.show_all()
-      
+   
+   def on_new_plugin_menu_item(self, manager):
+      self.update_menu(get_glipper_history().get_history())
+   
    def on_menu_deactivate(self, menu):
       self.applet.set_state(gtk.STATE_NORMAL)
    
    def on_menu_item_activate(self, menuitem, item):
-      self.history.set_default(item)
+      get_glipper_history().set_default(item)
       
    def on_clear(self, menuitem):
-      self.history.clear()
+      get_glipper_history().clear()
    
    def position_menu(self, menu, data=None):
-      origin = self.applet.window.get_origin()
+      x, y = self.applet.window.get_origin()
       
-      requisition_height = self.menu.size_request()[1]
-      
-      x = origin[0]
-      y = origin[1]
+      requisition_width, requisition_height = self.menu.size_request()
       
       if y + self.applet.allocation.height + requisition_height > self.applet.get_screen().get_height():
          y -= requisition_height
@@ -100,7 +102,7 @@ class Applet(object):
                menu_item.get_child().set_text(item[0:self.max_item_length] + '...')
                self.tooltips.set_tip(menu_item, item)
 
-            if self.mark_default_entry and item == self.history.get_clipboards().get_default_clipboard_text():
+            if self.mark_default_entry and item == get_glipper_clipboards().get_default_clipboard_text():
                menu_item.get_child().set_markup('<b>' + menu_item.get_child().get_text() + '</b>')
                
             menu_item.connect('activate', self.on_menu_item_activate, item)
@@ -112,6 +114,14 @@ class Applet(object):
       clear_item.connect('activate', self.on_clear)
       self.menu.append(clear_item)
       
+      plugins_menu_items = get_glipper_plugins_manager().get_menu_items()
+      
+      if len(plugins_menu_items) > 0:
+         self.menu.append(gtk.SeparatorMenuItem())
+         
+         for menu_item in plugins_menu_items:
+            self.menu.append(plugins_menu_items[menu_item])
+            
       self.menu.connect('deactivate', self.on_menu_deactivate)
       
       self.menu.show_all()
@@ -126,7 +136,7 @@ class Applet(object):
 	   glipper.About.show_about(self.applet)
    
    def on_plugins (self, component, verb):
-      pass
+      PluginsWindow(self.applet)
    
    def on_clicked(self, applet, event):
       if event.button != 1:
@@ -138,7 +148,8 @@ class Applet(object):
       
    def on_destroy(self, applet):
       if self.save_history:
-         self.history.save()
+         get_glipper_history().save()
+      get_glipper_plugins_manager().call('stop')
       
    def on_change_size(self, applet):
       icon_size = applet.get_size() - 2 # Padding
@@ -162,12 +173,13 @@ class Applet(object):
          
    def on_history_changed(self, object, history):
       self.update_menu(history)
+      get_glipper_plugins_manager().call('historyChanged')
       
    def on_mark_default_entry_changed(self, value):
       if value is None or value.type != gconf.VALUE_BOOL:
          return
       self.mark_default_entry = value.get_bool()
-      self.update_menu(self.history.get_history())
+      self.update_menu(get_history().get_history())
       
    def on_save_history_changed(self, value):
       if value is None or value.type != gconf.VALUE_BOOL:
@@ -178,4 +190,4 @@ class Applet(object):
       if value is None or value.type != gconf.VALUE_INT:
          return
       self.max_item_length = value.get_int()
-      self.update_menu(self.history.get_history())
+      self.update_menu(get_history().get_history())

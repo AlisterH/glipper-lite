@@ -25,6 +25,7 @@ class Clipboards(gobject.GObject):
       gobject.timeout_add(500, self.on_timeout)
    
    def set_default_clipboard_text(self, text):
+      self.previous_default_clipboard_text = text
       self.default_clipboard.set_text(text)
    
    def get_default_clipboard_text(self):
@@ -54,3 +55,8 @@ class Clipboards(gobject.GObject):
       if value is None or value.type != gconf.VALUE_BOOL:
          return
       self.use_primary_clipboard = value.get_bool()
+      
+clipboards = Clipboards()
+
+def get_glipper_clipboards():
+   return clipboards

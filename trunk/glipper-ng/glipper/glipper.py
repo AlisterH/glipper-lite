@@ -25,6 +25,8 @@ else:
 # Now the path is set, import our applet
 import glipper, glipper.Applet, glipper.defs
 
+sys.path.insert(0, glipper.PLUGINS_DIR)
+
 try:
 	# attempt to set a name for killall
 	import glipper.osutils
