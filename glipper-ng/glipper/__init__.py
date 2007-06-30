@@ -88,7 +88,10 @@ from glipper.History import *
 
 def registerEntry(label, callback):
    get_glipper_plugins_manager().add_menu_item(callback.__module__, label, callback)
-   
+
+def insertItem(item):
+   get_glipper_history().add(item)
+
 def setItem(index, item):
    get_glipper_history().set(index, item)
 
