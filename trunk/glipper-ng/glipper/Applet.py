@@ -155,7 +155,7 @@ class Applet(object):
    def on_destroy(self, applet):
       if self.save_history:
          get_glipper_history().save()
-      get_glipper_plugins_manager().call('stop')
+      get_glipper_plugins_manager().stop_all()
       
    def on_change_size(self, applet):
       icon_size = applet.get_size() - 2 # Padding

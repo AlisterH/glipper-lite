@@ -37,7 +37,11 @@ class PluginsManager(gobject.GObject):
             self.plugins.remove(p)
             p.call('stop')
             self.remove_menu_item(plugin.get_file_name())
-      
+   
+   def stop_all(self):
+      for plugin in self.plugins:
+         self.stop(plugin)
+   
    def get_menu_items(self):
       return self.menu_items   
    
@@ -137,8 +141,10 @@ class PluginsWindow(object):
       
       plugin = self.plugins_list_model.get_value(iter, self.PLUGIN_COLUMN)
       
+      self.plugins_window.hide()
       plugin.call('showPreferences')
-   
+      self.plugins_window.show()
+      
    def on_plugins_list_selection_changed(self, selection):
       treeview, iter = selection.get_selected()
       
