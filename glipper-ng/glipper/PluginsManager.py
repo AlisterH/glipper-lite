@@ -4,7 +4,7 @@ from glipper.Plugin import *
 
 class PluginsManager(gobject.GObject):
    __gsignals__ = {
-      "new-menu-item" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, []),
+      "menu-items-changed" : (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, []),
    }
 
    def __init__(self):
@@ -36,17 +36,21 @@ class PluginsManager(gobject.GObject):
          if p.get_file_name() == plugin.get_file_name():
             self.plugins.remove(p)
             p.call('stop')
-            try:
-               del self.menu_items[p.get_file_name()]
-            except KeyError:
-               return
+            self.remove_menu_item(plugin.get_file_name())
       
    def get_menu_items(self):
       return self.menu_items   
    
+   def remove_menu_item(self, file_name):
+      try:
+         del self.menu_items[file_name]
+         self.emit('menu-items-changed')
+      except KeyError:
+         return
+   
    def add_menu_item(self, file_name, menuitem):
       self.menu_items[file_name] = menuitem
-      self.emit('new-menu-item')
+      self.emit('menu-items-changed')
       
    def has_started(self, plugin):
       for p in self.plugins:

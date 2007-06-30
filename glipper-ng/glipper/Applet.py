@@ -40,7 +40,7 @@ class Applet(object):
       get_glipper_history().connect('changed', self.on_history_changed)
       get_glipper_history().load()
       get_glipper_plugins_manager().load()
-      get_glipper_plugins_manager().connect('new-menu-item', self.on_new_plugin_menu_item)
+      get_glipper_plugins_manager().connect('menu-items-changed', self.on_plugins_menu_items_changed)
       
       self.applet.connect('change-size', lambda applet, orient: self.on_change_size(applet))
       self.applet.connect('button-press-event', self.on_clicked)
@@ -59,7 +59,7 @@ class Applet(object):
       self.applet.set_flags(gnomeapplet.EXPAND_MINOR)
       self.applet.show_all()
    
-   def on_new_plugin_menu_item(self, manager):
+   def on_plugins_menu_items_changed(self, manager):
       self.update_menu(get_glipper_history().get_history())
    
    def on_menu_deactivate(self, menu):
