@@ -38,8 +38,8 @@ class Applet(object):
       get_glipper_keybinder().connect('activated', self.on_key_combination_press)
       get_glipper_keybinder().connect('changed', self.on_key_combination_changed)
       get_glipper_history().connect('changed', self.on_history_changed)
-      get_glipper_history().load()
       get_glipper_plugins_manager().load()
+      get_glipper_history().load()
       get_glipper_plugins_manager().connect('menu-items-changed', self.on_plugins_menu_items_changed)
       
       self.applet.connect('change-size', lambda applet, orient: self.on_change_size(applet))
@@ -99,9 +99,9 @@ class Applet(object):
             menu_item = gtk.MenuItem(item, False)
             
             if len(item) > self.max_item_length:
-	       i = item.replace("\n", " ")
-	       i = item.replace("\t", " ")
-	       short = i[0:self.max_item_length/2] + '...' + i[-(self.max_item_length/2-3):]
+               i = item.replace("\n", " ")
+               i = item.replace("\t", " ")
+               short = i[0:self.max_item_length/2] + '...' + i[-(self.max_item_length/2-3):]
                menu_item.get_child().set_text(short)
                self.tooltips.set_tip(menu_item, item)
 
