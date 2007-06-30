@@ -32,7 +32,7 @@ class StringListener(threading.Thread):
 		threading.Thread.__init__(self)
 		self.socket = socket
 	def run(self):
-		while 1:
+		while not stop:
 			try:
 				string = self.socket.recv(4096)
 				if not string:
@@ -53,7 +53,7 @@ class ServerListener(threading.Thread):
 		print "start listening for incoming connections!"
 		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		s.bind(('', GLIPPERPORT))
-		while 1:
+		while not stop:
 			try:
 				s.listen(1)
 				conn, addr = s.accept()
@@ -90,6 +90,11 @@ def init():
 
 	#Then listen:
 	ServerListener().start()
+
+stop = False
+
+def stop():
+   stop = True
 
 def showPreferences():
 	preferences().show()

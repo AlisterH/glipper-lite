@@ -69,9 +69,6 @@ class confFile:
 			self.file.close()
 
 #preferences dialog:
-
-import pygtk
-pygtk.require('2.0')
 import gtk
 import gtk.glade
 
@@ -79,10 +76,10 @@ class preferences:
 	def __init__(self):
 		gladeFile = gtk.glade.XML(os.path.dirname(__file__) + "/nopaste.glade")
 		self.prefWind = gladeFile.get_widget("preferences")
-		self.prefWind.show()
+		self.prefWind.show_all()
+		self.prefWind.connect('destroy', self.destroy)
 		self.nickEntry = gladeFile.get_widget("nickEntry")
 		self.langBox = gladeFile.get_widget("langBox")
-
 		gladeFile.signal_autoconnect(self)
 
 		#read configurations
@@ -91,8 +88,12 @@ class preferences:
 		self.langBox.set_active(f.getLang())
 		f.close()
 
+	def destroy(self, window):
+		window.destroy()
+		gtk.main_quit()
+
 	def show(self):
-		self.prefWind.present()
+		gtk.main()
 
 	#EVENTS:
 	def on_applyButton_clicked(self, widget):
