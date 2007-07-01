@@ -81,22 +81,22 @@ GCONF_AUTOSTART_PLUGINS = GCONF_DIR + "/autostart_plugins"
 # Preload gconf directories
 GCONF_CLIENT.add_dir(GCONF_DIR, gconf.CLIENT_PRELOAD_RECURSIVE)
 
-# Plugins stuff
+# Functions callable by plugins
 
 from glipper.PluginsManager import *
 from glipper.History import *
 
-def registerEntry(label, callback):
-   get_glipper_plugins_manager().add_menu_item(callback.__module__, label, callback)
+def add_menu_item(file_name, menu_item):
+   get_glipper_plugins_manager().add_menu_item(file_name, menu_item)
 
-def insertItem(item):
+def add_history_item(item):
    get_glipper_history().add(item)
 
-def setItem(index, item):
+def set_history_item(index, item):
    get_glipper_history().set(index, item)
 
-def getItem(index):
+def get_history_item(index):
    return get_glipper_history().get(index)
    
-def setActiveItem(index):
+def set_history_default_item(index):
    get_glipper_history().set_default(get_glipper_history().get(index))

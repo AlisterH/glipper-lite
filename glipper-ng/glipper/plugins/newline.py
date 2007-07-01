@@ -10,12 +10,12 @@
 
 import glipper
 
-def newItem(arg):
-	glipper.setItem(0, glipper.getItem(0)+'\n')
-	glipper.setActiveItem(0)
+def on_new_item(arg):
+   glipper.set_history_item(0, arg + '\n')
+   glipper.set_history_default_item(0)
 
-def getInfo():
-	info = {"Name": "New Line",
-		"Description": "This plugin adds a newline character at the end of items in the clipboard",
-		"Preferences": False}
-	return info
+def info():
+   info = {"Name": "New line",
+      "Description": "Example plugin that adds a newline character at the end of items in the clipboard",
+      "Preferences": False}
+   return info

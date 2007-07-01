@@ -24,8 +24,8 @@ class History(gobject.GObject):
    
    def on_new_item(self, clipboards, item):
       self.add(item)
-      get_glipper_plugins_manager().call('newItem', item)
-         
+      get_glipper_plugins_manager().call('on_new_item', item)
+      
    def clear(self):
       self.history = []
       self.emit('changed', self.history)
@@ -53,7 +53,6 @@ class History(gobject.GObject):
          self.emit('changed', self.history)
    
    def set_default(self, item):
-      self.add(item)
       get_glipper_clipboards().set_default_clipboard_text(item)
       self.emit('changed', self.history)
    
