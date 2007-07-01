@@ -35,7 +35,7 @@ class Clipboards(gobject.GObject):
          self.primary_clipboard_text = text
          
    def get_default_clipboard_text(self):
-      return self.default_clipboard.wait_for_text()
+      return self.default_clipboard_text
    
    def on_default_clipboard_owner_change(self, clipboard, event):
       if self.use_default_clipboard:
