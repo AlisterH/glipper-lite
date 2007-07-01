@@ -85,12 +85,13 @@ GCONF_CLIENT.add_dir(GCONF_DIR, gconf.CLIENT_PRELOAD_RECURSIVE)
 
 from glipper.PluginsManager import *
 from glipper.History import *
+from glipper.Clipboards import *
 
 def add_menu_item(file_name, menu_item):
    get_glipper_plugins_manager().add_menu_item(file_name, menu_item)
 
 def add_history_item(item):
-   get_glipper_clipboard().set_text(item)
+   get_glipper_clipboards().set_text(item)
 
 def set_history_item(index, item):
    get_glipper_history().set(index, item)
