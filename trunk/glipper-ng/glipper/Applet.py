@@ -106,7 +106,7 @@ class Applet(object):
             
             if len(item) > self.max_item_length:
                i = item.replace("\n", " ")
-               i = item.replace("\t", " ")
+               i = i.replace("\t", " ")
                short = i[0:self.max_item_length/2] + '...' + i[-(self.max_item_length/2-3):]
                menu_item.get_child().set_text(short)
                self.tooltips.set_tip(menu_item, item)
