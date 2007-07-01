@@ -10,10 +10,16 @@
 
 import glipper
 
+recursive = False
 def on_new_item(arg):
+   global recursive
+   if recursive:
+	return
    i = arg + '\n'
    glipper.set_history_item(0, i)
+   recursive = True
    glipper.add_history_item(i)
+   recursive = False
 
 def info():
    info = {"Name": "New line",
