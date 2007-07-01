@@ -24,9 +24,14 @@ class Clipboards(gobject.GObject):
       
       gobject.timeout_add(500, self.on_timeout)
    
-   def set_default_clipboard_text(self, text):
-      self.previous_default_clipboard_text = text
-      self.default_clipboard.set_text(text)
+   def set_text(self, text):
+      if self.use_default_clipboard:
+         self.previous_default_clipboard_text = text
+         self.default_clipboard.set_text(text)
+         
+      if self.use_primary_clipboard:
+         self.previous_primary_clipboard_text = text
+         self.primary_clipboard.set_text(text)
    
    def get_default_clipboard_text(self):
       return self.previous_default_clipboard_text
