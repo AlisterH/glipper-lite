@@ -89,9 +89,15 @@ class Applet(object):
       self.menu.popup(None, None, self.position_menu, 1, gtk.get_current_event_time())
    
    def update_menu(self, history):
+      plugins_menu_items = get_glipper_plugins_manager().get_menu_items()
+      
+      for module, menu_item in plugins_menu_items:
+         if menu_item.get_parent() == self.menu:
+            self.menu.remove(menu_item)
+         
       self.menu.destroy()
       self.menu = gtk.Menu()
-      
+         
       if len(history) == 0:
          self.menu.append(gtk.MenuItem(_('< Empty history >')))
       else:
@@ -117,16 +123,11 @@ class Applet(object):
       clear_item.connect('activate', self.on_clear)
       self.menu.append(clear_item)
       
-      plugins_menu_items = get_glipper_plugins_manager().get_menu_items()
-      
       if len(plugins_menu_items) > 0:
          self.menu.append(gtk.SeparatorMenuItem())
          
-         for menu_item in plugins_menu_items:
-            label, callback = plugins_menu_items[menu_item]
-            item = gtk.MenuItem(label)
-            item.connect('activate', lambda x: callback())
-            self.menu.append(item)
+         for module, menu_item in plugins_menu_items:
+            self.menu.append(menu_item)
             
       self.menu.connect('deactivate', self.on_menu_deactivate)
       
@@ -179,7 +180,7 @@ class Applet(object):
          
    def on_history_changed(self, object, history):
       self.update_menu(history)
-      get_glipper_plugins_manager().call('historyChanged')
+      get_glipper_plugins_manager().call('on_history_changed')
       
    def on_mark_default_entry_changed(self, value):
       if value is None or value.type != gconf.VALUE_BOOL:

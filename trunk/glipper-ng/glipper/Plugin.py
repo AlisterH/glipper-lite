@@ -1,14 +1,19 @@
+import sys
+
 class Plugin(object):
    def __init__(self, file_name):
       self.file_name = file_name
       self.load_module()
-      self.info = self.call('getInfo')
+      self.info = self.call('info')
    
    def load_module(self):
       try:
          self.module = __import__(self.file_name)
       except ImportError:
          return
+   
+   def remove_module(self):
+      del sys.modules[self.file_name]
    
    def get_file_name(self):
       return self.file_name
@@ -22,7 +27,7 @@ class Plugin(object):
    def get_preferences(self):
       return self.info['Preferences']
       
-   def call(self, name, args=()):
+   def call(self, name, *args):
       if hasattr(self.module, name):
          func = getattr(self.module, name)
          if callable(func):

@@ -10,7 +10,7 @@ class PluginsManager(gobject.GObject):
    def __init__(self):
       gobject.GObject.__init__(self)
       self.plugins = []
-      self.menu_items = {} # History menu items for plugins
+      self.menu_items = [] # History menu items for plugins
       
       self.autostart_plugins = glipper.GCONF_CLIENT.get_list(glipper.GCONF_AUTOSTART_PLUGINS, gconf.VALUE_STRING)
       
@@ -24,20 +24,22 @@ class PluginsManager(gobject.GObject):
       self.autostart_plugins = glipper.GCONF_CLIENT.get_list(glipper.GCONF_AUTOSTART_PLUGINS, gconf.VALUE_STRING)
 
    def load(self):
-      for plugin in self.autostart_plugins:
-         self.start(Plugin(plugin))
+      for file_name in self.autostart_plugins:
+         self.start(file_name)
 
-   def start(self, plugin):
+   def start(self, file_name):
+      plugin = Plugin(file_name)
       self.plugins.append(plugin)
       plugin.call('init')
       
-   def stop(self, plugin):
-      for p in self.plugins:
-         if p.get_file_name() == plugin.get_file_name():
-            self.plugins.remove(p)
-            p.call('stop')
-            self.remove_menu_item(plugin.get_file_name())
-   
+   def stop(self, file_name):
+      for plugin in self.plugins:
+         if plugin.get_file_name() == file_name:
+            plugin.call('stop')
+            plugin.remove_module()
+            self.plugins.remove(plugin)
+            self.remove_menu_items(plugin.get_file_name())
+            
    def stop_all(self):
       for plugin in self.plugins:
          self.stop(plugin)
@@ -45,44 +47,43 @@ class PluginsManager(gobject.GObject):
    def get_menu_items(self):
       return self.menu_items   
    
-   def remove_menu_item(self, file_name):
-      try:
-         del self.menu_items[file_name]
-         self.emit('menu-items-changed')
-      except KeyError:
-         return
+   def remove_menu_items(self, file_name):
+      for module, menu_item in self.menu_items:
+         if module == file_name:
+            self.menu_items.remove((module, menu_item))
+            del menu_item
+      self.emit('menu-items-changed')
    
-   def add_menu_item(self, file_name, label, callback):
-      self.menu_items[file_name] = (label, callback)
+   def add_menu_item(self, file_name, menu_item):
+      self.menu_items.append((file_name, menu_item))
       self.emit('menu-items-changed')
       
-   def has_started(self, plugin):
-      for p in self.plugins:
-         if p.get_file_name() == plugin.get_file_name():
+   def has_started(self, file_name):
+      for plugin in self.plugins:
+         if plugin.get_file_name() == file_name:
             return True
       return False
       
-   def has_autostarted(self, plugin):
-      return plugin.get_file_name() in self.autostart_plugins
+   def has_autostarted(self, file_name):
+      return file_name in self.autostart_plugins
 
    def call(self, signal, *args):
       for plugin in self.plugins:
-         plugin.call(signal, args)
+         plugin.call(signal, *args)
 
 class PluginsWindow(object):
    def __init__(self, parent):
       glade_file = gtk.glade.XML(join(glipper.SHARED_DATA_DIR, "plugins-window.glade"))
       
-      self.PLUGIN_COLUMN, self.ENABLED_COLUMN, self.AUTOSTART_COLUMN, self.NAME_COLUMN, self.DESCRIPTION_COLUMN = range(5)
+      self.FILE_NAME_COLUMN, self.ENABLED_COLUMN, self.AUTOSTART_COLUMN, self.NAME_COLUMN, self.DESCRIPTION_COLUMN, self.PREFERENCES_COLUMN = range(6)
       
       self.plugins_window = glade_file.get_widget("plugins_window")
       self.plugins_list = glade_file.get_widget("plugins_list")
       self.preferences_button = glade_file.get_widget("preferences_button")
       self.refresh_button = glade_file.get_widget("refresh_button")
-      self.plugins_list_model = gtk.ListStore(gobject.TYPE_PYOBJECT, gobject.TYPE_BOOLEAN, gobject.TYPE_BOOLEAN, gobject.TYPE_STRING, gobject.TYPE_STRING)
+      self.plugins_list_model = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_BOOLEAN, gobject.TYPE_BOOLEAN, gobject.TYPE_STRING, gobject.TYPE_STRING, gobject.TYPE_BOOLEAN)
       self.plugins_list.set_model(self.plugins_list_model)
       self.plugins_list.get_selection().connect('changed', self.on_plugins_list_selection_changed)
-      self.preferences_button.connect('clicked', self.on_preferences_button_clicked)
       
       renderer = gtk.CellRendererToggle()
       renderer.connect('toggled', self.on_enabled_toggled)
@@ -112,7 +113,7 @@ class PluginsWindow(object):
       for file in directory:
          if file.name[-3:] == ".py":
             plugin = Plugin(file.name[:-3])
-            self.plugins_list_model.append([plugin, plugins_manager.has_started(plugin), plugins_manager.has_autostarted(plugin), plugin.get_name(), plugin.get_description()])
+            self.plugins_list_model.append([plugin.get_file_name(), plugins_manager.has_started(plugin.get_file_name()), plugins_manager.has_autostarted(plugin.get_file_name()), plugin.get_name(), plugin.get_description(), plugin.get_preferences()])
 
    def on_autostart_plugins_changed(self, value):
       if value is None or value.type != gconf.VALUE_LIST:
@@ -122,7 +123,7 @@ class PluginsWindow(object):
       iter = self.plugins_list_model.get_iter_first()
       
       while iter:
-         file_name = self.plugins_list_model.get_value(iter, self.PLUGIN_COLUMN).get_file_name()
+         file_name = self.plugins_list_model.get_value(iter, self.FILE_NAME_COLUMN)
          
          if file_name in self.autostart_plugins:
             self.plugins_list_model.set_value(iter, self.AUTOSTART_COLUMN, True)
@@ -139,42 +140,39 @@ class PluginsWindow(object):
    def on_preferences_button_clicked(self, button):
       treeview, iter = self.plugins_list.get_selection().get_selected()
       
-      plugin = self.plugins_list_model.get_value(iter, self.PLUGIN_COLUMN)
+      file_name = self.plugins_list_model.get_value(iter, self.FILE_NAME_COLUMN)
       
-      self.plugins_window.hide()
-      plugin.call('showPreferences')
-      self.plugins_window.show()
+      Plugin(file_name).call('on_show_preferences')
       
    def on_plugins_list_selection_changed(self, selection):
       treeview, iter = selection.get_selected()
       
-      preferences = self.plugins_list_model.get_value(iter, self.PLUGIN_COLUMN).get_preferences()
+      preferences = self.plugins_list_model.get_value(iter, self.PREFERENCES_COLUMN)
  
       self.preferences_button.set_sensitive(preferences)
       
    def on_autostart_toggled(self, renderer, path):
       iter = self.plugins_list_model.get_iter(path)
-      plugin = self.plugins_list_model.get_value(iter, self.PLUGIN_COLUMN)
-      file_name = plugin.get_file_name()
+      file_name = self.plugins_list_model.get_value(iter, self.FILE_NAME_COLUMN)
       
-      if plugins_manager.has_autostarted(plugin):
+      if plugins_manager.has_autostarted(file_name):
          self.autostart_plugins.remove(file_name)
       else:
          self.autostart_plugins.append(file_name)
       
-      self.plugins_list_model.set_value(iter, self.AUTOSTART_COLUMN, plugins_manager.has_autostarted(plugin))
+      self.plugins_list_model.set_value(iter, self.AUTOSTART_COLUMN, plugins_manager.has_autostarted(file_name))
       glipper.GCONF_CLIENT.set_list(glipper.GCONF_AUTOSTART_PLUGINS, gconf.VALUE_STRING, self.autostart_plugins)
       
    def on_enabled_toggled(self, renderer, path):
       iter = self.plugins_list_model.get_iter(path)
-      plugin = self.plugins_list_model.get_value(iter, self.PLUGIN_COLUMN)
-      
-      if plugins_manager.has_started(plugin):
-         plugins_manager.stop(plugin)
+      file_name = self.plugins_list_model.get_value(iter, self.FILE_NAME_COLUMN)
+  
+      if plugins_manager.has_started(file_name):
+         plugins_manager.stop(file_name)
       else:
-         plugins_manager.start(plugin)
+         plugins_manager.start(file_name)
       
-      self.plugins_list_model.set_value(iter, self.ENABLED_COLUMN, plugins_manager.has_started(plugin))
+      self.plugins_list_model.set_value(iter, self.ENABLED_COLUMN, plugins_manager.has_started(file_name))
 
 plugins_manager = PluginsManager()
 
