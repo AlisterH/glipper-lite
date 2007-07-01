@@ -104,7 +104,6 @@ def init():
 
 def on_activate(menuitem, snippet):
    glipper.add_history_item(snippet)
-   glipper.set_history_default_item(0)
 
 def update_menu():
    max_length = glipper.GCONF_CLIENT.get_int(glipper.GCONF_MAX_ITEM_LENGTH)
