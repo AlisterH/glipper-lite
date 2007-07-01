@@ -66,7 +66,7 @@ class Manager:
             self.snippets_model.append([item])
             
         glade_file.signal_autoconnect(self)
-   
+
     def on_manager_response(self, window, response):
       if response == gtk.RESPONSE_DELETE_EVENT or response == gtk.RESPONSE_CLOSE:
          window.destroy()
@@ -100,6 +100,7 @@ tooltips = gtk.Tooltips()
 def init():
     load_snippets()
     glipper.add_menu_item(__name__, menu_item)
+    glipper.GCONF_CLIENT.notify_add(glipper.GCONF_MAX_ITEM_LENGTH, lambda x, y, z, a: update_menu())
     update_menu()
 
 def on_activate(menuitem, snippet):
@@ -115,12 +116,8 @@ def update_menu():
       menu.append(gtk.MenuItem('No snippets available'))
    else:
       for snippet in snippets:
-         item = gtk.MenuItem(snippet)
+         item = gtk.MenuItem(glipper.format_item(snippet))
          if len(snippet) > max_length:
-            i = snippet.replace("\n", " ")
-            i = snippet.replace("\t", " ")
-            short = i[0:max_length/2] + '...' + i[-(max_length/2-3):]
-            item.get_child().set_text(short)
             tooltips.set_tip(item, snippet)
          item.connect('activate', on_activate, snippet)
          menu.append(item)

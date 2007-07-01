@@ -17,21 +17,9 @@ class Applet(object):
       self.image = gtk.Image()
       self.image.set_from_pixbuf(gtk.IconTheme.load_icon(gtk.icon_theme_get_default(), "glipper", self.applet.get_size() - 2, 0))
       self.tooltips.set_tip(self.applet, _("Glipper - Popup shortcut: ") + get_glipper_keybinder().get_key_combination())
-      
-      self.mark_default_entry = glipper.GCONF_CLIENT.get_bool(glipper.GCONF_MARK_DEFAULT_ENTRY)
-      if self.mark_default_entry == None:
-         self.mark_default_entry = True
-      glipper.GCONF_CLIENT.notify_add(glipper.GCONF_MARK_DEFAULT_ENTRY, lambda x, y, z, a: self.on_mark_default_entry_changed (z.value))
-      
-      self.save_history = glipper.GCONF_CLIENT.get_bool(glipper.GCONF_SAVE_HISTORY)
-      if self.mark_default_entry == None:
-         self.mark_default_entry = True
-      glipper.GCONF_CLIENT.notify_add(glipper.GCONF_SAVE_HISTORY, lambda x, y, z, a: self.on_save_history_changed (z.value))
-      
-      self.max_item_length = glipper.GCONF_CLIENT.get_int(glipper.GCONF_MAX_ITEM_LENGTH)
-      if self.max_item_length == None:
-         self.max_elements = 35
-      glipper.GCONF_CLIENT.notify_add(glipper.GCONF_MAX_ITEM_LENGTH, lambda x, y, z, a: self.on_max_item_length_changed (z.value))
+
+      glipper.GCONF_CLIENT.notify_add(glipper.GCONF_MARK_DEFAULT_ENTRY, lambda x, y, z, a: self.update_menu(get_glipper_history().get_history()))
+      glipper.GCONF_CLIENT.notify_add(glipper.GCONF_MAX_ITEM_LENGTH, lambda x, y, z, a: self.update_menu(get_glipper_history().get_history()))
       
       gtk.window_set_default_icon_name("glipper")
       
@@ -102,16 +90,11 @@ class Applet(object):
          self.menu.append(gtk.MenuItem(_('< Empty history >')))
       else:
          for item in history:
-            menu_item = gtk.MenuItem(item, False)
-            
-            if len(item) > self.max_item_length:
-               i = item.replace("\n", " ")
-               i = i.replace("\t", " ")
-               short = i[0:self.max_item_length/2] + '...' + i[-(self.max_item_length/2-3):]
-               menu_item.get_child().set_text(short)
+            menu_item = gtk.MenuItem(format_item(item), False)
+            if len(item) > max_item_length:
                self.tooltips.set_tip(menu_item, item)
 
-            if self.mark_default_entry and item == get_glipper_clipboards().get_default_clipboard_text():
+            if mark_default_entry and item == get_glipper_clipboards().get_default_clipboard_text():
                menu_item.get_child().set_markup('<b>' + menu_item.get_child().get_text() + '</b>')
                
             menu_item.connect('activate', self.on_menu_item_activate, item)
@@ -154,7 +137,7 @@ class Applet(object):
       return True
       
    def on_destroy(self, applet):
-      if self.save_history:
+      if save_history:
          get_glipper_history().save()
       get_glipper_plugins_manager().stop_all()
       
@@ -181,20 +164,45 @@ class Applet(object):
    def on_history_changed(self, object, history):
       self.update_menu(history)
       get_glipper_plugins_manager().call('on_history_changed')
-      
-   def on_mark_default_entry_changed(self, value):
-      if value is None or value.type != gconf.VALUE_BOOL:
-         return
-      self.mark_default_entry = value.get_bool()
-      self.update_menu(get_history().get_history())
-      
-   def on_save_history_changed(self, value):
-      if value is None or value.type != gconf.VALUE_BOOL:
-         return
-      self.save_history = value.get_bool()
-      
-   def on_max_item_length_changed (self, value):
-      if value is None or value.type != gconf.VALUE_INT:
-         return
-      self.max_item_length = value.get_int()
-      self.update_menu(get_history().get_history())
+
+#These variables and functions are available for all Applet instances:
+
+mark_default_entry = glipper.GCONF_CLIENT.get_bool(glipper.GCONF_MARK_DEFAULT_ENTRY)
+if mark_default_entry == None:
+   mark_default_entry = True
+glipper.GCONF_CLIENT.notify_add(glipper.GCONF_MARK_DEFAULT_ENTRY, lambda x, y, z, a: on_mark_default_entry_changed (z.value))
+
+save_history = glipper.GCONF_CLIENT.get_bool(glipper.GCONF_SAVE_HISTORY)
+if mark_default_entry == None:
+   mark_default_entry = True
+glipper.GCONF_CLIENT.notify_add(glipper.GCONF_SAVE_HISTORY, lambda x, y, z, a: on_save_history_changed (z.value))
+
+max_item_length = glipper.GCONF_CLIENT.get_int(glipper.GCONF_MAX_ITEM_LENGTH)
+if max_item_length == None:
+   max_elements = 35
+glipper.GCONF_CLIENT.notify_add(glipper.GCONF_MAX_ITEM_LENGTH, lambda x, y, z, a: on_max_item_length_changed (z.value))
+
+def on_mark_default_entry_changed(value):
+   global mark_default_entry
+   if value is None or value.type != gconf.VALUE_BOOL:
+      return
+   mark_default_entry = value.get_bool()
+
+def on_save_history_changed(value):
+   global save_history
+   if value is None or value.type != gconf.VALUE_BOOL:
+      return
+   save_history = value.get_bool()
+
+def on_max_item_length_changed (value):
+   global max_item_length
+   if value is None or value.type != gconf.VALUE_INT:
+      return
+   max_item_length = value.get_int()
+
+def format_item(item):
+   i = item.replace("\n", " ")
+   i = i.replace("\t", " ")
+   if len(item) > max_item_length:
+     return i[0:max_item_length/2] + '...' + i[-(max_item_length/2-3):]
+   return i
