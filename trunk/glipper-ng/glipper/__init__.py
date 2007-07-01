@@ -97,6 +97,3 @@ def set_history_item(index, item):
 
 def get_history_item(index):
    return get_glipper_history().get(index)
-   
-def set_history_default_item(index):
-   get_glipper_history().set_default(get_glipper_history().get(index))

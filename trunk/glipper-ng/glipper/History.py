@@ -54,12 +54,6 @@ class History(gobject.GObject):
          self.history = self.history[0:self.max_elements]
       self.emit('changed', self.history)
 
-   def set_default(self, item):
-      self.history.remove(item)
-      self.add(item)
-      get_glipper_clipboards().set_text(item)
-      self.emit('changed', self.history)
-   
    def load(self):
       try:
          file = open(glipper.HISTORY_FILE, "r")

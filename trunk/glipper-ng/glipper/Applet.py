@@ -66,7 +66,7 @@ class Applet(object):
       self.applet.set_state(gtk.STATE_NORMAL)
    
    def on_menu_item_activate(self, menuitem, item):
-      get_glipper_history().set_default(item)
+      get_glipper_clipboards().set_text(item)
       
    def on_clear(self, menuitem):
       get_glipper_history().clear()
