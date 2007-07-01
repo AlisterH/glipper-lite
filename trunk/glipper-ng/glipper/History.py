@@ -38,7 +38,7 @@ class History(gobject.GObject):
    
    def set(self, index, item):
       if item in self.history:
-	 self.history.remove(item)
+	      self.history.remove(item)
       try:
          self.history[index] = item
       except IndexError:
