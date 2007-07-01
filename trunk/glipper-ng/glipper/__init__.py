@@ -90,7 +90,7 @@ def add_menu_item(file_name, menu_item):
    get_glipper_plugins_manager().add_menu_item(file_name, menu_item)
 
 def add_history_item(item):
-   get_glipper_history().add(item)
+   get_glipper_clipboard().set_text(item)
 
 def set_history_item(index, item):
    get_glipper_history().set(index, item)

@@ -30,6 +30,7 @@ class Clipboards(gobject.GObject):
          
       if self.use_primary_clipboard:
          self.primary_clipboard.set_text(text)
+
       self.on_timeout()
    
    def get_default_clipboard_text(self):

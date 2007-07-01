@@ -11,8 +11,9 @@
 import glipper
 
 def on_new_item(arg):
-   glipper.set_history_item(0, arg + '\n')
-   glipper.set_history_default_item(0)
+   i = arg + '\n'
+   glipper.set_history_item(0, i)
+   glipper.add_history_item(i)
 
 def info():
    info = {"Name": "New line",
