@@ -39,7 +39,7 @@ class Manager:
          self.history_model.append ([item])
          index = index + 1
          item = glipper.get_history_item(index)
-
+      
     def __init__(self):
         glade_file = gtk.glade.XML(os.path.dirname(__file__) + "/snippets.glade")
         self.manager = glade_file.get_widget("manager")
@@ -70,9 +70,9 @@ class Manager:
     def on_manager_response(self, window, response):
       if response == gtk.RESPONSE_DELETE_EVENT or response == gtk.RESPONSE_CLOSE:
          window.destroy()
-         snippets_manager = None
-       
-	# Events:
+      if response == 1:
+         self.update_history_model()
+	
     def on_add_button_clicked(self, widget):
         self.history_model, iter = self.history_selection.get_selected()
         if iter:
@@ -89,8 +89,6 @@ class Manager:
             self.snippets_model.remove(iter)
             save_snippets()
             update_menu()
-
-snippets_manager = None
 
 def on_show_preferences():
     snippets_manager = Manager()
@@ -114,16 +112,19 @@ def update_menu():
    menu.destroy()
    menu = gtk.Menu()
    
-   for snippet in snippets:
-      item = gtk.MenuItem(snippet)
-      if len(snippet) > max_length:
-               i = snippet.replace("\n", " ")
-               i = snippet.replace("\t", " ")
-               short = i[0:max_length/2] + '...' + i[-(max_length/2-3):]
-               item.get_child().set_text(short)
-               tooltips.set_tip(item, snippet)
-      item.connect('activate', on_activate, snippet)
-      menu.append(item)
+   if len(snippets) == 0:
+      menu.append(gtk.MenuItem('No snippets available'))
+   else:
+      for snippet in snippets:
+         item = gtk.MenuItem(snippet)
+         if len(snippet) > max_length:
+            i = snippet.replace("\n", " ")
+            i = snippet.replace("\t", " ")
+            short = i[0:max_length/2] + '...' + i[-(max_length/2-3):]
+            item.get_child().set_text(short)
+            tooltips.set_tip(item, snippet)
+         item.connect('activate', on_activate, snippet)
+         menu.append(item)
    
    menu.show_all()
    menu_item.set_submenu(menu)
@@ -132,9 +133,7 @@ def stop():
    menu.destroy()
 
 def on_history_changed():
-    if snippets_manager:
-      snippets_manager.update_history_model()
-      update_menu()
+    update_menu()
 
 def info():
 	info = {"Name": "Snippets",
