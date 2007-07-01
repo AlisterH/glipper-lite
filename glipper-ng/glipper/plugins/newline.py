@@ -14,7 +14,7 @@ recursive = False
 def on_new_item(arg):
    global recursive
    if recursive:
-	return
+	   return
    i = arg + '\n'
    glipper.set_history_item(0, i)
    recursive = True
