@@ -46,12 +46,14 @@ class History(gobject.GObject):
          self.emit('changed', self.history)
    
    def add(self, item):
-      if item not in self.history:
-         self.history.insert(0, item)
-         if len(self.history) > self.max_elements:
-            self.history = self.history[0:self.max_elements]
-         self.emit('changed', self.history)
-   
+      if item in self.history:
+         self.history.remove(item)
+         
+      self.history.insert(0, item)
+      if len(self.history) > self.max_elements:
+         self.history = self.history[0:self.max_elements]
+      self.emit('changed', self.history)
+
    def set_default(self, item):
       self.history.remove(item)
       self.add(item)
