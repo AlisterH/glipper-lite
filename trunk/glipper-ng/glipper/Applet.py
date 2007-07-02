@@ -95,7 +95,7 @@ class Applet(object):
                self.tooltips.set_tip(menu_item, item)
 
             if mark_default_entry and item == get_glipper_clipboards().get_default_clipboard_text():
-               menu_item.get_child().set_markup('<b>' + menu_item.get_child().get_text() + '</b>')
+               menu_item.get_child().set_markup('<b>' + gobject.markup_escape_text(menu_item.get_child().get_text()) + '</b>')
                
             menu_item.connect('activate', self.on_menu_item_activate, item)
             self.menu.append(menu_item)
