@@ -63,14 +63,13 @@ AS_AC_EXPAND(PYTHONDIR, $pythondir)
 AC_SUBST(PYTHONDIR)
 		
 dnl ****************************************************************************
-dnl * PyGTK & co for Gnome Streamer
+dnl * PyGTK
 dnl ****************************************************************************
 PKG_CHECK_MODULES(GLIPPER,
 	gtk+-2.0				>= 2.6
 	pygtk-2.0				>= 2.6
 	pygobject-2.0			>= 2.6
 	gnome-python-2.0		>= 2.10
-	gnome-desktop-2.0		>= 2.10
 )
 AC_SUBST(GLIPPER_CFLAGS)
 AC_SUBST(GLIPPER_LIBS)
@@ -124,7 +123,6 @@ glipper/Makefile
 glipper/defs.py
 glipper/plugins/Makefile
 glipper/keybinder/Makefile
-glipper/gnomedesktop/Makefile
 glipper/osutils/Makefile
 data/Makefile
 data/glipper.pc
