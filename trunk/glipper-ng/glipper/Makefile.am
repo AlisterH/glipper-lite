@@ -1,4 +1,4 @@
-SUBDIRS = keybinder gnomedesktop osutils plugins
+SUBDIRS = keybinder osutils plugins
 	
 glipper: glipper.py
 	sed -e "s|\@PYTHONDIR\@|$(pythondir)/glipper|" $< > $@
