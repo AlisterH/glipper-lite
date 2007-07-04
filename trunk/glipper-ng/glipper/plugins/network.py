@@ -7,6 +7,7 @@ GLIPPERPORT = 10368
 
 allConnections = []
 inserting = False
+running = True
 
 def info():
    info = {"Name": "Network", 
@@ -31,52 +32,49 @@ class StringListener(threading.Thread):
    def __init__(self, socket):
       threading.Thread.__init__(self)
       self.socket = socket
+      
    def run(self):
       while running:
          try:
             string = self.socket.recv(4096)
             if not string:
                raise socket.error
-            time.sleep(100)
          except socket.error:
             allConnections.remove(self.socket)
             self.socket.close()
             return
-         print string
+         finally:
+            time.sleep(5)
+            
          global inserting
          inserting = True
          glipper.add_history_item(string)
          inserting = False
-
-s = None
-
+      
 #listens for incoming connections (like a server does):
 class ServerListener(threading.Thread):
    def run(self):
       print "start listening for incoming connections!"
       s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
       s.bind(('', GLIPPERPORT))
+      s.setblocking(False)
+      
       while running:
          try:
             s.listen(1)
             conn, addr = s.accept()
             print "connection %s accepted" % addr[0]
-            time.sleep(100)
          except socket.error:
             continue
-         string = StringListener(conn)
-         string.start()
-         allThreads.append(string)
+         finally:
+            time.sleep(5)
+            
+         StringListener(conn).start()
          allConnections.append(conn)
-
-allThreads = []
-
-running = True
-
+      print "stop listening for incoming connections!"
+      
 def stop():
    running = False
-   for thread in allThreads:
-      thread.join()
       
 def init():
    #read configfile:
@@ -100,14 +98,10 @@ def init():
          print "can\'t connect with %s" % x
          s.close()
          continue
-      listener = StringListener(s)
-      listener.setDaemon(1)
-      listener.start()
+      StringListener(s).start()
 
    #Then listen:
-   server = ServerListener()
-   server.start()
-   allThreads.append(server)
+   ServerListener().start()
 
 def on_show_preferences():
    preferences().show()
@@ -286,4 +280,5 @@ class preferences:
          f.setConnectIPs(self.getStringListFromStore(self.connectStore))
          f.close()
          widget.destroy()   
+
 
