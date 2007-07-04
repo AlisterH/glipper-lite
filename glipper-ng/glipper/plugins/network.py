@@ -44,7 +44,7 @@ class StringListener(threading.Thread):
             self.socket.close()
             return
          finally:
-            time.sleep(5)
+            time.sleep(0.1)
             
          global inserting
          inserting = True
@@ -67,15 +67,17 @@ class ServerListener(threading.Thread):
          except socket.error:
             continue
          finally:
-            time.sleep(5)
+            time.sleep(0.1)
             
-         StringListener(conn).start()
+         listener = StringListener(conn)
+         listener.setDaemon(1)
+         listener.start()
          allConnections.append(conn)
       print "stop listening for incoming connections!"
       
 def stop():
    running = False
-      
+   
 def init():
    #read configfile:
    f = confFile("r")
@@ -98,11 +100,15 @@ def init():
          print "can\'t connect with %s" % x
          s.close()
          continue
-      StringListener(s).start()
+      listener = StringListener(s)
+      listener.setDaemon(1)
+      listener.start()
 
    #Then listen:
-   ServerListener().start()
-
+   server = ServerListener()
+   server.setDaemon(1)
+   server.start()
+   
 def on_show_preferences():
    preferences().show()
 
