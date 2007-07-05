@@ -1,0 +1,69 @@
+This is a documentation about how to write plugins for Glipper.
+
+Plugins are written in the programming language Python. Glipper searches in the following pathes for plugins:
+
+If you write a plugin, make sure it is in one of this directories in order to use it, and that it has the extension
+*.py.
+It is a good idea to use only one .py file (and possibly a *.glade file) for one plugin, and not several. 
+
+Also it's a good idea to look at the plugins that are shipped with glipper.
+
+The communication between the plugins and Glipper consists of events (method calls by Glipper into your plugin) 
+and api calls (method calls by your plugin into Glipper).
+
+Here is a list of all events. If you want to use one of these, you have to do it by defining a function with this 
+name at the global scope (so not in a class).
+
+- "info"
+  Every plugin has to implement this method. It should return a dictionary which gives glipper the information about the name, the description and
+  wether a preferences dialog is available or not.
+  Here is an example how the newline plugin uses it:
+    def info():
+       info = {"Name": "New line",
+          "Description": "Example plugin that adds a newline character at the end of items in the clipboard",
+          "Preferences": False}
+       return info
+
+- "on_new_item"
+  This event gets sent if a new item is added to the glipper history. This item is delivered by the parameter.
+  This example prints every new item:
+  def on_new_item(item):
+     print item
+
+- "init"
+  This event is sent after your plugin is started. You can do initialization for your plugin here. No parameters and no return value.
+
+- "stop"
+  The opposite of "init". This gets called if the user askes glipper to stop the plugin.
+  The main intend of this event is to let your plugin stop all threads it uses (see the notes about thread programming below).
+  No parameters and no return value.
+
+- "on_activate"
+  Gets called if the menu item that you have possibly edited (or one of it's subitems, see the "add_menu_item" call below) gets clicked.
+  The first parameter is the widget that caused the call, the second is the string that the menuentry contains.
+  For an example how to use it see the snippets plugin for example.
+
+- "on_show_preferences"
+  Gets called if the user asks glipper to show the preferences of your plugin. Please show a gtk window here. Although it may be possible to
+  use other toolkits, it would "fit" into glipper.
+  The parameter is the parent widget. Please use it, because otherwise your window is maybe not shown at the front.
+
+
+Now about the api calls. You have to import the module "glipper" in order to use them.
+
+- "add_menu_item"
+- "add_history_item(item)"
+- "set_history_item(index, item)"
+- "get_history_item(item)"
+- "format_item(item)"
+TODO: Description
+
+About using threads in your plugin:
+*Todo*
+
+About storing preferences and other data belonging to your plugin:
+Please store the settings into a file in the ~/.glipper/plugins/ directory. You can get this directory in python by doing
+   dir = os.environ["HOME"] + "/.glipper/plugins"
+Please make also sure that this directory really exists:
+   if not os.path.exists(dir):
+      os.makedirs(dir)
