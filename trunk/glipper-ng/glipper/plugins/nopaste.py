@@ -30,8 +30,8 @@ def init():
    item.connect('activate', activated)
    glipper.add_menu_item(__name__, item)
 
-def on_show_preferences():
-   preferences().show()
+def on_show_preferences(parent):
+   preferences(parent).show()
 
 
 #config file class:
@@ -75,9 +75,10 @@ import gtk
 import gtk.glade
 
 class preferences:
-   def __init__(self):
+   def __init__(self, parent):
       gladeFile = gtk.glade.XML(os.path.dirname(__file__) + "/nopaste.glade")
       self.prefWind = gladeFile.get_widget("preferences")
+      self.prefWind.set_transient_for(parent)
       self.nickEntry = gladeFile.get_widget("nickEntry")
       self.langBox = gladeFile.get_widget("langBox")
       self.prefWind.connect('response', self.on_prefWind_response)

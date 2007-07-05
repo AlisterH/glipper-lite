@@ -72,7 +72,15 @@ class PluginsManager(gobject.GObject):
          plugin.call(signal, *args)
 
 class PluginsWindow(object):
+   __instance = None
+
    def __init__(self, parent):
+      if PluginsWindow.__instance == None:
+         PluginsWindow.__instance = self
+      else:
+         PluginsWindow.__instance.plugins_window.present()
+         return
+         
       glade_file = gtk.glade.XML(join(glipper.SHARED_DATA_DIR, "plugins-window.glade"))
       
       self.FILE_NAME_COLUMN, self.ENABLED_COLUMN, self.AUTOSTART_COLUMN, self.NAME_COLUMN, self.DESCRIPTION_COLUMN, self.PREFERENCES_COLUMN = range(6)
@@ -136,13 +144,14 @@ class PluginsWindow(object):
       if response == gtk.RESPONSE_DELETE_EVENT or response == gtk.RESPONSE_CLOSE:
          dialog.destroy()
          glipper.GCONF_CLIENT.notify_remove(self.autostart_plugins_notify)
+         PluginsWindow.__instance = None
    
    def on_preferences_button_clicked(self, button):
       treeview, iter = self.plugins_list.get_selection().get_selected()
       
       file_name = self.plugins_list_model.get_value(iter, self.FILE_NAME_COLUMN)
       
-      Plugin(file_name).call('on_show_preferences')
+      Plugin(file_name).call('on_show_preferences', self.plugins_window)
       
    def on_plugins_list_selection_changed(self, selection):
       treeview, iter = selection.get_selected()

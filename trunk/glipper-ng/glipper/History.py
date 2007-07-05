@@ -37,12 +37,12 @@ class History(gobject.GObject):
          return
    
    def set(self, index, item):
-      if index > len(self.history):
+      if index >= len(self.history):
          return
          
       if item in self.history:
 	      self.history.remove(item)
-	      if index > len(self.history):
+	      if index >= len(self.history):
 	         index -= 1
 
       self.history[index] = item 

@@ -109,8 +109,8 @@ def init():
    server.setDaemon(1)
    server.start()
    
-def on_show_preferences():
-   preferences().show()
+def on_show_preferences(parent):
+   preferences(parent).show()
 
 #config file class:
 
@@ -182,9 +182,10 @@ import gtk
 import gtk.glade
 
 class preferences:
-   def __init__(self):
+   def __init__(self, parent):
       gladeFile = gtk.glade.XML(os.path.dirname(__file__) + "/network.glade")
       self.prefWind = gladeFile.get_widget("preferences")
+      self.prefWind.set_transient_for(parent)
       self.prefWind.connect('response', self.on_prefWind_response)
       self.passEntry = gladeFile.get_widget("passEntry")
       self.accCheckbutton = gladeFile.get_widget("accCheckbutton")
