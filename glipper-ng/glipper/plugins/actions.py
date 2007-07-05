@@ -64,8 +64,8 @@ def on_new_item(newItem):
    if immediately:
       menu.popup(None, None, None, 0, 0)
 
-def on_show_preferences():
-   preferences().show()
+def on_show_preferences(parent):
+   preferences(parent).show()
 
 def info():
    info = {"Name": "Actions", 
@@ -133,9 +133,10 @@ class confFile:
 #preferences dialog:
 
 class preferences:
-   def __init__(self):
+   def __init__(self, parent):
       gladeFile = gtk.glade.XML(os.path.dirname(__file__) + "/actions.glade")
       self.prefWind = gladeFile.get_widget("preferences")
+      self.prefWind.set_transient_for(parent)
       self.prefWind.connect('response', self.on_prefWind_response)
       self.addCommandButton = gladeFile.get_widget("addCommandButton")
       self.addCommandButton.set_sensitive(False);

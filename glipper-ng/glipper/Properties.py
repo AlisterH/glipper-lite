@@ -2,7 +2,15 @@ import glipper, gtk, gtk.glade, gconf
 from os.path import join
 
 class Properties(object):
+   __instance = None
+   
    def __init__(self, parent):
+      if Properties.__instance == None:
+         Properties.__instance = self
+      else:
+         Properties.__instance.properties_window.present()
+         return
+         
       glade_file = gtk.glade.XML(join(glipper.SHARED_DATA_DIR, "properties-window.glade"))
       
       self.properties_window = glade_file.get_widget("properties_window")
@@ -102,4 +110,5 @@ class Properties(object):
          glipper.GCONF_CLIENT.notify_remove(self.mark_default_entry_notify)
          glipper.GCONF_CLIENT.notify_remove(self.save_history_notify)
          glipper.GCONF_CLIENT.notify_remove(self.key_combination_notify)
+         Properties.__instance = None
       

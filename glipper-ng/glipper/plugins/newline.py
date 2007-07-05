@@ -16,8 +16,8 @@ def on_new_item(arg):
    if recursive:
 	   return
    i = arg + '\n'
-   glipper.set_history_item(0, i)
    recursive = True
+   glipper.set_history_item(0, i)
    glipper.add_history_item(i)
    recursive = False
 

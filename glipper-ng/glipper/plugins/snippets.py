@@ -40,7 +40,7 @@ class Manager:
          index = index + 1
          item = glipper.get_history_item(index)
       
-    def __init__(self):
+    def __init__(self, parent):
         glade_file = gtk.glade.XML(os.path.dirname(__file__) + "/snippets.glade")
         self.manager = glade_file.get_widget("manager")
         self.manager.show_all()
@@ -64,7 +64,9 @@ class Manager:
         
         for item in snippets:
             self.snippets_model.append([item])
-            
+        
+        self.manager.set_transient_for(parent)
+        
         glade_file.signal_autoconnect(self)
 
     def on_manager_response(self, window, response):
@@ -90,8 +92,9 @@ class Manager:
             save_snippets()
             update_menu()
 
-def on_show_preferences():
-    snippets_manager = Manager()
+def on_show_preferences(parent):
+    load_snippets()
+    Manager(parent)
 
 menu_item = gtk.MenuItem('Snippets')
 menu = gtk.Menu()

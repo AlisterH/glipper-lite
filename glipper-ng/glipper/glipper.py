@@ -10,19 +10,6 @@ import gtk, gnomeapplet, gnome
 import getopt, sys
 from os.path import *
 
-# Allow to use uninstalled
-def _check(path):
-	return exists(path) and isdir(path) and isfile(path+"/AUTHORS")
-
-name = join(dirname(__file__), '..')
-if _check(name):
-	print 'Running uninstalled glipper, modifying PYTHONPATH'
-	sys.path.insert(0, abspath(name))
-else:
-	sys.path.insert(0, abspath("@PYTHONDIR@"))
-	print "Running installed glipper using [@PYTHONDIR@:$PYTHONPATH]"
-
-# Now the path is set, import our applet
 import glipper, glipper.Applet, glipper.defs
 
 sys.path.insert(0, glipper.PLUGINS_DIR)

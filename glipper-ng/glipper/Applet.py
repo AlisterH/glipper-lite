@@ -4,10 +4,7 @@ import gnomeapplet, gtk, gtk.gdk, gconf, gnomevfs, gobject, gnome
 from gettext import gettext as _
 
 import glipper, glipper.About, glipper.Properties
-from glipper.Keybinder import *
-from glipper.History import *
-from glipper.Clipboards import *
-from glipper.PluginsManager import *
+from glipper.Globals import *
 
 class Applet(object):
    def __init__(self, applet):
@@ -123,7 +120,7 @@ class Applet(object):
       gnome.help_display('glipper')
    
    def on_about (self, component, verb):
-	   glipper.About.show_about(self.applet)
+	   glipper.About.About(self.applet)
    
    def on_plugins (self, component, verb):
       PluginsWindow(self.applet)
