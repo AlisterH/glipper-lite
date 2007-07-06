@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-06 21:24+0200\n"
+"POT-Creation-Date: 2007-07-06 21:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,6 +41,22 @@ msgstr ""
 #. translators: These appear in the About dialog, usual format applies.
 #: ../glipper/About.py:42
 msgid "translator-credits"
+msgstr ""
+
+#: ../glipper/PluginsManager.py:99
+msgid "Enabled"
+msgstr ""
+
+#: ../glipper/PluginsManager.py:102
+msgid "Autostart"
+msgstr ""
+
+#: ../glipper/PluginsManager.py:103
+msgid "Name"
+msgstr ""
+
+#: ../glipper/PluginsManager.py:104
+msgid "Description"
 msgstr ""
 
 #: ../data/properties-window.glade.h:1
@@ -154,7 +170,7 @@ msgstr ""
 
 #: ../glipper/plugins/network.py:15
 msgid ""
-"Connect multiple glipper processes via network to synchronize their history"
+"Connect multiple Glipper processes via network to synchronize their history"
 msgstr ""
 
 #: ../glipper/plugins/network.py:225
@@ -162,7 +178,7 @@ msgid "New connection"
 msgstr ""
 
 #: ../glipper/plugins/network.py:230
-msgid "Enter IP Address: "
+msgid "Enter IP address: "
 msgstr ""
 
 #: ../glipper/plugins/newline.py:26
@@ -175,36 +191,36 @@ msgid ""
 "clipboard"
 msgstr ""
 
-#: ../glipper/plugins/nopaste.py:5 ../glipper/plugins/nopaste.py:29
+#: ../glipper/plugins/nopaste.py:7 ../glipper/plugins/nopaste.py:31
 msgid "Nopaste"
 msgstr ""
 
-#: ../glipper/plugins/nopaste.py:6
+#: ../glipper/plugins/nopaste.py:8
 msgid "Paste the entry of your clipboard to a No-Paste service"
 msgstr ""
 
-#: ../glipper/plugins/nopaste.py:24
-msgid "pasted by glipper"
+#: ../glipper/plugins/nopaste.py:26
+msgid "pasted by Glipper"
 msgstr ""
 
-#: ../glipper/plugins/nopaste.py:45
+#: ../glipper/plugins/nopaste.py:47
 msgid "Glipper user"
 msgstr ""
 
-#: ../glipper/plugins/snippets.py:51
+#: ../glipper/plugins/snippets.py:53
 msgid "History"
 msgstr ""
 
-#: ../glipper/plugins/snippets.py:59 ../glipper/plugins/snippets.py:99
-#: ../glipper/plugins/snippets.py:138
+#: ../glipper/plugins/snippets.py:61 ../glipper/plugins/snippets.py:101
+#: ../glipper/plugins/snippets.py:140
 msgid "Snippets"
 msgstr ""
 
-#: ../glipper/plugins/snippets.py:119
+#: ../glipper/plugins/snippets.py:121
 msgid "No snippets available"
 msgstr ""
 
-#: ../glipper/plugins/snippets.py:139
+#: ../glipper/plugins/snippets.py:141
 msgid "Create snippets from history items"
 msgstr ""
 
