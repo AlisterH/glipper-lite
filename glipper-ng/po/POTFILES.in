@@ -1,6 +1,7 @@
 [encoding: UTF-8]
 glipper/Applet.py
 glipper/About.py
+glipper/PluginsManager.py
 data/properties-window.glade
 data/Glipper.xml
 glipper/plugins/actions.py

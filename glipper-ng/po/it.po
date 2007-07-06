@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glipper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-06 21:24+0200\n"
+"POT-Creation-Date: 2007-07-06 21:43+0200\n"
 "PO-Revision-Date: 2006-11-21 01:19+0100\n"
 "Last-Translator: Eugenio Depalo <eugeniodepalo at mac dot com>\n"
 "Language-Team: Italian\n"
@@ -43,6 +43,22 @@ msgstr "Sito web di Glipper"
 #: ../glipper/About.py:42
 msgid "translator-credits"
 msgstr "Eugenio Depalo <eugeniodepalo@mac.com>"
+
+#: ../glipper/PluginsManager.py:99
+msgid "Enabled"
+msgstr "Abilitato"
+
+#: ../glipper/PluginsManager.py:102
+msgid "Autostart"
+msgstr "Autoavvia"
+
+#: ../glipper/PluginsManager.py:103
+msgid "Name"
+msgstr "Nome"
+
+#: ../glipper/PluginsManager.py:104
+msgid "Description"
+msgstr "Descrizione"
 
 #: ../data/properties-window.glade.h:1
 msgid "<Ctrl><Alt>c"
@@ -123,7 +139,9 @@ msgstr "Azioni"
 
 #: ../glipper/plugins/actions.py:74
 msgid "Define commands to run when an item matches a regular expression"
-msgstr "Definisci comandi da eseguire quando un elemento è conforme a un'espressione regolare"
+msgstr ""
+"Definisci comandi da eseguire quando un elemento è conforme a un'espressione "
+"regolare"
 
 #: ../glipper/plugins/actions.py:176 ../glipper/plugins/actions.glade.h:2
 msgid "Add command"
@@ -157,7 +175,9 @@ msgstr "Rete"
 #: ../glipper/plugins/network.py:15
 msgid ""
 "Connect multiple Glipper processes via network to synchronize their history"
-msgstr "Connetti più processi di Glipper via rete per sincronizzare la loro cronologia"
+msgstr ""
+"Connetti più processi di Glipper via rete per sincronizzare la loro "
+"cronologia"
 
 #: ../glipper/plugins/network.py:225
 msgid "New connection"
@@ -175,38 +195,40 @@ msgstr "Nuova linea"
 msgid ""
 "Example plugin that adds a newline character at the end of items in the "
 "clipboard"
-msgstr "Plugin di esempio che aggiunge un carattere di nuova linea alla fine degli elementi negli appunti"
+msgstr ""
+"Plugin di esempio che aggiunge un carattere di nuova linea alla fine degli "
+"elementi negli appunti"
 
-#: ../glipper/plugins/nopaste.py:5 ../glipper/plugins/nopaste.py:29
+#: ../glipper/plugins/nopaste.py:7 ../glipper/plugins/nopaste.py:31
 msgid "Nopaste"
 msgstr ""
 
-#: ../glipper/plugins/nopaste.py:6
+#: ../glipper/plugins/nopaste.py:8
 msgid "Paste the entry of your clipboard to a No-Paste service"
 msgstr "Incolla la voce nei tuoi appunti in un servizio No-Paste"
 
-#: ../glipper/plugins/nopaste.py:24
+#: ../glipper/plugins/nopaste.py:26
 msgid "pasted by Glipper"
 msgstr "incollato da Glipper"
 
-#: ../glipper/plugins/nopaste.py:45
+#: ../glipper/plugins/nopaste.py:47
 msgid "Glipper user"
 msgstr "Utente Glipper"
 
-#: ../glipper/plugins/snippets.py:51
+#: ../glipper/plugins/snippets.py:53
 msgid "History"
 msgstr "Cronologia"
 
-#: ../glipper/plugins/snippets.py:59 ../glipper/plugins/snippets.py:99
-#: ../glipper/plugins/snippets.py:138
+#: ../glipper/plugins/snippets.py:61 ../glipper/plugins/snippets.py:101
+#: ../glipper/plugins/snippets.py:140
 msgid "Snippets"
 msgstr "Snippet"
 
-#: ../glipper/plugins/snippets.py:119
+#: ../glipper/plugins/snippets.py:121
 msgid "No snippets available"
 msgstr "Nessuno snippet disponibile"
 
-#: ../glipper/plugins/snippets.py:139
+#: ../glipper/plugins/snippets.py:141
 msgid "Create snippets from history items"
 msgstr "Crea snippet dagli elementi della cronologia"
 
@@ -216,7 +238,9 @@ msgstr "Gestore di azioni"
 
 #: ../glipper/plugins/actions.glade.h:3
 msgid "Popup available actions when a new item gets added to the history"
-msgstr "Mostra le azioni disponibili quando un nuovo elemento viene aggiunto alla cronologia"
+msgstr ""
+"Mostra le azioni disponibili quando un nuovo elemento viene aggiunto alla "
+"cronologia"
 
 #: ../glipper/plugins/actions.glade.h:4 ../glipper/plugins/nopaste.glade.h:18
 msgid "gtk-apply"
@@ -303,3 +327,7 @@ msgstr ""
 #: ../glipper/plugins/snippets.glade.h:5
 msgid "gtk-refresh"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Glipper plugins"
+#~ msgstr "Utente Glipper"

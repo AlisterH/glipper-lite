@@ -1,4 +1,5 @@
 import gtk, gnomevfs, glipper, gobject, gconf
+from gettext import gettext as _
 from os.path import *
 from glipper.Plugin import *
 
@@ -95,12 +96,12 @@ class PluginsWindow(object):
       
       renderer = gtk.CellRendererToggle()
       renderer.connect('toggled', self.on_enabled_toggled)
-      self.plugins_list.append_column(gtk.TreeViewColumn("Enabled", renderer, active = self.ENABLED_COLUMN))
+      self.plugins_list.append_column(gtk.TreeViewColumn(_("Enabled"), renderer, active = self.ENABLED_COLUMN))
       renderer = gtk.CellRendererToggle()
       renderer.connect('toggled', self.on_autostart_toggled)
-      self.plugins_list.append_column(gtk.TreeViewColumn("Autostart", renderer, active = self.AUTOSTART_COLUMN))
-      self.plugins_list.append_column(gtk.TreeViewColumn("Name", gtk.CellRendererText(), text = self.NAME_COLUMN))
-      self.plugins_list.append_column(gtk.TreeViewColumn("Description", gtk.CellRendererText(), text = self.DESCRIPTION_COLUMN))
+      self.plugins_list.append_column(gtk.TreeViewColumn(_("Autostart"), renderer, active = self.AUTOSTART_COLUMN))
+      self.plugins_list.append_column(gtk.TreeViewColumn(_("Name"), gtk.CellRendererText(), text = self.NAME_COLUMN))
+      self.plugins_list.append_column(gtk.TreeViewColumn(_("Description"), gtk.CellRendererText(), text = self.DESCRIPTION_COLUMN))
       
       self.autostart_plugins = glipper.GCONF_CLIENT.get_list(glipper.GCONF_AUTOSTART_PLUGINS, gconf.VALUE_STRING)
       if self.autostart_plugins == None:
