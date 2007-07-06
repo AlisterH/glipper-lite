@@ -60,3 +60,7 @@ class Keybinder(gobject.GObject):
 if gtk.pygtk_version < (2,8,0):
    gobject.type_register(Keybinder)
 
+keybinder = Keybinder()
+
+def get_glipper_keybinder():
+   return keybinder

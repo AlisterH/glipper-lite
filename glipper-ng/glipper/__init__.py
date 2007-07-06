@@ -83,7 +83,10 @@ GCONF_CLIENT.add_dir(GCONF_DIR, gconf.CLIENT_PRELOAD_RECURSIVE)
 
 # Functions callable by plugins
 
-from glipper.Globals import *
+from glipper.History import *
+from glipper.Clipboards import *
+from glipper.PluginsManager import *
+
 import glipper.Applet
 
 def add_menu_item(file_name, menu_item):

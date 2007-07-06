@@ -4,7 +4,9 @@ import gnomeapplet, gtk, gtk.gdk, gconf, gnomevfs, gobject, gnome
 from gettext import gettext as _
 
 import glipper, glipper.About, glipper.Properties
-from glipper.Globals import *
+from glipper.Keybinder import *
+from glipper.History import *
+from glipper.PluginsManager import *
 
 class Applet(object):
    def __init__(self, applet):
