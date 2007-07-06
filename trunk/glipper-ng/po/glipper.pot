@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-29 14:23+0200\n"
+"POT-Creation-Date: 2007-07-06 21:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,30 +16,30 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../glipper/Applet.py:19 ../glipper/Applet.py:161
+#: ../glipper/Applet.py:16 ../glipper/Applet.py:159
 msgid "Glipper - Popup shortcut: "
 msgstr ""
 
-#: ../glipper/Applet.py:94
+#: ../glipper/Applet.py:87
 msgid "< Empty history >"
 msgstr ""
 
-#: ../glipper/About.py:19
+#: ../glipper/About.py:28
 msgid "Glipper"
 msgstr ""
 
-#: ../glipper/About.py:22
+#: ../glipper/About.py:31
 msgid "A clipboard manager."
 msgstr ""
 
-#: ../glipper/About.py:25
+#: ../glipper/About.py:34
 msgid "Glipper website"
 msgstr ""
 
 #. about.set_artists([])
 #. about.set_documenters([])
 #. translators: These appear in the About dialog, usual format applies.
-#: ../glipper/About.py:33
+#: ../glipper/About.py:42
 msgid "translator-credits"
 msgstr ""
 
@@ -109,4 +109,195 @@ msgstr ""
 
 #: ../data/Glipper.xml.h:4
 msgid "_Preferences"
+msgstr ""
+
+#: ../glipper/plugins/actions.py:35
+msgid "No actions available"
+msgstr ""
+
+#: ../glipper/plugins/actions.py:55 ../glipper/plugins/actions.py:73
+msgid "Actions"
+msgstr ""
+
+#: ../glipper/plugins/actions.py:74
+msgid "Define commands to run when an item matches a regular expression"
+msgstr ""
+
+#: ../glipper/plugins/actions.py:176 ../glipper/plugins/actions.glade.h:2
+msgid "Add command"
+msgstr ""
+
+#: ../glipper/plugins/actions.py:179
+msgid "Delete action"
+msgstr ""
+
+#: ../glipper/plugins/actions.py:185
+msgid "Delete command"
+msgstr ""
+
+#: ../glipper/plugins/actions.py:196 ../glipper/plugins/actions.py:238
+msgid "New command"
+msgstr ""
+
+#: ../glipper/plugins/actions.py:197 ../glipper/plugins/actions.py:227
+#: ../glipper/plugins/actions.py:239
+msgid "Enter description here"
+msgstr ""
+
+#: ../glipper/plugins/actions.py:226
+msgid "New regular expression"
+msgstr ""
+
+#: ../glipper/plugins/network.py:14
+msgid "Network"
+msgstr ""
+
+#: ../glipper/plugins/network.py:15
+msgid ""
+"Connect multiple glipper processes via network to synchronize their history"
+msgstr ""
+
+#: ../glipper/plugins/network.py:225
+msgid "New connection"
+msgstr ""
+
+#: ../glipper/plugins/network.py:230
+msgid "Enter IP Address: "
+msgstr ""
+
+#: ../glipper/plugins/newline.py:26
+msgid "New line"
+msgstr ""
+
+#: ../glipper/plugins/newline.py:27
+msgid ""
+"Example plugin that adds a newline character at the end of items in the "
+"clipboard"
+msgstr ""
+
+#: ../glipper/plugins/nopaste.py:5 ../glipper/plugins/nopaste.py:29
+msgid "Nopaste"
+msgstr ""
+
+#: ../glipper/plugins/nopaste.py:6
+msgid "Paste the entry of your clipboard to a No-Paste service"
+msgstr ""
+
+#: ../glipper/plugins/nopaste.py:24
+msgid "pasted by glipper"
+msgstr ""
+
+#: ../glipper/plugins/nopaste.py:45
+msgid "Glipper user"
+msgstr ""
+
+#: ../glipper/plugins/snippets.py:51
+msgid "History"
+msgstr ""
+
+#: ../glipper/plugins/snippets.py:59 ../glipper/plugins/snippets.py:99
+#: ../glipper/plugins/snippets.py:138
+msgid "Snippets"
+msgstr ""
+
+#: ../glipper/plugins/snippets.py:119
+msgid "No snippets available"
+msgstr ""
+
+#: ../glipper/plugins/snippets.py:139
+msgid "Create snippets from history items"
+msgstr ""
+
+#: ../glipper/plugins/actions.glade.h:1
+msgid "Action manager"
+msgstr ""
+
+#: ../glipper/plugins/actions.glade.h:3
+msgid "Popup available actions when a new item gets added to the history"
+msgstr ""
+
+#: ../glipper/plugins/actions.glade.h:4 ../glipper/plugins/nopaste.glade.h:18
+msgid "gtk-apply"
+msgstr ""
+
+#: ../glipper/plugins/network.glade.h:1
+msgid "<b>Connections</b>"
+msgstr ""
+
+#: ../glipper/plugins/network.glade.h:2
+msgid "<b>Security</b>"
+msgstr ""
+
+#: ../glipper/plugins/network.glade.h:3
+msgid "Network preferences"
+msgstr ""
+
+#: ../glipper/plugins/network.glade.h:4
+msgid "Only accept connections from this hosts:"
+msgstr ""
+
+#: ../glipper/plugins/network.glade.h:5
+msgid "Password:"
+msgstr ""
+
+#: ../glipper/plugins/network.glade.h:6
+msgid "Synchronize history with:"
+msgstr ""
+
+#: ../glipper/plugins/network.glade.h:7
+msgid "gtk-add"
+msgstr ""
+
+#: ../glipper/plugins/network.glade.h:8
+msgid "gtk-remove"
+msgstr ""
+
+#: ../glipper/plugins/nopaste.glade.h:1
+msgid ""
+"C (C89)\n"
+"C (C99)\n"
+"C++\n"
+"C#\n"
+"Java\n"
+"Pascal\n"
+"Perl\n"
+"PHP\n"
+"PL/I\n"
+"Python\n"
+"Ruby\n"
+"SQL\n"
+"Visual Basic\n"
+"Plain Text"
+msgstr ""
+
+#: ../glipper/plugins/nopaste.glade.h:15
+msgid "Language:"
+msgstr ""
+
+#: ../glipper/plugins/nopaste.glade.h:16
+msgid "Nickname:"
+msgstr ""
+
+#: ../glipper/plugins/nopaste.glade.h:17
+msgid "Nopaste preferences"
+msgstr ""
+
+#: ../glipper/plugins/snippets.glade.h:1
+msgid "Add"
+msgstr ""
+
+#: ../glipper/plugins/snippets.glade.h:2
+msgid "Remove"
+msgstr ""
+
+#: ../glipper/plugins/snippets.glade.h:3
+msgid "Snippets manager"
+msgstr ""
+
+#: ../glipper/plugins/snippets.glade.h:4
+msgid "gtk-close"
+msgstr ""
+
+#: ../glipper/plugins/snippets.glade.h:5
+msgid "gtk-refresh"
 msgstr ""

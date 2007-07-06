@@ -2,6 +2,7 @@
 #TODO: think about a password mechanism that makes sense
 
 import threading, socket, os, os.path, glipper, time
+from gettext import gettext as _
 
 GLIPPERPORT = 10368
 
@@ -10,8 +11,8 @@ inserting = False
 running = True
 
 def info():
-   info = {"Name": "Network", 
-      "Description": "Connect multiple glipper processes via network to synchronize their history",
+   info = {"Name": _("Network"), 
+      "Description": _("Connect multiple Glipper processes via network to synchronize their history"),
       "Preferences": True}
    return info
 
@@ -221,12 +222,12 @@ class preferences:
       self.prefWind.show_all()
 
    def askIP(self):
-      dialog = gtk.Dialog("New connection", self.prefWind, 
+      dialog = gtk.Dialog(_("New connection"), self.prefWind, 
             gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
             (gtk.STOCK_CANCEL, gtk.RESPONSE_REJECT,
              gtk.STOCK_OK, gtk.RESPONSE_ACCEPT))
       dialog.set_default_size (350, 150)
-      info = gtk.Label("Enter IP Address: ")
+      info = gtk.Label(_("Enter IP address: "))
       dialog.vbox.pack_start(info)
       info.show()
       entry = gtk.Entry()

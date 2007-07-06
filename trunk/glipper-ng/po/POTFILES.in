@@ -3,3 +3,12 @@ glipper/Applet.py
 glipper/About.py
 data/properties-window.glade
 data/Glipper.xml
+glipper/plugins/actions.py
+glipper/plugins/network.py
+glipper/plugins/newline.py
+glipper/plugins/nopaste.py
+glipper/plugins/snippets.py
+glipper/plugins/actions.glade
+glipper/plugins/network.glade
+glipper/plugins/nopaste.glade
+glipper/plugins/snippets.glade

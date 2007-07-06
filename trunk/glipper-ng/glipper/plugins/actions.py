@@ -7,6 +7,8 @@ import gtk
 import gtk.glade
 import pango
 
+from gettext import gettext as _
+
 immediately = False
 
 menu = gtk.Menu()
@@ -30,7 +32,7 @@ def update_menu():
 
    item = glipper.get_history_item(0)
    if len(model) == 0 or item == None:
-      empty_item = gtk.MenuItem('No actions available')
+      empty_item = gtk.MenuItem(_("No actions available"))
       menu.append(empty_item)
    else:
       for action in model:
@@ -50,7 +52,7 @@ def commandActivated(menu, cmd):
    command = cmd.replace("%s", glipper.get_history_item(0))
    os.system(command)
 
-menu_item = gtk.MenuItem("Actions")
+menu_item = gtk.MenuItem(_("Actions"))
 
 def init():
    global menu_item
@@ -68,8 +70,8 @@ def on_show_preferences(parent):
    preferences(parent).show()
 
 def info():
-   info = {"Name": "Actions", 
-      "Description": "Define commands to run when an item matches a regular expression",
+   info = {"Name": _("Actions"), 
+      "Description": _("Define commands to run when an item matches a regular expression"),
       "Preferences": True}
    return info
 
@@ -171,16 +173,16 @@ class preferences:
       self.actionTree.get_selection().connect("changed", self.selectionChanged)
 
       self.menu1 = gtk.Menu()
-      item = gtk.MenuItem("Add command")
+      item = gtk.MenuItem(_("Add command"))
       item.connect("activate", self.addCommand)
       self.menu1.append(item)
-      item = gtk.MenuItem("Delete action")
+      item = gtk.MenuItem(_("Delete action"))
       item.connect("activate", self.deleteEntry)
       self.menu1.append(item)
       self.menu1.show_all()
 
       self.menu2 = gtk.Menu()
-      item = gtk.MenuItem("Delete command")
+      item = gtk.MenuItem(_("Delete command"))
       item.connect("activate", self.deleteEntry)
       self.menu2.append(item)
       self.menu2.show_all()
@@ -191,8 +193,8 @@ class preferences:
    def addCommand(self, menu):
       iter = self.actionTree.get_selection().get_selected()[1]
       self.actionModel.append(iter, 
-         row=("New command", pango.STYLE_ITALIC, "#666", 
-            "Enter description here", pango.STYLE_ITALIC, "#666"))
+         row=(_("New command"), pango.STYLE_ITALIC, "#666", 
+            _("Enter description here"), pango.STYLE_ITALIC, "#666"))
       self.actionTree.expand_row(self.actionModel.get_path(iter), False)
 
    def deleteEntry(self, menu):
@@ -221,8 +223,8 @@ class preferences:
             
    def addButton_clicked(self, widget):
       self.actionModel.append(None, 
-         row=("New regular expression", pango.STYLE_ITALIC, "#666", 
-            "Enter description here", pango.STYLE_ITALIC, "#666"))
+         row=(_("New regular expression"), pango.STYLE_ITALIC, "#666", 
+            _("Enter description here"), pango.STYLE_ITALIC, "#666"))
 
    def deleteButton_clicked(self, widget):
       iter = self.actionTree.get_selection().get_selected()[1]
@@ -233,8 +235,8 @@ class preferences:
       if self.actionModel.iter_depth(iter) == 1:
          iter = self.actionModel.iter_parent(iter)
       self.actionModel.append(iter, 
-         row=("New command", pango.STYLE_ITALIC, "#666", 
-            "Enter description here", pango.STYLE_ITALIC, "#666"))
+         row=(_("New command"), pango.STYLE_ITALIC, "#666", 
+            _("Enter description here"), pango.STYLE_ITALIC, "#666"))
       self.actionTree.expand_row(self.actionModel.get_path(iter), False)
 
    def actionTree_button_press_event_cb(self, widget, event):

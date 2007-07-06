@@ -9,20 +9,21 @@
 #the selection disappears
 
 import glipper
+from gettext import gettext as _
 
 recursive = False
 def on_new_item(arg):
    global recursive
    if recursive:
-	   return
-   i = arg + '\n'
-   recursive = True
-   glipper.set_history_item(0, i)
-   glipper.add_history_item(i)
-   recursive = False
-
+      recursive = False
+   else:
+      recursive = True
+      i = arg + '\n'
+      glipper.set_history_item(0, i)
+      glipper.add_history_item(i)
+   
 def info():
-   info = {"Name": "New line",
-      "Description": "Example plugin that adds a newline character at the end of items in the clipboard",
+   info = {"Name": _("New line"),
+      "Description": _("Example plugin that adds a newline character at the end of items in the clipboard"),
       "Preferences": False}
    return info
