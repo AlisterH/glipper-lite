@@ -11,9 +11,10 @@ class Clipboards(gobject.GObject):
       self.default_clipboard = gtk.clipboard_get()
       self.primary_clipboard = gtk.clipboard_get("PRIMARY")
       
-      self.default_clipboard_text = self.default_clipboard.wait_for_text()
-      self.primary_clipboard_text = self.primary_clipboard.wait_for_text()
-      gobject.timeout_add(500, self.on_timeout)
+      self.default_clipboard_text = None
+      self.primary_clipboard_text = None
+      self.default_clipboard.connect('owner-change', self.on_default_clipboard_owner_change)
+      self.primary_clipboard.connect('owner-change', self.on_primary_clipboard_owner_change)
       
       self.use_default_clipboard = glipper.GCONF_CLIENT.get_bool(glipper.GCONF_USE_DEFAULT_CLIPBOARD)
       if self.use_default_clipboard == None:
@@ -33,34 +34,33 @@ class Clipboards(gobject.GObject):
       if self.use_primary_clipboard:
          self.primary_clipboard.set_text(text)
          self.primary_clipboard_text = text
-
+      
       self.emit('new-item', text)
       
    def get_default_clipboard_text(self):
       return self.default_clipboard_text
    
-   def on_timeout(self):
+   def on_default_clipboard_owner_change(self, clipboard, event):
       if self.use_default_clipboard:
-         item = self.default_clipboard.wait_for_text()
+         item = clipboard.wait_for_text()
          
          if item != None:
             if item != self.default_clipboard_text:
                self.default_clipboard_text = item
                self.emit('new-item', item)
          elif self.default_clipboard_text != None:
-            self.default_clipboard.set_text(self.default_clipboard_text)
-               
+            clipboard.set_text(self.default_clipboard_text)
+   
+   def on_primary_clipboard_owner_change(self, clipboard, event):
       if self.use_primary_clipboard:
-         item = self.primary_clipboard.wait_for_text()
+         item = clipboard.wait_for_text()
          
          if item != None:
             if item != self.primary_clipboard_text:
                self.primary_clipboard_text = item
                self.emit('new-item', item)
          elif self.primary_clipboard_text != None:
-            self.primary_clipboard.set_text(self.primary_clipboard_text)
-      
-      return True
+            clipboard.set_text(self.primary_clipboard_text)
       
    def on_use_default_clipboard_changed (self, value):
       if value is None or value.type != gconf.VALUE_BOOL:
