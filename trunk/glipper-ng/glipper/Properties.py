@@ -41,8 +41,16 @@ class Properties(object):
       
       glade_file.signal_autoconnect(self)
       
+      self.update_mark_default_entry()
+      
       self.properties_window.set_screen(parent.get_screen())
       self.properties_window.show_all()
+   
+   def update_mark_default_entry(self):
+      if self.use_default_clipboard_check.get_active():
+         self.mark_default_entry.set_sensitive(True)
+      else:
+         self.mark_default_entry.set_sensitive(False)
    
    def on_max_elements_changed(self, value):
       if value is None or value.type != gconf.VALUE_INT:
@@ -89,6 +97,7 @@ class Properties(object):
       glipper.GCONF_CLIENT.set_bool(glipper.GCONF_USE_PRIMARY_CLIPBOARD, toggle.get_active())
       
    def on_use_default_clipboard_check_toggled(self, toggle):
+      self.update_mark_default_entry()
       glipper.GCONF_CLIENT.set_bool(glipper.GCONF_USE_DEFAULT_CLIPBOARD, toggle.get_active())
       
    def on_mark_default_entry_toggled(self, toggle):
