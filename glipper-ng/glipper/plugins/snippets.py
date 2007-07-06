@@ -1,5 +1,7 @@
 import glipper, os, os.path, gconf
 
+from gettext import gettext as _
+
 snippets = []
 
 def load_snippets():
@@ -48,7 +50,7 @@ class Manager:
         self.history_tree = glade_file.get_widget('history_tree')
         self.history_tree.set_model(self.history_model)
         self.history_text = gtk.CellRendererText ()
-        self.history_column = gtk.TreeViewColumn ('History', self.history_text, text = 0)
+        self.history_column = gtk.TreeViewColumn (_("History"), self.history_text, text = 0)
         self.history_tree.append_column (self.history_column)
         self.history_selection = self.history_tree.get_selection()
         self.history_selection.set_mode (gtk.SELECTION_SINGLE)
@@ -56,7 +58,7 @@ class Manager:
         self.snippets_tree = glade_file.get_widget('snippets_tree')
         self.snippets_tree.set_model(self.snippets_model)
         self.snippets_text = gtk.CellRendererText ()
-        self.snippets_column = gtk.TreeViewColumn ('Snippets', self.snippets_text, text = 0)
+        self.snippets_column = gtk.TreeViewColumn (_("Snippets"), self.snippets_text, text = 0)
         self.snippets_tree.append_column (self.snippets_column)
         self.snippets_selection = self.snippets_tree.get_selection()
         self.snippets_selection.set_mode (gtk.SELECTION_SINGLE)
@@ -96,7 +98,7 @@ def on_show_preferences(parent):
     load_snippets()
     Manager(parent)
 
-menu_item = gtk.MenuItem('Snippets')
+menu_item = gtk.MenuItem(_("Snippets"))
 menu = gtk.Menu()
 tooltips = gtk.Tooltips()
 
@@ -116,7 +118,7 @@ def update_menu():
    menu = gtk.Menu()
    
    if len(snippets) == 0:
-      menu.append(gtk.MenuItem('No snippets available'))
+      menu.append(gtk.MenuItem(_("No snippets available")))
    else:
       for snippet in snippets:
          item = gtk.MenuItem(glipper.format_item(snippet))
@@ -135,7 +137,7 @@ def on_history_changed():
     update_menu()
 
 def info():
-	info = {"Name": "Snippets",
-		"Description": "Create snippets from history items",
+	info = {"Name": _("Snippets"),
+		"Description": _("Create snippets from history items"),
 		"Preferences": True }
 	return info

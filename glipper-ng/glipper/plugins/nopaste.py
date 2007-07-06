@@ -1,9 +1,11 @@
 import httplib, urllib, os, os.path, webbrowser
 import glipper
 
+from gettext import gettext as _
+
 def info():
-   info = {"Name": "Nopaste", 
-      "Description": "Paste the entry of your clipboard to a No-Paste service",
+   info = {"Name": _("Nopaste"), 
+      "Description": _("Paste the entry of your clipboard to a No-Paste service"),
       "Preferences": True}
    return info
 
@@ -21,12 +23,12 @@ def activated(menu):
    languageList = ("C89", "C", "C++", "C#", "Java", "Pascal", "Perl", "PHP", 
          "PL/I", "Python", "Ruby", "SQL", "VB", "Plain Text")
    cf = confFile("r")
-   url = rafbnet(languageList[cf.getLang()], cf.getNick(), "pasted by glipper", glipper.get_history_item(0))
+   url = rafbnet(languageList[cf.getLang()], cf.getNick(), _("pasted by Glipper"), glipper.get_history_item(0))
    webbrowser.open(url)
    cf.close()
 
 def init():
-   item = gtk.MenuItem("Nopaste")
+   item = gtk.MenuItem(_("Nopaste"))
    item.connect('activate', activated)
    glipper.add_menu_item(__name__, item)
 
@@ -42,7 +44,7 @@ class confFile:
       dir = os.environ["HOME"] + "/.glipper/plugins"
       if (mode == "r") and (not os.path.exists(dir + "/nopaste.conf")):
          self.lang = 13
-         self.nick = "Glipper user"
+         self.nick = _("Glipper user")
          return
       if not os.path.exists(dir):
          os.makedirs(dir)
