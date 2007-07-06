@@ -1,4 +1,4 @@
-import glipper, gtk, gtk.glade, gconf
+import glipper, gtk, gtk.glade, gconf, gnome
 from os.path import join
 
 class Properties(object):
@@ -111,4 +111,6 @@ class Properties(object):
          glipper.GCONF_CLIENT.notify_remove(self.save_history_notify)
          glipper.GCONF_CLIENT.notify_remove(self.key_combination_notify)
          Properties.__instance = None
-      
+   
+   def on_help_button_clicked(self, button):
+      gnome.help_display('glipper', 'preferences')
