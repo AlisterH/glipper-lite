@@ -5,6 +5,7 @@ from gettext import gettext as _
 snippets = []
 
 def load_snippets():
+    global snippets
     snippets = []
     dir = os.environ["HOME"] + "/.glipper/plugins"
     if not os.path.exists(dir):
