@@ -164,7 +164,7 @@ class Applet(object):
       self.update_menu(history)
       get_glipper_plugins_manager().call('on_history_changed')
 
-#These variables and functions are available for all Applet instances:
+# These variables and functions are available for all Applet instances:
 
 mark_default_entry = glipper.GCONF_CLIENT.get_bool(glipper.GCONF_MARK_DEFAULT_ENTRY)
 if mark_default_entry == None:

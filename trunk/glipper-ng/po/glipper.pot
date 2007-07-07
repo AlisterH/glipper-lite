@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-06 21:43+0200\n"
+"POT-Creation-Date: 2007-07-07 09:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../glipper/Applet.py:16 ../glipper/Applet.py:159
+#: ../glipper/Applet.py:18 ../glipper/Applet.py:161
 msgid "Glipper - Popup shortcut: "
 msgstr ""
 
-#: ../glipper/Applet.py:87
+#: ../glipper/Applet.py:89
 msgid "< Empty history >"
 msgstr ""
 
@@ -125,6 +125,14 @@ msgstr ""
 
 #: ../data/Glipper.xml.h:4
 msgid "_Preferences"
+msgstr ""
+
+#: ../data/Glipper.server.in.in.h:1
+msgid "Clipboard manager"
+msgstr ""
+
+#: ../data/Glipper.server.in.in.h:2
+msgid "Manages clipboards"
 msgstr ""
 
 #: ../glipper/plugins/actions.py:35
