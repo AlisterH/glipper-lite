@@ -37,6 +37,7 @@ class PluginsManager(gobject.GObject):
       for plugin in self.plugins:
          if plugin.get_file_name() == file_name:
             plugin.call('stop')
+            plugin.remove_module()
             self.plugins.remove(plugin)
             self.remove_menu_items(plugin.get_file_name())
             
@@ -123,6 +124,8 @@ class PluginsWindow(object):
          if file.name[-3:] == ".py":
             plugin = Plugin(file.name[:-3])
             self.plugins_list_model.append([plugin.get_file_name(), plugins_manager.get_started(plugin.get_file_name()), plugins_manager.get_autostarted(plugin.get_file_name()), plugin.get_name(), plugin.get_description(), plugin.get_preferences()])
+            if not plugins_manager.get_started(plugin.get_file_name()):
+               plugin.remove_module()
             
    def on_autostart_plugins_changed(self, value):
       if value is None or value.type != gconf.VALUE_LIST:
@@ -147,7 +150,9 @@ class PluginsWindow(object):
          glipper.GCONF_CLIENT.notify_remove(self.autostart_plugins_notify)
          
          for plugin in self.temp_plugins:
-            self.temp_plugins.remove(plugin)
+            if not plugins_manager.get_started(plugin.get_file_name()):
+               plugin.remove_module()
+               self.temp_plugins.remove(plugin)
          
          PluginsWindow.__instance = None
    

@@ -6,9 +6,6 @@ class Plugin(object):
       self.load_module()
       self.info = self.call('info')
    
-   def __del__(self):
-      self.remove_module()
-   
    def load_module(self):
       try:
          self.module = __import__(self.file_name)
