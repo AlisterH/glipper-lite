@@ -15,8 +15,8 @@ Here is a list of all events. If you want to use one of these, you have to do it
 name at the global scope (so not in a class).
 
 - "info"
-  Every plugin has to implement this method. It should return a dictionary which gives glipper the information about the name, the description and
-  wether a preferences dialog is available or not.
+  Every plugin has to implement this method. It should return a dictionary which gives glipper the information about the name, 
+  the description and wether a preferences dialog is available or not.
   Here is an example how the newline plugin uses it:
     def info():
        info = {"Name": "New line",
@@ -52,14 +52,47 @@ name at the global scope (so not in a class).
 Now about the api calls. You have to import the module "glipper" in order to use them.
 
 - "add_menu_item"
+  *TODO*
+
 - "add_history_item(item)"
+  Adds a new item to the clipboard(s), and so also to the top of the history.
+
 - "set_history_item(index, item)"
-- "get_history_item(item)"
+  Sets the history entry specified by "index" to "item". Beware, if your index is 0, the item will stand on the top
+  of the list, but won't be in the clipboard. This makes the state of glipper inconsistent. Consider using add_history_item
+  instead.
+  Tip: If you want to replace the item at the top of the history with a new entry, AND synchronize the clipboard(s) with it,
+  just do it the same way the newline plugin does:
+        glipper.set_history_item(0, i)
+	glipper.add_history_item(i)	#this doesn't change the history, only the clipboards, because "i" is already on the top
+
+- "get_history_item(index)"
+  Returns the item at position "index" from the history.
+
 - "format_item(item)"
-TODO: Description
+  Formats the item (or generally the string) the same way like in the history popup. So it returns a shortened string, which is
+  exactly as long as given by the gconf preferences.
+  Tip: if you use this, consider that the user has the possibility to change the gconf settings at runtime. If this happens, you have
+  must format your items again to stay consistent. You can get informations about gconf key changes by registering a notify handler.
+  See below and see the snippet plugin.
+
+About infinite recursive "event - api call" constructs:
+*TODO*
+
+About gconf:
+You can use the object "GCONF_CLIENT" in the glipper module to have access to the Glipper's gconf preferences.
+For example the following call will register a notify handler, which calls the function "update_menu()" (through a lambda wrapper)
+every time the key GCONF_MAX_ITEM_LENGTH (this is the value for the maximum string size of the entries in the history) changes:
+   glipper.GCONF_CLIENT.notify_add(glipper.GCONF_MAX_ITEM_LENGTH, lambda x, y, z, a: update_menu())
+You can ask for a value by doing:
+   max_length = glipper.GCONF_CLIENT.get_int(glipper.GCONF_MAX_ITEM_LENGTH)
+See the gconf documentation and our plugins for more informations.
 
 About using threads in your plugin:
-*Todo*
+If your plugin uses threads, you should ALWAYS keep one thing in mind:
+Stop all your threads in the "stop()" event.
+If you don't do this, you plugin keeps running, also if the user has told Glipper to stop it. This behaviour is not desired!!!
+If you want to see an example for a plugin using threads, take a look at the network plugin.
 
 About storing preferences and other data belonging to your plugin:
 Please store the settings into a file in the ~/.glipper/plugins/ directory. You can get this directory in python by doing
