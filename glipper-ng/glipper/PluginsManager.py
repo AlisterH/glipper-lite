@@ -146,6 +146,9 @@ class PluginsWindow(object):
          dialog.destroy()
          glipper.GCONF_CLIENT.notify_remove(self.autostart_plugins_notify)
          
+         for plugin in self.temp_plugins:
+            self.temp_plugins.remove(plugin)
+         
          PluginsWindow.__instance = None
    
    def on_preferences_button_clicked(self, button):
