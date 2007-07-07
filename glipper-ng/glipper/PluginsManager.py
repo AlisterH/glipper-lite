@@ -152,7 +152,6 @@ class PluginsWindow(object):
          for plugin in self.temp_plugins:
             if not plugins_manager.get_started(plugin.get_file_name()):
                plugin.remove_module()
-               self.temp_plugins.remove(plugin)
          
          PluginsWindow.__instance = None
    
