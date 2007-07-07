@@ -4,6 +4,7 @@ glipper/About.py
 glipper/PluginsManager.py
 data/properties-window.glade
 data/Glipper.xml
+data/Glipper.server.in.in
 glipper/plugins/actions.py
 glipper/plugins/network.py
 glipper/plugins/newline.py
