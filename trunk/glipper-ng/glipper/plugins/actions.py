@@ -1,7 +1,6 @@
 import os, os.path, re
 import glipper
 
-import pygtk
 import gtk
 import gtk.glade
 import pango

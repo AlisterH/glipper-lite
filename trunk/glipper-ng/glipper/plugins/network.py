@@ -179,7 +179,6 @@ class confFile:
 
 #preferences dialog:
 
-import pygtk
 import gtk
 import gtk.glade
 
