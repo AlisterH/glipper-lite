@@ -42,9 +42,9 @@ AC_PATH_PROG(GCONFTOOL, gconftool-2)
 AM_GCONF_SOURCE_2
 
 dnl ****************************************************************************
-dnl * Python 2.5
+dnl * Python >= 2.4
 dnl ****************************************************************************
-AM_PATH_PYTHON(2.5)
+AM_PATH_PYTHON(2.4)
 AM_CHECK_PYTHON_HEADERS(,[AC_MSG_ERROR(could not find Python headers)])
 
 dnl ****************************************************************************
