@@ -1,4 +1,4 @@
-import httplib, urllib, os, os.path, webbrowser
+import httplib, urllib, os, os.path, webbrowser, threading
 import glipper
 
 from gettext import gettext as _
@@ -9,23 +9,31 @@ def info():
       "Preferences": True}
    return info
 
-def rafbnet(lang, nick, desc, text):
-   conn = httplib.HTTPConnection("rafb.net")
-   params = urllib.urlencode({"lang": lang, "nick": nick, 
-      "desc": desc, "text": text, "tabs": "no"})
-   headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
-   conn.request("POST", "/paste/paste.php", params, headers)
-   url = conn.getresponse().getheader("location")
-   conn.close()
-   return url
+class RafbNet(threading.Thread):
+   def __init__(self, lang, nick, desc, text):
+      threading.Thread.__init__(self)
+      self.lang = lang
+      self.nick = desc
+      self.desc = desc	      
+      self.text = text
+
+   def run(self):
+      conn = httplib.HTTPConnection("rafb.net")
+      params = urllib.urlencode({"lang": self.lang, "nick": self.nick, 
+         "desc": self.desc, "text": self.text, "tabs": "no"})
+      headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
+      conn.request("POST", "/paste/paste.php", params, headers)
+      url = conn.getresponse().getheader("location")
+      conn.close()
+      webbrowser.open(url)
 
 def activated(menu):
    languageList = ("C89", "C", "C++", "C#", "Java", "Pascal", "Perl", "PHP", 
          "PL/I", "Python", "Ruby", "SQL", "VB", "Plain Text")
    cf = confFile("r")
-   url = rafbnet(languageList[cf.getLang()], cf.getNick(), _("pasted by Glipper"), glipper.get_history_item(0))
-   webbrowser.open(url)
+   rafbnet = RafbNet(languageList[cf.getLang()], cf.getNick(), _("pasted by Glipper"), glipper.get_history_item(0))
    cf.close()
+   rafbnet.start()
 
 def init():
    item = gtk.MenuItem(_("Nopaste"))
