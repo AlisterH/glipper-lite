@@ -37,13 +37,14 @@ class StringListener(threading.Thread):
    def run(self):
       while running:
          try:
-            string = self.socket.recv(4096)
-            if not string:
-               raise socket.error
-         except socket.error:
-            allConnections.remove(self.socket)
-            self.socket.close()
-            return
+            try:
+               string = self.socket.recv(4096)
+               if not string:
+                  raise socket.error
+            except socket.error:
+               allConnections.remove(self.socket)
+               self.socket.close()
+               return
          finally:
             time.sleep(0.1)
             
@@ -62,11 +63,12 @@ class ServerListener(threading.Thread):
       
       while running:
          try:
-            s.listen(1)
-            conn, addr = s.accept()
-            print "connection %s accepted" % addr[0]
-         except socket.error:
-            continue
+            try:
+               s.listen(1)
+               conn, addr = s.accept()
+               print "connection %s accepted" % addr[0]
+            except socket.error:
+               continue
          finally:
             time.sleep(0.1)
             
@@ -178,7 +180,6 @@ class confFile:
 #preferences dialog:
 
 import pygtk
-pygtk.require('2.0')
 import gtk
 import gtk.glade
 
