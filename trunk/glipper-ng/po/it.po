@@ -306,7 +306,7 @@ msgstr ""
 
 #: ../glipper/plugins/nopaste.glade.h:15
 msgid "Language:"
-msgstr "Lingua:"
+msgstr "Linguaggio:"
 
 #: ../glipper/plugins/nopaste.glade.h:16
 msgid "Nickname:"
@@ -336,6 +336,3 @@ msgstr ""
 msgid "gtk-refresh"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Glipper plugins"
-#~ msgstr "Utente Glipper"
