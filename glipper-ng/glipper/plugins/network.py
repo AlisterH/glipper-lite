@@ -35,14 +35,21 @@ class StringSender(threading.Thread):
    def run(self):
       for listener in allConnections:
          try:
-            listener.socket.send(listener.encrypt(item))
+            send = listener.encrypt(self.item)
+            for c in range(len(send)/4096 +1):
+               listener.socket.send(send[c*4096:c*4096+4096])
+            listener.socket.send("\0")
          except socket.error:
             listener.quit()
+
+class PasswordException(Exception):
+   pass
 
 #listens for new items from the other side of the connection:
 class StringListener(threading.Thread):
    def __init__(self, socket, password, establisher):
       threading.Thread.__init__(self)
+      socket.setblocking(True)
       global allConnections
       allConnections.append(self)
       self.establisher = establisher
@@ -54,82 +61,85 @@ class StringListener(threading.Thread):
             return	#TODO
          if len(password) <= 8:
             fill = 8
-         fill += 8 - (password % 8)
+         fill += 8 - (len(password) % 8)
          passw = password + "\0" * fill
-         self.crypt = AES.new(passw, AES.ECB)
+         self.crypt = AES.new(passw, AES.MODE_ECB)
 
    def encrypt(self, string):
-      if password == "":
+      if self.password == "":
          return string
-      result = ""
-      for c in range((len(string) / 16) + 1):
-         mes = string[c*16:c*16+15]
-         mes += "\0" * 16 - len(mes)	#blocks must be 16 bytes long
-         result += self.crypt(mes)
-      return result
+      #blocks must be 16*N bytes long
+      return self.crypt.encrypt(string+"\0"*(16-len(string)%16))
 
    def decrypt(self, input):
-      if password == "":
+      if self.password == "":
          return input
-      string = ""
-      for c in range((len(input) / 16) + 1):
-         string += crypt.decrypt(input[c*16:c*16+15])
+      string = self.crypt.decrypt(input)
       string = string[:string.find("\0")]
       return string
 
    def request_password_compare(self):
-      try:
-         en = self.encrypt("request")
-         self.socket.send(en)
-         response = self.socket.recv(4096)
-         if self.decrypt(response) != "response":
-            print "wrong password for connection %s" % self.socket.getsockname()
-            raise Exception()
-         print "password ok."
-      except:
-         self.quit()
+      en = self.encrypt("request")
+      self.socket.send(en)
+      response = self.socket.recv(4096)
+      if response == "wrong!" or self.decrypt(response) != "response":
+         raise PasswordException()
 
    def response_password_compare(self):
-      try:
-         request = self.socket.recv(4096)
-         if self.decrypt(request) != "request":
-            print "wrong password for connection %s" % self.socket.getsockname()
-            raise Exception()
-         en = self.encrypt("response")[0]
-         self.socket.send(en)
-         print "password ok."
-      except:
-         self.quit()
+      request = self.socket.recv(4096)
+      if self.decrypt(request) != "request":
+         self.socket.send("wrong!")
+         raise PasswordException()
+      en = self.encrypt("response")
+      self.socket.send(en)
 
    def quit(self):
-      print "closing connection %s" % self.socket.getsockname()
+      try:
+         print "closing connection %s" % self.socket.getpeername()[0]
+      except:
+         print "closing connection"
       global allConnections
       allConnections.remove(self)
       self.socket.close()
 
    def run(self):
-      if self.establisher:
-         self.request_password_compare()
-      else:
-         self.response_password_compare()
+      print "comparing passwords:"
+      try:
+         if self.establisher:
+            self.request_password_compare()
+         else:
+            self.response_password_compare()
+      except socket.error:
+         self.quit()
+	 return
+      except PasswordException:
+         print "wrong password for connection %s" % self.socket.getpeername()[0]
+         self.quit()
+         return
 
-      def getBlock():
+      print "password ok! start listening"
+
+      def recv():
+         string = self.socket.recv(4096)
+         if not string:
+            raise socket.error
          return string
 
       while True:	#loop quits when socket gets closed
          try:
-            string = self.socket.recv(4096)
-            if not string:
-               raise socket.error
-            string = self.decrypt(string)
+            item = ""
+            string = recv()
+            while string != "\0":
+               item += string
+               string = recv()
+            item = self.decrypt(item)
          except socket.error:
             self.quit()
             return
-         time.sleep(0.1)
             
          global inserting
          inserting = True
-         glipper.add_history_item(string)
+         glipper.add_history_item(item)
          inserting = False
       
 #listens for incoming connections (like a server does):
@@ -161,26 +171,19 @@ class ServerListener(threading.Thread):
                print "connection %s not accepted" % addr[0]
                raise socket.error()
          except socket.error:
-            conn.close()
             continue
             
          listener = StringListener(conn, password, False)
          listener.setDaemon(1)
          listener.start()
       print "stop listening for incoming connections!"
+      s.close()
       
 def stop():
    for c in allConnections:
       c.quit()
    global running
    running = False
-   #Do a fake connection to ourselve for that the ServerListener has the possibility to stop:
-   try:
-      s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-      s.connect(("127.0.0.1", GLIPPERPORT))
-      s.close()
-   except:
-      pass
    
 def init():
    #read configfile:
@@ -194,9 +197,9 @@ def init():
       try:
          s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
          s.connect((x[0], GLIPPERPORT))
-         print "connected with %s" % x[0]
+         print "connected to %s" % x[0]
       except socket.error:
-         print "can\'t connect with %s" % x[0]
+         print "can\'t connect to %s" % x[0]
          s.close()
          continue
       listener = StringListener(s, x[1], True)
@@ -311,8 +314,9 @@ class preferences:
    def show(self):
       self.prefWind.show_all()
       if not cryptAvailable:
-         warning = gtk.MessagDialog(self.prefWind, gtk.DIALOG_MODAL, gtk.MESSAGE_WARNING, gtk.BUTTONS_OK, 
+         warning = gtk.MessageDialog(self.prefWind, gtk.DIALOG_MODAL, gtk.MESSAGE_WARNING, gtk.BUTTONS_OK, 
             _("You have to install the Python Cryptography Toolkit (python-crypto) if you want to use encrypted connections!"))
+         warning.run()
          warning.destroy()
 
    def askIP(self):
