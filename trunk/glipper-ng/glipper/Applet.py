@@ -11,6 +11,7 @@ from glipper.PluginsManager import *
 class Applet(object):
    def __init__(self, applet):
       self.applet = applet
+      self.size = 24
       self.menu = gtk.Menu()
       self.tooltips = gtk.Tooltips()
       self.image = gtk.Image()
@@ -29,7 +30,7 @@ class Applet(object):
       get_glipper_history().load()
       get_glipper_plugins_manager().connect('menu-items-changed', self.on_plugins_menu_items_changed)
       
-      self.applet.connect('change-size', lambda applet, orient: self.on_change_size(applet))
+      self.applet.connect('size-allocate', self.on_size_allocate)
       self.applet.connect('button-press-event', self.on_clicked)
       self.applet.connect('destroy', self.on_destroy)
       
@@ -43,7 +44,7 @@ class Applet(object):
          ])
 
       self.applet.add(self.image)
-      self.applet.set_flags(gnomeapplet.EXPAND_MINOR)
+      self.applet.set_applet_flags(gnomeapplet.EXPAND_MINOR)
       self.applet.show_all()
    
    def on_plugins_menu_items_changed(self, manager):
@@ -140,9 +141,13 @@ class Applet(object):
          get_glipper_history().save()
       get_glipper_plugins_manager().stop_all()
       
-   def on_change_size(self, applet):
-      icon_size = applet.get_size() - 2 # Padding
+   def on_size_allocate(self, applet, allocation):
+      if allocation.height == self.size:
+         return
 
+      self.size = allocation.height
+
+      icon_size = self.size - 2 # Padding
       # We do this to prevent icon scaling
       if icon_size <= 21:
          icon_size = 16
