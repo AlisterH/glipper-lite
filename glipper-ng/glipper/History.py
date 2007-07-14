@@ -31,21 +31,16 @@ class History(gobject.GObject):
       self.emit('changed', self.history)
    
    def get(self, index):
-      try:
-         return self.history[index]
-      except IndexError:
-         return
+      return self.history[index]
    
    def set(self, index, item):
-      if index >= len(self.history):
-         return
-         
       if item in self.history:
-	      self.history.remove(item)
-	      if index >= len(self.history):
-	         index -= 1
+         self.history.remove(item)
 
-      self.history[index] = item 
+      if index == len(self.history):
+         self.history.append(item)
+      else:
+         self.history[index] = item 
       self.emit('changed', self.history)
    
    def add(self, item):
@@ -56,6 +51,9 @@ class History(gobject.GObject):
       if len(self.history) > self.max_elements:
          self.history = self.history[0:self.max_elements]
       self.emit('changed', self.history)
+
+   def remove(self, index):
+      del self.history[index]
 
    def load(self):
       try:

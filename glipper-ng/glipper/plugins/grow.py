@@ -1,15 +1,10 @@
 from glipper import *
 from gettext import gettext as _
 
-def delItem(index):
-   tmp = get_history_item(0)
-   set_history_item(0, get_history_item(index))
-   set_history_item(0, tmp)
-
 def on_new_item(item):
    try:
       if item.find(get_history_item(1)) != -1:
-         delItem(1)
+         remove_history_item(1)
    except:
       pass
 

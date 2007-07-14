@@ -1,8 +1,11 @@
-#TODO: communicate over a secure connection
-#TODO: think about a password mechanism that makes sense
-
-import threading, socket, os, os.path, glipper, time
+import threading, socket, os, stat, os.path, glipper, time
 from gettext import gettext as _
+
+cryptAvailable = True
+try:
+   from Crypto.Cipher import AES
+except:
+   cryptAvailable = False
 
 GLIPPERPORT = 10368
 
@@ -16,37 +19,113 @@ def info():
       "Preferences": True}
    return info
 
-def on_new_item(on_new_item):
+def on_new_item(item):
    if inserting:
       return
-   if on_new_item == '':
+   if item == '':
       return
-   for sock in allConnections:
-      try:
-         sock.send(on_new_item)
-      except socket.error:
-         allConnections.remove(sock)
-         sock.close()
+   StringSender(item).start()
+
+#sends a new item to the other connections:
+class StringSender(threading.Thread):
+   def __init__(self, item):
+      threading.Thread.__init__(self)
+      self.item = item
+
+   def run(self):
+      for listener in allConnections:
+         try:
+            listener.socket.send(listener.encrypt(item))
+         except socket.error:
+            listener.quit()
 
 #listens for new items from the other side of the connection:
 class StringListener(threading.Thread):
-   def __init__(self, socket):
+   def __init__(self, socket, password, establisher):
       threading.Thread.__init__(self)
+      global allConnections
+      allConnections.append(self)
+      self.establisher = establisher
       self.socket = socket
-      
+      self.password = password
+      #get the AES object (password must be 16, 24 or 32 bytes long)
+      if password != "":
+         if not cryptAvailable:
+            return	#TODO
+         if len(password) <= 8:
+            fill = 8
+         fill += 8 - (password % 8)
+         passw = password + "\0" * fill
+         self.crypt = AES.new(passw, AES.ECB)
+
+   def encrypt(self, string):
+      if password == "":
+         return string
+      result = ""
+      for c in range((len(string) / 16) + 1):
+         mes = string[c*16:c*16+15]
+         mes += "\0" * 16 - len(mes)	#blocks must be 16 bytes long
+         result += self.crypt(mes)
+      return result
+
+   def decrypt(self, input):
+      if password == "":
+         return input
+      string = ""
+      for c in range((len(input) / 16) + 1):
+         string += crypt.decrypt(input[c*16:c*16+15])
+      string = string[:string.find("\0")]
+      return string
+
+   def request_password_compare(self):
+      try:
+         en = self.encrypt("request")
+         self.socket.send(en)
+         response = self.socket.recv(4096)
+         if self.decrypt(response) != "response":
+            print "wrong password for connection %s" % self.socket.getsockname()
+            raise Exception()
+         print "password ok."
+      except:
+         self.quit()
+
+   def response_password_compare(self):
+      try:
+         request = self.socket.recv(4096)
+         if self.decrypt(request) != "request":
+            print "wrong password for connection %s" % self.socket.getsockname()
+            raise Exception()
+         en = self.encrypt("response")[0]
+         self.socket.send(en)
+         print "password ok."
+      except:
+         self.quit()
+
+   def quit(self):
+      print "closing connection %s" % self.socket.getsockname()
+      global allConnections
+      allConnections.remove(self)
+      self.socket.close()
+
    def run(self):
-      while running:
+      if self.establisher:
+         self.request_password_compare()
+      else:
+         self.response_password_compare()
+
+      def getBlock():
+         return string
+
+      while True:	#loop quits when socket gets closed
          try:
-            try:
-               string = self.socket.recv(4096)
-               if not string:
-                  raise socket.error
-            except socket.error:
-               allConnections.remove(self.socket)
-               self.socket.close()
-               return
-         finally:
-            time.sleep(0.1)
+            string = self.socket.recv(4096)
+            if not string:
+               raise socket.error
+            string = self.decrypt(string)
+         except socket.error:
+            self.quit()
+            return
+         time.sleep(0.1)
             
          global inserting
          inserting = True
@@ -55,6 +134,10 @@ class StringListener(threading.Thread):
       
 #listens for incoming connections (like a server does):
 class ServerListener(threading.Thread):
+   def __init__(self, acceptIPs):
+      threading.Thread.__init__(self)
+      self.acceptIPs = acceptIPs
+
    def run(self):
       print "start listening for incoming connections!"
       s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -62,33 +145,47 @@ class ServerListener(threading.Thread):
       s.setblocking(False)
       
       while running:
+         time.sleep(0.1)
          try:
-            try:
-               s.listen(1)
-               conn, addr = s.accept()
+            s.listen(1)
+            conn, addr = s.accept()
+            accept = False
+            for x in self.acceptIPs:
+               if socket.inet_aton(x[0]) == socket.inet_aton(addr[0]):
+                  accept = True
+                  password = x[1]
+                  break
+            if accept:
                print "connection %s accepted" % addr[0]
-            except socket.error:
-               continue
-         finally:
-            time.sleep(0.1)
+            else:
+               print "connection %s not accepted" % addr[0]
+               raise socket.error()
+         except socket.error:
+            conn.close()
+            continue
             
-         listener = StringListener(conn)
+         listener = StringListener(conn, password, False)
          listener.setDaemon(1)
          listener.start()
-         allConnections.append(conn)
       print "stop listening for incoming connections!"
       
 def stop():
+   for c in allConnections:
+      c.quit()
+   global running
    running = False
+   #Do a fake connection to ourselve for that the ServerListener has the possibility to stop:
+   try:
+      s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+      s.connect(("127.0.0.1", GLIPPERPORT))
+      s.close()
+   except:
+      pass
    
 def init():
    #read configfile:
    f = confFile("r")
-   password = f.getPassword()
-   if f.getAcceptEnabled():
-      acceptIPs = f.getAcceptIPs()
-   else:
-      acceptIPs = ()
+   acceptIPs = f.getAcceptIPs()
    connectIPs = f.getConnectIPs()
    f.close()
 
@@ -96,19 +193,18 @@ def init():
    for x in connectIPs:
       try:
          s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-         s.connect((x, GLIPPERPORT))
-         allConnections.append(s)
-         print "connected with %s" % x
+         s.connect((x[0], GLIPPERPORT))
+         print "connected with %s" % x[0]
       except socket.error:
-         print "can\'t connect with %s" % x
+         print "can\'t connect with %s" % x[0]
          s.close()
          continue
-      listener = StringListener(s)
+      listener = StringListener(s, x[1], True)
       listener.setDaemon(1)
       listener.start()
 
    #Then listen:
-   server = ServerListener()
+   server = ServerListener(acceptIPs)
    server.setDaemon(1)
    server.start()
    
@@ -123,37 +219,32 @@ class confFile:
 
       dir = os.environ["HOME"] + "/.glipper/plugins"
       if (mode == "r") and (not os.path.exists(dir + "/network.conf")):
-         self.password = ""
-         self.enabled = False
          self.accept = ()
          self.connect = ()
          return
       if not os.path.exists(dir):
          os.makedirs(dir)
       self.file = open(dir + "/network.conf", mode)
+      os.chmod(dir + "/network.conf", stat.S_IRUSR | stat.S_IWUSR)
 
       if mode == "r":
-         self.password = self.file.readline()[:-1]
-         self.enabled = (self.file.readline() == "True\n")
          self.accept = []
          self.connect = []
          line = self.file.readline()
          while line != "\n":
-            self.accept.append(line[:-1])   
+	    IP = line[:-1]
+            line = self.file.readline()
+	    password = line[:-1]
+            self.accept.append((IP, password))   
             line = self.file.readline()
          line = self.file.readline()
          while line != "":
-            self.connect.append(line[:-1])   
+	    IP = line[:-1]
+            line = self.file.readline()
+	    password = line[:-1]
+            self.connect.append((IP, password))   
             line = self.file.readline()
 
-   def setPassword(self, password):
-      self.password = password
-   def getPassword(self):
-      return self.password
-   def setAcceptEnabled(self, enabled):
-      self.enabled = enabled
-   def getAcceptEnabled(self):
-      return self.enabled
    def setAcceptIPs(self, ips):
       self.accept = ips
    def getAcceptIPs(self):
@@ -167,13 +258,13 @@ class confFile:
          return
       try:
          if self.mode == "w":
-            self.file.write(self.password + "\n")
-            self.file.write(repr(self.enabled) + "\n")
             for x in self.accept:
-               self.file.write(x + "\n")
+               self.file.write(x[0] + "\n")
+               self.file.write(x[1] + "\n")
             self.file.write("\n")
             for x in self.connect:
-               self.file.write(x + "\n")
+               self.file.write(x[0] + "\n")
+               self.file.write(x[1] + "\n")
       finally:
          self.file.close()
 
@@ -188,38 +279,41 @@ class preferences:
       self.prefWind = gladeFile.get_widget("preferences")
       self.prefWind.set_transient_for(parent)
       self.prefWind.connect('response', self.on_prefWind_response)
-      self.passEntry = gladeFile.get_widget("passEntry")
-      self.accCheckbutton = gladeFile.get_widget("accCheckbutton")
 
       #Acception List:
       self.acceptList = gladeFile.get_widget("acceptList")
-      self.acceptStore = gtk.ListStore(str)
+      self.acceptStore = gtk.ListStore(str, str)
       self.acceptList.set_model(self.acceptStore)
       renderer = gtk.CellRendererText()
-      column = gtk.TreeViewColumn(None, renderer, text=0)
+      column = gtk.TreeViewColumn("IP", renderer, text=0)
+      self.acceptList.append_column(column) 
+      column = gtk.TreeViewColumn(_("Password"), renderer, text=1)
       self.acceptList.append_column(column) 
 
       #Connection List:
       self.connectList = gladeFile.get_widget("connectList")
-      self.connectStore = gtk.ListStore(str)
+      self.connectStore = gtk.ListStore(str, str)
       self.connectList.set_model(self.connectStore)
       renderer = gtk.CellRendererText()
-      column = gtk.TreeViewColumn(None, renderer, text=0)
+      column = gtk.TreeViewColumn("IP", renderer, text=0)
+      self.connectList.append_column(column) 
+      column = gtk.TreeViewColumn(_("Password"), renderer, text=1)
       self.connectList.append_column(column) 
 
       gladeFile.signal_autoconnect(self)
 
       #read configurations
       f = confFile("r")
-      self.passEntry.set_text(f.getPassword())
-      self.accCheckbutton.set_active(f.getAcceptEnabled())
-      self.acceptList.set_sensitive(f.getAcceptEnabled())
       self.setStringListToStore(self.acceptStore, f.getAcceptIPs())
       self.setStringListToStore(self.connectStore, f.getConnectIPs())
       f.close()
 
    def show(self):
       self.prefWind.show_all()
+      if not cryptAvailable:
+         warning = gtk.MessagDialog(self.prefWind, gtk.DIALOG_MODAL, gtk.MESSAGE_WARNING, gtk.BUTTONS_OK, 
+            _("You have to install the Python Cryptography Toolkit (python-crypto) if you want to use encrypted connections!"))
+         warning.destroy()
 
    def askIP(self):
       dialog = gtk.Dialog(_("New connection"), self.prefWind, 
@@ -233,18 +327,27 @@ class preferences:
       entry = gtk.Entry()
       dialog.vbox.pack_start(entry)
       entry.show()
+      passInfo = gtk.Label(_("Enter Password for this Connection: "))
+      dialog.vbox.pack_start(passInfo)
+      passInfo.show()
+      passEntry = gtk.Entry()
+      dialog.vbox.pack_start(passEntry)
+      passEntry.show()
       res = dialog.run()
       dialog.destroy()
       if (res == gtk.RESPONSE_REJECT) or (entry.get_text() == ""):
          return None
       if res == gtk.RESPONSE_ACCEPT:
-         return entry.get_text()
+         if len(passEntry.get_text()) > 32:
+            return None		# TODO: Show an error message
+         return (entry.get_text(), passEntry.get_text())
 
    def addIPToList(self, store):
-      IP = self.askIP()
-      if IP != None:
+      result = self.askIP()
+      if result != None:
          iter = store.append()
-         store.set(iter, 0, IP)
+         store.set(iter, 0, result[0])
+         store.set(iter, 1, result[1])
 
    def removeIPFromList(self, list):
       selection = list.get_selection()
@@ -255,17 +358,16 @@ class preferences:
    def getStringListFromStore(self, store):
       iter = store.get_iter_first()
       while iter != None:
-         yield store.get_value(iter, 0)
+         yield (store.get_value(iter, 0), store.get_value(iter, 1))
          iter = store.iter_next(iter)
 
    def setStringListToStore(self, store, list):
       for x in list:
          iter = store.append()
-         store.set(iter, 0, x)
+         store.set(iter, 0, x[0])
+         store.set(iter, 1, x[1])
 
    #EVENTS:
-   def on_accCheckbutton_toggled(self, widget):
-      self.acceptList.set_sensitive(widget.get_active())
 
    def on_delAccButton_clicked(self, widget):
       self.removeIPFromList(self.acceptList)
@@ -282,8 +384,6 @@ class preferences:
    def on_prefWind_response(self, widget, response):
       if response == gtk.RESPONSE_DELETE_EVENT or response == gtk.RESPONSE_CLOSE:
          f = confFile("w")
-         f.setPassword(self.passEntry.get_text())
-         f.setAcceptEnabled(self.accCheckbutton.get_active())
          f.setAcceptIPs(self.getStringListFromStore(self.acceptStore))
          f.setConnectIPs(self.getStringListFromStore(self.connectStore))
          f.close()
