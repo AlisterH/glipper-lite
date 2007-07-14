@@ -101,5 +101,8 @@ def set_history_item(index, item):
 def get_history_item(index):
    return get_glipper_history().get(index)
 
+def remove_history_item(index):
+   return get_glipper_history().remove(index)
+
 def format_item(item):
    return glipper.Applet.format_item(item)
