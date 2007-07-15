@@ -87,7 +87,9 @@ class Applet(object):
       self.menu = gtk.Menu()
          
       if len(history) == 0:
-         self.menu.append(gtk.MenuItem(_('< Empty history >')))
+         menu_item = gtk.ImageMenuItem(gtk.STOCK_STOP)
+         menu_item.get_child().set_text(_('Empty history'))
+         self.menu.append(menu_item)
       else:
          for item in history:
             menu_item = gtk.MenuItem(format_item(item), False)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-07 09:49+0200\n"
+"POT-Creation-Date: 2007-07-15 14:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../glipper/Applet.py:18 ../glipper/Applet.py:161
+#: ../glipper/Applet.py:19 ../glipper/Applet.py:168
 msgid "Glipper - Popup shortcut: "
 msgstr ""
 
-#: ../glipper/Applet.py:89
-msgid "< Empty history >"
+#: ../glipper/Applet.py:91
+msgid "Empty history"
 msgstr ""
 
 #: ../glipper/About.py:28
@@ -43,19 +43,19 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#: ../glipper/PluginsManager.py:99
+#: ../glipper/PluginsManager.py:100
 msgid "Enabled"
 msgstr ""
 
-#: ../glipper/PluginsManager.py:102
+#: ../glipper/PluginsManager.py:103
 msgid "Autostart"
 msgstr ""
 
-#: ../glipper/PluginsManager.py:103
+#: ../glipper/PluginsManager.py:104
 msgid "Name"
 msgstr ""
 
-#: ../glipper/PluginsManager.py:104
+#: ../glipper/PluginsManager.py:105
 msgid "Description"
 msgstr ""
 
@@ -135,58 +135,72 @@ msgstr ""
 msgid "Manages clipboards"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:35
+#: ../glipper/plugins/actions.py:33
 msgid "No actions available"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:55 ../glipper/plugins/actions.py:73
+#: ../glipper/plugins/actions.py:53 ../glipper/plugins/actions.py:71
 msgid "Actions"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:74
+#: ../glipper/plugins/actions.py:72
 msgid "Define commands to run when an item matches a regular expression"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:176 ../glipper/plugins/actions.glade.h:2
+#: ../glipper/plugins/actions.py:174 ../glipper/plugins/actions.glade.h:2
 msgid "Add command"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:179
+#: ../glipper/plugins/actions.py:177
 msgid "Delete action"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:185
+#: ../glipper/plugins/actions.py:183
 msgid "Delete command"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:196 ../glipper/plugins/actions.py:238
+#: ../glipper/plugins/actions.py:194 ../glipper/plugins/actions.py:236
 msgid "New command"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:197 ../glipper/plugins/actions.py:227
-#: ../glipper/plugins/actions.py:239
+#: ../glipper/plugins/actions.py:195 ../glipper/plugins/actions.py:225
+#: ../glipper/plugins/actions.py:237
 msgid "Enter description here"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:226
+#: ../glipper/plugins/actions.py:224
 msgid "New regular expression"
 msgstr ""
 
-#: ../glipper/plugins/network.py:14
+#: ../glipper/plugins/network.py:17
 msgid "Network"
 msgstr ""
 
-#: ../glipper/plugins/network.py:15
+#: ../glipper/plugins/network.py:18
 msgid ""
 "Connect multiple Glipper processes via network to synchronize their history"
 msgstr ""
 
-#: ../glipper/plugins/network.py:225
+#: ../glipper/plugins/network.py:293 ../glipper/plugins/network.py:303
+msgid "Password"
+msgstr ""
+
+#: ../glipper/plugins/network.py:318
+msgid ""
+"You have to install the Python Cryptography Toolkit (python-crypto) if you "
+"want to use encrypted connections!"
+msgstr ""
+
+#: ../glipper/plugins/network.py:323
 msgid "New connection"
 msgstr ""
 
-#: ../glipper/plugins/network.py:230
+#: ../glipper/plugins/network.py:328
 msgid "Enter IP address: "
+msgstr ""
+
+#: ../glipper/plugins/network.py:334
+msgid "Enter Password for this Connection: "
 msgstr ""
 
 #: ../glipper/plugins/newline.py:26
@@ -199,7 +213,7 @@ msgid ""
 "clipboard"
 msgstr ""
 
-#: ../glipper/plugins/nopaste.py:7 ../glipper/plugins/nopaste.py:31
+#: ../glipper/plugins/nopaste.py:7 ../glipper/plugins/nopaste.py:39
 msgid "Nopaste"
 msgstr ""
 
@@ -207,28 +221,28 @@ msgstr ""
 msgid "Paste the entry of your clipboard to a No-Paste service"
 msgstr ""
 
-#: ../glipper/plugins/nopaste.py:26
+#: ../glipper/plugins/nopaste.py:34
 msgid "pasted by Glipper"
 msgstr ""
 
-#: ../glipper/plugins/nopaste.py:47
+#: ../glipper/plugins/nopaste.py:55
 msgid "Glipper user"
 msgstr ""
 
-#: ../glipper/plugins/snippets.py:53
+#: ../glipper/plugins/snippets.py:55
 msgid "History"
 msgstr ""
 
-#: ../glipper/plugins/snippets.py:61 ../glipper/plugins/snippets.py:101
-#: ../glipper/plugins/snippets.py:140
+#: ../glipper/plugins/snippets.py:63 ../glipper/plugins/snippets.py:103
+#: ../glipper/plugins/snippets.py:142
 msgid "Snippets"
 msgstr ""
 
-#: ../glipper/plugins/snippets.py:121
+#: ../glipper/plugins/snippets.py:123
 msgid "No snippets available"
 msgstr ""
 
-#: ../glipper/plugins/snippets.py:141
+#: ../glipper/plugins/snippets.py:143
 msgid "Create snippets from history items"
 msgstr ""
 
@@ -249,30 +263,27 @@ msgid "<b>Connections</b>"
 msgstr ""
 
 #: ../glipper/plugins/network.glade.h:2
-msgid "<b>Security</b>"
+msgid "Accept connections from this hosts:"
 msgstr ""
 
 #: ../glipper/plugins/network.glade.h:3
-msgid "Network preferences"
+msgid "Connect to:"
 msgstr ""
 
 #: ../glipper/plugins/network.glade.h:4
-msgid "Only accept connections from this hosts:"
+msgid "Network preferences"
 msgstr ""
 
 #: ../glipper/plugins/network.glade.h:5
-msgid "Password:"
+msgid ""
+"Please read the security informations about this plugin before using it!"
 msgstr ""
 
 #: ../glipper/plugins/network.glade.h:6
-msgid "Synchronize history with:"
-msgstr ""
-
-#: ../glipper/plugins/network.glade.h:7
 msgid "gtk-add"
 msgstr ""
 
-#: ../glipper/plugins/network.glade.h:8
+#: ../glipper/plugins/network.glade.h:7
 msgid "gtk-remove"
 msgstr ""
 
