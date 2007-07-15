@@ -15,7 +15,7 @@ class Applet(object):
       self.menu = gtk.Menu()
       self.tooltips = gtk.Tooltips()
       self.image = gtk.Image()
-      self.image.set_from_pixbuf(gtk.IconTheme.load_icon(gtk.icon_theme_get_default(), "glipper", self.applet.get_size() - 2, 0))
+      self.image.set_from_pixbuf(gtk.IconTheme.load_icon(gtk.icon_theme_get_default(), "glipper", self.size - 2, 0))
       self.tooltips.set_tip(self.applet, _("Glipper - Popup shortcut: ") + get_glipper_keybinder().get_key_combination())
 
       glipper.GCONF_CLIENT.notify_add(glipper.GCONF_MARK_DEFAULT_ENTRY, lambda x, y, z, a: self.update_menu(get_glipper_history().get_history()))
