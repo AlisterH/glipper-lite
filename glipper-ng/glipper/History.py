@@ -31,6 +31,9 @@ class History(gobject.GObject):
       self.emit('changed', self.history)
    
    def get(self, index):
+      if index >= len(self.history):
+         return
+
       return self.history[index]
    
    def set(self, index, item):
