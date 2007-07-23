@@ -139,8 +139,6 @@ class Applet(object):
       return True
       
    def on_destroy(self, applet):
-      if save_history:
-         get_glipper_history().save()
       get_glipper_plugins_manager().stop_all()
       
    def on_size_allocate(self, applet, allocation):
@@ -167,9 +165,11 @@ class Applet(object):
       if success:
          self.tooltips.set_tip(self.applet, _("Glipper - Popup shortcut: ") + get_glipper_keybinder().get_key_combination())
          
-   def on_history_changed(self, object, history):
-      self.update_menu(history)
+   def on_history_changed(self, history, history_list):
+      self.update_menu(history_list)
       get_glipper_plugins_manager().call('on_history_changed')
+      if save_history:
+         history.save()
 
 # These variables and functions are available for all Applet instances:
 
