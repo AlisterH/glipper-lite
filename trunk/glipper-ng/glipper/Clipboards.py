@@ -11,8 +11,8 @@ class Clipboards(gobject.GObject):
       self.default_clipboard = gtk.clipboard_get()
       self.primary_clipboard = gtk.clipboard_get("PRIMARY")
       
-      self.default_clipboard_text = None
-      self.primary_clipboard_text = None
+      self.default_clipboard_text = self.default_clipboard.wait_for_text()
+      self.primary_clipboard_text = self.primary_clipboard.wait_for_text()
       self.default_clipboard.connect('owner-change', self.on_default_clipboard_owner_change)
       self.primary_clipboard.connect('owner-change', self.on_primary_clipboard_owner_change)
       
