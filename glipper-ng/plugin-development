@@ -11,6 +11,9 @@ Also it's a good idea to look at the plugins that are shipped with glipper.
 The communication between the plugins and Glipper consists of events (method calls by Glipper into your plugin) 
 and api calls (method calls by your plugin into Glipper).
 
+This documentation is only a very brief overview. Maybe you want to look at History.py to get an idea how
+the history works exactly.
+
 Here is a list of all events. If you want to use one of these, you have to do it by defining a function with this 
 name at the global scope (so not in a class).
 
@@ -49,7 +52,8 @@ name at the global scope (so not in a class).
   The parameter is the parent widget. Please use it, because otherwise your window is maybe not shown at the front.
 
 
-Now about the api calls. You have to import the module "glipper" in order to use them.
+Now about the api calls. You have to import the module "glipper" in order to use them. All of these calls are throwing exceptions
+if necessary, so make sure to catch them.
 
 - "add_menu_item"
   *TODO*
@@ -68,6 +72,12 @@ Now about the api calls. You have to import the module "glipper" in order to use
 
 - "get_history_item(index)"
   Returns the item at position "index" from the history.
+
+- "remove_history_item(index)"
+  Removes the item at position "index" from the history.
+
+- "clear_history()"
+  Clears the whole history.
 
 - "format_item(item)"
   Formats the item (or generally the string) the same way like in the history popup. So it returns a shortened string, which is
