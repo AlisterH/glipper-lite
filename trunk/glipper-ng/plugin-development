@@ -55,8 +55,9 @@ name at the global scope (so not in a class).
 Now about the api calls. You have to import the module "glipper" in order to use them. All of these calls are throwing exceptions
 if necessary, so make sure to catch them.
 
-- "add_menu_item"
-  *TODO*
+- "add_menu_item(file_name, menu_item)"
+  Adds the gtk MenuItem widget, given by the parameter "menu_item", to the glipper menu.
+  The item will be removed automatically when the plugin gets stopped.
 
 - "add_history_item(item)"
   Adds a new item to the clipboard(s), and so also to the top of the history.
@@ -110,3 +111,9 @@ Please store the settings into a file in the ~/.glipper/plugins/ directory. You 
 Please make also sure that this directory really exists:
    if not os.path.exists(dir):
       os.makedirs(dir)
+
+About debugging:
+The easiest way to debug your plugin is by putting print statements to your program. These will be printed to standard output.
+To see the standard output, you have to start glipper from console before you add it to the panel.
+For example if the glipper executable is in the /usr/lib/glipper/ dir, you have to type "/usr/lib/glipper/glipper" in the console and then
+add glipper to the panel.
