@@ -17,7 +17,7 @@ sys.path.insert(0, glipper.PLUGINS_DIR)
 try:
 	# attempt to set a name for killall
 	import glipper.osutils
-	glipper.osutils.set_process_name ("glipper")
+	glipper.osutils.set_process_name("glipper")
 except:
 	print "Unable to set processName"
 

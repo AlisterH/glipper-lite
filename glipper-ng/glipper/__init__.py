@@ -49,6 +49,9 @@ PLUGINS_DIR = join(SHARED_DATA_DIR, 'plugins')
 # Path to history file
 HISTORY_FILE = join(USER_GLIPPER_DIR, "history")
 
+# Maximum length constant for tooltips item in the history
+MAX_TOOLTIPS_LENGTH = 11347
+
 #Gconf client
 GCONF_CLIENT = gconf.client_get_default()
 

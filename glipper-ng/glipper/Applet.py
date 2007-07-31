@@ -93,8 +93,9 @@ class Applet(object):
       else:
          for item in history:
             menu_item = gtk.MenuItem(format_item(item), False)
-            if len(item) > max_item_length:
-               self.tooltips.set_tip(menu_item, item)
+
+            if len(item) > max_item_length :
+               self.tooltips.set_tip(menu_item, item[:glipper.MAX_TOOLTIPS_LENGTH])
 
             if mark_default_entry and item == get_glipper_clipboards().get_default_clipboard_text():
                menu_item.get_child().set_markup('<b>' + gobject.markup_escape_text(menu_item.get_child().get_text()) + '</b>')
