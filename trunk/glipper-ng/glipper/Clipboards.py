@@ -45,9 +45,8 @@ class Clipboards(gobject.GObject):
          item = clipboard.wait_for_text()
          
          if item != None:
-            if item != self.default_clipboard_text:
-               self.default_clipboard_text = item
-               self.emit('new-item', item)
+            self.default_clipboard_text = item
+            self.emit('new-item', item)
          elif self.default_clipboard_text != None:
             clipboard.set_text(self.default_clipboard_text)
    
@@ -56,9 +55,8 @@ class Clipboards(gobject.GObject):
          item = clipboard.wait_for_text()
          
          if item != None:
-            if item != self.primary_clipboard_text:
-               self.primary_clipboard_text = item
-               self.emit('new-item', item)
+            self.primary_clipboard_text = item
+            self.emit('new-item', item)
          elif self.primary_clipboard_text != None:
             clipboard.set_text(self.primary_clipboard_text)
       
