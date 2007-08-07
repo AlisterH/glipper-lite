@@ -23,7 +23,7 @@
               <widget class="GtkCheckButton" id="immediatelyCheck">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="label" translatable="yes">Popup available actions when a new item gets added to the history</property>
+                <property name="label" translatable="yes">Immediately show available actions</property>
                 <property name="use_underline">True</property>
                 <property name="draw_indicator">True</property>
               </widget>

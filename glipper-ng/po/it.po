@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glipper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-07 16:56+0200\n"
+"POT-Creation-Date: 2007-08-07 17:28+0200\n"
 "PO-Revision-Date: 2006-11-21 01:19+0100\n"
 "Last-Translator: Eugenio Depalo <eugeniodepalo at mac dot com>\n"
 "Language-Team: Italian\n"
@@ -146,11 +146,10 @@ msgid "Actions"
 msgstr "Azioni"
 
 #: ../glipper/plugins/actions.py:78
-#, fuzzy
 msgid "Define commands to run when an item matches a regular expression."
 msgstr ""
 "Definisci comandi da eseguire quando un elemento è conforme a un'espressione "
-"regolare"
+"regolare."
 
 #: ../glipper/plugins/actions.py:180 ../glipper/plugins/actions.glade.h:2
 msgid "Add command"
@@ -262,10 +261,8 @@ msgid "Action manager"
 msgstr "Gestore di azioni"
 
 #: ../glipper/plugins/actions.glade.h:3
-msgid "Popup available actions when a new item gets added to the history"
-msgstr ""
-"Mostra le azioni disponibili quando un nuovo elemento viene aggiunto alla "
-"cronologia"
+msgid "Immediately show available actions"
+msgstr "Mostra subito le azioni disponibili"
 
 #: ../glipper/plugins/actions.glade.h:4 ../glipper/plugins/nopaste.glade.h:18
 msgid "gtk-apply"
@@ -363,3 +360,8 @@ msgid ""
 msgstr ""
 "Questo plugin riconosce se un nuovo elemento è una versione cresciuta del "
 "precedente e, se è così, elimina il precedente."
+
+#~ msgid "Popup available actions when a new item gets added to the history"
+#~ msgstr ""
+#~ "Mostra le azioni disponibili quando un nuovo elemento viene aggiunto alla "
+#~ "cronologia"
