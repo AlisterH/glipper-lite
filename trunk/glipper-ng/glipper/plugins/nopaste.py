@@ -38,7 +38,7 @@ def activated(menu):
 def init():
    item = gtk.MenuItem(_("Nopaste"))
    item.connect('activate', activated)
-   glipper.add_menu_item(__name__, item)
+   glipper.add_menu_item(item)
 
 def on_show_preferences(parent):
    preferences(parent).show()

@@ -106,7 +106,7 @@ tooltips = gtk.Tooltips()
 
 def init():
     load_snippets()
-    glipper.add_menu_item(__name__, menu_item)
+    glipper.add_menu_item(menu_item)
     glipper.GCONF_CLIENT.notify_add(glipper.GCONF_MAX_ITEM_LENGTH, lambda x, y, z, a: update_menu())
     update_menu()
 

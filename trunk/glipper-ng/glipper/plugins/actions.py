@@ -61,7 +61,7 @@ menu_item = gtk.MenuItem(_("Actions"))
 def init():
    global menu_item
    update_menu()
-   glipper.add_menu_item(__name__, menu_item)
+   glipper.add_menu_item(menu_item)
 
 def stop():
    menu.destroy()
