@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glipper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-15 14:25+0200\n"
+"POT-Creation-Date: 2007-08-07 16:56+0200\n"
 "PO-Revision-Date: 2006-11-21 01:19+0100\n"
 "Last-Translator: Eugenio Depalo <eugeniodepalo at mac dot com>\n"
 "Language-Team: Italian\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../glipper/Applet.py:19 ../glipper/Applet.py:168
+#: ../glipper/Applet.py:19 ../glipper/Applet.py:167
 msgid "Glipper - Popup shortcut: "
 msgstr "Glipper - Scorciatoia per il popup: "
 
@@ -44,19 +44,19 @@ msgstr "Sito web di Glipper"
 msgid "translator-credits"
 msgstr "Eugenio Depalo <eugeniodepalo@mac.com>"
 
-#: ../glipper/PluginsManager.py:100
+#: ../glipper/PluginsManager.py:103
 msgid "Enabled"
 msgstr "Abilitato"
 
-#: ../glipper/PluginsManager.py:103
+#: ../glipper/PluginsManager.py:106
 msgid "Autostart"
 msgstr "Autoavvia"
 
-#: ../glipper/PluginsManager.py:104
+#: ../glipper/PluginsManager.py:107
 msgid "Name"
 msgstr "Nome"
 
-#: ../glipper/PluginsManager.py:105
+#: ../glipper/PluginsManager.py:108
 msgid "Description"
 msgstr "Descrizione"
 
@@ -106,7 +106,8 @@ msgstr "Seleziona - Evidenzia/pulsante centrale del mouse"
 
 #: ../data/properties-window.glade.h:12
 msgid "Tag Ctrl+C clipboard's content in history (bold)"
-msgstr "Evidenzia il contenuto degli appunti Ctrl+C nella cronologia (grassetto)"
+msgstr ""
+"Evidenzia il contenuto degli appunti Ctrl+C nella cronologia (grassetto)"
 
 #: ../data/properties-window.glade.h:13
 msgid "Which clipboards should be managed by Glipper?"
@@ -136,41 +137,43 @@ msgstr "Gestore di appunti"
 msgid "Manages clipboards"
 msgstr "Gestisce i tuoi appunti"
 
-#: ../glipper/plugins/actions.py:33
+#: ../glipper/plugins/actions.py:43
 msgid "No actions available"
 msgstr "Nessun'azione disponibile"
 
-#: ../glipper/plugins/actions.py:53 ../glipper/plugins/actions.py:71
+#: ../glipper/plugins/actions.py:59 ../glipper/plugins/actions.py:77
 msgid "Actions"
 msgstr "Azioni"
 
-#: ../glipper/plugins/actions.py:72
-msgid "Define commands to run when an item matches a regular expression"
+#: ../glipper/plugins/actions.py:78
+#, fuzzy
+msgid "Define commands to run when an item matches a regular expression."
 msgstr ""
-"Definisci comandi da eseguire quando un elemento è conforme a un'espressione regolare"
+"Definisci comandi da eseguire quando un elemento è conforme a un'espressione "
+"regolare"
 
-#: ../glipper/plugins/actions.py:174 ../glipper/plugins/actions.glade.h:2
+#: ../glipper/plugins/actions.py:180 ../glipper/plugins/actions.glade.h:2
 msgid "Add command"
 msgstr "Aggiungi comando"
 
-#: ../glipper/plugins/actions.py:177
+#: ../glipper/plugins/actions.py:183
 msgid "Delete action"
 msgstr "Rimuovi azione"
 
-#: ../glipper/plugins/actions.py:183
+#: ../glipper/plugins/actions.py:189
 msgid "Delete command"
 msgstr "Rimuovi comando"
 
-#: ../glipper/plugins/actions.py:194 ../glipper/plugins/actions.py:236
+#: ../glipper/plugins/actions.py:200 ../glipper/plugins/actions.py:242
 msgid "New command"
 msgstr "Nuovo comando"
 
-#: ../glipper/plugins/actions.py:195 ../glipper/plugins/actions.py:225
-#: ../glipper/plugins/actions.py:237
+#: ../glipper/plugins/actions.py:201 ../glipper/plugins/actions.py:231
+#: ../glipper/plugins/actions.py:243
 msgid "Enter description here"
 msgstr "Aggiungi la descrizione qui"
 
-#: ../glipper/plugins/actions.py:224
+#: ../glipper/plugins/actions.py:230
 msgid "New regular expression"
 msgstr "Nuova espressione regolare"
 
@@ -182,7 +185,8 @@ msgstr "Rete"
 msgid ""
 "Connect multiple Glipper processes via network to synchronize their history"
 msgstr ""
-"Connetti più processi di Glipper via rete per sincronizzare la loro cronologia"
+"Connetti più processi di Glipper via rete per sincronizzare la loro "
+"cronologia"
 
 #: ../glipper/plugins/network.py:293 ../glipper/plugins/network.py:303
 msgid "Password"
@@ -193,7 +197,8 @@ msgid ""
 "You have to install the Python Cryptography Toolkit (python-crypto) if you "
 "want to use encrypted connections!"
 msgstr ""
-"Se vuoi usare le connessioni criptate devi installare il Python Cryptography Toolkit (python-crypto)"
+"Se vuoi usare le connessioni criptate devi installare il Python Cryptography "
+"Toolkit (python-crypto)"
 
 #: ../glipper/plugins/network.py:323
 msgid "New connection"
@@ -224,8 +229,8 @@ msgid "Nopaste"
 msgstr ""
 
 #: ../glipper/plugins/nopaste.py:8
-msgid "Paste the entry of your clipboard to a No-Paste service"
-msgstr "Incolla i contenuti dei tuoi appunti in un servizio No-Paste"
+msgid "Paste the entry of your clipboard to a Nopaste service"
+msgstr "Incolla i contenuti dei tuoi appunti in un servizio Nopaste"
 
 #: ../glipper/plugins/nopaste.py:34
 msgid "pasted by Glipper"
@@ -258,7 +263,9 @@ msgstr "Gestore di azioni"
 
 #: ../glipper/plugins/actions.glade.h:3
 msgid "Popup available actions when a new item gets added to the history"
-msgstr "Mostra le azioni disponibili quando un nuovo elemento viene aggiunto alla cronologia"
+msgstr ""
+"Mostra le azioni disponibili quando un nuovo elemento viene aggiunto alla "
+"cronologia"
 
 #: ../glipper/plugins/actions.glade.h:4 ../glipper/plugins/nopaste.glade.h:18
 msgid "gtk-apply"
@@ -284,7 +291,8 @@ msgstr "Preferenze di Rete"
 msgid ""
 "Please read the security informations about this plugin before using it!"
 msgstr ""
-"Per favore leggi le informazioni di sicurezza su questo plugin prima di usarlo!"
+"Per favore leggi le informazioni di sicurezza su questo plugin prima di "
+"usarlo!"
 
 #: ../glipper/plugins/network.glade.h:6
 msgid "gtk-add"
@@ -344,3 +352,14 @@ msgstr ""
 msgid "gtk-refresh"
 msgstr ""
 
+#: ../glipper/plugins/grow.py:12
+msgid "Grow"
+msgstr "Crescita"
+
+#: ../glipper/plugins/grow.py:13
+msgid ""
+"This plugin detects whether a new entry is just a grown version of the "
+"previous one, and if so, deletes the previous."
+msgstr ""
+"Questo plugin riconosce se un nuovo elemento è una versione cresciuta del "
+"precedente e, se è così, elimina il precedente."
