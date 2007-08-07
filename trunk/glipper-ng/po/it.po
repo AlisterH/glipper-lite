@@ -225,7 +225,7 @@ msgstr ""
 
 #: ../glipper/plugins/nopaste.py:8
 msgid "Paste the entry of your clipboard to a No-Paste service"
-msgstr "Incolla la voce nei tuoi appunti in un servizio No-Paste"
+msgstr "Incolla i contenuti dei tuoi appunti in un servizio No-Paste"
 
 #: ../glipper/plugins/nopaste.py:34
 msgid "pasted by Glipper"

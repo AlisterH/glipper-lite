@@ -361,7 +361,7 @@
   		    <para><application><link linkend="plugins-newline">Newline</link></application> adds a newline character at the end of items in the clipboard.</para>
   		  </listitem>
   		  <listitem>
-  		    <para><application><link linkend="plugins-nopaste">Nopaste</link></application> allows you to paste the entry of your clipboard to a No-Paste service.</para>
+  		    <para><application><link linkend="plugins-nopaste">Nopaste</link></application> allows you to paste the entry of your clipboard to a Nopaste service.</para>
   		  </listitem>
   		  <listitem>
   		    <para><application><link linkend="plugins-snippets">Snippets</link></application> allows you to create snippets from history items.</para>
@@ -378,7 +378,7 @@
       <para>To manage your actions, select the <application>Actions</application> plugin from the <guilabel>Plugin</guilabel> dialog and then click on the <guibutton>Preferences</guibutton> button.</para> 
       <sect3>
       <title>Managing actions</title>
-      <para>The <application>Actions</application> <guibutton>Preferences</guibutton> shows the actions and commands you defined in a table. To add a new action,
+      <para>The <application>Actions</application> <guibutton>Manager</guibutton> shows the actions and commands you defined in a table. To add a new action,
             click the <guibutton>Add action</guibutton> button. The newly created action will now appear in the table.</para>
       <para>To set the regular expression and the description for this action, click the <guilabel>New regular expression</guilabel> and <guilabel>Add your description here</guilabel> labels in the table. You can now add a list of commands to run with the specified action.</para>
       <para>To add a new command to the specified action, select the row corresponding to the action in the table and then click the <guibutton>Add command</guibutton> button</para>
@@ -412,7 +412,7 @@
       <para>You will be asked for the informations about the connection you are creating. In this dialog, you can also specify a password to protect your connection from unwanted users.</para>
       <para>If you added a connection to the list of the IPs you want to connect to, then you will be sharing the history when you click the <guibutton>Apply</guibutton> button.</para>
       <para>To remove connections to the list, select the row corresponding to the connection you want to remove from one of the tables and click the <guibutton>Remove</guibutton> button.</para>
-      <para>If you don't have the Python Cryptography Toolkit (python-crypto) installed, or don't use a password, you data will be transmitted in plain text. This can be a big security issue, because anyone who has access to your physical network connection can read all the data your computers are transmitting. If you have confidential informations in you clipboard (like passwords), they better shouldn't be sent unencrypted.</para>
+      <para>If you don't have the Python Cryptography Toolkit (python-crypto) installed, or don't use a password, your data will be transmitted in plain text. This can be a big security issue, because anyone who has access to your physical network connection can read all the data your computers are transmitting. If you have confidential informations in you clipboard (like passwords), they better shouldn't be sent unencrypted.</para>
       </sect3>
     </sect2>
 
@@ -485,7 +485,7 @@
       <para>To manage your snippets, select the <application>Snippets</application> plugin from the <guilabel>Plugin</guilabel> dialog and then click on the <guibutton>Preferences</guibutton> button.</para> 
       <sect3>
       <title>Managing snippets</title>
-      <para>The <application>Snippets</application> <guibutton>Preferences</guibutton> displays two tables:</para>
+      <para>The <application>Snippets</application> <guibutton>Manager</guibutton> displays two tables:</para>
   		<itemizedlist>
   		  <listitem>
            <para>The table on the left contains the current history.</para>
