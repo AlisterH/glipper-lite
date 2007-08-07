@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: glipper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-07 15:58+0200\n"
+"POT-Creation-Date: 2007-08-07 18:06+0200\n"
 "PO-Revision-Date: 2006-11-21 01:27+0100\n"
 "Last-Translator: karderio <karderio at gmail dot com>\n"
 "Language-Team: German <svenrech@gmx.de>\n"
@@ -148,7 +148,7 @@ msgstr ""
 "Definiere Kommandos die ausgeführt werden sollen, sobald ein Eintrag auf "
 "einen regulären Ausdruck passt."
 
-#: ../glipper/plugins/actions.py:180 ../glipper/plugins/actions.glade.h:2
+#: ../glipper/plugins/actions.py:180 ../glipper/plugins/actions.glade.h:3
 msgid "Add command"
 msgstr "Füge Kommando hinzu"
 
@@ -167,7 +167,7 @@ msgstr "Neues Kommando"
 #: ../glipper/plugins/actions.py:201 ../glipper/plugins/actions.py:231
 #: ../glipper/plugins/actions.py:243
 msgid "Enter description here"
-msgstr "Gebe Beschreibung hier ein"
+msgstr "Trage Beschreibung hier ein"
 
 #: ../glipper/plugins/actions.py:230
 msgid "New regular expression"
@@ -257,13 +257,15 @@ msgstr "Erzeuge Schnipsel von Verlaufseinträgen"
 msgid "Action manager"
 msgstr "Aktionsmanager"
 
-#: ../glipper/plugins/actions.glade.h:3
-msgid "Popup available actions when a new item gets added to the history"
-msgstr ""
-"Zeige verfügbare Aktionen sobald ein neuer Eintrag zum Verlauf hinzugefügt "
-"wird"
+#: ../glipper/plugins/actions.glade.h:2
+msgid "Add action"
+msgstr "Aktion hinzufügen"
 
-#: ../glipper/plugins/actions.glade.h:4 ../glipper/plugins/nopaste.glade.h:18
+#: ../glipper/plugins/actions.glade.h:4
+msgid "Immediately show available actions"
+msgstr "Zeige verfügbare Aktionen sofort"
+
+#: ../glipper/plugins/actions.glade.h:5 ../glipper/plugins/nopaste.glade.h:18
 msgid "gtk-apply"
 msgstr ""
 
@@ -356,5 +358,10 @@ msgid ""
 "This plugin detects whether a new entry is just a grown version of the "
 "previous one, and if so, deletes the previous."
 msgstr ""
-"Dieses Plugin erkennt ob ein neuer Eintrag nur eine gewachsene Variante "
-"des Vorherigen ist, und falls es so ist, wird der Vorherige gelöscht."
+"Dieses Plugin erkennt ob ein neuer Eintrag nur eine gewachsene Variante des "
+"Vorherigen ist, und falls es so ist, wird der Vorherige gelöscht."
+
+#~ msgid "Popup available actions when a new item gets added to the history"
+#~ msgstr ""
+#~ "Zeige verfügbare Aktionen sobald ein neuer Eintrag zum Verlauf "
+#~ "hinzugefügt wird"
