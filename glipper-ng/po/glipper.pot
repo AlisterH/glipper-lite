@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-07 17:28+0200\n"
+"POT-Creation-Date: 2007-08-07 17:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -147,7 +147,7 @@ msgstr ""
 msgid "Define commands to run when an item matches a regular expression."
 msgstr ""
 
-#: ../glipper/plugins/actions.py:180 ../glipper/plugins/actions.glade.h:2
+#: ../glipper/plugins/actions.py:180 ../glipper/plugins/actions.glade.h:3
 msgid "Add command"
 msgstr ""
 
@@ -250,11 +250,15 @@ msgstr ""
 msgid "Action manager"
 msgstr ""
 
-#: ../glipper/plugins/actions.glade.h:3
+#: ../glipper/plugins/actions.glade.h:2
+msgid "Add action"
+msgstr ""
+
+#: ../glipper/plugins/actions.glade.h:4
 msgid "Immediately show available actions"
 msgstr ""
 
-#: ../glipper/plugins/actions.glade.h:4 ../glipper/plugins/nopaste.glade.h:18
+#: ../glipper/plugins/actions.glade.h:5 ../glipper/plugins/nopaste.glade.h:18
 msgid "gtk-apply"
 msgstr ""
 
