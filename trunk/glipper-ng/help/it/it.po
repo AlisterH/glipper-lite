@@ -119,7 +119,7 @@ msgid ""
 "<application>Glipper</application> is a GNOME applet for managing your "
 "clipboards."
 msgstr ""
-"<application>Glipper</application> è una applet per GNOME per gestire i tuoi "
+"<application>Glipper</application> è un'applet per GNOME per gestire i tuoi "
 "appunti."
 
 #: ../C/glipper.xml:122(para)
