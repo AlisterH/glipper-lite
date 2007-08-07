@@ -133,7 +133,7 @@ msgstr ""
 "die Zwischenablage kopiert wird. <application>Glipper</application> "
 "verwaltet einen Verlauf von sowohl der \"Kopieren\" Zwischenablage, "
 "überlicherweise mit <keycombo><keycap>Strg+C</keycap></keycombo> gefüllt, "
-"und der \"Markieren\" Zwischenablage, welche gefüllt wird sobald ein Text "
+"als auch der \"Markieren\" Zwischenablage, welche gefüllt wird sobald ein Text "
 "selektiert wird."
 
 #: glipper.xml:129(para)
@@ -171,7 +171,7 @@ msgstr ""
 "Um <application>Glipper</application> zu starten, rechtsklicke auf das GNOME "
 "Panel und wähle <guimenuitem>Zum Panel hinzufügen</guimenuitem>. Wähle "
 "<guisubmenu>Zwischenablagenverwalter</guisubmenu> in dem Dialog, dann klicke "
-"auf <guibutton>OK</guibutton>. Glipper wird dann im Panel erscheinen."
+"auf <guibutton>OK</guibutton>. Glipper erscheint dann im Panel."
 
 #: glipper.xml:156(para)
 msgid ""
@@ -265,8 +265,8 @@ msgid ""
 "can be pasted both with the paste function of your application and with the "
 "middle mouse button."
 msgstr ""
-"Beide Inhalt der \"Kopieren\" und der \"Markieren\" Zwischenablage werden "
-"ersetzt sobald du ein Element des Zwischenablagenverlaufs wählst. Der neue "
+"Sowohl der Inhalt der \"Kopieren\" als auch der \"Markieren\" Zwischenablage werden "
+"ersetzt, sobald du ein Element des Zwischenablagenverlaufs wählst. Der neue "
 "Eintrag kann nun sowohl per Einfügefunktion, als auch mit der mittleren "
 "Maustaste eingefügt werden."
 
@@ -292,8 +292,8 @@ msgid ""
 "<application>Glipper</application> to suit your requirements and preferences."
 msgstr ""
 "Benutze den <guilabel>Einstellungen</guilabel> Dialog um "
-"<application>Glipper</application> anzupassen um deinen Vorraussetzungen und "
-"Vorlieben zu entsprechen."
+"<application>Glipper</application> anzupassen damit es deinen Vorraussetzungen und "
+"Vorlieben entspricht."
 
 #: glipper.xml:234(para)
 msgid ""
@@ -302,7 +302,7 @@ msgid ""
 "<menuchoice><guimenuitem>Preferences</guimenuitem></menuchoice>."
 msgstr ""
 "Um den <guilabel>Einstellungen</guilabel> Dialog anzuzeigen, rechtsklicke "
-"auf das <application>Glipper</application> Symbol im Panel und wähöe "
+"auf das <application>Glipper</application> Symbol im Panel und wähle "
 "<menuchoice><guimenuitem>Einstellungen</guimenuitem></menuchoice>."
 
 #: glipper.xml:239(title)
@@ -338,7 +338,7 @@ msgid ""
 "Use this spin box to specify the maximum number of characters of one item in "
 "the history."
 msgstr ""
-"Benutze diese Drehbox um die maximale Anzahl von Zwichen eines Eintrages im "
+"Benutze diese Drehbox um die maximale Zeichenanzahl eines Eintrages im "
 "Verlauf anzugeben."
 
 #: glipper.xml:282(guilabel)
@@ -348,7 +348,7 @@ msgstr "Markieren - Markieren/Mittlere Maustaste"
 #: glipper.xml:286(para)
 msgid "Select this option to maintain a history of the \"select\" clipboard."
 msgstr ""
-"Wähle diese Option um einen Verlauf der \"Markieren\" Zwischenablage zu "
+"Wähle diese Option um den Verlauf der \"Markieren\" Zwischenablage zu "
 "verwalten."
 
 #: glipper.xml:292(guilabel)
@@ -358,7 +358,7 @@ msgstr "Kopieren - Strg+C/Strg+V"
 #: glipper.xml:296(para)
 msgid "Select this option to maintain a history of the \"copy\" clipboard."
 msgstr ""
-"Wähle diese Option um einen Verlauf der \"Kopieren\" Zwischenablage zu "
+"Wähle diese Option um den Verlauf der \"Kopieren\" Zwischenablage zu "
 "verwalten."
 
 #: glipper.xml:302(guilabel)
@@ -370,8 +370,8 @@ msgid ""
 "Select this option to have <application>Glipper</application> mark the "
 "contents of the \"copy\" clipboard."
 msgstr ""
-"Wähle diese Option damit <application>Glipper</application> den Inhalt der "
-"\"Kopiere\" Zwischenablage markiert."
+"Wähle diese Option, damit <application>Glipper</application> den Inhalt der "
+"\"Kopieren\" Zwischenablage markiert."
 
 #: glipper.xml:312(guilabel)
 msgid "Save history"
@@ -382,7 +382,7 @@ msgid ""
 "Select this option to save the contents of the clipboards. If you select "
 "this, you will keep the history of clipboards from your last session."
 msgstr ""
-"Wähle diese Option um den Inhalt der Zwischenablage zu speichern. Falls du "
+"Wähle diese Option, um den Inhalt der Zwischenablage zu speichern. Falls du "
 "dies wählst, wirst du den Zwischenablagenverlauf deiner letzten Sitzung "
 "behalten."
 
@@ -394,7 +394,7 @@ msgstr "Tastenkombination für das Popup-Fenster"
 msgid "Enter a key combination to change the main menu keyboard shortcut."
 msgstr ""
 "Trage eine Tastenkombination ein um das Hauptmenü Tastaturkürzel zu ändern. "
-"(Bitte beachte das die Kombination hier auf englisch angegeben werden muss)"
+"(Bitte beachte das die Kombination hier englisch angegeben werden muss)"
 
 #: glipper.xml:340(title)
 msgid "Plugins"
@@ -440,7 +440,7 @@ msgid ""
 "expression."
 msgstr ""
 "<application><link linkend=\"plugins-actions\">Aktionen</link></application> "
-"erlauben dir Kommandos zu definieren welche abgearbeitet werden sobald ein "
+"erlauben dir Kommandos zu definieren, welche abgearbeitet werden sobald ein "
 "Eintrag auf einen regulären Ausdruck passt."
 
 #: glipper.xml:358(para)
@@ -449,7 +449,7 @@ msgid ""
 "connects multiple Glipper processes via network to synchronize their history."
 msgstr ""
 "<application><link linkend=\"plugins-network\">Netzwerk</link></application> "
-"verbindet mehrere Glipper Prozesse übers Netzwerk um ihre Verläufe zu "
+"verbindet mehrere Glipper Prozesse über das Netzwerk um ihre Verläufe zu "
 "synchronisieren."
 
 #: glipper.xml:361(para)
@@ -485,8 +485,8 @@ msgid ""
 "if so, deletes the previous."
 msgstr ""
 "<application><link linkend=\"plugins-grow\">Wachsen</link></application> "
-"erkennt ob a neuer Eintrag nur eine gewachsene Version des vorherigen ist, "
-"und falls dem so ist wird der vorherige gelöscht."
+"erkennt ob ein neuer Eintrag nur eine gewachsene Version des Vorherigen ist, "
+"und falls dem so ist wird der Vorherige gelöscht."
 
 #: glipper.xml:351(para)
 msgid ""
@@ -506,7 +506,7 @@ msgid ""
 "to run when the current item in the clipboards matches a regular expression."
 msgstr ""
 "Das <application>Aktionen</application> Plugin erlaubt dir Kommandos zu "
-"definieren welche abgearbeitet werden falls der jetzige "
+"definieren, welche abgearbeitet werden falls der jetzige "
 "Eintrag in der Zwischenablage auf einen regulären Ausdruck passt."
 
 #: glipper.xml:378(para)
@@ -516,7 +516,7 @@ msgid ""
 "<guibutton>Preferences</guibutton> button."
 msgstr ""
 "Um deine Aktionen zu verwalten, wähle das <applicatin>Aktionen</application> "
-"Plugin aus dem <guilabel>Plugin</guilabel> Dialog und klicke dann auf den "
+"Plugin aus dem <guilabel>Plugindialog</guilabel> und klicke dann auf den "
 "<guibutton>Einstellungen</guibutton> Knopf."
 
 #: glipper.xml:382(title)
@@ -525,13 +525,13 @@ msgstr "Aktionen Einstellungen"
 
 #: glipper.xml:400(guilabel)
 msgid "Immediately show available actions"
-msgstr ""
+msgstr "Zeige verfügbare Aktionen sofort an"
 
 #: glipper.xml:404(para)
 msgid ""
 "Select this option to popup a menu with the available actions when a new "
 "item gets added to the history."
-msgstr ""
+msgstr "Wähle diese Option, um ein Menü mit den verfügbaren Aktionen anzuzeigen sobald ein neuer Eintrag zum Verlauf hinzugefügt wird."
 
 #: glipper.xml:414(title)
 msgid "Managing actions"
@@ -566,11 +566,11 @@ msgstr ""
 msgid ""
 "To add a new command to the specified action, select the row corresponding "
 "to the action in the table and then click the <guibutton>Add command</"
-"guibutton> button"
+"guibutton> button."
 msgstr ""
 "Um ein neues Kommando zu der angegeben Aktion hinzuzufügen, wähle die Zeile "
 "in der Tabelle welche zu der Aktion gehört und klicke auf den "
-"<guibutton>Kommando hinzufügen</guibutton> Knopf"
+"<guibutton>Kommando hinzufügen</guibutton> Knopf."
 
 #: glipper.xml:419(para)
 msgid ""
@@ -586,10 +586,10 @@ msgstr ""
 #: glipper.xml:420(para)
 msgid ""
 "The command can use the current clipboard contents as an argument by using %"
-"s in the command definition"
+"s in the command definition."
 msgstr ""
 "Das Kommando kann den jetzigen Zwischenablageninhalt als ein Argument "
-"benutzen, in dem %s in der Kommandodefinition benutzt wird"
+"benutzen, in dem %s in der Kommandodefinition benutzt wird."
 
 #: glipper.xml:421(para)
 msgid ""
@@ -607,11 +607,10 @@ msgstr "Aktionen benutzen"
 #: glipper.xml:425(para)
 msgid ""
 "To use the actions you defined in your preferences, select "
-"<guimenuitem>Actions</guimenuitem> from the <guimenu>main menu</guimenu>"
+"<guimenuitem>Actions</guimenuitem> from the <guimenu>main menu</guimenu>."
 msgstr ""
-"Um die Aktionen die du in den Einstellungen definiert hast zu benutzen, "
-"wähke <guimenuitem>Aktionen</guimenuitem> von dem <guimenu>Hauptmenü</"
-"guimenu>"
+"Um die Aktionen, die du in den Einstellungen definiert hast, zu benutzen, "
+"wähle <guimenuitem>Aktionen</guimenuitem> aus dem <guimenu>Hauptmenü</guimenu>."
 
 #: glipper.xml:426(para)
 msgid ""
@@ -631,7 +630,7 @@ msgid ""
 "processes via network to synchronize their history."
 msgstr ""
 "Das <application>Netwerk</application> Plugin verbindet mehrere Glipper "
-"Prozesse übers Netwerk um ihre Verläufe zu synchronisieren."
+"Prozesse über das Netwerk um ihre Verläufe zu synchronisieren."
 
 #: glipper.xml:433(para)
 msgid ""
@@ -639,7 +638,7 @@ msgid ""
 "application> plugin from the <guilabel>Plugin</guilabel> dialog and then "
 "click on the <guibutton>Preferences</guibutton> button."
 msgstr ""
-"Um die IPs zu denen du verbinden willst zu setzen, wähle das "
+"Um die IPs, zu denen du verbinden willst, zu setzen, wähle das "
 "<application>Netzwerk</application> Plugin aus dem <guilabel>Plugindialog</"
 "guilabel> und klicke auf den <guibutton>Einstellungen</guibutton> Knopf."
 
@@ -672,7 +671,7 @@ msgid ""
 "guibutton> button corresponding to the table you want to add the IP to."
 msgstr ""
 "Um eine neue Verbindung zu einer der Listen hinzuzufügen, klicke auf den "
-"<guibutton>Hinzufügen</guibutton> Knopf, welcher zu der Tabelle zu der du "
+"<guibutton>Hinzufügen</guibutton> Knopf, welcher zu der Tabelle, zu der du "
 "die IP hinzufügen willst, gehört."
 
 #: glipper.xml:446(para)
@@ -682,7 +681,7 @@ msgid ""
 "connection from unwanted users."
 msgstr ""
 "Du wirst nach den Informationen über die Verbindung die du erstellst "
-"gefragt. In dem Dialog kannst du ebenfalls ein Passwort angeben um deine "
+"gefragt. In dem Dialog kannst du ebenfalls ein Passwort angeben, um deine "
 "Verbindung vor ungewollten Benutzern zu schützen."
 
 #: glipper.xml:447(para)
@@ -691,7 +690,7 @@ msgid ""
 "then you will be sharing the history when you click the <guibutton>Apply</"
 "guibutton> button."
 msgstr ""
-"Wenn du eine Verbindung zu der Liste der IPs hinzugefügt hast wirst du den "
+"Wenn du eine Verbindung zu der Liste der IPs hinzugefügt hast, wirst du den "
 "Verlauf teilen sobald du auf den <guibutton>Anwenden</guibutton> Knopf "
 "klickst."
 
@@ -736,7 +735,7 @@ msgstr ""
 
 #: glipper.xml:456(para)
 msgid "This is just an example plugin."
-msgstr "Dies ist nur ein Beispielsplugin"
+msgstr "Dies ist nur ein Beispielsplugin."
 
 #: glipper.xml:460(title)
 msgid "Nopaste plugin"
@@ -791,10 +790,10 @@ msgstr "Nopaste benutzen"
 #: glipper.xml:511(para)
 msgid ""
 "To paste the current clipboard contents to the Nopaste service, select "
-"<guimenuitem>Nopaste</guimenuitem> from the <guimenu>main menu</guimenu>"
+"<guimenuitem>Nopaste</guimenuitem> from the <guimenu>main menu</guimenu>."
 msgstr ""
 "Um den momentanen Zwischenablageninhalt dem Nopaste Dienst zu übergeben, "
-"wähle <guimenuitem>Nopaste</guimenuitem> vom <guimenu>Hauptmenü</guimenu>"
+"wähle <guimenuitem>Nopaste</guimenuitem> aus dem <guimenu>Hauptmenü</guimenu>."
 
 #: glipper.xml:516(title)
 msgid "Snippets plugin"
@@ -820,7 +819,7 @@ msgid ""
 "<guibutton>Preferences</guibutton> button."
 msgstr ""
 "Um deine Schnipsel zu verwalten, wähle das <application>Snippets</"
-"application> Plugin aus dem <guilabel>Plugin</guilabel> Dialog and klicke "
+"application> Plugin aus dem <guilabel>Plugindialog</guilabel> und klicke "
 "dann auf den <guibutton>Einstellungen</guibutton> Knopf."
 
 #: glipper.xml:521(title)

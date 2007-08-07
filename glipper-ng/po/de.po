@@ -181,7 +181,7 @@ msgstr "Netzwerk"
 msgid ""
 "Connect multiple Glipper processes via network to synchronize their history"
 msgstr ""
-"Verbinde mehrere Glipper Prozesse über's Netzwerk um ihren Verlauf zu "
+"Verbinde mehrere Glipper Prozesse über das Netzwerk um ihren Verlauf zu "
 "synchronisieren"
 
 #: ../glipper/plugins/network.py:293 ../glipper/plugins/network.py:303
@@ -263,7 +263,7 @@ msgstr "Aktion hinzufügen"
 
 #: ../glipper/plugins/actions.glade.h:4
 msgid "Immediately show available actions"
-msgstr "Zeige verfügbare Aktionen sofort"
+msgstr "Zeige verfügbare Aktionen sofort an"
 
 #: ../glipper/plugins/actions.glade.h:5 ../glipper/plugins/nopaste.glade.h:18
 msgid "gtk-apply"
