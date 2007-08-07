@@ -125,10 +125,13 @@ class PluginsWindow(object):
       
       for file in directory:
          if file.name[-3:] == ".py":
-            plugin = Plugin(file.name[:-3])
-            self.plugins_list_model.append([plugin.get_file_name(), plugins_manager.get_started(plugin.get_file_name()), plugins_manager.get_autostarted(plugin.get_file_name()), plugin.get_name(), plugin.get_description(), plugin.get_preferences()])
-            if not plugins_manager.get_started(plugin.get_file_name()):
-               plugin.remove_module()
+            try:
+               plugin = Plugin(file.name[:-3])
+               self.plugins_list_model.append([plugin.get_file_name(), plugins_manager.get_started(plugin.get_file_name()), plugins_manager.get_autostarted(plugin.get_file_name()), plugin.get_name(), plugin.get_description(), plugin.get_preferences()])
+               if not plugins_manager.get_started(plugin.get_file_name()):
+                  plugin.remove_module()
+            except:
+               print "Error trying to open plugin %s" % file.name
             
    def on_autostart_plugins_changed(self, value):
       if value is None or value.type != gconf.VALUE_LIST:
