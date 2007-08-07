@@ -81,7 +81,7 @@
                             <child>
                               <widget class="GtkLabel" id="label1">
                                 <property name="visible">True</property>
-                                <property name="label">Add action</property>
+                                <property name="label" translatable="yes">Add action</property>
                                 <property name="use_underline">True</property>
                               </widget>
                               <packing>
