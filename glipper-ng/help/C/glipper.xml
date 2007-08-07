@@ -412,6 +412,7 @@
       <para>You will be asked for the informations about the connection you are creating. In this dialog, you can also specify a password to protect your connection from unwanted users.</para>
       <para>If you added a connection to the list of the IPs you want to connect to, then you will be sharing the history when you click the <guibutton>Apply</guibutton> button.</para>
       <para>To remove connections to the list, select the row corresponding to the connection you want to remove from one of the tables and click the <guibutton>Remove</guibutton> button.</para>
+      <para>If you don't have the Python Cryptography Toolkit (python-crypto) installed, or don't use a password, you data will be transmitted in plain text. This can be a big security issue, because anyone who has access to your physical network connection can read all the data your computers are transmitting. If you have confidential informations in you clipboard (like passwords), they better shouldn't be sent unencrypted.</para>
       </sect3>
     </sect2>
 
