@@ -31,15 +31,18 @@ class PluginsManager(gobject.GObject):
    def start(self, file_name):
       plugin = Plugin(file_name)
       self.plugins.append(plugin)
+      self.init_plugin = plugin # Adding menu items from plugins is allowed only in the init function.
+                                # add_menu_item uses this to know what plugin it is being called for.
       plugin.call('init')
-      
+      self.init_plugin = None
+
    def stop(self, file_name):
       for plugin in self.plugins:
          if plugin.get_file_name() == file_name:
             plugin.call('stop')
             plugin.remove_module()
             self.plugins.remove(plugin)
-            self.remove_menu_items(plugin.get_file_name())
+            self.remove_menu_items(plugin)
             
    def stop_all(self):
       for plugin in self.plugins:
@@ -48,15 +51,15 @@ class PluginsManager(gobject.GObject):
    def get_menu_items(self):
       return self.menu_items   
    
-   def remove_menu_items(self, file_name):
-      for module, menu_item in self.menu_items:
-         if module == file_name:
-            self.menu_items.remove((module, menu_item))
+   def remove_menu_items(self, plugin):
+      for p, menu_item in self.menu_items:
+         if p == plugin:
+            self.menu_items.remove((p, menu_item))
 
       self.emit('menu-items-changed')
    
-   def add_menu_item(self, file_name, menu_item):
-      self.menu_items.append((file_name, menu_item))
+   def add_menu_item(self, menu_item):
+      self.menu_items.append((self.init_plugin, menu_item))
       self.emit('menu-items-changed')
       
    def get_started(self, file_name):

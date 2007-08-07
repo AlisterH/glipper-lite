@@ -92,8 +92,8 @@ from glipper.PluginsManager import *
 
 import glipper.Applet
 
-def add_menu_item(file_name, menu_item):
-   get_glipper_plugins_manager().add_menu_item(file_name, menu_item)
+def add_menu_item(menu_item):
+   get_glipper_plugins_manager().add_menu_item(menu_item)
 
 def add_history_item(item):
    get_glipper_clipboards().set_text(item)
