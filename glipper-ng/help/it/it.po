@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2007-08-07 17:34+0200\n"
+"POT-Creation-Date: 2007-08-07 19:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -350,7 +350,9 @@ msgstr "Seleziona - Evidenzia/pulsante centrale del mouse"
 
 #: ../C/glipper.xml:286(para)
 msgid "Select this option to maintain a history of the \"select\" clipboard."
-msgstr "Seleziona questa opzione per mantenere una cronologia degli appunti \"selezione\"."
+msgstr ""
+"Seleziona questa opzione per mantenere una cronologia degli appunti "
+"\"selezione\"."
 
 #: ../C/glipper.xml:292(guilabel)
 msgid "Copy - Ctrl+C/Ctrl+V"
@@ -358,19 +360,22 @@ msgstr "Copia - Ctrl+C/Ctrl+V"
 
 #: ../C/glipper.xml:296(para)
 msgid "Select this option to maintain a history of the \"copy\" clipboard."
-msgstr "Seleziona questa opzione per mantenere una cronologia degli appunti \"copia\"."
+msgstr ""
+"Seleziona questa opzione per mantenere una cronologia degli appunti \"copia"
+"\"."
 
 #: ../C/glipper.xml:302(guilabel)
 msgid "Tag Ctrl+C clipboard's content in history (bold)"
-msgstr "Evidenzia i contenuti degli appunti Ctrl+C nella cronologia (grassetto)"
+msgstr ""
+"Evidenzia i contenuti degli appunti Ctrl+C nella cronologia (grassetto)"
 
 #: ../C/glipper.xml:306(para)
 msgid ""
 "Select this option to have <application>Glipper</application> mark the "
 "contents of the \"copy\" clipboard."
 msgstr ""
-"Seleziona questa opzione per far si che <application>Glipper</application> evidenzi i "
-"contenuti degli appunti \"copia\"."
+"Seleziona questa opzione per far si che <application>Glipper</application> "
+"evidenzi i contenuti degli appunti \"copia\"."
 
 #: ../C/glipper.xml:312(guilabel)
 msgid "Save history"
@@ -526,8 +531,8 @@ msgid ""
 "Select this option to popup a menu with the available actions when a new "
 "item gets added to the history."
 msgstr ""
-"Seleziona questa opzione per mostrare un menu con le azioni disponibili quando un nuovo "
-"elemento viene aggiunto alla cronologia."
+"Seleziona questa opzione per mostrare un menu con le azioni disponibili "
+"quando un nuovo elemento viene aggiunto alla cronologia."
 
 #: ../C/glipper.xml:414(title)
 msgid "Managing actions"
@@ -707,12 +712,12 @@ msgid ""
 "you have confidential informations in you clipboard (like passwords), they "
 "better shouldn't be sent unencrypted."
 msgstr ""
-"Se non hai il Python Cryptography Toolkit (python-crypto) installato, "
-"o non usi una password, i tuoi dati verranno trasmessi in testo semplice. Questo "
-"può essere un grande rischio di sicurezza, perchè chiunque abbia accesso alla tua rete fisica "
-"può accedere tutti i dati che i tuoi computer stanno inviando. Se "
-"hai delle informazioni confidenziali negli appunti (come le password), queste "
-"non dovrebbero essere inviate non criptate."
+"Se non hai il Python Cryptography Toolkit (python-crypto) installato, o non "
+"usi una password, i tuoi dati verranno trasmessi in testo semplice. Questo "
+"può essere un grande rischio di sicurezza, perchè chiunque abbia accesso "
+"alla tua rete fisica può accedere tutti i dati che i tuoi computer stanno "
+"inviando. Se hai delle informazioni confidenziali negli appunti (come le "
+"password), queste non dovrebbero essere inviate non criptate."
 
 #: ../C/glipper.xml:454(title)
 msgid "Newline plugin"
