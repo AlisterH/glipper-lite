@@ -116,18 +116,18 @@
   <title>Introduction</title>
 
 	<para>
-		<application>Glipper</application> is a clipboardmanager applet for GNOME's panel.
+		<application>Glipper</application> is a GNOME applet for managing your clipboards.
 	</para>
 
 	<para>
 		<application>Glipper</application> sits in the panel and collects
-		everything that is copied to the clipboard. Glipper maintains a history both 
+		everything that is copied to the clipboard. <application>Glipper</application> maintains a history both 
 		of the "copy" clipboard, usually filled with <keycombo><keycap>Ctrl+C</keycap></keycombo> and of the
 		"select" clipboard, filled when text is selected. 
 	</para>
 
 	<para>
-		<application>Glipper</application> lets you choose an entry from the history
+		<application>Glipper</application> lets you choose an item from the history
 		to fill the current clipboards.
 	</para>
 
@@ -148,7 +148,7 @@
 		<title>Starting &appname;</title>
 
 		<para>
-			To start <application>Glipper</application>, right-click on GNOME's panel and choose <guimenuitem>Add To Panel</guimenuitem>.
+			To start <application>Glipper</application>, right-click on the GNOME panel and choose <guimenuitem>Add To Panel</guimenuitem>.
 			Select <guisubmenu>Clipboard Manager</guisubmenu> in the dialog, then click <guibutton>OK</guibutton>.
 			Glipper will appear in the panel then.
 		</para>
@@ -195,13 +195,13 @@
 		<para>
 			<application>Glipper</application> lets you replace the current contents of the clipboards with an element
 			from the clipboard history. To use an element previously copied to the clipboard as the current
-			contents of the clipboards :
+			contents of the clipboards:
 
 			<orderedlist>
 			 <listitem>
 			  <para>
 				Open the <guimenu>main menu</guimenu> by clicking on the <application>Glipper</application>
-				icon in the notification area. You can also use the keyboard shortcut, which is <keycombo><keycap>Ctrl+Alt+C</keycap></keycombo>
+				icon in the panel. You can also use the keyboard shortcut, which is <keycombo><keycap>Ctrl+Alt+C</keycap></keycombo>
 				by default.
 			  </para>
 			 </listitem>
@@ -259,7 +259,7 @@
               </entry>
               <entry valign="top">
 		<para>
-			Use this spin box to specify how many clipboard entrys should be saved
+			Use this spin box to specify how many clipboard items should be saved
 			and shown in the <guimenu>main menu</guimenu>.
 		</para>
               </entry>
@@ -272,7 +272,7 @@
               </entry>
               <entry valign="top">
 		<para>
-			Use this spin box to specify how wide the history list should be.
+			Use this spin box to specify the maximum number of characters of one item in the history.
 		</para>
               </entry>
             </row>
@@ -338,10 +338,175 @@
 
   <sect1 id="plugins">
     <title>Plugins</title>
-	<para>
-		*TODO*
-	</para>
+    <para>
+		You can add more features to <application>Glipper</application> by enabling plugins. A plugin is a module that enhances the functionality of the <application>Glipper</application> core program.
+      Plugins may add new items to the <application>Glipper</application> <guimenu>main menu</guimenu> for the new features they provide.
+    </para>
+	 <para>
+		Use the <guilabel>Plugin</guilabel> dialog to enable or disable plugins, or see which plugins are currently enabled.
+    </para>
+    <para>
+		To display the <guilabel>Plugin</guilabel> dialog, right click on the <application>Glipper</application> icon in the panel and choose <menuchoice><guimenuitem>Plugin</guimenuitem></menuchoice>.
+    </para>
+    <para>
+      The following plugins come built-in with <application>Glipper</application>:
+  		<itemizedlist>
+  		  <listitem>
+  		    <para><application><link linkend="plugins-actions">Actions</link></application> allows you to define commands to run when an item matches a regular expression.</para>
+  		  </listitem>
+  		  <listitem>
+  		    <para><application><link linkend="plugins-network">Network</link></application> connects multiple Glipper processes via network to synchronize their history.</para>
+  		  </listitem>
+  		  <listitem>
+  		    <para><application><link linkend="plugins-newline">Newline</link></application> adds a newline character at the end of items in the clipboard.</para>
+  		  </listitem>
+  		  <listitem>
+  		    <para><application><link linkend="plugins-nopaste">Nopaste</link></application> allows you to paste the entry of your clipboard to a No-Paste service.</para>
+  		  </listitem>
+  		  <listitem>
+  		    <para><application><link linkend="plugins-snippets">Snippets</link></application> allows you to create snippets from history items.</para>
+  		  </listitem>
+  		  <listitem>
+  		    <para><application><link linkend="plugins-grow">Grow</link></application> detects whether a new entry is just a grown version of the previous one, and if so, deletes the previous.</para>
+  		  </listitem>
+  		</itemizedlist>
+    </para>
 
+    <sect2 id="plugins-actions">    
+      <title>Actions Plugin</title>
+      <para>The <application>Actions</application> Plugin allows you to define commands to run when the current item in the clipboards matches a regular expression.</para>
+      <para>To manage your actions, select the <application>Actions</application> plugin from the <guilabel>Plugin</guilabel> dialog and then click on the <guibutton>Preferences</guibutton> button.</para> 
+      <sect3>
+      <title>Managing actions</title>
+      <para>The <application>Actions</application> <guibutton>Preferences</guibutton> shows the actions and commands you defined in a table. To add a new action,
+            click the <guibutton>Add action</guibutton> button. The newly created action will now appear in the table.</para>
+      <para>To set the regular expression and the description for this action, click the <guilabel>New regular expression</guilabel> and <guilabel>Add your description here</guilabel> labels in the table. You can now add a list of commands to run with the specified action.</para>
+      <para>To add a new command to the specified action, select the row corresponding to the action in the table and then click the <guibutton>Add command</guibutton> button</para>
+      <para>To set the program to run and the description for this command, click the <guilabel>New command</guilabel> and <guilabel>Add your description here</guilabel> labels in the table.</para>
+      <para>The command can use the current clipboard contents as an argument by using %s in the command definition</para>
+      <para>To remove an action or command, select the corresponding item in the table, and then click the <guibutton>Remove</guibutton> button.</para>
+      </sect3>
+      <sect3>
+      <title>Using actions</title>
+      <para>To use the actions you defined in your preferences, select <guimenuitem>Actions</guimenuitem> from the <guimenu>main menu</guimenu></para>
+      <para>Select the description corresponding to the action you want to run, and the command will execute.</para>
+      </sect3>
+    </sect2>
+
+    <sect2 id="plugins-network">    
+      <title>Network Plugin</title>
+      <para>The <application>Network</application> Plugin connects multiple Glipper processes via network to synchronize their history.</para>
+      <para>To set up the IPs you want to connect to, select the <application>Network</application> plugin from the <guilabel>Plugin</guilabel> dialog and then click on the <guibutton>Preferences</guibutton> button.</para> 
+      <sect3>
+      <title>Managing connections</title>
+      <para>The <application>Network</application> <guibutton>Preferences</guibutton> displays two tables:</para>
+  		<itemizedlist>
+  		  <listitem>
+           <para>The first table contains the list of the IPs you want to accept incoming connections from.</para>
+        </listitem>
+        <listitem>
+           <para>The second table contains the list of the IPs you want to connect to.</para>
+        </listitem>
+      </itemizedlist>
+      <para>To add new connections to one of the lists, click the <guibutton>Add</guibutton> button corresponding to the table you want to add the IP to.</para>
+      <para>You will be asked for the informations about the connection you are creating. In this dialog, you can also specify a password to protect your connection from unwanted users.</para>
+      <para>If you added a connection to the list of the IPs you want to connect to, then you will be sharing the history when you click the <guibutton>Apply</guibutton> button.</para>
+      <para>To remove connections to the list, select the row corresponding to the connection you want to remove from one of the tables and click the <guibutton>Remove</guibutton> button.</para>
+      </sect3>
+    </sect2>
+
+    <sect2 id="plugins-newline">    
+      <title>Newline Plugin</title>
+      <para>The <application>Newline</application> Plugin adds a newline character at the end of items in the clipboard.</para>
+      <para>This is just an example plugin.</para> 
+    </sect2>
+
+    <sect2 id="plugins-nopaste">    
+      <title>Nopaste Plugin</title>
+      <para>The <application>Nopaste</application> Plugin allows you to paste the item in your clipboard to a Nopaste service.</para>
+      <para>A Nopaste service is a web application which allows its users to upload snippets of text, usually samples of source code, for public viewing.</para>
+      <sect3>
+      <title>Preferences</title>
+<table frame="topbot" id="plugins-nopaste-TBL">
+        <title>Nopaste Preferences</title>
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="35.09*"/>
+          <colspec colname="colspec1" colwidth="64.91*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>Dialog Element</para>
+              </entry>
+              <entry>
+                <para>Description</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>Language</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+		<para>
+			Use this combo box to specify what is the programming language of the contents you want to paste to the Nopaste service.
+		</para>
+              </entry>
+            </row>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>Name</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+		<para>
+			Enter the name you want to use when pasting to the Nopaste service.
+		</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      </sect3>
+      <sect3>
+      <title>Using Nopaste</title>
+      <para>To paste the current clipboard contents to the Nopaste service, select <guimenuitem>Nopaste</guimenuitem> from the <guimenu>main menu</guimenu></para>
+      </sect3>
+    </sect2>
+
+    <sect2 id="plugins-snippets">    
+      <title>Snippets Plugin</title>
+      <para>The <application>Snippets</application> Plugin allows you to create snippets from history items.</para>
+      <para>Snippets are block of text that you can use in different occasions.</para>
+      <para>To manage your snippets, select the <application>Snippets</application> plugin from the <guilabel>Plugin</guilabel> dialog and then click on the <guibutton>Preferences</guibutton> button.</para> 
+      <sect3>
+      <title>Managing snippets</title>
+      <para>The <application>Snippets</application> <guibutton>Preferences</guibutton> displays two tables:</para>
+  		<itemizedlist>
+  		  <listitem>
+           <para>The table on the left contains the current history.</para>
+        </listitem>
+        <listitem>
+           <para>The table on the right contains the snippets you added from the history.</para>
+        </listitem>
+      </itemizedlist>
+      <para>To add an history item to the snippet list, select the item you want to add in the history list and click the <guibutton>Add</guibutton> button. The newly created snippet will now appear in the snippet list.</para>
+      <para>To remove a snippet, select the corresponding item in the snippets list, and then click the <guibutton>Remove</guibutton> button.</para>
+      </sect3>
+      <sect3>
+      <title>Using snippets</title>
+      <para>To fill the contents of your clipboard with a snippet, select <guimenuitem>Snippets</guimenuitem> from the <guimenu>main menu</guimenu>
+      and then one of the snippets in the list.</para>
+      </sect3>
+    </sect2>
+
+    <sect2 id="plugins-grow">    
+      <title>Grow Plugin</title>
+      <para>The <application>Grow</application> Plugin detects whether a new entry is just a grown version of the previous one, and if so, deletes the previous.</para>
+    </sect2>
   </sect1>
 
   <sect1 id="legalm">
