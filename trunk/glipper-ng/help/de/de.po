@@ -1,251 +1,548 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2006-07-15 21:32+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: 1.0\n"
+"POT-Creation-Date: 2007-08-07 16:19+0200\n"
+"PO-Revision-Date: 2007-08-07 16:19+0200\n"
+"Last-Translator: Sven Rech <svenrech@gmx.de>\n"
+"Language-Team: German <svenrech@gmx.de>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: base.xml:19(title) 
-msgid "<application>Glipper</application> Manual V0.90"
-msgstr "<application>Glipper</application> Handbuch V0.90"
+#: /home/sven/glipper-ng/help/C/glipper.xml:19(title) 
+msgid "Glipper Manual"
+msgstr "Glipper Handbuch"
 
-#: base.xml:22(year) 
-msgid "2006"
-msgstr "2006"
+#: /home/sven/glipper-ng/help/C/glipper.xml:22(year) 
+msgid "2007"
+msgstr ""
 
-#: base.xml:23(holder) base.xml:34(publishername) base.xml:65(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:23(holder) /home/sven/glipper-ng/help/C/glipper.xml:34(publishername) /home/sven/glipper-ng/help/C/glipper.xml:89(para) 
 msgid "Glipper devs"
 msgstr "Glipper Entwickler"
 
-#: base.xml:39(firstname) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:39(firstname) 
 msgid "Karderio"
-msgstr "Karderio"
+msgstr ""
 
-#: base.xml:41(orgname) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:41(orgname) /home/sven/glipper-ng/help/C/glipper.xml:49(orgname) /home/sven/glipper-ng/help/C/glipper.xml:57(orgname) 
 msgid "Glipper dev"
-msgstr "Glipper dev"
+msgstr "Glipper Entwickler"
 
-#: base.xml:42(email) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:42(email) 
 msgid "kardeio at gmail dot com"
-msgstr "kardeio at gmail dot com"
+msgstr ""
 
-#: base.xml:61(revnumber) 
-msgid "glipper Manual V0.90"
-msgstr "glipper Handbuch V0.90"
+#: /home/sven/glipper-ng/help/C/glipper.xml:46(firstname) 
+msgid "Sven"
+msgstr ""
 
-#: base.xml:62(date) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:47(surname) 
+msgid "Rech"
+msgstr ""
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:50(email) 
+msgid "svenrech at gmx dot de"
+msgstr ""
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:54(firstname) 
+msgid "Eugenio"
+msgstr ""
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:55(surname) 
+msgid "Depalo"
+msgstr ""
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:58(email) 
+msgid "eugeniodepalo at mac dot com"
+msgstr ""
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:77(revnumber) 
+msgid "Glipper Manual V1.0"
+msgstr ""
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:78(date) 
+msgid "2007-07-26"
+msgstr ""
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:80(para) 
+msgid "Sven Rech"
+msgstr ""
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:81(para) 
+msgid "Eugenio Depalo"
+msgstr ""
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:85(revnumber) 
+msgid "Glipper Manual V0.90"
+msgstr "Glipper Handbuch V0.90"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:86(date) 
 msgid "2006-06-27"
-msgstr "2006-06-27"
+msgstr ""
 
-#: base.xml:64(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:88(para) 
 msgid "karderio"
-msgstr "karderio"
+msgstr ""
 
-#: base.xml:70(releaseinfo) 
-msgid "This manual describes version 0.90 of glipper."
-msgstr "Dieses Handbuch beschreibt die Version 0.90 von Glipper."
+#: /home/sven/glipper-ng/help/C/glipper.xml:94(releaseinfo) 
+msgid "This manual describes version 1.0 of Glipper."
+msgstr "Dieses Handbuch beschreibt Version 1.0 von Glipper"
 
-#: base.xml:73(title) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:97(title) 
 msgid "Feedback"
-msgstr "Feedback"
+msgstr ""
 
-#: base.xml:74(para) 
-msgid "To report a bug or make a suggestion regarding the <application>Glipper</application> application or this manual, follow the directions in the <ulink url=\"http://sourceforge.net/projects/glipper/\" type=\"help\">Glipper project page</ulink>."
-msgstr "Um einen Fehler zu melden oder einen Vorschlag betreffend dem Programm <application>Glipper</application> oder diesem Handbuch zu machen, folge den Anweisungen auf der  <ulink url=\"http://sourceforge.net/projects/glipper/\" type=\"help\">Glipper Projektseite</ulink>."
+#: /home/sven/glipper-ng/help/C/glipper.xml:98(para) 
+msgid "To report a bug or make a suggestion regarding the <application>Glipper</application> application or this manual, follow the directions in the <ulink url=\"http://glipper.sourceforge.net\" type=\"help\">Glipper project page</ulink>."
+msgstr "Um einen Fehler zu berichten oder einen Vorschlag für bezüglich dem Programm <application>Glipper</application> oder diesem Handbuch zu machen, befolge die Anweisungen auf der <ulink url=\"http://glipper.sourceforge.net\" type=\"help\">Glipper Projektseite</ulink>."
 
-#: base.xml:85(primary) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:109(primary) 
 msgid "Glipper"
-msgstr "Glipper"
+msgstr ""
 
-#: base.xml:92(title) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:116(title) 
 msgid "Introduction"
 msgstr "Einführung"
 
-#: base.xml:94(para) 
-msgid "<application>Glipper</application> is a clipboardmanager for GNOME. <application>Glipper</application> can also be made to work with other desktop environments and window managers."
-msgstr "<application>Glipper</application> ist ein Zwischenablagenverwalter für GNOME. <application>Glipper</application> kann ebenfalls mit anderen Umgebungen und Windows Managern benutzt werden."
+#: /home/sven/glipper-ng/help/C/glipper.xml:118(para) 
+msgid "<application>Glipper</application> is a GNOME applet for managing your clipboards."
+msgstr "<application>Glipper</application> ist ein GNOME Applet um Zwischenablagen zu verwalten."
 
-#: base.xml:100(para) 
-msgid "<application>Glipper</application> sits in the notification area and collects everything that is copied to the clipboard. Glipper maintains a history both of the \"copy\" clipboard, usually filled with <keycombo><keycap>Ctrl+C</keycap></keycombo> and of the \"select\" clipboard, filled when text is selected."
-msgstr "<application>Glipper</application> sitzt im Benachrichtigungsfeld und sammelt alles, was in die Zwischenablage kopiert wird. Glipper verwaltet einen Verlauf sowohl von der \"Kopieren\" Zwischenablage, überlicherweise mit Hilfe von  <keycombo><keycap>Strg+C</keycap></keycombo> gefüllt, und der \"Markieren\" Zwischenablage, welche durch markierung gefüllt wird."
+#: /home/sven/glipper-ng/help/C/glipper.xml:122(para) 
+msgid "<application>Glipper</application> sits in the panel and collects everything that is copied to the clipboard. <application>Glipper</application> maintains a history both of the \"copy\" clipboard, usually filled with <keycombo><keycap>Ctrl+C</keycap></keycombo> and of the \"select\" clipboard, filled when text is selected."
+msgstr "<application>Glipper</application> sitzt im Panel und sammelt alles was in die Zwischenablage kopiert wird. <application>Glipper</application> verwaltet einen Verlauf von sowohl der \"Kopieren\" Zwischenablage, überlicherweise mit <keycombo><keycap>Strg+C</keycap></keycombo> gefüllt, und der \"Markieren\" Zwischenablage, welche gefüllt wird sobald ein Text selektiert wird."
 
-#: base.xml:107(para) 
-msgid "<application>Glipper</application> lets you choose an entry from the history to fill the current clipboards."
-msgstr "<application>Glipper</application> lässt dich einen Eintrag aus dem Verlauf auswählen, welche die derzeitige Zwischenablage füllen soll."
+#: /home/sven/glipper-ng/help/C/glipper.xml:129(para) 
+msgid "<application>Glipper</application> lets you choose an item from the history to fill the current clipboards."
+msgstr "<application>Glipper</application> lässt dich einen Eintrag des Verlaufs aussuchen, um die momentane Zwischenablage zu füllen."
 
-#: base.xml:112(para) 
-msgid "The webpage for <application>Glipper</application> can be found at the <ulink url=\"http://sourceforge.net/projects/glipper/\">Glipper project page</ulink>."
-msgstr "Die Webseite von <application>Glipper</application> kann auf der <ulink url=\"http://sourceforge.net/pro        jects/glipper/\">Glipper Projektseite</ulink> gefunden werden."
+#: /home/sven/glipper-ng/help/C/glipper.xml:134(para) 
+msgid "The webpage for <application>Glipper</application> can be found at the <ulink url=\"http://glipper.sourceforge.net\">Glipper project page</ulink>."
+msgstr "Die Webseite von <application>Glipper</application> kann auf der <ulink url=\"http://glipper.sourceforge.net\">Glipper Projekt Seite</ulink> gefunden werden."
 
-#: base.xml:123(title) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:145(title) 
 msgid "Usage"
 msgstr "Benutzung"
 
-#: base.xml:126(title) 
-msgid "Starting glipper"
+#: /home/sven/glipper-ng/help/C/glipper.xml:148(title) 
+msgid "Starting Glipper"
 msgstr "Glipper starten"
 
-#: base.xml:128(para) 
-msgid "To start <application>glipper</application>, select <guimenuitem>Glipper</guimenuitem> from the <guisubmenu>Accessories</guisubmenu> submenu of the <guimenuitem>Places</guimenuitem> menu.You may also start <application>glipper</application> by typing <command>glipper</command> in a terminal."
-msgstr "Um <application>Glipper</application> zu starten, wähle <guimenuitem>Glipper</guimenuitem> aus dem <guisubmenu>Zubehör</guisubmenu> Untermenü des <guimenuitem>Anwendungen</guimenuitem> menu. Du kannst <application>Glipper</application> auch starten indem du <command>glipper</command> in ein Terminal eingibst."
+#: /home/sven/glipper-ng/help/C/glipper.xml:150(para) 
+msgid "To start <application>Glipper</application>, right-click on the GNOME panel and choose <guimenuitem>Add To Panel</guimenuitem>. Select <guisubmenu>Clipboard Manager</guisubmenu> in the dialog, then click <guibutton>OK</guibutton>. Glipper will appear in the panel then."
+msgstr "Um <application>Glipper</application> zu starten, rechtsklicke auf das GNOME Panel und wähle <guimenuitem>Zum Panel hinzufügen</guimenuitem>. Wähle <guisubmenu>Zwischenablagenverwalter</guisubmenu> in dem Dialog, dann klicke auf <guibutton>OK</guibutton>. Glipper wird dann im Panel erscheinen."
 
-#: base.xml:135(para) 
-msgid "Under GNOME, you may want to add <application>glipper</application> to your list of startup programs. You may do this from the <application>sessions</application> preference tool. To access the the <application>sessions</application> preference tool choose <menuchoice><guimenu> System</guimenu><guisubmenu>Preferences</guisubmenu><guimenuitem> Sessions</guimenuitem></menuchoice>. Use the <guilabel>Startup Programs</guilabel> tab to add <application>glipper</application>."
-msgstr "Unter GNOME möchstest du <application>Glipper</application> vielleicht in die Liste deiner Startprogramme hinzufügen. Du kannst dies mit Hilfe des <application>Sitzungen</application> Einstellungsprogramm tun. Um das <application>Sitzungen</application> Einstellungsprogramm zu erreichen, wähle <menuchoice><guimenu> System</guimenu><guisubmenu>Einstellungen</guisubmenu><guimenuitem>Sitzungen</guimenuitem></menuchoice>. Benutze den <guilabel>Startprogramme</guilabel> Reiter um <application>glipper</application> hinzuzufügen."
+#: /home/sven/glipper-ng/help/C/glipper.xml:156(para) 
+msgid "The layout of the <application>Glipper</application> icon in the panel varies depending on the size and type of the panel in which the applet resides."
+msgstr "Das Layout des <application>Glipper</application> Symbols im Panel variiert abhänging von der Größe und dem Typ des Panels in welchem das Applet sich befindet."
 
-#: base.xml:145(title) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:162(title) 
 msgid "The two different clipboards"
-msgstr "Die zwei verschiedenen Zwischenablagen"
+msgstr "Die beiden unterschiedlichen Zwischenablagen"
 
-#: base.xml:147(para) 
-msgid "Under <application>X</application>, the windowing system for which <application>glipper</application> is designed, there are two separate clipboards."
-msgstr "Unter <application>X</application>, das Fenstersystem für welches <application>Glipper</application> ausgelegt ist, existieren zwei unterschiedliche Zwischenablagen."
+#: /home/sven/glipper-ng/help/C/glipper.xml:164(para) 
+msgid "Under <application>X</application>, the windowing system for which <application>Glipper</application> is designed, there are two separate clipboards."
+msgstr "In <application>X</application>, dem Fenstersystem für welches <application>Glipper</application> konstruiert ist, existieren zwei seperate Zwischenablagen."
 
-#: base.xml:152(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:169(para) 
 msgid "The \"copy\" clipboard is filled when you use the copy function of an application. Usually the copy function is used by selecting text and pressing <keycombo><keycap>Ctrl+C</keycap></keycombo>, or with a <guibutton>Copy</guibutton> button. Use the paste function of an application to paste the contents of the \"copy\" clipboard. The paste function is usually used by pressing <keycombo><keycap>Ctrl+V</keycap></keycombo>, or with a <guibutton>Paste</guibutton> button."
-msgstr "Die \"Kopieren\" Zwischenablage wird gefüllt sobald du die kopieren Funktion einer Anwendung benutzt. Oft wird diese kopieren Funktion benutzt indem man Text auswählt und <keycombo><keycap>Strg+C</keycap></keycombo> drückt, oder mit einem <guibutton>Kopieren</guibutton> Schalter. Benutze die einfüge Funktion einer Anwendung um den Inhalt der \"Kopieren\" Zwischenablage einzufügen. Die einfüge Funktion wird normalerweise benutzt indem man <keycombo><keycap>Strg+V</keycap></keycombo> drückt, oder mit Hilfe eines <guibutton>Einfügen</guibutton> Schalters."
+msgstr "Die \"Kopieren\" Zwischenablage wird gefüllt sobald du die Kopierfunktion einer Anwendung benutzt. Normalerweise wird die Kopierfunktion benutzt indem Text selektiert wird und <keycombo><keycap>Strg+C</keycap></keycombo> gedrückt wird, oder mit einem <guibutton>Kopieren</guibutton> Knopf. Benutze die Einfügefunktion einer Anwendung um den Inhalt der \"Kopieren\" Zwischenablage einzufügen. Die Einfügefunktion wird normalerweise benutzt indem <keycombo><keycap>Strg+V</keycap></keycombo> gedrückt wird, oder mit einem <guibutton>Einfüge</guibutton> Knopf."
 
-#: base.xml:160(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:177(para) 
 msgid "The \"select\" clipboard is filled when you select text in any application. As soon as you select any text, it is put in the \"select\" clipboard. To paste text from the \"select\" clipboard, simply press the middle mouse button."
-msgstr "Die \"Markieren\" Zwischenablage wird gefüllt sobald man den Text einer Anwendung markiert. Sobald du einen Text markierst, wird er in die \"Markieren\" Zwischenablage übernommen. Um Text von der \"Markieren\" Zwischenablage einzufügen, drücke einfach die mittlere Maustaste."
+msgstr "Die \"Markieren\" Zwischenablage wird gefüllt sobald du einen Text in irgendeiner Anwendung markierst. Sobald ein Text selektiert wird, gelangt er in die \"Markieren\" Zwischenablage. Um den Text der momentanen \"Markieren\" Zwischenablage einzufügen, drücke einfach die mittlere Maustaste."
 
-#: base.xml:167(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:184(para) 
 msgid "By default, the contents of the \"copy\" clipboard are marked as bold in the <guimenu>main menu</guimenu>. The contents of the \"select\" clipboard are shown at the top of the list."
-msgstr "Standardmäßig, der Inhalt der \"Kopieren\" Zwischenablage wird im <guimenu>Verlauf</guimenu> fett markiert. Der Inhalt der \"Markieren\" Zwischenablage wird an der Spitze der Liste gezeigt."
+msgstr "Standardmäßig wird der Inhalt der \"Kopieren\" Zwischenablage im <guimenu>Hauptmenü</guimenu> dick markiert. Der Inhalt der \"Markieren\" Zwischenablage wird ganz oben angezeigt."
 
-#: base.xml:176(title) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:193(title) 
 msgid "Selecting an element from the clipboard history"
-msgstr "Ein Element aus dem Verlauf auswählen"
+msgstr "Ein Element des Zwischenablagenverlaufs wählen"
 
-#: base.xml:185(para) 
-msgid "Open the <guimenu>main menu</guimenu> by clicking on the <application>glipper</application> icon in the notification area. You can also use the keyboard shortcut, which is <keycombo><keycap>Ctrl+Alt+C</keycap></keycombo> by default."
-msgstr "Öffne den <guimenu>Verlauf</guimenu> indem du auf das <application>Glipper</application> Icon im Benachrichtigungsfeld klickst. Du kannst auch die Tastatur Kurztaste, welche standardmäßig <keycombo><keycap>Strg+Alt+C</keycap></keycombo> ist, benutzen."
+#: /home/sven/glipper-ng/help/C/glipper.xml:202(para) 
+msgid "Open the <guimenu>main menu</guimenu> by clicking on the <application>Glipper</application> icon in the panel. You can also use the keyboard shortcut, which is <keycombo><keycap>Ctrl+Alt+C</keycap></keycombo> by default."
+msgstr "Öffne das <guimenu>Hauptmenü</guimenu> indem du das <application>Glipper</application> Symbol im Panel anklickst. Du kannst ebenso das Tastaturküzel benutzen, welches Standardmäßig <keycombo><keycap>Strg+Alt+C</keycap></keycombo> ist."
 
-#: base.xml:192(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:209(para) 
 msgid "Click on an item from the history."
-msgstr "Klicke auf einen Eintrag im Verlauf."
+msgstr "Klicke auf einen Eintrag des Verlaufs."
 
-#: base.xml:199(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:216(para) 
 msgid "Both the contents of the \"copy\" and of the \"select\" clipboards are replaced when you choose an element from the clipboard history. The new item can be pasted both with the paste function of your application and with the middle mouse button."
-msgstr "Beide Inhalte der \"Kopieren\" und der \"Markieren\" Zwischenablage werden ersetzt sobald du ein Element aus dem Zwischenablagenverlauf auswählst. Das neue Element kann sowohl mit der einfüge Funktion deiner Anwendung, als auch mit der mittleren Maustaste eingefügt werden."
+msgstr "Beide Inhalt der \"Kopieren\" und der \"Markieren\" Zwischenablage werden ersetzt sobald du ein Element des Zwischenablagenverlaufs wählst. Der neue Eintrag kann nun sowohl per Einfügefunktion, als auch mit der mittleren Maustaste eingefügt werden."
 
-#: base.xml:178(para) 
-msgid "<application>Glipper</application> lets you replace the current contents of the clipboards with an element from the clipboard history. To use an element previously copied to the clipboard as the current contents of the clipboards : <placeholder-1/><placeholder-2/>"
-msgstr "<application>Glipper</application> lässt dich die derzeitigen Inhalte der Zwischenablagen mit einem Element des Zwischenablagenverlaufes ersetzen. Um ein vorheriges Element welches in der Zwischenablage war als jetzigen Inhalt der Zwischenablage zu benutzen: <placeholder-1/><placeholder-2/>"
+#: /home/sven/glipper-ng/help/C/glipper.xml:195(para) 
+msgid "<application>Glipper</application> lets you replace the current contents of the clipboards with an element from the clipboard history. To use an element previously copied to the clipboard as the current contents of the clipboards: <placeholder-1/><placeholder-2/>"
+msgstr "<application>Glipper</application> lässt dich die momentanen Inhalte der Zwischenablagen mit einem Element des Zwischenablagenverlaufs ersetzen. Um ein vorher kopiertes Element als jetzigen Inhalt der Zwischenablagen zu benutzen: <placeholder-1/><placeholder-2/>"
 
-#: base.xml:211(title) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:228(title) /home/sven/glipper-ng/help/C/glipper.xml:430(title) 
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: base.xml:213(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:230(para) 
 msgid "Use the <guilabel>Preferences</guilabel> dialog to customize <application>Glipper</application> to suit your requirements and preferences."
-msgstr "Benutze den <guilabel>Einstellungen</guilabel> Dialog um  <application>Glipper</application> an deinen Bedarf und Vorlieben anzupassen."
+msgstr "Benutze den <guilabel>Einstellungen</guilabel> Dialog um <application>Glipper</application> anzupassen um deinen Vorraussetzungen und Vorlieben zu entsprechen."
 
-#: base.xml:217(para) 
-msgid "To display the <guilabel>Preferences</guilabel> dialog, right click on the <application>Glipper</application> icon in the notification area and choose <menuchoice><guimenuitem>Preferences</guimenuitem></menuchoice>."
-msgstr "Um den <guilabel>Einstellungen</guilabel> dialog anzuzeigen, rechtsklicke auf das <application>Glipper</application> Icon im Benachrichtigungsfeld and wähle <menuchoice><guimenuitem>Einstellungen</guimenuitem></menuchoice>."
+#: /home/sven/glipper-ng/help/C/glipper.xml:234(para) 
+msgid "To display the <guilabel>Preferences</guilabel> dialog, right click on the <application>Glipper</application> icon in the panel and choose <menuchoice><guimenuitem>Preferences</guimenuitem></menuchoice>."
+msgstr "Um den <guilabel>Einstellungen</guilabel> Dialog anzuzeigen, rechtsklicke auf das <application>Glipper</application> Symbol im Panel und wähöe <menuchoice><guimenuitem>Einstellungen</guimenuitem></menuchoice>."
 
-#: base.xml:222(title) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:239(title) 
 msgid "Glipper Preferences"
 msgstr "Glipper Einstellungen"
 
-#: base.xml:229(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:246(para) /home/sven/glipper-ng/help/C/glipper.xml:439(para) 
 msgid "Dialog Element"
-msgstr "Dialog Element"
+msgstr ""
 
-#: base.xml:232(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:249(para) /home/sven/glipper-ng/help/C/glipper.xml:442(para) 
 msgid "Description"
 msgstr "Beschreibung"
 
-#: base.xml:240(guilabel) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:257(guilabel) 
 msgid "Amount of entries in history"
 msgstr "Anzahl der Einträge im Verlauf"
 
-#: base.xml:244(para) 
-msgid "Use this spin box to specify how many clipboard entrys should be saved and shown in the <guimenu>main menu</guimenu>."
-msgstr "Benutze dieses Feld um anzugeben wieviele Zwischenablageneinträge gespeichert und im <guimenu>Verlauf</guimenu> angezeigt werden sollen."
+#: /home/sven/glipper-ng/help/C/glipper.xml:261(para) 
+msgid "Use this spin box to specify how many clipboard items should be saved and shown in the <guimenu>main menu</guimenu>."
+msgstr "Benutze diese Drehbox um zu spezifizieren wie viele Zwischenablageneinträge gespeichert und im <guimenu>Hauptenü</guimenu> angezeigt werden sollen."
 
-#: base.xml:253(guilabel) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:270(guilabel) 
 msgid "Length of one history entry"
-msgstr "Länge eines Verlaufeintrages"
+msgstr "Länge eines Verlaufseintrages"
 
-#: base.xml:257(para) 
-msgid "Use this spin box to specify how wide the history list should be."
-msgstr "Benutze dieses Feld um anzugeben wie breit die Verlaufsliste sein soll."
+#: /home/sven/glipper-ng/help/C/glipper.xml:274(para) 
+msgid "Use this spin box to specify the maximum number of characters of one item in the history."
+msgstr "Benutze diese Drehbox um die maximale Anzahl von Zwichen eines Eintrages im Verlauf anzugeben."
 
-#: base.xml:265(guilabel) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:282(guilabel) 
 msgid "Select - Mark/middle mouse button"
-msgstr "Auswählen - Markieren/mittlere Maustaste"
+msgstr "Markieren - Markieren/Mittlere Maustaste"
 
-#: base.xml:269(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:286(para) 
 msgid "Select this option to maintain a history of the \"select\" clipboard."
 msgstr "Wähle diese Option um einen Verlauf der \"Markieren\" Zwischenablage zu verwalten."
 
-#: base.xml:275(guilabel) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:292(guilabel) 
 msgid "Copy - Ctrl+C/Ctrl+V"
 msgstr "Kopieren - Strg+C/Strg+V"
 
-#: base.xml:279(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:296(para) 
 msgid "Select this option to maintain a history of the \"copy\" clipboard."
-msgstr "Wähle diese Option um einen Verlauf der \"Kopieren\" Zwischenablage zu führen."
+msgstr "Wähle diese Option um einen Verlauf der \"Kopieren\" Zwischenablage zu verwalten."
 
-#: base.xml:285(guilabel) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:302(guilabel) 
 msgid "Tag Ctrl+C clipboard's content in history (bold)"
-msgstr "Markiere die Einträge der Strg+C Zwischenablage im Verlauf (fett)"
+msgstr "Markiere Strg+C Zwischenablageninhalt im Verlauf (dick)"
 
-#: base.xml:289(para) 
-msgid "Select this option to have <application>glipper</application> mark the contents of the \"copy\" clipboard."
-msgstr "Wähle diese Options, damit <application>glipper</application> den Inhalt der \"Kopieren\" Zwischenablage markiert."
+#: /home/sven/glipper-ng/help/C/glipper.xml:306(para) 
+msgid "Select this option to have <application>Glipper</application> mark the contents of the \"copy\" clipboard."
+msgstr "Wähle diese Option damit <application>Glipper</application> den Inhalt der \"Kopiere\" Zwischenablage markiert."
 
-#: base.xml:295(guilabel) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:312(guilabel) 
 msgid "Save history"
 msgstr "Speichere Verlauf"
 
-#: base.xml:299(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:316(para) 
 msgid "Select this option to save the contents of the clipboards. If you select this, you will keep the history of clipboards from your last session."
-msgstr "Wähle diese Option um den Inhalt der Zwischenablage zu sichern. Wenn du dies auswählst, bleibt dein Verlauf der Zwischenablagen der letzten Sitzung erhalten."
+msgstr "Wähle diese Option um den Inhalt der Zwischenablage zu speichern. Falls du dies wählst, wirst du den Zwischenablagenverlauf deiner letzten Sitzung behalten."
 
-#: base.xml:308(guilabel) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:325(guilabel) 
 msgid "Key combination for popup"
-msgstr "Tastenkombination für Pop-up Menü"
+msgstr "Tastenkombination für das Popup-Fenster"
 
-#: base.xml:312(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:329(para) 
 msgid "Enter a key combination to change the main menu keyboard shortcut."
-msgstr "Gib eine Tastenkombination ein, um die Schnelltaste für das Menü zu ändern (in englischer Schreibweise)."
+msgstr "Trage eine Tastenkombination ein um das Hauptmenü Tastaturkürzel zu ändern. (Bitte beachte das die Kombination hier auf englisch angegeben werden muss)"
 
-#: base.xml:323(title) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:340(title) 
+msgid "Plugins"
+msgstr "Plugins"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:341(para) 
+msgid "You can add more features to <application>Glipper</application> by enabling plugins. A plugin is a module that enhances the functionality of the <application>Glipper</application> core program. Plugins may add new items to the <application>Glipper</application><guimenu>main menu</guimenu> for the new features they provide."
+msgstr "Du kannst mehr Funktionen zu <application>Glipper</application> hinzufügen indem du Plugins aktivierst. Ein Plugin ist ein Modul welches die Funktionalität des <application>Glipper</application> Kernprogrammes erweitert. Plugins können neue Einträge zu dem <application>Glipper</application> <guimenu>Hauptmenü</guimenu> hinzufügen, um neue Funktionen anzubieten."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:345(para) 
+msgid "Use the <guilabel>Plugin</guilabel> dialog to enable or disable plugins, or see which plugins are currently enabled."
+msgstr "Benutze den <guilabel>Plugindialog</guilabel> um Plugins zu aktivieren oder deaktivieren oder um zu sehen welche Plugins zur Zeit aktiviert sind."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:348(para) 
+msgid "To display the <guilabel>Plugin</guilabel> dialog, right click on the <application>Glipper</application> icon in the panel and choose <menuchoice><guimenuitem>Plugin</guimenuitem></menuchoice>."
+msgstr "Um den <guilabel>Plugindialog</guilabel> anzuzeigen, rechtsklicke auf das <application>Glipper</application> Symbol im Panel und wähle <menuchoice><guimenuitem>Plugin</guimenuitem></menuchoice>.""
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:355(para) 
+msgid "<application><link linkend=\"plugins-actions\">Actions</link></application> allows you to define commands to run when an item matches a regular expression."
+msgstr "<application><link linkend=\"plugins-actions\">Aktionen</link></application> erlauben dir Kommandos zu definieren welche abgearbeitet werden sobald ein Eintrag auf einen regulären Ausdruck passt."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:358(para) 
+msgid "<application><link linkend=\"plugins-network\">Network</link></application> connects multiple Glipper processes via network to synchronize their history."
+msgstr "<application><link linkend=\"plugins-network\">Netzwerk</link></application> verbindet mehrere Glipper Prozesse übers Netzwerk um ihre Verläufe zu synchronisieren."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:361(para) 
+msgid "<application><link linkend=\"plugins-newline\">Newline</link></application> adds a newline character at the end of items in the clipboard."
+msgstr "<application><link linkend=\"plugins-newline\">Neue Zeile</link></application> fügt eine neue Zeile am Ende der Zwischenablageneinträge ein."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:364(para) 
+msgid "<application><link linkend=\"plugins-nopaste\">Nopaste</link></application> allows you to paste the entry of your clipboard to a No-Paste service."
+msgstr "<application><link linkend=\"plugins-nopaste\">Nopaste</link></application> erlaubt dir den Eintrag deiner Zwischenablage einem No-Paste Dienst zu übergeben."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:367(para) 
+msgid "<application><link linkend=\"plugins-snippets\">Snippets</link></application> allows you to create snippets from history items."
+msgstr "<application><link linkend=\"plugins-snippets\">Schnipsel</link></application> erlaubt dir Schnipsel von den Zwischenablageneinträgen zu erzeugen."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:370(para) 
+msgid "<application><link linkend=\"plugins-grow\">Grow</link></application> detects whether a new entry is just a grown version of the previous one, and if so, deletes the previous."
+msgstr "<application><link linkend=\"plugins-grow\">Wachsen</link></application> erkennt ob a neuer Eintrag nur eine gewachsene Version des vorherigen ist, und falls dem so ist wird der vorherige gelöscht."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:351(para) 
+msgid "The following plugins come built-in with <application>Glipper</application>: <placeholder-1/>"
+msgstr "Die folgenden Plugins werden von <application>Glipper</application> mitgeliefert: <placeholder-1/>"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:376(title) 
+msgid "Actions Plugin"
+msgstr "Aktionen Plugin"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:377(para) 
+msgid "The <application>Actions</application> Plugin allows you to define commands to run when the current item in the clipboards matches a regular expression."
+msgstr "Das <application>Aktionen</application> Plugin erlaubt dir Kommandos zu definieren welche abgearbeitet werden falls der jetzige Zwischenablageneintrag auf einen regulären Ausdruck passt."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:378(para) 
+msgid "To manage your actions, select the <application>Actions</application> plugin from the <guilabel>Plugin</guilabel> dialog and then click on the <guibutton>Preferences</guibutton> button."
+msgstr "Um deine Aktionen zu verwalten, wähle das <applicatin>Aktionen</application> Plugin aus dem <guilabel>Plugin</guilabel> Dialog und klicke dann auf den <guibutton>Einstellungen</guibutton> Knopf."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:380(title) 
+msgid "Managing actions"
+msgstr "Verwalte Aktionen"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:381(para) 
+msgid "The <application>Actions</application><guibutton>Preferences</guibutton> shows the actions and commands you defined in a table. To add a new action, click the <guibutton>Add action</guibutton> button. The newly created action will now appear in the table."
+msgstr "Die Aktionseinstellungen zeigen die Aktionen und Kommandos die du definiert hast in einer Tabelle. Um eine neue Aktion hinzuzufügen, klicke auf den <guibutton>Aktion hinzufügen</guibutton> Knopf. Die neu erstellte Aktion wird nun in der Tabelle erscheinen."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:383(para) 
+msgid "To set the regular expression and the description for this action, click the <guilabel>New regular expression</guilabel> and <guilabel>Add your description here</guilabel> labels in the table. You can now add a list of commands to run with the specified action."
+msgstr "Um den regulären Ausdruck und die Beschreibung für diese Aktion zu setzen, klicke auf die <guilabel>Neuer regulärer Ausdruck</guilabel> und <guilabel>Füge deine Beschreibung hier ein</guilabel> Beschriftung in der Tabelle. Du kannst nun eine Liste von Kommandos hinzufügen, welche mit der angegebenen Aktion ausgeführt werden."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:384(para) 
+msgid "To add a new command to the specified action, select the row corresponding to the action in the table and then click the <guibutton>Add command</guibutton> button"
+msgstr "Um ein neues Kommando zu der angegeben Aktion hinzuzufügen, wähle die Zeile in der Tabelle welche zu der Aktion gehört und klicke auf den <guibutton>Kommando hinzufügen</guibutton> Knopf"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:385(para) 
+msgid "To set the program to run and the description for this command, click the <guilabel>New command</guilabel> and <guilabel>Add your description here</guilabel> labels in the table."
+msgstr "Um das Programm welches aufgerufen werden soll und die Beschreibung des Kommandos zu setzen, klicke auf die <guilabel>Neues Kommando</guilabel> und <guilabel>Füge deine Beschreibung hier ein</guilabel> Beschriftungen in der Tabelle."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:386(para) 
+msgid "The command can use the current clipboard contents as an argument by using %s in the command definition"
+msgstr "Das Kommando kann den jetzigen Zwischenablageninhalt als ein Argument benutzen, in dem %s in der Kommandodefinition benutzt wird"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:387(para) 
+msgid "To remove an action or command, select the corresponding item in the table, and then click the <guibutton>Remove</guibutton> button."
+msgstr "Um eine Aktion oder ein Kommando zu entfernen, markiere den zugehörigen Eintrag in der Tabelle und klicke dann auf den <guibutton>Entfernen</guibutton> Knopf."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:390(title) 
+msgid "Using actions"
+msgstr "Aktionen benutzen"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:391(para) 
+msgid "To use the actions you defined in your preferences, select <guimenuitem>Actions</guimenuitem> from the <guimenu>main menu</guimenu>"
+msgstr "Um die Aktionen die du in den Einstellungen definiert hast zu benutzen, wähke <guimenuitem>Aktionen</guimenuitem> von dem <guimenu>Hauptmenü</guimenu>"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:392(para) 
+msgid "Select the description corresponding to the action you want to run, and the command will execute."
+msgstr "Wähle die Beschreibung welche zu der Aktion gehört die du ausführen willst, und das Kommando wird abgearbeitet."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:397(title) 
+msgid "Network Plugin"
+msgstr "Netwerk Plugin"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:398(para) 
+msgid "The <application>Network</application> Plugin connects multiple Glipper processes via network to synchronize their history."
+msgstr "Das <application>Netwerk</application> Plugin verbindet mehrer Glipper Prozesse übers Netwerk um ihre Verläufe zu synchronisieren."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:399(para) 
+msgid "To set up the IPs you want to connect to, select the <application>Network</application> plugin from the <guilabel>Plugin</guilabel> dialog and then click on the <guibutton>Preferences</guibutton> button."
+msgstr "Um die IPs zu denen du verbinden willst zu setzen, wähle das <application>Netzwerk</application> Plugin aus dem <guilabel>Plugindialog</guilabel> und klicke auf den <guibutton>Einstellungen</guibutton> Knopf."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:401(title) 
+msgid "Managing connections"
+msgstr "Verwalte Verbindungen"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:402(para) 
+msgid "The <application>Network</application><guibutton>Preferences</guibutton> displays two tables:"
+msgstr "Die Netwerkeinstellungen zeigen zwei Tabellen:"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:405(para) 
+msgid "The first table contains the list of the IPs you want to accept incoming connections from."
+msgstr "Die erste Tabelle beinhaltet die Liste der IPs von denen du einkommende Verbindungen akzeptieren willst."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:408(para) 
+msgid "The second table contains the list of the IPs you want to connect to."
+msgstr "Die zweite Tabelle beinhaltet die Liste der IPs zu denen du verbinden willst."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:411(para) 
+msgid "To add new connections to one of the lists, click the <guibutton>Add</guibutton> button corresponding to the table you want to add the IP to."
+msgstr "Um eine neue Verbindung zu einer der Listen hinzuzufügen, klicke auf den <guibutton>Hinzufügen</guibutton> Knopf, welcher zu der Tabelle zu der du die IP hinzufügen willst, gehört."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:412(para) 
+msgid "You will be asked for the informations about the connection you are creating. In this dialog, you can also specify a password to protect your connection from unwanted users."
+msgstr "Du wirst nach den Informationen über die Verbindung die du erstellst gefragt. In dem Dialog kannst du ebenfalls ein Passwort angeben um deine Verbindung vor ungewollten Benutzern zu schützen."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:413(para) 
+msgid "If you added a connection to the list of the IPs you want to connect to, then you will be sharing the history when you click the <guibutton>Apply</guibutton> button."
+msgstr "Wenn du eine Verbindung zu der Liste der IPs hinzugefügt hast wirst du den Verlauf teilen sobald du auf den <guibutton>Anwenden</guibutton> Knopf klickst."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:414(para) 
+msgid "To remove connections to the list, select the row corresponding to the connection you want to remove from one of the tables and click the <guibutton>Remove</guibutton> button."
+msgstr "Um Verbindungen von der Liste zu löschen, markiere die Zeile die zu der Verbindung gehört die du von der Tabelle löschen willst, und klicke auf den <guibutton>Entfernen</guibutton> Knopf."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:415(para) 
+msgid "If you don't have the Python Cryptography Toolkit (python-crypto) installed, or don't use a password, you data will be transmitted in plain text. This can be a big security issue, because anyone who has access to your physical network connection can read all the data your computers are transmitting. If you have confidential informations in you clipboard (like passwords), they better shouldn't be sent unencrypted."
+msgstr "Falls du das Python Cryptography Toolkit (python-crypto) nicht installiert haben solltest, oder kein Passwort benutzt, werden deine Daten im Klartext übertragen. Das kann ein großes Sicherheitsproblem sein, weil jemand der Zugriff auf deine physikalische Netzwerkverbindung hat alle Daten die deine Computer übertragen lesen kann. Wenn du Vertrauenswürdige Informationen in deiner Zwischenablage hast (wie Passwörter), sollten sie lieber nicht unverschlüsselt gesendet werden."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:420(title) 
+msgid "Newline Plugin"
+msgstr "Neue Zeile Plugin"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:421(para) 
+msgid "The <application>Newline</application> Plugin adds a newline character at the end of items in the clipboard."
+msgstr "Das <application>Neue Zeile</application> Plugin fügt eine neue Zeile am Ende deiner Zwischenablageneinträge ein."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:422(para) 
+msgid "This is just an example plugin."
+msgstr "Dies ist nur ein Beispielsplugin"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:426(title) 
+msgid "Nopaste Plugin"
+msgstr ""
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:427(para) 
+msgid "The <application>Nopaste</application> Plugin allows you to paste the item in your clipboard to a Nopaste service."
+msgstr "Das <application>Nopaste</application> Plugin erlaubt dir deine Zwischenablageneinträge einem Nopaste Dienst zu übergeben."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:428(para) 
+msgid "A Nopaste service is a web application which allows its users to upload snippets of text, usually samples of source code, for public viewing."
+msgstr "Ein Nopaste Dienst ist eine Webanwendung welcher dir erlaubt Textschnipsel hochzuladen, oft Teile eine Quellcodes, um sie öffentlich anzuzeigen."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:432(title) 
+msgid "Nopaste Preferences"
+msgstr "Nopaste Einstellungen"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:450(guilabel) 
+msgid "Language"
+msgstr "Sprache"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:454(para) 
+msgid "Use this combo box to specify what is the programming language of the contents you want to paste to the Nopaste service."
+msgstr "Benutze diese Kombobox um anzugeben um welche Programmiersprache es sich bei den Inhalten, welche du dem Nopaste Dienst übergeben möchtest, handelt."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:462(guilabel) 
+msgid "Name"
+msgstr ""
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:466(para) 
+msgid "Enter the name you want to use when pasting to the Nopaste service."
+msgstr "Trage den Namen ein den du benutzen möchtest wenn du den Nopaste Dienst benutzt."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:476(title) 
+msgid "Using Nopaste"
+msgstr "Nopaste benutzen"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:477(para) 
+msgid "To paste the current clipboard contents to the Nopaste service, select <guimenuitem>Nopaste</guimenuitem> from the <guimenu>main menu</guimenu>"
+msgstr "Um den momentanen Zwischenablageninhalt dem Nopaste Dienst zu übergeben, wähle <guimenuitem>Nopaste</guimenuitem> vom <guimenu>Hauptmenü</guimenu>"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:482(title) 
+msgid "Snippets Plugin"
+msgstr "Schnipsel Plugin"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:483(para) 
+msgid "The <application>Snippets</application> Plugin allows you to create snippets from history items."
+msgstr "Das <application>Schnipsel</application> Plugin erlaubt dir Schnipsel von Zwischenablageneinträgen zu erzeugen."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:484(para) 
+msgid "Snippets are blocks of text that you can use in different occasions."
+msgstr "Schnipsel sind Textblöcke die du zu verschiedenen Anlässen benutzen kannst."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:485(para) 
+msgid "To manage your snippets, select the <application>Snippets</application> plugin from the <guilabel>Plugin</guilabel> dialog and then click on the <guibutton>Preferences</guibutton> button."
+msgstr "Um deine Schnipsel zu verwalten, wähle das <application>Snippets</application> Plugin aus dem <guilabel>Plugin</guilabel> Dialog and klicke dann auf den <guibutton>Einstellungen</guibutton> Knopf."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:487(title) 
+msgid "Managing snippets"
+msgstr "Schnipsel verwalten"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:488(para) 
+msgid "The <application>Snippets</application><guibutton>Preferences</guibutton> displays two tables:"
+msgstr "Die Schnipseleinstellungen zeigen zwei Tabellen an:"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:491(para) 
+msgid "The table on the left contains the current history."
+msgstr "Die linke Tabelle beinhaltet den jetzigen Verlauf."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:494(para) 
+msgid "The table on the right contains the snippets you added from the history."
+msgstr "Die rechte Tabelle beinhaltet die Schnipsel die du aus dem Verlauf hinzugefügt hast."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:497(para) 
+msgid "To add an history item to the snippet list, select the item you want to add in the history list and click the <guibutton>Add</guibutton> button. The newly created snippet will now appear in the snippet list."
+msgstr "Um einen Verlaufseintrag zu der Schnipselliste hinzuzufügen, wähle den Eintrag den du hinzufügen willst in der Verlaufsliste aus und klicke dann auf den <guibutton>Hinzufügen</guibutton> Knopf. Der neu erzeugte Schnipsel wird nun in der Schnipselliste erscheinen."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:498(para) 
+msgid "To remove a snippet, select the corresponding item in the snippets list, and then click the <guibutton>Remove</guibutton> button."
+msgstr "Um ein Schnipsel zu entfernen, wähle den zugehörigen Eintrag in der Schnipselliste und klicke dann auf en <guibutton>Entfernen</guibutton> Knopf."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:501(title) 
+msgid "Using snippets"
+msgstr "Schnipsel benutzen"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:502(para) 
+msgid "To fill the contents of your clipboard with a snippet, select <guimenuitem>Snippets</guimenuitem> from the <guimenu>main menu</guimenu> and then one of the snippets in the list."
+msgstr "Um die Inhalte deiner Zwischenablagen mit einem Schnispel zu füllen, wähle <guimenuitem>Schnipsel</guimenuitem> aus dem <guimenu>Hauptmenü</guimenu> und dann einen der Schnipsel in der Liste."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:508(title) 
+msgid "Grow Plugin"
+msgstr "Wachsen Plugin"
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:509(para) 
+msgid "The <application>Grow</application> Plugin detects whether a new entry is just a grown version of the previous one, and if so, deletes the previous."
+msgstr "Das <application>Wachsen</application> Plugin erkennt ob ein neuer Eintrag nur eine gewachsene Version eines Vorherigen ist, und falls ja, wird der Vorherige gelöscht."
+
+#: /home/sven/glipper-ng/help/C/glipper.xml:514(title) 
 msgid "Legal"
 msgstr "Rechtliches"
 
-#: base.xml:326(title) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:517(title) 
 msgid "Glipper Licence"
 msgstr "Glipper Lizenz"
 
-#: base.xml:327(para) 
-msgid "Glipper is licenced under the LGPL, see the <application>glipper</application> about box for details."
-msgstr "Glipper steht unter der LGPL Lizenz. Siehe den <application>glipper</application> Über Dialog für Details."
+#: /home/sven/glipper-ng/help/C/glipper.xml:518(para) 
+msgid "<application>Glipper</application> is licenced under the GPL, see the <application>Glipper</application> about box for details."
+msgstr "<application>Glipper</application> steht unter der GPL Lizenz, siehe die <application>Glipper</application> Über Box für Details."
 
-#: base.xml:333(title) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:524(title) 
 msgid "Glipper Documentation Licence"
-msgstr "Glipper Documentation Licence"
+msgstr ""
 
-#: base.xml:334(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:525(para) 
 msgid "Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any later version published by the Free Software Foundation with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink>."
-msgstr "Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any later version published by the Free Software Foundation with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. You can find a copy of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink>."
+msgstr ""
 
-#: base.xml:351(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:542(para) 
 msgid "DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
-msgstr "DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS FREE OF DEFECTS MERCHANTABLE, FIT FOR A PARTICULAR PURPOSE OR NON-INFRINGING. THE ENTIRE RISK AS TO THE QUALITY, ACCURACY, AND PERFORMANCE OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS WITH YOU. SHOULD ANY DOCUMENT OR MODIFIED VERSION PROVE DEFECTIVE IN ANY RESPECT, YOU (NOT THE INITIAL WRITER, AUTHOR OR ANY CONTRIBUTOR) ASSUME THE COST OF ANY NECESSARY SERVICING, REPAIR OR CORRECTION. THIS DISCLAIMER OF WARRANTY CONSTITUTES AN ESSENTIAL PART OF THIS LICENSE. NO USE OF ANY DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
+msgstr ""
 
-#: base.xml:371(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:562(para) 
 msgid "UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES OR LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES."
-msgstr "UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY CONTRIBUTOR, OR ANY DISTRIBUTOR OF THE DOCUMENT OR MODIFIED VERSION OF THE DOCUMENT, OR ANY SUPPLIER OF ANY OF SUCH PARTIES, BE LIABLE TO ANY PERSON FOR ANY DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY CHARACTER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER DAMAGES OR LOSSES ARISING OUT OF OR RELATING TO USE OF THE DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT, EVEN IF SUCH PARTY SHALL HAVE BEEN INFORMED OF THE POSSIBILITY OF SUCH DAMAGES."
+msgstr ""
 
-#: base.xml:344(para) 
+#: /home/sven/glipper-ng/help/C/glipper.xml:535(para) 
 msgid "DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: <placeholder-1/>"
-msgstr "DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: <placeholder-1/>"
+msgstr ""
+
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
+#: /home/sven/glipper-ng/help/C/glipper.xml:0(None) 
+msgid "translator-credits"
+msgstr "Sven rech <svenrech@gmx.de>"
 

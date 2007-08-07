@@ -202,11 +202,11 @@ msgstr "Neue Verbindung"
 
 #: ../glipper/plugins/network.py:328
 msgid "Enter IP address: "
-msgstr "Gib IP Adresse ein: "
+msgstr "Trage die IP Adresse ein: "
 
 #: ../glipper/plugins/network.py:334
 msgid "Enter Password for this Connection: "
-msgstr "Gib das Passwort für diese Verbindung ein: "
+msgstr "Trage das Passwort für diese Verbindung ein: "
 
 #: ../glipper/plugins/newline.py:26
 msgid "New line"
