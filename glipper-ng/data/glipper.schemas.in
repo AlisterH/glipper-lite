@@ -78,17 +78,6 @@
       </locale>
     </schema>
     <schema>
-      <key>/schemas/apps/glipper/check_interval</key>
-      <applyto>/apps/glipper/check_interval</applyto>
-      <owner>glipper</owner>
-      <type>int</type>
-      <default>500</default>
-      <locale name="C">
-        <short>The interval between the clipboard checks (ms)</short>
-        <long>The interval between the clipboard checks (ms)</long>
-      </locale>
-    </schema>
-    <schema>
       <key>/schemas/apps/glipper/autostart_plugins</key>
       <applyto>/apps/glipper/autostart_plugins</applyto>
       <owner>glipper</owner>
