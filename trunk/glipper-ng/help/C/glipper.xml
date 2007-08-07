@@ -415,14 +415,14 @@
       <para>The <application>Actions</application> <guibutton>Manager</guibutton> shows the actions and commands you defined in a table. To add a new action,
             click the <guibutton>Add action</guibutton> button. The newly created action will now appear in the table.</para>
       <para>To set the regular expression and the description for this action, click the <guilabel>New regular expression</guilabel> and <guilabel>Add your description here</guilabel> labels in the table. You can now add a list of commands to run with the specified action.</para>
-      <para>To add a new command to the specified action, select the row corresponding to the action in the table and then click the <guibutton>Add command</guibutton> button</para>
+      <para>To add a new command to the specified action, select the row corresponding to the action in the table and then click the <guibutton>Add command</guibutton> button.</para>
       <para>To set the program to run and the description for this command, click the <guilabel>New command</guilabel> and <guilabel>Add your description here</guilabel> labels in the table.</para>
-      <para>The command can use the current clipboard contents as an argument by using %s in the command definition</para>
+      <para>The command can use the current clipboard contents as an argument by using %s in the command definition.</para>
       <para>To remove an action or command, select the corresponding item in the table, and then click the <guibutton>Remove</guibutton> button.</para>
       </sect3>
       <sect3>
       <title>Using actions</title>
-      <para>To use the actions you defined in your preferences, select <guimenuitem>Actions</guimenuitem> from the <guimenu>main menu</guimenu></para>
+      <para>To use the actions you defined in your preferences, select <guimenuitem>Actions</guimenuitem> from the <guimenu>main menu</guimenu>.</para>
       <para>Select the description corresponding to the action you want to run, and the command will execute.</para>
       </sect3>
     </sect2>
@@ -508,7 +508,7 @@
       </sect3>
       <sect3>
       <title>Using Nopaste</title>
-      <para>To paste the current clipboard contents to the Nopaste service, select <guimenuitem>Nopaste</guimenuitem> from the <guimenu>main menu</guimenu></para>
+      <para>To paste the current clipboard contents to the Nopaste service, select <guimenuitem>Nopaste</guimenuitem> from the <guimenu>main menu</guimenu>.</para>
       </sect3>
     </sect2>
 
