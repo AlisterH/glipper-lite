@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-15 14:25+0200\n"
+"POT-Creation-Date: 2007-08-07 15:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../glipper/Applet.py:19 ../glipper/Applet.py:168
+#: ../glipper/Applet.py:19 ../glipper/Applet.py:167
 msgid "Glipper - Popup shortcut: "
 msgstr ""
 
@@ -43,19 +43,19 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#: ../glipper/PluginsManager.py:100
+#: ../glipper/PluginsManager.py:103
 msgid "Enabled"
 msgstr ""
 
-#: ../glipper/PluginsManager.py:103
+#: ../glipper/PluginsManager.py:106
 msgid "Autostart"
 msgstr ""
 
-#: ../glipper/PluginsManager.py:104
+#: ../glipper/PluginsManager.py:107
 msgid "Name"
 msgstr ""
 
-#: ../glipper/PluginsManager.py:105
+#: ../glipper/PluginsManager.py:108
 msgid "Description"
 msgstr ""
 
@@ -135,40 +135,40 @@ msgstr ""
 msgid "Manages clipboards"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:33
+#: ../glipper/plugins/actions.py:43
 msgid "No actions available"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:53 ../glipper/plugins/actions.py:71
+#: ../glipper/plugins/actions.py:59 ../glipper/plugins/actions.py:77
 msgid "Actions"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:72
-msgid "Define commands to run when an item matches a regular expression"
+#: ../glipper/plugins/actions.py:78
+msgid "Define commands to run when an item matches a regular expression."
 msgstr ""
 
-#: ../glipper/plugins/actions.py:174 ../glipper/plugins/actions.glade.h:2
+#: ../glipper/plugins/actions.py:180 ../glipper/plugins/actions.glade.h:2
 msgid "Add command"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:177
+#: ../glipper/plugins/actions.py:183
 msgid "Delete action"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:183
+#: ../glipper/plugins/actions.py:189
 msgid "Delete command"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:194 ../glipper/plugins/actions.py:236
+#: ../glipper/plugins/actions.py:200 ../glipper/plugins/actions.py:242
 msgid "New command"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:195 ../glipper/plugins/actions.py:225
-#: ../glipper/plugins/actions.py:237
+#: ../glipper/plugins/actions.py:201 ../glipper/plugins/actions.py:231
+#: ../glipper/plugins/actions.py:243
 msgid "Enter description here"
 msgstr ""
 
-#: ../glipper/plugins/actions.py:224
+#: ../glipper/plugins/actions.py:230
 msgid "New regular expression"
 msgstr ""
 
@@ -218,7 +218,7 @@ msgid "Nopaste"
 msgstr ""
 
 #: ../glipper/plugins/nopaste.py:8
-msgid "Paste the entry of your clipboard to a No-Paste service"
+msgid "Paste the entry of your clipboard to a Nopaste service"
 msgstr ""
 
 #: ../glipper/plugins/nopaste.py:34
@@ -335,4 +335,14 @@ msgstr ""
 
 #: ../glipper/plugins/snippets.glade.h:5
 msgid "gtk-refresh"
+msgstr ""
+
+#: ../glipper/plugins/grow.py:12
+msgid "Grow"
+msgstr ""
+
+#: ../glipper/plugins/grow.py:13
+msgid ""
+"This plugin detects whether a new entry is just a grown version of the "
+"previous one, and if so, deletes the previous."
 msgstr ""

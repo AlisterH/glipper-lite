@@ -14,3 +14,4 @@ glipper/plugins/actions.glade
 glipper/plugins/network.glade
 glipper/plugins/nopaste.glade
 glipper/plugins/snippets.glade
+glipper/plugins/grow.py
