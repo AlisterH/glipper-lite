@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2007-08-07 16:51+0200\n"
+"POT-Creation-Date: 2007-08-07 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,7 +89,7 @@ msgstr ""
 
 #: ../C/glipper.xml:94(releaseinfo)
 msgid "This manual describes version 1.0 of Glipper."
-msgstr "Questo manuale descrive la versione 1.0 di Glipper."
+msgstr "Questo manuale descrive la versione 1.0."
 
 #: ../C/glipper.xml:97(title)
 msgid "Feedback"
@@ -282,7 +282,8 @@ msgstr ""
 "elemento precedentemente copiato negli appunti come i contenuti correnti "
 "degli appunti: <placeholder-1/><placeholder-2/>"
 
-#: ../C/glipper.xml:228(title) ../C/glipper.xml:430(title)
+#: ../C/glipper.xml:228(title) ../C/glipper.xml:380(title)
+#: ../C/glipper.xml:464(title)
 msgid "Preferences"
 msgstr "Preferenze"
 
@@ -309,11 +310,13 @@ msgstr ""
 msgid "Glipper Preferences"
 msgstr "Preferenze di Glipper"
 
-#: ../C/glipper.xml:246(para) ../C/glipper.xml:439(para)
+#: ../C/glipper.xml:246(para) ../C/glipper.xml:389(para)
+#: ../C/glipper.xml:473(para)
 msgid "Dialog Element"
 msgstr "Elemento Dialogo"
 
-#: ../C/glipper.xml:249(para) ../C/glipper.xml:442(para)
+#: ../C/glipper.xml:249(para) ../C/glipper.xml:392(para)
+#: ../C/glipper.xml:476(para)
 msgid "Description"
 msgstr "Descrizione"
 
@@ -347,30 +350,27 @@ msgstr "Seleziona - Evidenzia/pulsante centrale del mouse"
 
 #: ../C/glipper.xml:286(para)
 msgid "Select this option to maintain a history of the \"select\" clipboard."
-msgstr ""
+msgstr "Seleziona questa opzione per mantenere una cronologia degli appunti \"selezione\"."
 
 #: ../C/glipper.xml:292(guilabel)
 msgid "Copy - Ctrl+C/Ctrl+V"
-msgstr ""
+msgstr "Copia - Ctrl+C/Ctrl+V"
 
 #: ../C/glipper.xml:296(para)
 msgid "Select this option to maintain a history of the \"copy\" clipboard."
-msgstr ""
-"Seleziona questa opzione per mantenere una cronologia degli appunti "
-"\"selezione\"."
+msgstr "Seleziona questa opzione per mantenere una cronologia degli appunti \"copia\"."
 
 #: ../C/glipper.xml:302(guilabel)
 msgid "Tag Ctrl+C clipboard's content in history (bold)"
-msgstr ""
-"Etichetta i contenuti degli appunti Ctrl+C nella cronologia (grassetto)"
+msgstr "Evidenzia i contenuti degli appunti Ctrl+C nella cronologia (grassetto)"
 
 #: ../C/glipper.xml:306(para)
 msgid ""
 "Select this option to have <application>Glipper</application> mark the "
 "contents of the \"copy\" clipboard."
 msgstr ""
-"Seleziona questa opzione per mantenere una cronologia degli appunti \"copia"
-"\"."
+"Seleziona questa opzione per far si che <application>Glipper</application> evidenzi i "
+"contenuti degli appunti \"copia\"."
 
 #: ../C/glipper.xml:312(guilabel)
 msgid "Save history"
@@ -492,15 +492,15 @@ msgstr ""
 "<application>Glipper</application>: <placeholder-1/>"
 
 #: ../C/glipper.xml:376(title)
-msgid "Actions Plugin"
+msgid "Actions plugin"
 msgstr "Plugin Azioni"
 
 #: ../C/glipper.xml:377(para)
 msgid ""
-"The <application>Actions</application> Plugin allows you to define commands "
+"The <application>Actions</application> plugin allows you to define commands "
 "to run when the current item in the clipboards matches a regular expression."
 msgstr ""
-"Il Plugin <application>Azioni</application> ti permette di definire comandi "
+"Il plugin <application>Azioni</application> ti permette di definire comandi "
 "da eseguire quando un elemento corrisponde a un'espressione regolare."
 
 #: ../C/glipper.xml:378(para)
@@ -513,11 +513,27 @@ msgstr ""
 "application> dalla finestra di dialogo <guilabel>Plugin</guilabel> e clicca "
 "sul pulsante <guibutton>Preferenze</guibutton>."
 
-#: ../C/glipper.xml:380(title)
+#: ../C/glipper.xml:382(title)
+msgid "Actions Preferences"
+msgstr "Preferenze di Nopaste"
+
+#: ../C/glipper.xml:400(guilabel)
+msgid "Immediately show available actions"
+msgstr "Mostra immediatamente le azioni disponibili"
+
+#: ../C/glipper.xml:404(para)
+msgid ""
+"Select this option to popup a menu with the available actions when a new "
+"item gets added to the history."
+msgstr ""
+"Seleziona questa opzione per mostrare un menu con le azioni disponibili quando un nuovo "
+"elemento viene aggiunto alla cronologia."
+
+#: ../C/glipper.xml:414(title)
 msgid "Managing actions"
 msgstr "Gestire le azioni"
 
-#: ../C/glipper.xml:381(para)
+#: ../C/glipper.xml:415(para)
 msgid ""
 "The <application>Actions</application><guibutton>Manager</guibutton> shows "
 "the actions and commands you defined in a table. To add a new action, click "
@@ -529,7 +545,7 @@ msgstr ""
 "una nuova azione, clicca il pulsante <guibutton>Aggiungi azione</guibutton>. "
 "L'azione appena creata apparirà ora nella tabella."
 
-#: ../C/glipper.xml:383(para)
+#: ../C/glipper.xml:417(para)
 msgid ""
 "To set the regular expression and the description for this action, click the "
 "<guilabel>New regular expression</guilabel> and <guilabel>Add your "
@@ -541,7 +557,7 @@ msgstr ""
 "<guilabel>Aggiungi la descrizione qui</guilabel> nella tabella. Puoi adesso "
 "aggiungere una lista di comandi da eseguire con l'azione specificata."
 
-#: ../C/glipper.xml:384(para)
+#: ../C/glipper.xml:418(para)
 msgid ""
 "To add a new command to the specified action, select the row corresponding "
 "to the action in the table and then click the <guibutton>Add command</"
@@ -551,7 +567,7 @@ msgstr ""
 "corrispondente all'azione nella tabella e clicca il pulsante "
 "<guibutton>Aggiungi comando</guibutton>"
 
-#: ../C/glipper.xml:385(para)
+#: ../C/glipper.xml:419(para)
 msgid ""
 "To set the program to run and the description for this command, click the "
 "<guilabel>New command</guilabel> and <guilabel>Add your description here</"
@@ -561,7 +577,7 @@ msgstr ""
 "clicca le etichette <guilabel>Nuovo comando</guilabel> e <guilabel>Aggiungi "
 "la descrizione qui</guilabel> nella tabella."
 
-#: ../C/glipper.xml:386(para)
+#: ../C/glipper.xml:420(para)
 msgid ""
 "The command can use the current clipboard contents as an argument by using %"
 "s in the command definition"
@@ -569,7 +585,7 @@ msgstr ""
 "Il comando può usare i contenuti degli appunti correnti come un argomento "
 "usando %s nella propria definizione"
 
-#: ../C/glipper.xml:387(para)
+#: ../C/glipper.xml:421(para)
 msgid ""
 "To remove an action or command, select the corresponding item in the table, "
 "and then click the <guibutton>Remove</guibutton> button."
@@ -577,11 +593,11 @@ msgstr ""
 "Per rimuovere un'azione o un comando, seleziona il corrispondente elemento "
 "nella tabella, e clicca il pulsante <guibutton>Rimuovi</guibutton>."
 
-#: ../C/glipper.xml:390(title)
+#: ../C/glipper.xml:424(title)
 msgid "Using actions"
 msgstr "Utilizzo delle azioni"
 
-#: ../C/glipper.xml:391(para)
+#: ../C/glipper.xml:425(para)
 msgid ""
 "To use the actions you defined in your preferences, select "
 "<guimenuitem>Actions</guimenuitem> from the <guimenu>main menu</guimenu>"
@@ -589,7 +605,7 @@ msgstr ""
 "Per usare le azioni che hai definito nelle tue preferenze, seleziona "
 "<guimenuitem>Azioni</guimenuitem> dal <guimenu>menu principale</guimenu>"
 
-#: ../C/glipper.xml:392(para)
+#: ../C/glipper.xml:426(para)
 msgid ""
 "Select the description corresponding to the action you want to run, and the "
 "command will execute."
@@ -597,19 +613,19 @@ msgstr ""
 "Seleziona la descrizione corrispondente all'azione che vuoi eseguire, e il "
 "comando verrà eseguito."
 
-#: ../C/glipper.xml:397(title)
-msgid "Network Plugin"
+#: ../C/glipper.xml:431(title)
+msgid "Network plugin"
 msgstr "Plugin Rete"
 
-#: ../C/glipper.xml:398(para)
+#: ../C/glipper.xml:432(para)
 msgid ""
-"The <application>Network</application> Plugin connects multiple Glipper "
+"The <application>Network</application> plugin connects multiple Glipper "
 "processes via network to synchronize their history."
 msgstr ""
-"Il Plugin <application>Rete</application> connette più processi di Glipper "
+"Il plugin <application>Rete</application> connette più processi di Glipper "
 "via rete per sincronizzare la loro cronologia."
 
-#: ../C/glipper.xml:399(para)
+#: ../C/glipper.xml:433(para)
 msgid ""
 "To set up the IPs you want to connect to, select the <application>Network</"
 "application> plugin from the <guilabel>Plugin</guilabel> dialog and then "
@@ -619,11 +635,11 @@ msgstr ""
 "<application>Rete</application> dalla finestra di dialogo <guilabel>Plugin</"
 "guilabel> e clicca sul pulsante <guibutton>Preferenze/guibutton>."
 
-#: ../C/glipper.xml:401(title)
+#: ../C/glipper.xml:435(title)
 msgid "Managing connections"
 msgstr "Gestire le connessioni"
 
-#: ../C/glipper.xml:402(para)
+#: ../C/glipper.xml:436(para)
 msgid ""
 "The <application>Network</application><guibutton>Preferences</guibutton> "
 "displays two tables:"
@@ -631,7 +647,7 @@ msgstr ""
 "Le <guibutton>Preferenze</guibutton> di <application>Rete</application> "
 "mostrano due tabelle:"
 
-#: ../C/glipper.xml:405(para)
+#: ../C/glipper.xml:439(para)
 msgid ""
 "The first table contains the list of the IPs you want to accept incoming "
 "connections from."
@@ -639,11 +655,11 @@ msgstr ""
 "La prima tabella contiene la lista degli IP da cui vuoi accettare "
 "connessioni."
 
-#: ../C/glipper.xml:408(para)
+#: ../C/glipper.xml:442(para)
 msgid "The second table contains the list of the IPs you want to connect to."
 msgstr "La seconda tabella contiene la lista degli IP a cui vuoi connetterti."
 
-#: ../C/glipper.xml:411(para)
+#: ../C/glipper.xml:445(para)
 msgid ""
 "To add new connections to one of the lists, click the <guibutton>Add</"
 "guibutton> button corresponding to the table you want to add the IP to."
@@ -652,7 +668,7 @@ msgstr ""
 "<guibutton>Aggiungi</guibutton> corrispondente alla tabella a cui vuoi "
 "aggiungere l'IP."
 
-#: ../C/glipper.xml:412(para)
+#: ../C/glipper.xml:446(para)
 msgid ""
 "You will be asked for the informations about the connection you are "
 "creating. In this dialog, you can also specify a password to protect your "
@@ -662,7 +678,7 @@ msgstr ""
 "questa finestra di dialogo, puoi anche specificare una password per "
 "proteggere la tua connessione da utenti non voluti."
 
-#: ../C/glipper.xml:413(para)
+#: ../C/glipper.xml:447(para)
 msgid ""
 "If you added a connection to the list of the IPs you want to connect to, "
 "then you will be sharing the history when you click the <guibutton>Apply</"
@@ -672,7 +688,7 @@ msgstr ""
 "allora condividerai la tua cronologia quando cliccherai il pulsante "
 "<guibutton>Applica</guibutton>"
 
-#: ../C/glipper.xml:414(para)
+#: ../C/glipper.xml:448(para)
 msgid ""
 "To remove connections to the list, select the row corresponding to the "
 "connection you want to remove from one of the tables and click the "
@@ -682,7 +698,7 @@ msgstr ""
 "connessione che vuoi rimuovere da una delle tabelle e clicca il pulsante "
 "<guibutton>Rimuovi</guibutton>"
 
-#: ../C/glipper.xml:415(para)
+#: ../C/glipper.xml:449(para)
 msgid ""
 "If you don't have the Python Cryptography Toolkit (python-crypto) installed, "
 "or don't use a password, your data will be transmitted in plain text. This "
@@ -691,42 +707,36 @@ msgid ""
 "you have confidential informations in you clipboard (like passwords), they "
 "better shouldn't be sent unencrypted."
 msgstr ""
-"Se non hai installato il Python Cryptography Toolkit (python-crypto), "
-"o non usi una password, i dati verranno trasmessi in semplice testo. Questo "
-"può essere un grosso problema di sicurezza, perchè chiunque possa accedere alla tua connessione "
-"può leggere tutti i dati che il tuo computer sta trasmettendo. Se "
-"hai informazioni confidenziali nei tuoi appunti (come password), queste "
-"non dovrebbero essere mandate non criptate."
 
-#: ../C/glipper.xml:420(title)
-msgid "Newline Plugin"
+#: ../C/glipper.xml:454(title)
+msgid "Newline plugin"
 msgstr "Plugin Nuova linea"
 
-#: ../C/glipper.xml:421(para)
+#: ../C/glipper.xml:455(para)
 msgid ""
-"The <application>Newline</application> Plugin adds a newline character at "
+"The <application>Newline</application> plugin adds a newline character at "
 "the end of items in the clipboard."
 msgstr ""
-"Il Plugin <application>Nuova linea</application> aggiunge un carattere di "
+"Il plugin <application>Nuova linea</application> aggiunge un carattere di "
 "nuova linea alla fine degli elementi negli appunti."
 
-#: ../C/glipper.xml:422(para)
+#: ../C/glipper.xml:456(para)
 msgid "This is just an example plugin."
 msgstr "Questo è solo un plugin di esempio."
 
-#: ../C/glipper.xml:426(title)
-msgid "Nopaste Plugin"
+#: ../C/glipper.xml:460(title)
+msgid "Nopaste plugin"
 msgstr "Plugin Nopaste"
 
-#: ../C/glipper.xml:427(para)
+#: ../C/glipper.xml:461(para)
 msgid ""
-"The <application>Nopaste</application> Plugin allows you to paste the item "
+"The <application>Nopaste</application> plugin allows you to paste the item "
 "in your clipboard to a Nopaste service."
 msgstr ""
-"Il Plugin <application>Nopaste</application> ti permette di incollare i "
+"Il plugin <application>Nopaste</application> ti permette di incollare i "
 "contenuti dei tuoi appunti in un servizio Nopaste."
 
-#: ../C/glipper.xml:428(para)
+#: ../C/glipper.xml:462(para)
 msgid ""
 "A Nopaste service is a web application which allows its users to upload "
 "snippets of text, usually samples of source code, for public viewing."
@@ -735,15 +745,15 @@ msgstr ""
 "caricare blocchi di testo, di solito esempi di codice sorgente, per farli "
 "visualizzare al pubblico."
 
-#: ../C/glipper.xml:432(title)
+#: ../C/glipper.xml:466(title)
 msgid "Nopaste Preferences"
 msgstr "Preferenze di Nopaste"
 
-#: ../C/glipper.xml:450(guilabel)
+#: ../C/glipper.xml:484(guilabel)
 msgid "Language"
 msgstr "Linguaggio"
 
-#: ../C/glipper.xml:454(para)
+#: ../C/glipper.xml:488(para)
 msgid ""
 "Use this combo box to specify what is the programming language of the "
 "contents you want to paste to the Nopaste service."
@@ -751,19 +761,19 @@ msgstr ""
 "Usa questa casella di selezione per specificare qual'è il linguaggio di "
 "programmazione dei contenuti che vuoi incollare nel servizio Nopaste."
 
-#: ../C/glipper.xml:462(guilabel)
+#: ../C/glipper.xml:496(guilabel)
 msgid "Name"
 msgstr "Nome"
 
-#: ../C/glipper.xml:466(para)
+#: ../C/glipper.xml:500(para)
 msgid "Enter the name you want to use when pasting to the Nopaste service."
 msgstr "Inserisci il nome che vuoi usare quando incolli nel servizio Nopaste"
 
-#: ../C/glipper.xml:476(title)
+#: ../C/glipper.xml:510(title)
 msgid "Using Nopaste"
 msgstr "Utilizzo di Nopaste"
 
-#: ../C/glipper.xml:477(para)
+#: ../C/glipper.xml:511(para)
 msgid ""
 "To paste the current clipboard contents to the Nopaste service, select "
 "<guimenuitem>Nopaste</guimenuitem> from the <guimenu>main menu</guimenu>"
@@ -772,24 +782,24 @@ msgstr ""
 "seleziona <guimenuitem>Nopaste</guimenuitem> dal <guimenu>menu principale</"
 "guimenu>"
 
-#: ../C/glipper.xml:482(title)
-msgid "Snippets Plugin"
+#: ../C/glipper.xml:516(title)
+msgid "Snippets plugin"
 msgstr "Plugin Snippet"
 
-#: ../C/glipper.xml:483(para)
+#: ../C/glipper.xml:517(para)
 msgid ""
-"The <application>Snippets</application> Plugin allows you to create snippets "
+"The <application>Snippets</application> plugin allows you to create snippets "
 "from history items."
 msgstr ""
-"Il Plugin <application>Snippet</application> ti permette di creare snippet "
+"Il plugin <application>Snippet</application> ti permette di creare snippet "
 "dagli elementi della cronologia."
 
-#: ../C/glipper.xml:484(para)
+#: ../C/glipper.xml:518(para)
 msgid "Snippets are blocks of text that you can use in different occasions."
 msgstr ""
 "Gli snippet sono blocchi di testo che puoi usare in differenti situazioni."
 
-#: ../C/glipper.xml:485(para)
+#: ../C/glipper.xml:519(para)
 msgid ""
 "To manage your snippets, select the <application>Snippets</application> "
 "plugin from the <guilabel>Plugin</guilabel> dialog and then click on the "
@@ -799,11 +809,11 @@ msgstr ""
 "application> dalla finestra di dialogo <guilabel>Plugin</guilabel> e clicca "
 "sul pulsante <guibutton>Preferenze</guibutton>."
 
-#: ../C/glipper.xml:487(title)
+#: ../C/glipper.xml:521(title)
 msgid "Managing snippets"
 msgstr "Gestire gli snippet"
 
-#: ../C/glipper.xml:488(para)
+#: ../C/glipper.xml:522(para)
 msgid ""
 "The <application>Snippets</application><guibutton>Manager</guibutton> "
 "displays two tables:"
@@ -811,18 +821,18 @@ msgstr ""
 "Il <guibutton>Gestore</guibutton> di <application>Snippet</application> "
 "mostra due tabelle:"
 
-#: ../C/glipper.xml:491(para)
+#: ../C/glipper.xml:525(para)
 msgid "The table on the left contains the current history."
 msgstr "La tabella sulla sinistra contiene la cronologia corrente."
 
-#: ../C/glipper.xml:494(para)
+#: ../C/glipper.xml:528(para)
 msgid ""
 "The table on the right contains the snippets you added from the history."
 msgstr ""
 "La tabella sulla destra contiene gli snippet che hai aggiunto dalla "
 "cronologia."
 
-#: ../C/glipper.xml:497(para)
+#: ../C/glipper.xml:531(para)
 msgid ""
 "To add an history item to the snippet list, select the item you want to add "
 "in the history list and click the <guibutton>Add</guibutton> button. The "
@@ -833,7 +843,7 @@ msgstr ""
 "clicca il pulsante <guibutton>Aggiungi</guibutton>. Lo snippet appena creato "
 "apparirà ora nella lista degli snippet."
 
-#: ../C/glipper.xml:498(para)
+#: ../C/glipper.xml:532(para)
 msgid ""
 "To remove a snippet, select the corresponding item in the snippets list, and "
 "then click the <guibutton>Remove</guibutton> button."
@@ -841,11 +851,11 @@ msgstr ""
 "Per rimuovere uno snippet, seleziona il corrispondente elemento nella lista "
 "degli snippet, e clicca il pulsante <guibutton>Rimuovi</guibutton>."
 
-#: ../C/glipper.xml:501(title)
+#: ../C/glipper.xml:535(title)
 msgid "Using snippets"
 msgstr "Utilizzo degli snippet"
 
-#: ../C/glipper.xml:502(para)
+#: ../C/glipper.xml:536(para)
 msgid ""
 "To fill the contents of your clipboard with a snippet, select "
 "<guimenuitem>Snippets</guimenuitem> from the <guimenu>main menu</guimenu> "
@@ -855,27 +865,27 @@ msgstr ""
 "<guimenuitem>Snippet</guimenuitem> dal <guimenu>menu principale</guimenu> e "
 "allora uno degli elementi nella lista degli snippet."
 
-#: ../C/glipper.xml:508(title)
-msgid "Grow Plugin"
+#: ../C/glipper.xml:542(title)
+msgid "Grow plugin"
 msgstr "Plugin Crescita"
 
-#: ../C/glipper.xml:509(para)
+#: ../C/glipper.xml:543(para)
 msgid ""
-"The <application>Grow</application> Plugin detects whether a new entry is "
+"The <application>Grow</application> plugin detects whether a new entry is "
 "just a grown version of the previous one, and if so, deletes the previous."
 msgstr ""
-"Il Plugin <application>Crescita</application> riconosce se un nuovo elemento "
+"Il plugin <application>Crescita</application> riconosce se un nuovo elemento "
 "è una versione cresciuta del precedente e, se è così, elimina il precedente."
 
-#: ../C/glipper.xml:514(title)
+#: ../C/glipper.xml:548(title)
 msgid "Legal"
 msgstr "Licenza"
 
-#: ../C/glipper.xml:517(title)
+#: ../C/glipper.xml:551(title)
 msgid "Glipper Licence"
 msgstr "Licenza di Glipper"
 
-#: ../C/glipper.xml:518(para)
+#: ../C/glipper.xml:552(para)
 msgid ""
 "<application>Glipper</application> is licenced under the GPL, see the "
 "<application>Glipper</application> about box for details."
@@ -883,11 +893,11 @@ msgstr ""
 "<application>Glipper</application> è distribuito sotto licenza GPL, vedi il "
 "dialogo di informazioni di <application>glipper</application> per dettagli"
 
-#: ../C/glipper.xml:524(title)
+#: ../C/glipper.xml:558(title)
 msgid "Glipper Documentation Licence"
 msgstr "Licenza della Documentazione di Glipper"
 
-#: ../C/glipper.xml:525(para)
+#: ../C/glipper.xml:559(para)
 msgid ""
 "Permission is granted to copy, distribute and/or modify this document under "
 "the terms of the GNU Free Documentation License (GFDL), Version 1.1 or any "
@@ -896,7 +906,7 @@ msgid ""
 "of the GFDL at this <ulink type=\"help\" url=\"ghelp:fdl\">link</ulink>."
 msgstr ""
 
-#: ../C/glipper.xml:542(para)
+#: ../C/glipper.xml:576(para)
 msgid ""
 "DOCUMENT IS PROVIDED ON AN \"AS IS\" BASIS, WITHOUT WARRANTY OF ANY KIND, "
 "EITHER EXPRESSED OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT "
@@ -911,7 +921,7 @@ msgid ""
 "OF THE DOCUMENT IS AUTHORIZED HEREUNDER EXCEPT UNDER THIS DISCLAIMER; AND"
 msgstr ""
 
-#: ../C/glipper.xml:562(para)
+#: ../C/glipper.xml:596(para)
 msgid ""
 "UNDER NO CIRCUMSTANCES AND UNDER NO LEGAL THEORY, WHETHER IN TORT (INCLUDING "
 "NEGLIGENCE), CONTRACT, OR OTHERWISE, SHALL THE AUTHOR, INITIAL WRITER, ANY "
@@ -925,7 +935,7 @@ msgid ""
 "POSSIBILITY OF SUCH DAMAGES."
 msgstr ""
 
-#: ../C/glipper.xml:535(para)
+#: ../C/glipper.xml:569(para)
 msgid ""
 "DOCUMENT AND MODIFIED VERSIONS OF THE DOCUMENT ARE PROVIDED UNDER THE TERMS "
 "OF THE GNU FREE DOCUMENTATION LICENSE WITH THE FURTHER UNDERSTANDING THAT: "

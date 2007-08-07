@@ -373,9 +373,43 @@
     </para>
 
     <sect2 id="plugins-actions">    
-      <title>Actions Plugin</title>
-      <para>The <application>Actions</application> Plugin allows you to define commands to run when the current item in the clipboards matches a regular expression.</para>
+      <title>Actions plugin</title>
+      <para>The <application>Actions</application> plugin allows you to define commands to run when the current item in the clipboards matches a regular expression.</para>
       <para>To manage your actions, select the <application>Actions</application> plugin from the <guilabel>Plugin</guilabel> dialog and then click on the <guibutton>Preferences</guibutton> button.</para> 
+      <sect3>
+         <title>Preferences</title>
+<table frame="topbot" id="plugins-nopaste-TBL">
+        <title>Actions Preferences</title>
+        <tgroup cols="2" colsep="0" rowsep="0">
+          <colspec colname="colspec0" colwidth="35.09*"/>
+          <colspec colname="colspec1" colwidth="64.91*"/>
+          <thead>
+            <row rowsep="1">
+              <entry>
+                <para>Dialog Element</para>
+              </entry>
+              <entry>
+                <para>Description</para>
+              </entry>
+            </row>
+          </thead>
+          <tbody>
+            <row>
+              <entry valign="top">
+                <para>
+                  <guilabel>Immediately show available actions</guilabel>
+                </para>
+              </entry>
+              <entry valign="top">
+		<para>
+			Select this option to popup a menu with the available actions when a new item gets added to the history.
+		</para>
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      </sect3>
       <sect3>
       <title>Managing actions</title>
       <para>The <application>Actions</application> <guibutton>Manager</guibutton> shows the actions and commands you defined in a table. To add a new action,
@@ -394,8 +428,8 @@
     </sect2>
 
     <sect2 id="plugins-network">    
-      <title>Network Plugin</title>
-      <para>The <application>Network</application> Plugin connects multiple Glipper processes via network to synchronize their history.</para>
+      <title>Network plugin</title>
+      <para>The <application>Network</application> plugin connects multiple Glipper processes via network to synchronize their history.</para>
       <para>To set up the IPs you want to connect to, select the <application>Network</application> plugin from the <guilabel>Plugin</guilabel> dialog and then click on the <guibutton>Preferences</guibutton> button.</para> 
       <sect3>
       <title>Managing connections</title>
@@ -417,14 +451,14 @@
     </sect2>
 
     <sect2 id="plugins-newline">    
-      <title>Newline Plugin</title>
-      <para>The <application>Newline</application> Plugin adds a newline character at the end of items in the clipboard.</para>
+      <title>Newline plugin</title>
+      <para>The <application>Newline</application> plugin adds a newline character at the end of items in the clipboard.</para>
       <para>This is just an example plugin.</para> 
     </sect2>
 
     <sect2 id="plugins-nopaste">    
-      <title>Nopaste Plugin</title>
-      <para>The <application>Nopaste</application> Plugin allows you to paste the item in your clipboard to a Nopaste service.</para>
+      <title>Nopaste plugin</title>
+      <para>The <application>Nopaste</application> plugin allows you to paste the item in your clipboard to a Nopaste service.</para>
       <para>A Nopaste service is a web application which allows its users to upload snippets of text, usually samples of source code, for public viewing.</para>
       <sect3>
       <title>Preferences</title>
@@ -479,8 +513,8 @@
     </sect2>
 
     <sect2 id="plugins-snippets">    
-      <title>Snippets Plugin</title>
-      <para>The <application>Snippets</application> Plugin allows you to create snippets from history items.</para>
+      <title>Snippets plugin</title>
+      <para>The <application>Snippets</application> plugin allows you to create snippets from history items.</para>
       <para>Snippets are blocks of text that you can use in different occasions.</para>
       <para>To manage your snippets, select the <application>Snippets</application> plugin from the <guilabel>Plugin</guilabel> dialog and then click on the <guibutton>Preferences</guibutton> button.</para> 
       <sect3>
@@ -505,8 +539,8 @@
     </sect2>
 
     <sect2 id="plugins-grow">    
-      <title>Grow Plugin</title>
-      <para>The <application>Grow</application> Plugin detects whether a new entry is just a grown version of the previous one, and if so, deletes the previous.</para>
+      <title>Grow plugin</title>
+      <para>The <application>Grow</application> plugin detects whether a new entry is just a grown version of the previous one, and if so, deletes the previous.</para>
     </sect2>
   </sect1>
 
