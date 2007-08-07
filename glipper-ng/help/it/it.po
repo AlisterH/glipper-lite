@@ -408,7 +408,7 @@ msgid ""
 msgstr ""
 "Puoi aggiungere nuove funzioni a <application>Glipper</application> "
 "abilitando i plugin. Un plugin è un modulo che estende le funzionalità del "
-"programma principale di <application>Glipper</application>"
+"programma principale di <application>Glipper</application>."
 
 #: ../C/glipper.xml:345(para)
 msgid ""
@@ -515,7 +515,7 @@ msgstr ""
 
 #: ../C/glipper.xml:382(title)
 msgid "Actions Preferences"
-msgstr "Preferenze di Nopaste"
+msgstr "Preferenze di Azioni"
 
 #: ../C/glipper.xml:400(guilabel)
 msgid "Immediately show available actions"
@@ -633,7 +633,7 @@ msgid ""
 msgstr ""
 "Per impostare gli IP a cui vuoi connetterti, seleziona il plugin "
 "<application>Rete</application> dalla finestra di dialogo <guilabel>Plugin</"
-"guilabel> e clicca sul pulsante <guibutton>Preferenze/guibutton>."
+"guilabel> e clicca sul pulsante <guibutton>Preferenze</guibutton>."
 
 #: ../C/glipper.xml:435(title)
 msgid "Managing connections"
@@ -707,6 +707,12 @@ msgid ""
 "you have confidential informations in you clipboard (like passwords), they "
 "better shouldn't be sent unencrypted."
 msgstr ""
+"Se non hai il Python Cryptography Toolkit (python-crypto) installato, "
+"o non usi una password, i tuoi dati verranno trasmessi in testo semplice. Questo "
+"può essere un grande rischio di sicurezza, perchè chiunque abbia accesso alla tua rete fisica "
+"può accedere tutti i dati che i tuoi computer stanno inviando. Se "
+"hai delle informazioni confidenziali negli appunti (come le password), queste "
+"non dovrebbero essere inviate non criptate."
 
 #: ../C/glipper.xml:454(title)
 msgid "Newline plugin"
