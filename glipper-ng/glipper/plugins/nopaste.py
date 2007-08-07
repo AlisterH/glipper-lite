@@ -5,7 +5,7 @@ from gettext import gettext as _
 
 def info():
    info = {"Name": _("Nopaste"), 
-      "Description": _("Paste the entry of your clipboard to a No-Paste service"),
+      "Description": _("Paste the entry of your clipboard to a Nopaste service"),
       "Preferences": True}
    return info
 

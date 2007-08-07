@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.2.0 on Sun Jul  1 08:28:13 2007 by eugenio@eugenio-desktop-->
+<!--Generated with glade3 3.2.0 on Tue Aug  7 08:47:08 2007 by eugenio@eugenio-desktop-->
 <glade-interface>
   <widget class="GtkDialog" id="plugins_window">
     <property name="width_request">600</property>
@@ -49,6 +49,7 @@
                 <property name="can_default">True</property>
                 <property name="label">gtk-help</property>
                 <property name="use_stock">True</property>
+                <property name="response_id">-11</property>
               </widget>
             </child>
             <child>
@@ -59,6 +60,7 @@
                 <property name="can_default">True</property>
                 <property name="label">gtk-preferences</property>
                 <property name="use_stock">True</property>
+                <property name="response_id">1</property>
                 <signal name="clicked" handler="on_preferences_button_clicked"/>
               </widget>
               <packing>

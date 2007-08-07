@@ -1,4 +1,4 @@
-import gtk, gnomevfs, glipper, gobject, gconf
+import gtk, gnomevfs, glipper, gobject, gconf, gnome
 from gettext import gettext as _
 from os.path import *
 from glipper.Plugin import *
@@ -154,15 +154,16 @@ class PluginsWindow(object):
                plugin.remove_module()
          
          PluginsWindow.__instance = None
-   
-   def on_preferences_button_clicked(self, button):
-      treeview, iter = self.plugins_list.get_selection().get_selected()
+      elif response == 1:
+         treeview, iter = self.plugins_list.get_selection().get_selected()
       
-      file_name = self.plugins_list_model.get_value(iter, self.FILE_NAME_COLUMN)
+         file_name = self.plugins_list_model.get_value(iter, self.FILE_NAME_COLUMN)
       
-      plugin = Plugin(file_name)
-      self.temp_plugins.append(plugin)
-      plugin.call('on_show_preferences', self.plugins_window)
+         plugin = Plugin(file_name)
+         self.temp_plugins.append(plugin)
+         plugin.call('on_show_preferences', self.plugins_window)
+      elif response == gtk.RESPONSE_HELP:
+         gnome.help_display('glipper', 'plugins')
       
    def on_plugins_list_selection_changed(self, selection):
       treeview, iter = selection.get_selected()

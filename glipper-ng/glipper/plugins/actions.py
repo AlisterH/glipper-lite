@@ -27,19 +27,25 @@ def update_menu():
    menu = gtk.Menu()
    
    #read informations from model and create menu items:
-
+   menu_items = []
    item = glipper.get_history_item(0)
-   if len(model) == 0 or item == None:
-      empty_item = gtk.MenuItem(_("No actions available"))
-      menu.append(empty_item)
-   else:
+
+   if item != None:
       for action in model:
          regex = re.compile(action[0])
          if regex.match(item) != None:
             for cmd in action.iterchildren():
                item = gtk.MenuItem(cmd[3])
-               menu.append(item)
                item.connect("activate", commandActivated, cmd[0])
+               menu_items.append(item)
+
+   if len(menu_items) == 0:
+      empty_item = gtk.MenuItem(_("No actions available"))
+      menu.append(empty_item)
+   else:
+      for item in menu_items:
+         menu.append(item)
+               
    
    menu.show_all()
    menu_item.set_submenu(menu)
@@ -69,7 +75,7 @@ def on_show_preferences(parent):
 
 def info():
    info = {"Name": _("Actions"), 
-      "Description": _("Define commands to run when an item matches a regular expression"),
+      "Description": _("Define commands to run when an item matches a regular expression."),
       "Preferences": True}
    return info
 
