@@ -88,7 +88,10 @@ if necessary, so make sure to catch them.
   See below and see the snippet plugin.
 
 About infinite recursive "event - api call" constructs:
-*TODO*
+If your plugin uses the on_new_item event, and within this, it uses the add_history_item() function, an infinite recursive loop would
+occure, because the add_hisotry_item() function causes Glipper to call on_new_item() again, which will of course call add_history_item()
+again, and so on...
+Take a look at the newline plugin to see how you can work around this problem.
 
 About gconf:
 You can use the object "GCONF_CLIENT" in the glipper module to have access to the Glipper's gconf preferences.
