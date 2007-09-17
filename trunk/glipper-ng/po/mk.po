@@ -1,0 +1,377 @@
+# translation of mk.po to Macedonian
+#
+# Italian translation of Glipper.
+#
+# This file is distributed under the same license as the Glipper package.
+#
+#
+# Translated by Eugenio Depalo <eugeniodepalo@mac.com>, 2006.
+# Arangel Angov <arangel@linux.net.mk>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: mk\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-08-07 17:58+0200\n"
+"PO-Revision-Date: 2007-09-07 16:23+0200\n"
+"Last-Translator: Arangel Angov <arangel@linux.net.mk>\n"
+"Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: ../glipper/Applet.py:19 ../glipper/Applet.py:167
+msgid "Glipper - Popup shortcut: "
+msgstr "Glipper - Кратенка: "
+
+#: ../glipper/Applet.py:91
+msgid "Empty history"
+msgstr "Празна историја"
+
+#: ../glipper/About.py:28
+msgid "Glipper"
+msgstr "Glipper"
+
+#: ../glipper/About.py:31
+msgid "A clipboard manager."
+msgstr "Менаџер на таблата за исечоци."
+
+#: ../glipper/About.py:34
+msgid "Glipper website"
+msgstr "Веб страната на Glipper"
+
+#. about.set_artists([])
+#. about.set_documenters([])
+#. translators: These appear in the About dialog, usual format applies.
+#: ../glipper/About.py:42
+msgid "translator-credits"
+msgstr "Arangel Angov <arangel@linux.net.mk>"
+
+#: ../glipper/PluginsManager.py:103
+msgid "Enabled"
+msgstr "Вклучено"
+
+#: ../glipper/PluginsManager.py:106
+msgid "Autostart"
+msgstr "Автоматски подигнување"
+
+#: ../glipper/PluginsManager.py:107
+msgid "Name"
+msgstr "Име"
+
+#: ../glipper/PluginsManager.py:108
+msgid "Description"
+msgstr "Опис"
+
+#: ../data/properties-window.glade.h:1
+msgid "<Ctrl><Alt>c"
+msgstr "<Ctrl><Alt>c"
+
+#: ../data/properties-window.glade.h:2
+msgid "<b>Behaviour</b>"
+msgstr "<b>Однесување</b>"
+
+#: ../data/properties-window.glade.h:3
+msgid "<b>Clipboards</b>"
+msgstr "<b>Табли со исечоци</b>"
+
+#: ../data/properties-window.glade.h:4
+msgid "<b>Limits</b>"
+msgstr "<b>Лимити</b>"
+
+#: ../data/properties-window.glade.h:5
+msgid "Amount of entries in history:"
+msgstr "Број на записи во историјата:"
+
+#: ../data/properties-window.glade.h:6
+msgid "Copy - Ctrl+C/Ctrl+V"
+msgstr "Копирање - Ctrl+C/Ctrl+V"
+
+#: ../data/properties-window.glade.h:7
+msgid "Glipper preferences"
+msgstr "Преференци"
+
+#: ../data/properties-window.glade.h:8
+msgid "Key combination for popup: "
+msgstr "Комбинација од копчиња"
+
+#: ../data/properties-window.glade.h:9
+msgid "Length of one history entry:"
+msgstr "Должината на еден запис во историјата:"
+
+#: ../data/properties-window.glade.h:10
+msgid "Save history"
+msgstr "Зачувај историја"
+
+#: ../data/properties-window.glade.h:11
+msgid "Select - Mark/middle mouse button"
+msgstr "Избирање - Обележување/десно копче на глувчето"
+
+#: ../data/properties-window.glade.h:12
+msgid "Tag Ctrl+C clipboard's content in history (bold)"
+msgstr "Обележувај ја содржината од Ctrl+C со задебелени букви"
+
+#: ../data/properties-window.glade.h:13
+msgid "Which clipboards should be managed by Glipper?"
+msgstr "Кои табли за исечоци да се менаџираат со Glipper?"
+
+#: ../data/Glipper.xml.h:1
+msgid "Pl_ugins"
+msgstr "До_датоци"
+
+#: ../data/Glipper.xml.h:2
+msgid "_About"
+msgstr "_За"
+
+#: ../data/Glipper.xml.h:3
+msgid "_Help"
+msgstr "_Помош"
+
+#: ../data/Glipper.xml.h:4
+msgid "_Preferences"
+msgstr "_Преференци"
+
+#: ../data/Glipper.server.in.in.h:1
+msgid "Clipboard manager"
+msgstr "Менаџер на таблата за исечоци"
+
+#: ../data/Glipper.server.in.in.h:2
+msgid "Manages clipboards"
+msgstr "Ја менаџира таблата за исечоци"
+
+#: ../glipper/plugins/actions.py:43
+msgid "No actions available"
+msgstr "Не се достапни дејства"
+
+#: ../glipper/plugins/actions.py:59 ../glipper/plugins/actions.py:77
+msgid "Actions"
+msgstr "Дејства"
+
+#: ../glipper/plugins/actions.py:78
+msgid "Define commands to run when an item matches a regular expression."
+msgstr ""
+"Дефинирај команда што ќе се извршувам кога некој предмет се совпаѓа "
+"со регуларен израз."
+
+#: ../glipper/plugins/actions.py:180 ../glipper/plugins/actions.glade.h:3
+msgid "Add command"
+msgstr "Додај команда"
+
+#: ../glipper/plugins/actions.py:183
+msgid "Delete action"
+msgstr "Избриши дејство"
+
+#: ../glipper/plugins/actions.py:189
+msgid "Delete command"
+msgstr "Избриши команда"
+
+#: ../glipper/plugins/actions.py:200 ../glipper/plugins/actions.py:242
+msgid "New command"
+msgstr "Нова команда"
+
+#: ../glipper/plugins/actions.py:201 ../glipper/plugins/actions.py:231
+#: ../glipper/plugins/actions.py:243
+msgid "Enter description here"
+msgstr "Внесете опис"
+
+#: ../glipper/plugins/actions.py:230
+msgid "New regular expression"
+msgstr "Нов регуларен израз"
+
+#: ../glipper/plugins/network.py:17
+msgid "Network"
+msgstr "Мрежа"
+
+#: ../glipper/plugins/network.py:18
+msgid "Connect multiple Glipper processes via network to synchronize their history"
+msgstr "Врзете повеќе процеси на Glipper преку мрежа и синхронизирајте ја нивната историја"
+
+#: ../glipper/plugins/network.py:293 ../glipper/plugins/network.py:303
+msgid "Password"
+msgstr "Лозинка"
+
+#: ../glipper/plugins/network.py:318
+msgid ""
+"You have to install the Python Cryptography Toolkit (python-crypto) if you "
+"want to use encrypted connections!"
+msgstr ""
+"Треба да инсталирате Python Cryptography Toolkit (python-crypto) ако "
+"сакате да користите енкриптирани врски!"
+
+#: ../glipper/plugins/network.py:323
+msgid "New connection"
+msgstr "Нова врска"
+
+#: ../glipper/plugins/network.py:328
+msgid "Enter IP address: "
+msgstr "Внесете IP адреса: "
+
+#: ../glipper/plugins/network.py:334
+msgid "Enter Password for this Connection: "
+msgstr "Внесете лозинка за оваа врска: "
+
+#: ../glipper/plugins/newline.py:26
+msgid "New line"
+msgstr "Нова линија"
+
+#: ../glipper/plugins/newline.py:27
+msgid ""
+"Example plugin that adds a newline character at the end of items in the "
+"clipboard"
+msgstr ""
+"Пример додаток кој што додава знак на нова линија на крајот од предметите "
+"во табелата за исечоци"
+
+#: ../glipper/plugins/nopaste.py:7 ../glipper/plugins/nopaste.py:39
+msgid "Nopaste"
+msgstr "Не вметнувај"
+
+#: ../glipper/plugins/nopaste.py:8
+msgid "Paste the entry of your clipboard to a Nopaste service"
+msgstr "Вметнете го записот од Вашата табла со сервисот за не вметнување"
+
+#: ../glipper/plugins/nopaste.py:34
+msgid "pasted by Glipper"
+msgstr "вметнато со Glipper"
+
+#: ../glipper/plugins/nopaste.py:55
+msgid "Glipper user"
+msgstr "Glipper корисник"
+
+#: ../glipper/plugins/snippets.py:55
+msgid "History"
+msgstr "Историја"
+
+#: ../glipper/plugins/snippets.py:63 ../glipper/plugins/snippets.py:103
+#: ../glipper/plugins/snippets.py:142
+msgid "Snippets"
+msgstr "Snippets"
+
+#: ../glipper/plugins/snippets.py:123
+msgid "No snippets available"
+msgstr "Не се достапни snippets"
+
+#: ../glipper/plugins/snippets.py:143
+msgid "Create snippets from history items"
+msgstr "Креирајте snippets од предмети од историјата"
+
+#: ../glipper/plugins/actions.glade.h:1
+msgid "Action manager"
+msgstr "Менаџер за дејства"
+
+#: ../glipper/plugins/actions.glade.h:2
+msgid "Add action"
+msgstr "Додај дејство"
+
+#: ../glipper/plugins/actions.glade.h:4
+msgid "Immediately show available actions"
+msgstr "Веднаш покажи ги достапните дејства"
+
+#: ../glipper/plugins/actions.glade.h:5 ../glipper/plugins/nopaste.glade.h:18
+msgid "gtk-apply"
+msgstr "gtk-apply"
+
+#: ../glipper/plugins/network.glade.h:1
+msgid "<b>Connections</b>"
+msgstr "<b>Врски</b>"
+
+#: ../glipper/plugins/network.glade.h:2
+msgid "Accept connections from this hosts:"
+msgstr "Прифаќај врски од овие хостови:"
+
+#: ../glipper/plugins/network.glade.h:3
+msgid "Connect to:"
+msgstr "Врзи се за:"
+
+#: ../glipper/plugins/network.glade.h:4
+msgid "Network preferences"
+msgstr "Мрежни преференци"
+
+#: ../glipper/plugins/network.glade.h:5
+msgid "Please read the security informations about this plugin before using it!"
+msgstr "Ве молам прочитајте ги безбедносните информации за додатокот пред да го користите!"
+
+#: ../glipper/plugins/network.glade.h:6
+msgid "gtk-add"
+msgstr "gtk-add"
+
+#: ../glipper/plugins/network.glade.h:7
+msgid "gtk-remove"
+msgstr "gtk-remove"
+
+#: ../glipper/plugins/nopaste.glade.h:1
+msgid ""
+"C (C89)\n"
+"C (C99)\n"
+"C++\n"
+"C#\n"
+"Java\n"
+"Pascal\n"
+"Perl\n"
+"PHP\n"
+"PL/I\n"
+"Python\n"
+"Ruby\n"
+"SQL\n"
+"Visual Basic\n"
+"Plain Text"
+msgstr ""
+"C (C89)\n"
+"C (C99)\n"
+"C++\n"
+"C#\n"
+"Java\n"
+"Pascal\n"
+"Perl\n"
+"PHP\n"
+"PL/I\n"
+"Python\n"
+"Ruby\n"
+"SQL\n"
+"Visual Basic\n"
+"Plain Text"
+
+#: ../glipper/plugins/nopaste.glade.h:15
+msgid "Language:"
+msgstr "Јазик:"
+
+#: ../glipper/plugins/nopaste.glade.h:16
+msgid "Nickname:"
+msgstr "Прекар:"
+
+#: ../glipper/plugins/nopaste.glade.h:17
+msgid "Nopaste preferences"
+msgstr "Преференци за не вметнување"
+
+#: ../glipper/plugins/snippets.glade.h:1
+msgid "Add"
+msgstr "Додај"
+
+#: ../glipper/plugins/snippets.glade.h:2
+msgid "Remove"
+msgstr "Отстрани"
+
+#: ../glipper/plugins/snippets.glade.h:3
+msgid "Snippets manager"
+msgstr "Менаџер за snippets"
+
+#: ../glipper/plugins/snippets.glade.h:4
+msgid "gtk-close"
+msgstr "gtk-close"
+
+#: ../glipper/plugins/snippets.glade.h:5
+msgid "gtk-refresh"
+msgstr "gtk-refresh"
+
+#: ../glipper/plugins/grow.py:12
+msgid "Grow"
+msgstr "Порасни"
+
+#: ../glipper/plugins/grow.py:13
+msgid ""
+"This plugin detects whether a new entry is just a grown version of the "
+"previous one, and if so, deletes the previous."
+msgstr ""
+"Додатокот детектира дали новиот запис е дел е само додаден на "
+"старата верзиај или пак се работи за целосно нов запис."
+
