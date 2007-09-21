@@ -1,0 +1,349 @@
+# This file is distributed under the same license as the glipper package.
+
+msgid ""
+msgstr ""
+"Project-Id-Version: glipper\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-08-07 18:06+0200\n"
+"PO-Revision-Date: 2007-09-10 17:46+0100\n"
+"Last-Translator: Etienne Deparis (aka Milouse) <etienne.deparis@umaneti.net>\n"
+"Language-Team: French \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../glipper/Applet.py:19
+#: ../glipper/Applet.py:167
+msgid "Glipper - Popup shortcut: "
+msgstr "Glipper - Raccourcis Popup: "
+
+#: ../glipper/Applet.py:91
+msgid "Empty history"
+msgstr "Vider l'historique"
+
+#: ../glipper/About.py:28
+msgid "Glipper"
+msgstr "Glipper"
+
+#: ../glipper/About.py:31
+msgid "A clipboard manager."
+msgstr "Un gestionnaire de presse papier"
+
+#: ../glipper/About.py:34
+msgid "Glipper website"
+msgstr "Site web de Glipper"
+
+#. about.set_artists([])
+#. about.set_documenters([])
+#. translators: These appear in the About dialog, usual format applies.
+#: ../glipper/About.py:42
+msgid "translator-credits"
+msgstr "Etienne Deparis <etienne.deparis@umaneti.net>"
+
+#: ../glipper/PluginsManager.py:103
+msgid "Enabled"
+msgstr "Activé"
+
+#: ../glipper/PluginsManager.py:106
+msgid "Autostart"
+msgstr "Démarrage automatique"
+
+#: ../glipper/PluginsManager.py:107
+msgid "Name"
+msgstr "Nom"
+
+#: ../glipper/PluginsManager.py:108
+msgid "Description"
+msgstr "Description"
+
+#: ../data/properties-window.glade.h:1
+msgid "<Ctrl><Alt>c"
+msgstr "<Ctrl><Atl>c"
+
+#: ../data/properties-window.glade.h:2
+msgid "<b>Behaviour</b>"
+msgstr "<b>Comportement</b>"
+
+#: ../data/properties-window.glade.h:3
+msgid "<b>Clipboards</b>"
+msgstr "<b>Presses-papier</b>"
+
+#: ../data/properties-window.glade.h:4
+msgid "<b>Limits</b>"
+msgstr "<b>Limites</b>"
+
+#: ../data/properties-window.glade.h:5
+msgid "Amount of entries in history:"
+msgstr "Nombre de pages d'historique"
+
+#: ../data/properties-window.glade.h:6
+msgid "Copy - Ctrl+C/Ctrl+V"
+msgstr "Copier \"classique\" - Ctrl+C/Ctrl+V"
+
+#: ../data/properties-window.glade.h:7
+msgid "Glipper preferences"
+msgstr "Préférences de Glipper"
+
+#: ../data/properties-window.glade.h:8
+msgid "Key combination for popup: "
+msgstr "Combinaison de touches pour le menu popup :"
+
+#: ../data/properties-window.glade.h:9
+msgid "Length of one history entry:"
+msgstr "Longueur d'une page d'historique :"
+
+#: ../data/properties-window.glade.h:10
+msgid "Save history"
+msgstr "Enregistrer l'historique"
+
+#: ../data/properties-window.glade.h:11
+msgid "Select - Mark/middle mouse button"
+msgstr "Sélectionner - Marquer/bouton milieu de la souris"
+
+#: ../data/properties-window.glade.h:12
+msgid "Tag Ctrl+C clipboard's content in history (bold)"
+msgstr "Différencer les entrées Ctrl+C de l'historique (en gras)"
+
+#: ../data/properties-window.glade.h:13
+msgid "Which clipboards should be managed by Glipper?"
+msgstr "Quel presse-papier doit être géré par Glipper ?"
+
+#: ../data/Glipper.xml.h:1
+msgid "Pl_ugins"
+msgstr "Pl_ugins"
+
+#: ../data/Glipper.xml.h:2
+msgid "_About"
+msgstr "_A propos"
+
+#: ../data/Glipper.xml.h:3
+msgid "_Help"
+msgstr "Aide (_H)"
+
+#: ../data/Glipper.xml.h:4
+msgid "_Preferences"
+msgstr "_Préférences"
+
+#: ../data/Glipper.server.in.in.h:1
+msgid "Clipboard manager"
+msgstr "Gestionnaire de presse-papier"
+
+#: ../data/Glipper.server.in.in.h:2
+msgid "Manages clipboards"
+msgstr "Gérer les presses papiers"
+
+#: ../glipper/plugins/actions.py:43
+msgid "No actions available"
+msgstr "Pas d'action disponible"
+
+#: ../glipper/plugins/actions.py:59
+#: ../glipper/plugins/actions.py:77
+msgid "Actions"
+msgstr "Actions"
+
+#: ../glipper/plugins/actions.py:78
+msgid "Define commands to run when an item matches a regular expression."
+msgstr "Définir quelle action effectuer lorsqu'un élément correspond à une expression régulière."
+
+#: ../glipper/plugins/actions.py:180
+#: ../glipper/plugins/actions.glade.h:3
+msgid "Add command"
+msgstr "Ajouter une commande"
+
+#: ../glipper/plugins/actions.py:183
+msgid "Delete action"
+msgstr "Supprimer une action"
+
+#: ../glipper/plugins/actions.py:189
+msgid "Delete command"
+msgstr "Supprimer une commande"
+
+#: ../glipper/plugins/actions.py:200
+#: ../glipper/plugins/actions.py:242
+msgid "New command"
+msgstr "Nouvelle commande"
+
+#: ../glipper/plugins/actions.py:201
+#: ../glipper/plugins/actions.py:231
+#: ../glipper/plugins/actions.py:243
+msgid "Enter description here"
+msgstr "Entrez ici une description"
+
+#: ../glipper/plugins/actions.py:230
+msgid "New regular expression"
+msgstr "Nouvelle expression régulière"
+
+#: ../glipper/plugins/network.py:17
+msgid "Network"
+msgstr "Réseau"
+
+#: ../glipper/plugins/network.py:18
+msgid "Connect multiple Glipper processes via network to synchronize their history"
+msgstr "Connecte différentes instances de Glipper via un réseau afin de synchroniser leur historique"
+
+#: ../glipper/plugins/network.py:293
+#: ../glipper/plugins/network.py:303
+msgid "Password"
+msgstr "Mot de passe"
+
+#: ../glipper/plugins/network.py:318
+msgid "You have to install the Python Cryptography Toolkit (python-crypto) if you want to use encrypted connections!"
+msgstr "Vous devez installer le toolkit de cryptographie Python (python-crypto) si vous souhaitez utiliser des connections cryptées !"
+
+#: ../glipper/plugins/network.py:323
+msgid "New connection"
+msgstr "Nouvelle connexion"
+
+#: ../glipper/plugins/network.py:328
+msgid "Enter IP address: "
+msgstr "Entrez une adresse IP :"
+
+#: ../glipper/plugins/network.py:334
+msgid "Enter Password for this Connection: "
+msgstr "Entrez un mot de passe pour cette connexion :"
+
+#: ../glipper/plugins/newline.py:26
+msgid "New line"
+msgstr "Nouvelle ligne"
+
+#: ../glipper/plugins/newline.py:27
+msgid "Example plugin that adds a newline character at the end of items in the clipboard"
+msgstr "Plugin d'exemple qui ajoute un caractère de fin de ligne à la fin de chaque entrées du presse-papier"
+
+#: ../glipper/plugins/nopaste.py:7
+#: ../glipper/plugins/nopaste.py:39
+msgid "Nopaste"
+msgstr ""
+
+#: ../glipper/plugins/nopaste.py:8
+msgid "Paste the entry of your clipboard to a Nopaste service"
+msgstr "Copier la page de votre presse-papier vers un service Nopaste"
+
+#: ../glipper/plugins/nopaste.py:34
+msgid "pasted by Glipper"
+msgstr "collé par Glipper"
+
+#: ../glipper/plugins/nopaste.py:55
+msgid "Glipper user"
+msgstr "Utilisateur Glipper"
+
+#: ../glipper/plugins/snippets.py:55
+msgid "History"
+msgstr "Historique"
+
+#: ../glipper/plugins/snippets.py:63
+#: ../glipper/plugins/snippets.py:103
+#: ../glipper/plugins/snippets.py:142
+msgid "Snippets"
+msgstr "Snippets"
+
+#: ../glipper/plugins/snippets.py:123
+msgid "No snippets available"
+msgstr "Aucun snippets disponible"
+
+#: ../glipper/plugins/snippets.py:143
+msgid "Create snippets from history items"
+msgstr "Créer des snippets à partir d'entrées de l'historique"
+
+#: ../glipper/plugins/actions.glade.h:1
+msgid "Action manager"
+msgstr "Gestionnaire d'action"
+
+#: ../glipper/plugins/actions.glade.h:2
+msgid "Add action"
+msgstr "Ajouter une action"
+
+#: ../glipper/plugins/actions.glade.h:4
+msgid "Immediately show available actions"
+msgstr "Montrer immédiatement les actions disponibles"
+
+#: ../glipper/plugins/actions.glade.h:5
+#: ../glipper/plugins/nopaste.glade.h:18
+msgid "gtk-apply"
+msgstr ""
+
+#: ../glipper/plugins/network.glade.h:1
+msgid "<b>Connections</b>"
+msgstr "<b>Connexions</b>"
+
+#: ../glipper/plugins/network.glade.h:2
+msgid "Accept connections from this hosts:"
+msgstr "Accepter les connexions de ces hôtes :"
+
+#: ../glipper/plugins/network.glade.h:3
+msgid "Connect to:"
+msgstr "Se connecter à :"
+
+#: ../glipper/plugins/network.glade.h:4
+msgid "Network preferences"
+msgstr "Préférences réseau"
+
+#: ../glipper/plugins/network.glade.h:5
+msgid "Please read the security informations about this plugin before using it!"
+msgstr "Merci de lire attentivement les informations sur ce plugin avant de l'utiliser !"
+
+#: ../glipper/plugins/network.glade.h:6
+msgid "gtk-add"
+msgstr ""
+
+#: ../glipper/plugins/network.glade.h:7
+msgid "gtk-remove"
+msgstr ""
+
+#: ../glipper/plugins/nopaste.glade.h:1
+msgid ""
+"C (C89)\n"
+"C (C99)\n"
+"C++\n"
+"C#\n"
+"Java\n"
+"Pascal\n"
+"Perl\n"
+"PHP\n"
+"PL/I\n"
+"Python\n"
+"Ruby\n"
+"SQL\n"
+"Visual Basic\n"
+"Plain Text"
+msgstr ""
+
+#: ../glipper/plugins/nopaste.glade.h:15
+msgid "Language:"
+msgstr "Langue"
+
+#: ../glipper/plugins/nopaste.glade.h:16
+msgid "Nickname:"
+msgstr "Pseudonyme :"
+
+#: ../glipper/plugins/nopaste.glade.h:17
+msgid "Nopaste preferences"
+msgstr "Préférences Nopaste"
+
+#: ../glipper/plugins/snippets.glade.h:1
+msgid "Add"
+msgstr "Ajouter"
+
+#: ../glipper/plugins/snippets.glade.h:2
+msgid "Remove"
+msgstr "Enlever"
+
+#: ../glipper/plugins/snippets.glade.h:3
+msgid "Snippets manager"
+msgstr "Gestionnaire de snippets"
+
+#: ../glipper/plugins/snippets.glade.h:4
+msgid "gtk-close"
+msgstr ""
+
+#: ../glipper/plugins/snippets.glade.h:5
+msgid "gtk-refresh"
+msgstr ""
+
+#: ../glipper/plugins/grow.py:12
+msgid "Grow"
+msgstr "Agrandir"
+
+#: ../glipper/plugins/grow.py:13
+msgid "This plugin detects whether a new entry is just a grown version of the previous one, and if so, deletes the previous."
+msgstr "Ce plugin détecte automatiquement lorsqu'une nouvelle entrée n'est qu'une version agrandie d'une précédente, et, le cas échéant, supprime la précédente."
