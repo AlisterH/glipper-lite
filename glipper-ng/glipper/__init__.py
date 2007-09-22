@@ -5,30 +5,8 @@ import gtk, gtk.gdk, gconf
 
 # Autotools set the actual data_dir in defs.py
 from defs import *
-
-try:
-   # Allows to load uninstalled .la libs
-   import ltihooks
-except ImportError:
-   pass
-
-# Allow to use uninstalled glipper ---------------------------------------------
-UNINSTALLED_GLIPPER = False
-def _check(path):
-   return exists(path) and isdir(path) and isfile(path + "/AUTHORS")
    
-name = join(dirname(__file__), '..')
-if _check(name):
-   UNINSTALLED_GLIPPER = True
-   
-# Sets SHARED_DATA_DIR to local copy, or the system location
-# Shared data dir is most the time /usr/share/glipper
-if UNINSTALLED_GLIPPER:
-   SHARED_DATA_DIR = abspath(join(dirname(__file__), '..', 'data'))
-else:
-   SHARED_DATA_DIR = join(DATA_DIR, "glipper")
-print "SHARED_DATA_DIR: %s" % SHARED_DATA_DIR
-
+SHARED_DATA_DIR = join(DATA_DIR, "glipper")
 
 USER_GLIPPER_DIR = expanduser("~/.glipper")
 if not exists(USER_GLIPPER_DIR):
