@@ -61,23 +61,39 @@ class Clipboards(gobject.GObject):
    
    def on_default_clipboard_owner_change(self, clipboard, event):
       if self.use_default_clipboard:
-         item = clipboard.wait_for_text()
-         
-         if item != None:
-            self.default_clipboard_text = item
-            self.emit('new-item', item)
-         elif self.default_clipboard_text != None:
-            clipboard.set_text(self.default_clipboard_text)
+         text = clipboard.wait_for_text()
+
+         if text != None:
+            self.default_clipboard_text = text
+            self.default_clipboard_image = None
+            self.emit('new-item', text)
+            return
+
+         targets = clipboard.wait_for_targets()
+
+         if targets == None:
+            if self.default_clipboard_text != None:
+               clipboard.set_text(self.default_clipboard_text)
+            elif self.default_clipboard_image != None:
+               clipboard.set_image(self.default_clipboard_image)
    
    def on_primary_clipboard_owner_change(self, clipboard, event):
       if self.use_primary_clipboard:
-         item = clipboard.wait_for_text()
-         
-         if item != None:
-            self.primary_clipboard_text = item
-            self.emit('new-item', item)
-         elif self.primary_clipboard_text != None:
-            clipboard.set_text(self.primary_clipboard_text)
+         text = clipboard.wait_for_text()
+
+         if text != None:
+            self.primary_clipboard_text = text
+            self.primary_clipboard_image = None
+            self.emit('new-item', text)
+            return
+
+         targets = clipboard.wait_for_targets()
+
+         if targets == None:
+            if self.primary_clipboard_text != None:
+               clipboard.set_text(self.primary_clipboard_text)
+            elif self.default_clipboard_image != None:
+               clipboard.set_image(self.primary_clipboard_image)
       
    def on_use_default_clipboard_changed (self, value):
       if value is None or value.type != gconf.VALUE_BOOL:
