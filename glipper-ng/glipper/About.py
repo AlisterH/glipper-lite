@@ -53,7 +53,7 @@ class About(object):
          "website-label" : _("Glipper website"),
       }
 
-      self.about.set_authors(["Sven Rech <sven@gmx.de>", "Eugenio Depalo <eugeniodepalo@mac.com>", "Karderio <karderio@gmail.com>"])
+      self.about.set_authors(["Sven Rech <svenrech@gmx.de>", "Eugenio Depalo <eugeniodepalo@mac.com>", "Karderio <karderio@gmail.com>"])
       #   about.set_artists([])
       #   about.set_documenters([])
    
