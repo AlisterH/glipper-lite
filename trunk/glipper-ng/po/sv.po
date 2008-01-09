@@ -40,7 +40,7 @@ msgstr "Glippers websida"
 #. translators: These appear in the About dialog, usual format applies.
 #: ../glipper/About.py:42
 msgid "translator-credits"
-msgstr "Erik Piehl <erik.piehl@gmail.com@gmx.de>"
+msgstr "Erik Piehl <erik.piehl@gmail.com>"
 
 #: ../glipper/PluginsManager.py:103
 msgid "Enabled"
