@@ -1,0 +1,366 @@
+# swedish translation
+# by Erik Piehl
+# This file is distributed under the same license as the glipper package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: glipper\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-08-07 18:06+0200\n"
+"PO-Revision-Date: 2008-01-07 08:33+0100\n"
+"Last-Translator: Erik Piehl <erik.piehl@gmail.com>\n"
+"Language-Team: Swedish <erik.piehl@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../glipper/Applet.py:19
+#: ../glipper/Applet.py:167
+msgid "Glipper - Popup shortcut: "
+msgstr "Glipper - Popupgenväg:"
+
+#: ../glipper/Applet.py:91
+msgid "Empty history"
+msgstr "Töm historik"
+
+#: ../glipper/About.py:28
+msgid "Glipper"
+msgstr "Glipper"
+
+#: ../glipper/About.py:31
+msgid "A clipboard manager."
+msgstr "En urklippshanterare"
+
+#: ../glipper/About.py:34
+msgid "Glipper website"
+msgstr "Glippers websida"
+
+#. about.set_artists([])
+#. about.set_documenters([])
+#. translators: These appear in the About dialog, usual format applies.
+#: ../glipper/About.py:42
+msgid "translator-credits"
+msgstr "Erik Piehl <erik.piehl@gmail.com@gmx.de>"
+
+#: ../glipper/PluginsManager.py:103
+msgid "Enabled"
+msgstr "Aktiverad"
+
+#: ../glipper/PluginsManager.py:106
+msgid "Autostart"
+msgstr "Autostart"
+
+#: ../glipper/PluginsManager.py:107
+msgid "Name"
+msgstr "Namn"
+
+#: ../glipper/PluginsManager.py:108
+msgid "Description"
+msgstr "Beskrivning"
+
+#: ../data/properties-window.glade.h:1
+msgid "<Ctrl><Alt>c"
+msgstr "<Ctrl><Atl>c"
+
+#: ../data/properties-window.glade.h:2
+msgid "<b>Behaviour</b>"
+msgstr "<b>Beteende</b>"
+
+#: ../data/properties-window.glade.h:3
+msgid "<b>Clipboards</b>"
+msgstr "<b>Klippböcker</b>"
+
+#: ../data/properties-window.glade.h:4
+msgid "<b>Limits</b>"
+msgstr "<b>Gränser</b>"
+
+#: ../data/properties-window.glade.h:5
+msgid "Amount of entries in history:"
+msgstr "Antal urklipp i historiken:"
+
+#: ../data/properties-window.glade.h:6
+msgid "Copy - Ctrl+C/Ctrl+V"
+msgstr "Kopiera - Ctrl+C/Ctrl+V"
+
+#: ../data/properties-window.glade.h:7
+msgid "Glipper preferences"
+msgstr "Glipper Inställningar"
+
+#: ../data/properties-window.glade.h:8
+msgid "Key combination for popup: "
+msgstr "Tangentkombination för popupmeny:"
+
+#: ../data/properties-window.glade.h:9
+msgid "Length of one history entry:"
+msgstr "Längd för ett urklipp i historiken:"
+
+#: ../data/properties-window.glade.h:10
+msgid "Save history"
+msgstr "Spara historik"
+
+#: ../data/properties-window.glade.h:11
+msgid "Select - Mark/middle mouse button"
+msgstr "Välj - Markera/mittenmusknappen"
+
+#: ../data/properties-window.glade.h:12
+msgid "Tag Ctrl+C clipboard's content in history (bold)"
+msgstr "Markera Ctrl+C klippbokshistorik (fet)"
+
+#: ../data/properties-window.glade.h:13
+msgid "Which clipboards should be managed by Glipper?"
+msgstr "Vilka klippböcker ska Glipper hantera?"
+
+#: ../data/Glipper.xml.h:1
+msgid "Pl_ugins"
+msgstr "Pl_ugins"
+
+#: ../data/Glipper.xml.h:2
+msgid "_About"
+msgstr "_Om"
+
+#: ../data/Glipper.xml.h:3
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: ../data/Glipper.xml.h:4
+msgid "_Preferences"
+msgstr "_Inställningar"
+
+#: ../data/Glipper.server.in.in.h:1
+msgid "Clipboard manager"
+msgstr "Klippbokshanterare"
+
+#: ../data/Glipper.server.in.in.h:2
+msgid "Manages clipboards"
+msgstr "Hanterar klippböcker"
+
+#: ../glipper/plugins/actions.py:43
+msgid "No actions available"
+msgstr "Inga val tillgängliga"
+
+#: ../glipper/plugins/actions.py:59
+#: ../glipper/plugins/actions.py:77
+msgid "Actions"
+msgstr "Aktioner"
+
+#: ../glipper/plugins/actions.py:78
+msgid "Define commands to run when an item matches a regular expression."
+msgstr "Ange kommandon som ska köras när ett urklipp matchar ett reguljärt uttryck."
+
+#: ../glipper/plugins/actions.py:180
+#: ../glipper/plugins/actions.glade.h:3
+msgid "Add command"
+msgstr "Lägg till kommando"
+
+#: ../glipper/plugins/actions.py:183
+msgid "Delete action"
+msgstr "Ta bort aktion"
+
+#: ../glipper/plugins/actions.py:189
+msgid "Delete command"
+msgstr "Ta bort kommando"
+
+#: ../glipper/plugins/actions.py:200
+#: ../glipper/plugins/actions.py:242
+msgid "New command"
+msgstr "Nytt kommando"
+
+#: ../glipper/plugins/actions.py:201
+#: ../glipper/plugins/actions.py:231
+#: ../glipper/plugins/actions.py:243
+msgid "Enter description here"
+msgstr "Ange beskrivning här"
+
+#: ../glipper/plugins/actions.py:230
+msgid "New regular expression"
+msgstr "Nytt reguljärt uttryck"
+
+#: ../glipper/plugins/network.py:17
+msgid "Network"
+msgstr "Nätverk"
+
+#: ../glipper/plugins/network.py:18
+msgid "Connect multiple Glipper processes via network to synchronize their history"
+msgstr "Koppla ihop flera Glipperprocessser via nätverket för att synkronisera deras historik"
+
+#: ../glipper/plugins/network.py:293
+#: ../glipper/plugins/network.py:303
+msgid "Password"
+msgstr "Lösenord"
+
+#: ../glipper/plugins/network.py:318
+msgid "You have to install the Python Cryptography Toolkit (python-crypto) if you want to use encrypted connections!"
+msgstr "Du måste installera Python Cryptography Toolkit (python-crupto) om du vill använda krypterade anslutningar!"
+
+#: ../glipper/plugins/network.py:323
+msgid "New connection"
+msgstr "Ny anslutning"
+
+#: ../glipper/plugins/network.py:328
+msgid "Enter IP address: "
+msgstr "Ange IP-adress:"
+
+#: ../glipper/plugins/network.py:334
+msgid "Enter Password for this Connection: "
+msgstr "Ange lösenord för denna anslutning:"
+
+#: ../glipper/plugins/newline.py:26
+msgid "New line"
+msgstr "Ny rad"
+
+#: ../glipper/plugins/newline.py:27
+msgid "Example plugin that adds a newline character at the end of items in the clipboard"
+msgstr "Exempel på plugin som lägger till en radbrytning till slutet av urkipp i klippboken"
+
+#: ../glipper/plugins/nopaste.py:7
+#: ../glipper/plugins/nopaste.py:39
+msgid "Nopaste"
+msgstr "Nopaste"
+
+#: ../glipper/plugins/nopaste.py:8
+msgid "Paste the entry of your clipboard to a Nopaste service"
+msgstr "Klistra urklippet i din klippbok till en Nopaste service"
+
+#: ../glipper/plugins/nopaste.py:34
+msgid "pasted by Glipper"
+msgstr "klistrad av Glipper"
+
+#: ../glipper/plugins/nopaste.py:55
+msgid "Glipper user"
+msgstr "Glipperanvändare"
+
+#: ../glipper/plugins/snippets.py:55
+msgid "History"
+msgstr "Historik"
+
+#: ../glipper/plugins/snippets.py:63
+#: ../glipper/plugins/snippets.py:103
+#: ../glipper/plugins/snippets.py:142
+msgid "Snippets"
+msgstr "Snippets"
+
+#: ../glipper/plugins/snippets.py:123
+msgid "No snippets available"
+msgstr "Inga snipplets tillgängliga"
+
+#: ../glipper/plugins/snippets.py:143
+msgid "Create snippets from history items"
+msgstr "Skapa snipplets från historik"
+
+#: ../glipper/plugins/actions.glade.h:1
+msgid "Action manager"
+msgstr "Aktionshanterare"
+
+#: ../glipper/plugins/actions.glade.h:2
+msgid "Add action"
+msgstr "Lägg till aktion"
+
+#: ../glipper/plugins/actions.glade.h:4
+msgid "Immediately show available actions"
+msgstr "Visa genast tillgängliga aktioner"
+
+#: ../glipper/plugins/actions.glade.h:5
+#: ../glipper/plugins/nopaste.glade.h:18
+msgid "gtk-apply"
+msgstr "gtk-apply"
+
+#: ../glipper/plugins/network.glade.h:1
+msgid "<b>Connections</b>"
+msgstr "<b>Anslutningar</b>"
+
+#: ../glipper/plugins/network.glade.h:2
+msgid "Accept connections from this hosts:"
+msgstr "Acceptera anslutningar från dessa värdar:"
+
+#: ../glipper/plugins/network.glade.h:3
+msgid "Connect to:"
+msgstr "Anslut till:"
+
+#: ../glipper/plugins/network.glade.h:4
+msgid "Network preferences"
+msgstr "Nätverksinställningar"
+
+#: ../glipper/plugins/network.glade.h:5
+msgid "Please read the security informations about this plugin before using it!"
+msgstr "Var god läs säkerhetsinformationen om detta plugin innan du använder det!"
+
+#: ../glipper/plugins/network.glade.h:6
+msgid "gtk-add"
+msgstr "gtk-add"
+
+#: ../glipper/plugins/network.glade.h:7
+msgid "gtk-remove"
+msgstr "gtk-remove"
+
+#: ../glipper/plugins/nopaste.glade.h:1
+msgid ""
+"C (C89)\n"
+"C (C99)\n"
+"C++\n"
+"C#\n"
+"Java\n"
+"Pascal\n"
+"Perl\n"
+"PHP\n"
+"PL/I\n"
+"Python\n"
+"Ruby\n"
+"SQL\n"
+"Visual Basic\n"
+"Plain Text"
+msgstr ""
+"C (C89)\n"
+"C (C99)\n"
+"C++\n"
+"C#\n"
+"Java\n"
+"Pascal\n"
+"Perl\n"
+"PHP\n"
+"PL/I\n"
+"Python\n"
+"Ruby\n"
+"SQL\n"
+"Visual Basic\n"
+"Plain Text"
+
+#: ../glipper/plugins/nopaste.glade.h:15
+msgid "Language:"
+msgstr "Språk:"
+
+#: ../glipper/plugins/nopaste.glade.h:16
+msgid "Nickname:"
+msgstr "Smeknamn:"
+
+#: ../glipper/plugins/nopaste.glade.h:17
+msgid "Nopaste preferences"
+msgstr "Nopasteinställningar"
+
+#: ../glipper/plugins/snippets.glade.h:1
+msgid "Add"
+msgstr "Lägg till"
+
+#: ../glipper/plugins/snippets.glade.h:2
+msgid "Remove"
+msgstr "Ta bort"
+
+#: ../glipper/plugins/snippets.glade.h:3
+msgid "Snippets manager"
+msgstr "Snipplethanterare"
+
+#: ../glipper/plugins/snippets.glade.h:4
+msgid "gtk-close"
+msgstr "gtk-close"
+
+#: ../glipper/plugins/snippets.glade.h:5
+msgid "gtk-refresh"
+msgstr "gtk-refresh"
+
+#: ../glipper/plugins/grow.py:12
+msgid "Grow"
+msgstr "Längre"
+
+#: ../glipper/plugins/grow.py:13
+msgid "This plugin detects whether a new entry is just a grown version of the previous one, and if so, deletes the previous."
+msgstr "Detta plugin upptäcker om ett nytt urklipp är en längre version av ett tidigare urklipp. Om detta är fallet raderas det kortare urklippet."
+
