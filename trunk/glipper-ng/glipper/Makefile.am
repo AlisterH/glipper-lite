@@ -1,10 +1,10 @@
 SUBDIRS = keybinder osutils plugins
 	
-glipper: glipper.py
+glipper-applet: glipper-applet.py
 	sed -e "s|\@PYTHONDIR\@|$(pythondir)/glipper|" $< > $@
 
 glipperbindir = $(libdir)/glipper
-glipperbin_SCRIPTS = glipper
+glipperbin_SCRIPTS = glipper-applet
 
 glipperdir = $(pythondir)/glipper
 glipper_PYTHON = \
@@ -20,7 +20,7 @@ glipper_PYTHON = \
 	Keybinder.py
 	
 BUILT_SOURCES = \
-	glipper
+	glipper-applet
 	
 CLEANFILES = \
 	$(BUILT_SOURCES)
@@ -31,4 +31,4 @@ DISTCLEANFILES = \
 	
 EXTRA_DIST = \
 	defs.py.in \
-	glipper.py
+	glipper-applet.py
