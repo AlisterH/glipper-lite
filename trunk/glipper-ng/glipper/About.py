@@ -45,7 +45,6 @@ class About(object):
       self.about = gtk.AboutDialog()
    
       infos = {
-         "name" : _("Glipper"),
          "logo-icon-name" : "glipper",
          "version" : glipper.VERSION,
          "comments" : _("A clipboard manager."),
@@ -54,6 +53,7 @@ class About(object):
          "website-label" : _("Glipper website"),
       }
 
+      self.about.set_name(_("Glipper"))
       self.about.set_authors(["Sven Rech <svenrech@gmx.de>", "Eugenio Depalo <eugeniodepalo@mac.com>", "Karderio <karderio@gmail.com>"])
       #   about.set_artists([])
       #   about.set_documenters([])
