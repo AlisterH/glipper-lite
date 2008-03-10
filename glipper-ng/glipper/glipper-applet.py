@@ -40,12 +40,13 @@ import glipper, glipper.Applet, glipper.defs
 
 sys.path.insert(0, glipper.PLUGINS_DIR)
 
-try:
-	# attempt to set a name for killall
-	import glipper.osutils
-	glipper.osutils.set_process_name("glipper")
-except:
-	print "Unable to set process name"
+def set_process_name():
+	try:
+		# attempt to set a name for killall
+		import glipper.osutils
+		glipper.osutils.set_process_name("glipper")
+	except:
+		print "Unable to set process name"
 
 import gettext, locale
 gettext.bindtextdomain('glipper', abspath(join(glipper.defs.DATA_DIR, "locale")))
@@ -91,7 +92,6 @@ OPTIONS:
 	
 if __name__ == "__main__":	
 	standalone = False
-	do_trace = False
 	
 	try:
 		opts, args = getopt.getopt(sys.argv[1:], "hw", ["help", "window"])
@@ -113,10 +113,12 @@ if __name__ == "__main__":
 	}
 	
 	gnome.program_init('glipper', '1.0', properties= { gnome.PARAM_APP_DATADIR : glipper.DATA_DIR })
-	
+	set_process_name()
+
 	if standalone:
 		import gnome
 		gnome.init(glipper.defs.PACKAGE, glipper.defs.VERSION)
+		set_process_name()
 		build_window()
 		
 		gtk.main()
@@ -128,4 +130,5 @@ if __name__ == "__main__":
 			glipper.defs.PACKAGE,
 			glipper.defs.VERSION,
 			applet_factory)
+
 
