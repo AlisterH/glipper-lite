@@ -26,6 +26,16 @@ import gtk, gnomeapplet, gnome
 import getopt, sys
 from os.path import *
 
+# Allow to use uninstalled
+def _check(path):
+	return exists(path) and isdir(path) and isfile(path+"/AUTHORS")
+
+name = join(dirname(__file__), '..')
+if _check(name):
+	sys.path.insert(0, abspath(name))
+else:
+	sys.path.insert(0, abspath("@PYTHONDIR@"))
+
 import glipper, glipper.Applet, glipper.defs
 
 sys.path.insert(0, glipper.PLUGINS_DIR)
@@ -35,7 +45,7 @@ try:
 	import glipper.osutils
 	glipper.osutils.set_process_name("glipper")
 except:
-	print "Unable to set processName"
+	print "Unable to set process name"
 
 import gettext, locale
 gettext.bindtextdomain('glipper', abspath(join(glipper.defs.DATA_DIR, "locale")))

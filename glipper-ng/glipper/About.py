@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Glipper - Clipboardmanager for GNOME
 # Copyright (C) 2007 Glipper Team
 #

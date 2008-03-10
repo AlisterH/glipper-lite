@@ -24,8 +24,26 @@ import gtk, gtk.gdk, gconf
 
 # Autotools set the actual data_dir in defs.py
 from defs import *
-   
-SHARED_DATA_DIR = join(DATA_DIR, "glipper")
+
+try:
+	# Allows to load uninstalled .la libs
+	import ltihooks
+except ImportError:
+	pass
+
+# Allow to use uninstalled glipper ---------------------------------------------
+UNINSTALLED_GLIPPER = False
+def _check(path):
+	return exists(path) and isdir(path) and isfile(path+"/AUTHORS")
+	
+name = join(dirname(__file__), '..')
+if _check(name):
+	UNINSTALLED_GLIPPER = True
+	
+if UNINSTALLED_GLIPPER:
+	SHARED_DATA_DIR = abspath(join(dirname(__file__), '..', 'data'))
+else:
+	SHARED_DATA_DIR = join(DATA_DIR, "glipper")
 
 USER_GLIPPER_DIR = expanduser("~/.glipper")
 if not exists(USER_GLIPPER_DIR):
@@ -34,14 +52,17 @@ if not exists(USER_GLIPPER_DIR):
    except Exception , msg:
       print 'Error:could not create user glipper dir (%s): %s' % (USER_GLIPPER_DIR, msg)
 
+# Path to plugins
+if UNINSTALLED_GLIPPER:
+	PLUGINS_DIR = join(dirname(__file__), "plugins")
+else:
+	PLUGINS_DIR = join(SHARED_DATA_DIR, "plugins")
+
 # ------------------------------------------------------------------------------
 
 # Set the cwd to the home directory so spawned processes behave correctly
 # when presenting save/open dialogs
 os.chdir(expanduser("~"))
-
-# Path to plugins
-PLUGINS_DIR = join(SHARED_DATA_DIR, 'plugins')
 
 # Path to history file
 HISTORY_FILE = join(USER_GLIPPER_DIR, "history")
@@ -52,7 +73,7 @@ MAX_TOOLTIPS_LENGTH = 11347
 #Gconf client
 GCONF_CLIENT = gconf.client_get_default()
 
-# GConf directory for deskbar in window mode and shared settings
+# GConf directory for glipper in window mode and shared settings
 GCONF_DIR = "/apps/glipper"
 
 # GConf key to the setting for the amount of elements in history
