@@ -86,12 +86,11 @@ class History(gobject.GObject):
       
       length = file.readline()
       while length:
-         self.history.append(file.read(int(length)))
+         self.add(file.read(int(length)))
          file.read(1) # This is for \n
          length = file.readline()
       
       file.close()
-      self.emit('changed', self.history)
       
    def save(self):
       try:
