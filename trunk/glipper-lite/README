@@ -1,4 +1,4 @@
-Glipper - Clipboardmanager for Gnome
+Glipper - Clipboard manager for Gnome
 ====================================
 
 Copyright (C) 2006 Sven Rech <svenrech@gmx.de>
@@ -7,7 +7,7 @@ Copyright (C) 2006 Sven Rech <svenrech@gmx.de>
 Introduction
 ============
 
-Glipper is a clipboardmanager for GNOME (and other WMs). You can see this as a
+Glipper is a clipboard manager for GNOME (and other WMs). You can see this as a
 GNOME counterpart to KDE's Klipper. But it only depends on GTK+ 2 and NOT on
 GNOME libs, so you can also use it with any other window manager that supports
 tray icons.

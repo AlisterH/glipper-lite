@@ -68,7 +68,7 @@ msgid "Introduction"
 msgstr "Introduction"
 
 #: base.xml:94(para)
-msgid "<application>Glipper</application> is a clipboardmanager for GNOME. <application>Glipper</application> can also be made to work with other desktop environments and window managers."
+msgid "<application>Glipper</application> is a clipboard manager for GNOME. <application>Glipper</application> can also be made to work with other desktop environments and window managers."
 msgstr "<application>Glipper</application> est un gestionnaire de presse papier pour GNOME. <application>Glipper</application> peut aussi fonctionner sous d'autres environnements de bureau et gestionnaires de fenêtres."
 
 #: base.xml:100(para)
