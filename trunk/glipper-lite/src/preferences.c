@@ -3,12 +3,11 @@
 #endif
 
 #include <gtk/gtk.h>
-#include <glade/glade.h>
 #include "preferences.h"
 #include "main.h"
 #include "utils/glipper-i18n.h"
 
-#define GLADE_XML_FILE "glipper-properties.glade"
+#define UI_XML_FILE "glipper-properties.ui"
 
 GtkWidget* historyLength;
 GtkWidget* itemLength;
@@ -73,35 +72,38 @@ on_helpButton_clicked                 (GtkButton       *button,
 
 void showPreferences(gpointer data)
 {
-	char* glade_file;
-	GladeXML* gladeWindow;
+	char* ui_file;
 
-	//Load interface from glade file
-	glade_file = g_build_filename(GLADEDIR, GLADE_XML_FILE, NULL);
+	//Load interface from ui file
+	ui_file = g_build_filename(UI_DIR, UI_XML_FILE, NULL);
 
-	gladeWindow = glade_xml_new(glade_file, "preferences-dialog", NULL);
 
-	//In case we cannot load glade file
-	if (gladeWindow == NULL)
+	GError* error = NULL;
+		GtkBuilder* builder = gtk_builder_new();
+		if (!gtk_builder_add_from_file (builder, ui_file, &error))
 	{
-		errorDialog(_("Could not load the preferences interface"), glade_file);
-		g_free (glade_file);
+			errorDialog(_("Could not load the preferences interface"), error->message);
+			//    No, this only prints the message, doesn't show a window
+			//    g_warning ("Couldn't load builder file: %s", error->message);
+			g_error_free(error);
 		return;
 	}
 
-	g_free (glade_file);
+
+	g_free (ui_file);
 
 	//Get the widgets that we will need
-	historyLength = glade_xml_get_widget(gladeWindow, "historyLength");
-	itemLength = glade_xml_get_widget(gladeWindow, "itemLength");
-	primaryCheck = glade_xml_get_widget(gladeWindow, "primaryCheck");
-	defaultCheck = glade_xml_get_widget(gladeWindow, "defaultCheck");
-	markDefaultCheck = glade_xml_get_widget(gladeWindow, "markDefaultCheck");
-	saveHistCheck = glade_xml_get_widget(gladeWindow, "saveHistCheck");
-	keyCombEntry = glade_xml_get_widget(gladeWindow, "keyComb");
-	applyButton = glade_xml_get_widget(gladeWindow, "applyButton");
-	helpButton = glade_xml_get_widget(gladeWindow, "helpButton");
-	prefWin = glade_xml_get_widget(gladeWindow, "preferences-dialog");
+	historyLength = GTK_WIDGET (gtk_builder_get_object (builder, "historyLength"));
+	itemLength = GTK_WIDGET (gtk_builder_get_object (builder, "itemLength"));
+	primaryCheck = GTK_WIDGET (gtk_builder_get_object (builder, "primaryCheck"));
+	defaultCheck = GTK_WIDGET (gtk_builder_get_object (builder, "defaultCheck"));
+	markDefaultCheck = GTK_WIDGET (gtk_builder_get_object (builder, "markDefaultCheck"));
+	saveHistCheck = GTK_WIDGET (gtk_builder_get_object (builder, "saveHistCheck"));
+	keyCombEntry = GTK_WIDGET (gtk_builder_get_object (builder, "keyComb"));
+	applyButton = GTK_WIDGET (gtk_builder_get_object (builder, "applyButton"));
+	helpButton = GTK_WIDGET (gtk_builder_get_object (builder, "helpButton"));
+	prefWin = GTK_WIDGET (gtk_builder_get_object (builder, "preferences-dialog"));
+
 
 	//Connect signals to handlers
 	g_signal_connect_after ((gpointer) primaryCheck, "toggled",
@@ -118,9 +120,10 @@ void showPreferences(gpointer data)
 		NULL);
 
 	//Show preferences dialog
+
 	setWidgets();
 	gtk_widget_show_all(prefWin);
 
-	//free the glade data
-	g_object_unref(gladeWindow);
+	//free the gtkbuilder data
+	g_object_unref(builder);
 }

@@ -82,55 +82,55 @@ msgstr "Om de documentatie in te zien, bezoek de Glipper-website of compileer Gl
 msgid "Could not load the preferences interface"
 msgstr "Het was niet mogelijk om het voorkeurenvenster te laden"
 
-#: ../data/glipper-properties.glade.h:1
+#: ../data/glipper-properties.ui.h:1
 msgid "<Ctrl><Alt>c"
 msgstr "<Ctrl><Atl>C"
 
-#: ../data/glipper-properties.glade.h:2
+#: ../data/glipper-properties.ui.h:2
 msgid "<b>Behaviour</b>"
 msgstr "<b>Gedrag</b>"
 
-#: ../data/glipper-properties.glade.h:3
+#: ../data/glipper-properties.ui.h:3
 msgid "<b>Clipboards</b>"
 msgstr "<b>Klemborden</b>"
 
-#: ../data/glipper-properties.glade.h:4
+#: ../data/glipper-properties.ui.h:4
 msgid "<b>Limits</b>"
 msgstr "<b>Limieten</b>"
 
-#: ../data/glipper-properties.glade.h:5
+#: ../data/glipper-properties.ui.h:5
 msgid "Amount of entries in history:"
 msgstr "Aantal regels in de geschiedenis:"
 
-#: ../data/glipper-properties.glade.h:6
+#: ../data/glipper-properties.ui.h:6
 msgid "Copy - Ctrl+C/Ctrl+V"
 msgstr "Kopiëren - Ctrl+C/Ctrl+V"
 
-#: ../data/glipper-properties.glade.h:7
+#: ../data/glipper-properties.ui.h:7
 msgid "Glipper Preferences"
 msgstr "Glipper-instellingen"
 
-#: ../data/glipper-properties.glade.h:8
+#: ../data/glipper-properties.ui.h:8
 msgid "Key combination for popup: "
 msgstr "Toetscombinatie voor het popupmenu:"
 
-#: ../data/glipper-properties.glade.h:9
+#: ../data/glipper-properties.ui.h:9
 msgid "Length of one history entry:"
 msgstr "Lengte van regels in de geschiedenis:"
 
-#: ../data/glipper-properties.glade.h:10
+#: ../data/glipper-properties.ui.h:10
 msgid "Save history"
 msgstr "Geschiedenis bewaren"
 
-#: ../data/glipper-properties.glade.h:11
+#: ../data/glipper-properties.ui.h:11
 msgid "Select - Mark/middle mouse button"
 msgstr "Selecteren - Markeren/Middelste muisknop"
 
-#: ../data/glipper-properties.glade.h:12
+#: ../data/glipper-properties.ui.h:12
 msgid "Tag Ctrl+C clipboard's content in history (bold)"
 msgstr "Markeer de inhoud van het Ctrl+C-klembord in de geschiedenis (vet)"
 
-#: ../data/glipper-properties.glade.h:13
+#: ../data/glipper-properties.ui.h:13
 msgid "Which clipboards should be managed by Glipper?"
 msgstr "Welke klemborden moeten door Glipper beheerd worden?"
 

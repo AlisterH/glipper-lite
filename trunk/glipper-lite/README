@@ -30,7 +30,6 @@ Dependancies
 To use Glipper you must have these libraries installed on your system :
 
 	gtk+
-	libglade
 
 If you use GNOME support (default) you will also require :
 

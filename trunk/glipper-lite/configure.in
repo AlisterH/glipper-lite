@@ -60,17 +60,15 @@ AC_CONFIG_MACRO_DIR([m4])
 ###########################################################################
 
 # Minimum versions.
-GLIB_REQUIRED=2.6.0
-GTK_REQUIRED=2.6.0
-GLADE_REQUIRED=2.0.0
+GLIB_REQUIRED=2.12.0
+GTK_REQUIRED=2.12.0
 
 AC_SUBST(GLIB_REQUIRED)
 AC_SUBST(GTK_REQUIRED)
 
 PKG_CHECK_MODULES(FR,			\
 	glib-2.0 >= $GLIB_REQUIRED	\
-	gtk+-2.0 >= $GTK_REQUIRED	\
-	libglade-2.0 >= $GLADE_REQUIRED) 
+	gtk+-2.0 >= $GTK_REQUIRED)
 
 AC_SUBST(FR_CFLAGS)
 AC_SUBST(FR_LIBS)

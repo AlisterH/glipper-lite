@@ -1,4 +1,4 @@
 src/main.c
 src/preferences.c
-data/glipper-properties.glade
+[type: gettext/glade]data/glipper-properties.ui
 data/glipper.desktop.in

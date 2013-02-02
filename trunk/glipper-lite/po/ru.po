@@ -82,55 +82,55 @@ msgstr "Для просмотра документации посетите са
 msgid "Could not load the preferences interface"
 msgstr "Не могу загрузить интерфейс настроек"
 
-#: ../data/glipper-properties.glade.h:1
+#: ../data/glipper-properties.ui.h:1
 msgid "<Ctrl><Alt>c"
 msgstr "<Ctrl><Atl>c"
 
-#: ../data/glipper-properties.glade.h:2
+#: ../data/glipper-properties.ui.h:2
 msgid "<b>Behaviour</b>"
 msgstr "<b>Свойства</b>"
 
-#: ../data/glipper-properties.glade.h:3
+#: ../data/glipper-properties.ui.h:3
 msgid "<b>Clipboards</b>"
 msgstr "<b>Буферы обмена</b>"
 
-#: ../data/glipper-properties.glade.h:4
+#: ../data/glipper-properties.ui.h:4
 msgid "<b>Limits</b>"
 msgstr "<b>Пределы</b>"
 
-#: ../data/glipper-properties.glade.h:5
+#: ../data/glipper-properties.ui.h:5
 msgid "Amount of entries in history:"
 msgstr "Количество элементов истории:"
 
-#: ../data/glipper-properties.glade.h:6
+#: ../data/glipper-properties.ui.h:6
 msgid "Copy - Ctrl+C/Ctrl+V"
 msgstr "\"Буфер копирования\" - Ctrl+C/Ctrl+V"
 
-#: ../data/glipper-properties.glade.h:7
+#: ../data/glipper-properties.ui.h:7
 msgid "Glipper Preferences"
 msgstr "Свойства Glipper'а"
 
-#: ../data/glipper-properties.glade.h:8
+#: ../data/glipper-properties.ui.h:8
 msgid "Key combination for popup: "
 msgstr "Комбинация клавиш для всплытия: "
 
-#: ../data/glipper-properties.glade.h:9
+#: ../data/glipper-properties.ui.h:9
 msgid "Length of one history entry:"
 msgstr "Длина элемента истории:"
 
-#: ../data/glipper-properties.glade.h:10
+#: ../data/glipper-properties.ui.h:10
 msgid "Save history"
 msgstr "История сохранения"
 
-#: ../data/glipper-properties.glade.h:11
+#: ../data/glipper-properties.ui.h:11
 msgid "Select - Mark/middle mouse button"
 msgstr "\"Буфер выделения\" - Выделение/Вставка средней кнопкой мыши"
 
-#: ../data/glipper-properties.glade.h:12
+#: ../data/glipper-properties.ui.h:12
 msgid "Tag Ctrl+C clipboard's content in history (bold)"
 msgstr "Отмечать содержимое \"буфера копирования\" в истории жирным шрифтом"
 
-#: ../data/glipper-properties.glade.h:13
+#: ../data/glipper-properties.ui.h:13
 msgid "Which clipboards should be managed by Glipper?"
 msgstr "За какими буферами обмена должен наблюдать Glipper?"
 
