@@ -86,55 +86,55 @@ msgstr ""
 msgid "Could not load the preferences interface"
 msgstr "Nem sikerült betölteni a beállítófelületet"
 
-#: ../data/glipper-properties.glade.h:1
+#: ../data/glipper-properties.ui.h:1
 msgid "<Ctrl><Alt>c"
 msgstr "<Ctrl><Alt>c"
 
-#: ../data/glipper-properties.glade.h:2
+#: ../data/glipper-properties.ui.h:2
 msgid "<b>Behaviour</b>"
 msgstr "<b>Viselkedés</b>"
 
-#: ../data/glipper-properties.glade.h:3
+#: ../data/glipper-properties.ui.h:3
 msgid "<b>Clipboards</b>"
 msgstr "<b>Vágólapok</b>"
 
-#: ../data/glipper-properties.glade.h:4
+#: ../data/glipper-properties.ui.h:4
 msgid "<b>Limits</b>"
 msgstr "<b>Korlátok</b>"
 
-#: ../data/glipper-properties.glade.h:5
+#: ../data/glipper-properties.ui.h:5
 msgid "Amount of entries in history:"
 msgstr "Előzménybejegyzések mennyisége:"
 
-#: ../data/glipper-properties.glade.h:6
+#: ../data/glipper-properties.ui.h:6
 msgid "Copy - Ctrl+C/Ctrl+V"
 msgstr "Másolás - Ctrl+c/Ctrl+c"
 
-#: ../data/glipper-properties.glade.h:7
+#: ../data/glipper-properties.ui.h:7
 msgid "Glipper Preferences"
 msgstr "A Glipper beállításai"
 
-#: ../data/glipper-properties.glade.h:8
+#: ../data/glipper-properties.ui.h:8
 msgid "Key combination for popup: "
 msgstr "Felugró menü billentyűkombinációja: "
 
-#: ../data/glipper-properties.glade.h:9
+#: ../data/glipper-properties.ui.h:9
 msgid "Length of one history entry:"
 msgstr "Egy előzménybejegyzés hossza:"
 
-#: ../data/glipper-properties.glade.h:10
+#: ../data/glipper-properties.ui.h:10
 msgid "Save history"
 msgstr "Előzmények mentése"
 
-#: ../data/glipper-properties.glade.h:11
+#: ../data/glipper-properties.ui.h:11
 msgid "Select - Mark/middle mouse button"
 msgstr "Kijelölés - Kijelölés/középső egérgomb"
 
-#: ../data/glipper-properties.glade.h:12
+#: ../data/glipper-properties.ui.h:12
 msgid "Tag Ctrl+C clipboard's content in history (bold)"
 msgstr "A Ctrl+c vágólap tartalmának kiemelése (félkövéren)"
 
-#: ../data/glipper-properties.glade.h:13
+#: ../data/glipper-properties.ui.h:13
 msgid "Which clipboards should be managed by Glipper?"
 msgstr "A Glipper mely vágólapokat kezelje?"
 

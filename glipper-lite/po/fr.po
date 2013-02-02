@@ -85,56 +85,56 @@ msgstr "Pour consulter la documentation, consultez le site de Glipper ou compile
 msgid "Could not load the preferences interface"
 msgstr "N'a pas pû charger l'interface pour les préférences"
 
-#: ../data/glipper-properties.glade.h:1
+#: ../data/glipper-properties.ui.h:1
 msgid "<Ctrl><Alt>c"
 msgstr "<Ctrl><Alt>c"
 
-#: ../data/glipper-properties.glade.h:2
+#: ../data/glipper-properties.ui.h:2
 msgid "<b>Behaviour</b>"
 msgstr "<b>Comportement</b>"
 
-#: ../data/glipper-properties.glade.h:3
+#: ../data/glipper-properties.ui.h:3
 msgid "<b>Clipboards</b>"
 msgstr "<b>Presse-papiers</b>"
 
-#: ../data/glipper-properties.glade.h:4
+#: ../data/glipper-properties.ui.h:4
 msgid "<b>Limits</b>"
 msgstr "<b>Limites</b>"
 
-#: ../data/glipper-properties.glade.h:5
+#: ../data/glipper-properties.ui.h:5
 msgid "Amount of entries in history:"
 msgstr "Nombre d'entrées dans l'historique:"
 
-#: ../data/glipper-properties.glade.h:6
+#: ../data/glipper-properties.ui.h:6
 msgid "Copy - Ctrl+C/Ctrl+V"
 msgstr "Copie - Ctrl+C/Ctrl+V"
 
-#: ../data/glipper-properties.glade.h:7
+#: ../data/glipper-properties.ui.h:7
 msgid "Glipper Preferences"
 msgstr "Préférences de Glipper"
 
-#: ../data/glipper-properties.glade.h:8
+#: ../data/glipper-properties.ui.h:8
 msgid "Key combination for popup: "
 msgstr "Raccourci clavier pour le menu :"
 
-#: ../data/glipper-properties.glade.h:9
+#: ../data/glipper-properties.ui.h:9
 msgid "Length of one history entry:"
 msgstr "Taille maximale d'une entrée:"
 
-#: ../data/glipper-properties.glade.h:10
+#: ../data/glipper-properties.ui.h:10
 #, fuzzy
 msgid "Save history"
 msgstr "Enregistrer l'historique en quittant"
 
-#: ../data/glipper-properties.glade.h:11
+#: ../data/glipper-properties.ui.h:11
 msgid "Select - Mark/middle mouse button"
 msgstr "Sélection - Marquer/Bouton central de la souris"
 
-#: ../data/glipper-properties.glade.h:12
+#: ../data/glipper-properties.ui.h:12
 msgid "Tag Ctrl+C clipboard's content in history (bold)"
 msgstr "Marquer le contenu du presse-papiers Ctrl+C dans l'historique (en gras)"
 
-#: ../data/glipper-properties.glade.h:13
+#: ../data/glipper-properties.ui.h:13
 msgid "Which clipboards should be managed by Glipper?"
 msgstr "Quels presses-papiers devront être gérés par Glipper?"
 

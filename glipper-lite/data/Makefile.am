@@ -6,13 +6,13 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 icondir = $(datadir)/pixmaps
 icon_DATA = glipper.png
 
-gladedir = $(datadir)/glipper
-glade_DATA = glipper-properties.glade
+uidir = $(datadir)/glipper
+ui_DATA = glipper-properties.ui
 
 EXTRA_DIST =            \
 	$(desktop_in_files) \
 	$(icon_DATA)        \
-	$(glade_DATA)	\
+	$(ui_DATA)	\
 	#$(desktop_DATA)
 
 DISTCLEANFILES =		\
