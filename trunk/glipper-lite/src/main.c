@@ -374,6 +374,7 @@ gboolean checkClipboard(gpointer data)
 	if (usePrimary)
 		processContent(&PrimaryClip);
 	mainTimeout = g_timeout_add(500, checkClipboard, NULL);
+	gtk_widget_show_all(GTK_WIDGET(TrayIcon));
 	return 1;
 }
 
@@ -441,6 +442,7 @@ void createTrayIcon()
 	gtk_widget_show_all(GTK_WIDGET(TrayIcon));
 	g_signal_connect_swapped(G_OBJECT(eventbox), "button-press-event", 
 							 G_CALLBACK(TrayIconClicked), NULL);
+	g_signal_connect(G_OBJECT(TrayIcon), "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 }
 
 void show_about(gpointer data)
