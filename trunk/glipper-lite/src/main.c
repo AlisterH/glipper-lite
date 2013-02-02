@@ -489,7 +489,8 @@ void createPopupMenu()
 	GtkWidget* about = gtk_image_menu_item_new_from_stock(GTK_STOCK_ABOUT, NULL);
 	g_signal_connect(G_OBJECT(about), "activate", G_CALLBACK(show_about), NULL);
 
-	GtkWidget* help = gtk_image_menu_item_new_from_stock(GTK_STOCK_HELP, NULL);
+        //Disable for now as the help is not functioning in glipper-lite (it works in the GNOME glipper)
+	//GtkWidget* help = gtk_image_menu_item_new_from_stock(GTK_STOCK_HELP, NULL);
 	//g_signal_connect(G_OBJECT(help), "activate", G_CALLBACK(showHelp), NULL);
 
 	GtkWidget* preferences = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
@@ -497,7 +498,8 @@ void createPopupMenu()
 
 	//Add the widgets to the menu
 	gtk_menu_append((GtkMenu*)popupMenu, preferences);
-	gtk_menu_append((GtkMenu*)popupMenu, help);
+        //Disable help menu entry for now as the help is not functioning in glipper-lite (it works in the GNOME glipper)
+	//gtk_menu_append((GtkMenu*)popupMenu, help);
 	gtk_menu_append((GtkMenu*)popupMenu, about);
 	gtk_menu_append((GtkMenu*)popupMenu, gtk_separator_menu_item_new());
 	gtk_menu_append((GtkMenu*)popupMenu, quit);
