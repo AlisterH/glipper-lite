@@ -130,7 +130,7 @@ GtkWidget* addHistMenuItem(gchar* item)
 		g_free(temp);
 
 		//Add description tooltip to bold entry
-		gtk_tooltips_set_tip(toolTip, MenuItem, _("This entry was copied with ctrl+c.\nIt can be pasted with ctrl+v."), "Glipper");
+		gtk_tooltips_set_tip(toolTip, MenuItem, _("This entry was copied with ctrl+c.\nIt can be pasted with ctrl+v."), "Glipper-Lite");
 	}
 	else if (!item)
 	{
@@ -177,7 +177,7 @@ void createHistMenu()
 			gtk_image_new_from_pixbuf(pixbuf));
 	}	
 	gtk_label_set_text((GtkLabel*)gtk_bin_get_child((GtkBin*)menuHeader), 
-			g_strdup_printf(_("Glipper - Clipboardmanager  (%s)"), keyComb));
+			g_strdup_printf(_("Glipper-Lite - Clipboard manager  (%s)"), keyComb));
 
 	if (historyMenu != NULL)
 	{
@@ -212,7 +212,7 @@ void createHistMenu()
 		}
 
 		//Add description tooltip to first item
-		gtk_tooltips_set_tip(toolTip, firstItem, _("This is the last element to be copied.\nIt can be pasted with the middle mouse button."), "Glipper");
+		gtk_tooltips_set_tip(toolTip, firstItem, _("This is the last element to be copied.\nIt can be pasted with the middle mouse button."), "Glipper-Lite");
 
 		if (temp != NULL || (DefaultClip.isBin && !PrimaryClip.isBin))
 		{
@@ -432,8 +432,8 @@ void createTrayIcon()
 
 	//Add description tooltip to the icon
 	toolTip = gtk_tooltips_new();
-	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
-		keyComb), "Glipper");
+	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper-Lite (%s)\nClipboard manager"),
+		keyComb), "Glipper-Lite");
 
 	//connect and show everything:
 	gtk_container_add(GTK_CONTAINER(eventbox), tray_icon_image);
@@ -469,7 +469,7 @@ void show_about(gpointer data)
 		"translator-credits", _("translator-credits"),
 		"license", license,
 		"name", "Glipper-Lite",
-		"comments", _("Clipboardmanager"),
+		"comments", _("Clipboard manager"),
 		"logo", gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error),
 		"website", "http://glipper.sourceforge.net/",
 		"version", VERSION,
@@ -513,10 +513,10 @@ void keyhandler(char *keystring, gpointer user_data)
 					0, gtk_get_current_event_time());
 }
 
-//trys to open (or create) a file in "~/.glipper" for writing purposes:
+//trys to open (or create) a file in "~/.glipperlite" for writing purposes:
 FILE* writeGlipperFile(char* filename)
 {
-	gchar* directory = g_build_path("/", g_get_home_dir(), ".glipper", NULL);
+	gchar* directory = g_build_path("/", g_get_home_dir(), ".glipperlite", NULL);
 	gchar* path = g_build_filename(directory, filename, NULL);
 	FILE* file = fopen(path, "w");
 	if (file == NULL)
@@ -528,7 +528,7 @@ FILE* writeGlipperFile(char* filename)
 				g_warning("Can't open or create file %s!", path);
 		}
 		else
-			g_warning ("Can't create directory '.glipper' in user's home directory!");
+			g_warning ("Can't create directory '.glipperlite' in user's home directory!");
 	}
 	g_free(directory);
 	g_free(path);
@@ -556,7 +556,7 @@ void saveHistory()
 
 void readHistory()
 {
-	gchar* path= g_build_filename(g_get_home_dir(), ".glipper/history", NULL);
+	gchar* path= g_build_filename(g_get_home_dir(), ".glipperlite/history", NULL);
 	FILE* histFile = fopen(path, "r");
 	g_free(path);
 	if (histFile != 0)
@@ -581,7 +581,7 @@ void readHistory()
 
 void readPreferences()
 {
-	gchar* path= g_build_filename(g_get_home_dir(), ".glipper/prefs", NULL);
+	gchar* path= g_build_filename(g_get_home_dir(), ".glipperlite/prefs", NULL);
 	FILE* prefFile = fopen(path, "r");
 	g_free(path);
 	free(keyComb);
@@ -614,8 +614,8 @@ void applyPreferences()
 	hasChanged=1; 
 	deleteOldElement(maxElements);
 	keybinder_bind(keyComb, keyhandler, NULL);
-	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper (%s)\nClipboardmanager"),
-		keyComb), "Glipper");
+	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper-Lite (%s)\nClipboard manager"),
+		keyComb), "Glipper-Lite");
 }
 
 void savePreferences()
