@@ -28,7 +28,7 @@ prefix=/usr
 # GETTEXT
 ###########################################################################
 
-GETTEXT_PACKAGE="glipper"
+GETTEXT_PACKAGE="glipper-lite"
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext package])
 

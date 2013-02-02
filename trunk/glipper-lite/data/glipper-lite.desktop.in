@@ -1,10 +1,10 @@
 [Desktop Entry]
 Encoding=UTF-8
-_Name=Glipper
+_Name=Glipper-Lite
 _Comment=Clipboard Manager
 Categories=GTK;GNOME;Application;Utility;
-TryExec=glipper
-Exec=glipper
+TryExec=glipper-lite
+Exec=glipper-lite
 Icon=glipper.png
 Terminal=false
 Type=Application
