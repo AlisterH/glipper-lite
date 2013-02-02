@@ -1,6 +1,6 @@
 AM_CFLAGS = $(FR_CFLAGS) -I$(top_srcdir) \
 	-DGLIPPERLOCALEDIR=\""$(glipperlocaledir)"\" -DPIXMAPDIR=\""$(datadir)/pixmaps"\" \
-	-DUIDIR=\""$(datadir)/glipper"\" 
+	-DUI_DIR=\""$(datadir)/glipper"\" 
 
 noinst_PROGRAMS=glipper
 bin_PROGRAMS=glipper
