@@ -1,4 +1,4 @@
-Glipper-Lite - Clipboard manager for Gnome
+Glipper-Lite - GTK Clipboard manager
 ====================================
 
 Copyright (C) 2006 Sven Rech
@@ -16,9 +16,10 @@ it with any other window manager or panel that supports tray icons.
 
 This is a continuation of the classic C version of Glipper.  The original 
 Glipper project moved to Python long ago, first as a GNOME panel applet, and 
-later as an "appindicator".  It is now found at https://launchpad.net/glipper. 
+later as an "appindicator".  It is now found at https://launchpad.net/glipper.
 
 Project website : http://code.google.com/p/glipper-lite/
+
 
 Installation Manual
 ===================
@@ -36,11 +37,6 @@ To use Glipper you must have these libraries installed on your system :
 
 	gtk+
 
-If you use GNOME support (default) you will also require :
-
-	libgnome
-	gnome-doc-utils
-
 You must also have a freedesktop compliant notification area or system tray
 running.
 
@@ -50,9 +46,6 @@ Compilation and installation
 
 The first step is to compile the source code. Decompress the source archive if
 you have not already done so.
-
-By default, glipper compiles with GNOME support (Yelp help etc.) to disable
-this, add --disable-gnome to the ./configure line.
 
 Open a terminal and CD to the directory where your source code is, then type :
 
@@ -79,10 +72,6 @@ Notes
 By default, glipper will install under /usr, if you want to install it 
 elsewhere, such as in /usr/local, or ~/glipper, run configure with the 
 --prefix=<path> option.
-
-If you install in a prefix other than /usr, be sure to place a link to the
-documentation directory in /usr/share/gnome/help, otherwise Yelp will not be
-able to find the documentation (GNOME support only).
 
 
 See also
