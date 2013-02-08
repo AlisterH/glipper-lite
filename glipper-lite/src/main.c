@@ -473,7 +473,7 @@ void show_about(gpointer data)
 		"name", "Glipper-Lite",
 		"comments", _("Clipboard manager"),
 		"logo", gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error),
-		"website", "http://glipper.sourceforge.net/",
+		"website", "http://code.google.com/p/glipper-lite/",
 		"version", VERSION,
 		 NULL);
 }
