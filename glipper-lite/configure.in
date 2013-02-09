@@ -12,19 +12,6 @@ AM_INIT_AUTOMAKE
 
 
 ###########################################################################
-# MAIN SETTINGS
-###########################################################################
-
-# Modify these settings to change behaviour
-
-# Default instalation root directory
-prefix=/usr
-
-
-###########################################################################
-
-
-###########################################################################
 # GETTEXT
 ###########################################################################
 
@@ -32,7 +19,7 @@ GETTEXT_PACKAGE="glipper-lite"
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext package])
 
-# Add languages here, on fo each .po file
+# Add languages here, one fo each .po file
 ALL_LINGUAS="de fr ru nl es hu"
 AM_GLIB_GNU_GETTEXT
 AC_PROG_INTLTOOL([0.23])
@@ -68,7 +55,8 @@ AC_SUBST(GTK_REQUIRED)
 
 PKG_CHECK_MODULES(FR,			\
 	glib-2.0 >= $GLIB_REQUIRED	\
-	gtk+-2.0 >= $GTK_REQUIRED)
+	gtk+-2.0 >= $GTK_REQUIRED	\
+	x11)
 
 AC_SUBST(FR_CFLAGS)
 AC_SUBST(FR_LIBS)
@@ -82,11 +70,13 @@ AC_CHECK_HEADERS([libintl.h stdlib.h string.h unistd.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
+AC_C_INLINE
+AC_TYPE_SIZE_T
 AC_HEADER_STDBOOL
 
 # Checks for library functions.
 AC_TYPE_SIGNAL
-AC_CHECK_FUNCS([mkdir])
+AC_CHECK_FUNCS([memset mkdir setlocale])
 AC_CONFIG_FILES([Makefile
 src/Makefile
 data/Makefile ])
