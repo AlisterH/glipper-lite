@@ -27,6 +27,9 @@ fi
 
 intltoolize --copy --force --automake
 
-autoreconf -vi
+autoheader
+aclocal
+automake -ac
+autoconf
 
 echo "You can type ./configure now, to configure glipper"
