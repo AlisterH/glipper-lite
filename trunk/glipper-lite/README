@@ -15,8 +15,9 @@ Other clipboard managers you may be interested in include glippy (C#), diodon
 (requires libappindicator, but can run in a traditional systray), parcellite, 
 parcellite3 (old gtk3 port), ClipIt (parcellite fork), gpaste (GNOME), 
 wmcliphist (windowmaker applet), qlipper (QT)), gcm (GNOME clipboard manager - 
-old and broken), anamnesis (PyGTK), copyq (QT), pastie (GNOME)... and many 
-"Desktop Environments" include their own clipboard manager.
+old and broken), anamnesis (PyGTK), CopyQ (Qxt), pastie (GNOME)... personally 
+my favourite is ClipIt.  Many "Desktop Environments" also include their own 
+clipboard manager.
 
 Glipper-Lite only depends on GTK+ 2 and NOT on GNOME libs, so you can also use 
 it with any other window manager or panel that supports tray icons.
