@@ -5,8 +5,8 @@
 	<!ENTITY appversion "0.90">
 	<!ENTITY manrevision "0.90">
 	<!ENTITY date "2006-06-27">
-	<!ENTITY app "<application>Glipper</application>">
-	<!ENTITY appname "glipper">
+	<!ENTITY app "<application>Glipper-Lite</application>">
+	<!ENTITY appname "Glipper-Lite">
 ]>
 
 <!-- =============Document Header ============================= -->
@@ -73,8 +73,8 @@
 			<title>Feedback</title> 
 			<para>
 				To report a bug or make a suggestion regarding the &app; application or
-				this manual, follow the directions in the <ulink url="http://sourceforge.net/projects/glipper/"
-				type="help">Glipper project page</ulink>. 
+				this manual, please go to <ulink url="http://code.google.com/p/glipper-lite/issues/list"
+				type="help">Glipper-Lite project page</ulink>. 
 			</para>
 			<!-- Translators may also add here feedback address for translations -->
 		</legalnotice> 
@@ -82,7 +82,7 @@
 	</articleinfo>
 
 	<indexterm zone="index"> 
-		<primary>Glipper</primary> 
+		<primary>Glipper-Lite</primary> 
 	</indexterm>
 
  <!-- ============= Document Body ============================= -->
@@ -92,25 +92,25 @@
   <title>Introduction</title>
 
 	<para>
-		<application>Glipper</application> is a clipboard manager for GNOME.
-		<application>Glipper</application> can also be made to work with other desktop
+		<application>Glipper-Lite</application> is a clipboard manager for GNOME.
+		<application>Glipper-Lite</application> can also be made to work with other desktop
 		environments and window managers.
 	</para>
 
 	<para>
-		<application>Glipper</application> sits in the notification area and collects
-		everything that is copied to the clipboard. Glipper maintains a history both 
+		<application>Glipper-Lite</application> sits in the notification area and collects
+		everything that is copied to the clipboard. Glipper-Lite maintains a history both 
 		of the "copy" clipboard, usually filled with <keycombo><keycap>Ctrl+C</keycap></keycombo> and of the
 		"select" clipboard, filled when text is selected. 
 	</para>
 
 	<para>
-		<application>Glipper</application> lets you choose an entry from the history
+		<application>Glipper-Lite</application> lets you choose an entry from the history
 		to fill the current clipboards.
 	</para>
 
 	<para>
-		The webpage for <application>Glipper</application> can be found at the
+		The webpage for <application>Glipper-Lite</application> can be found at the
 		<ulink url="http://sourceforge.net/projects/glipper/">Glipper project page</ulink>. 
 	</para>
  </sect1>
@@ -126,18 +126,18 @@
 		<title>Starting &appname;</title>
 
 		<para>
-			To start <application>glipper</application>, select <guimenuitem>Glipper</guimenuitem>
+			To start <application>Glipper-Lite</application>, select <guimenuitem>Glipper-Lite</guimenuitem>
 			from the <guisubmenu>Accessories</guisubmenu> submenu of the
-			<guimenuitem>Places</guimenuitem> menu.You may also start <application>glipper</application>
-			by typing <command>glipper</command> in a terminal.
+			<guimenuitem>Places</guimenuitem> menu.You may also start <application>Glipper-Lite</application>
+			by typing <command>glipper-lite</command> in a terminal.
 		</para>
 
 		<para>
-			Under GNOME, you may want to add <application>glipper</application> to your list of startup
+			Under GNOME, you may want to add <application>Glipper-Lite</application> to your list of startup
 			programs. You may do this from the <application>sessions</application> preference tool.
 			To access the the <application>sessions</application> preference tool choose <menuchoice><guimenu>
 			System</guimenu><guisubmenu>Preferences</guisubmenu><guimenuitem> Sessions</guimenuitem></menuchoice>.
-			Use the <guilabel>Startup Programs</guilabel> tab to add <application>glipper</application>.
+			Use the <guilabel>Startup Programs</guilabel> tab to add <application>Glipper-Lite</application>.
 		</para>
 	</sect2>
 
@@ -145,7 +145,7 @@
 		<title>The two different clipboards</title>
 
 		<para>
-			Under <application>X</application>, the windowing system for which <application>glipper</application> is designed,
+			Under <application>X</application>, the windowing system for which <application>Glipper-Lite</application> is designed,
 			there are two separate clipboards.
 		</para>
 
@@ -176,14 +176,14 @@
 		<title>Selecting an element from the clipboard history</title>
 
 		<para>
-			<application>Glipper</application> lets you replace the current contents of the clipboards with an element
+			<application>Glipper-Lite</application> lets you replace the current contents of the clipboards with an element
 			from the clipboard history. To use an element previously copied to the clipboard as the current
 			contents of the clipboards :
 
 			<orderedlist>
 			 <listitem>
 			  <para>
-				Open the <guimenu>main menu</guimenu> by clicking on the <application>glipper</application>
+				Open the <guimenu>main menu</guimenu> by clicking on the <application>Glipper-Lite</application>
 				icon in the notification area. You can also use the keyboard shortcut, which is <keycombo><keycap>Ctrl+Alt+C</keycap></keycombo>
 				by default.
 			  </para>
@@ -211,15 +211,15 @@
     <title>Preferences</title>
 
 	<para>
-		Use the <guilabel>Preferences</guilabel> dialog to customize <application>Glipper</application> to suit your requirements
+		Use the <guilabel>Preferences</guilabel> dialog to customize <application>Glipper-Lite</application> to suit your requirements
 		and preferences.
 	</para>
 	<para>
-		To display the <guilabel>Preferences</guilabel> dialog, right click on the <application>Glipper</application> icon in the notification area and choose <menuchoice><guimenuitem>Preferences</guimenuitem></menuchoice>.
+		To display the <guilabel>Preferences</guilabel> dialog, right click on the <application>Glipper-Lite</application> icon in the notification area and choose <menuchoice><guimenuitem>Preferences</guimenuitem></menuchoice>.
 	</para>
 
 <table frame="topbot" id="preferences-TBL">
-        <title>Glipper Preferences</title>
+        <title>Glipper-Lite Preferences</title>
         <tgroup cols="2" colsep="0" rowsep="0">
           <colspec colname="colspec0" colwidth="35.09*"/>
           <colspec colname="colspec1" colwidth="64.91*"/>
@@ -286,7 +286,7 @@
                 </para>
               </entry>
               <entry colname="colspec1" valign="top">
-                <para>Select this option to have <application>glipper</application> mark the contents of the "copy" clipboard.</para>
+                <para>Select this option to have <application>Glipper-Lite</application> mark the contents of the "copy" clipboard.</para>
               </entry>
             </row>
             <row>
@@ -322,14 +322,14 @@
   <sect1 id="legalm">
     <title>Legal</title>
 
-	<sect2 id="glipper-legal">
-		<title>Glipper Licence</title>
+	<sect2 id="Glipper-Lite-legal">
+		<title>Glipper-Lite Licence</title>
 		<para>
-			Glipper is licenced under the LGPL, see the <application>glipper</application> about box for details.
+			Glipper-Lite is licenced under the LGPL, see the <application>Glipper-Lite</application> about box for details.
 		</para>
 	</sect2>
 
-	<sect2 id="glipper-doc-legal">
+	<sect2 id="Glipper-Lite-doc-legal">
 		<title>Glipper Documentation Licence</title>
 	<para>
 	  Permission is granted to copy, distribute and/or modify this
