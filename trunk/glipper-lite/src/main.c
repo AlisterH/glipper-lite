@@ -546,10 +546,10 @@ void keyhandler(char *keystring, gpointer user_data)
 					0, gtk_get_current_event_time());
 }
 
-//trys to open (or create) a file in "~/.glipperlite" for writing purposes:
+//trys to open (or create) a file in "~/.config/glipperlite" for writing purposes:
 FILE* writeGlipperFile(char* filename)
 {
-	gchar* directory = g_build_path("/", g_get_home_dir(), ".glipperlite", NULL);
+	gchar* directory = g_build_path("/", g_get_user_config_dir(), "glipperlite", NULL);
 	gchar* path = g_build_filename(directory, filename, NULL);
 	FILE* file = fopen(path, "w");
 	if (file == NULL)
@@ -561,7 +561,7 @@ FILE* writeGlipperFile(char* filename)
 				g_warning("Can't open or create file %s!", path);
 		}
 		else
-			g_warning ("Can't create directory '.glipperlite' in user's home directory!");
+			g_warning ("Can't create directory 'glipperlite' in user's config directory!");
 	}
 	g_free(directory);
 	g_free(path);
@@ -589,7 +589,7 @@ void saveHistory()
 
 void readHistory()
 {
-	gchar* path= g_build_filename(g_get_home_dir(), ".glipperlite/history", NULL);
+	gchar* path= g_build_filename(g_get_user_config_dir(), "glipperlite/history", NULL);
 	FILE* histFile = fopen(path, "r");
 	g_free(path);
 	if (histFile != 0)
@@ -614,7 +614,7 @@ void readHistory()
 
 void readPreferences()
 {
-	gchar* path= g_build_filename(g_get_home_dir(), ".glipperlite/prefs", NULL);
+	gchar* path= g_build_filename(g_get_user_config_dir(), "glipperlite/prefs", NULL);
 	FILE* prefFile = fopen(path, "r");
 	g_free(path);
 	free(keyComb);
