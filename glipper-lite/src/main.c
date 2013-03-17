@@ -23,7 +23,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "preferences.h"
-#include "utils/eggtrayicon.h"
 #include "utils/glipper-i18n.h"
 #include "utils/keybinder.h"
 
@@ -50,11 +49,19 @@ ClipStruct DefaultClip;
 GSList* history = NULL;
 GtkWidget* historyMenu = NULL;
 GtkWidget* popupMenu;
-GtkWidget* TrayIcon;
 GtkTooltips* toolTip; //The trayicon's tooltip
 GtkWidget* eventbox; //The trayicon's eventbox
 gint mainTimeout;
 int hasChanged = 1;
+
+
+#ifndef GTK_CHECK_VERSION(2,10,0) 
+	include "utils/eggtrayicon.h"
+	GtkStatusIcon* TrayIcon
+#else
+	GtkWidget* TrayIcon;
+#endif
+
 
 void errorDialog(gchar* error_msg, gchar* secondaryText);
 void saveHistory();
@@ -177,7 +184,7 @@ void createHistMenu()
 			gtk_image_new_from_pixbuf(pixbuf));
 	}	
 	gtk_label_set_text((GtkLabel*)gtk_bin_get_child((GtkBin*)menuHeader), 
-			g_strdup_printf(_("Glipper-Lite - Clipboard manager  (%s)"), keyComb));
+			g_strdup_printf(_("Glipper-Lite clipboard manager (%s)"), keyComb));
 
 	if (historyMenu != NULL)
 	{
@@ -374,7 +381,11 @@ gboolean checkClipboard(gpointer data)
 	if (usePrimary)
 		processContent(&PrimaryClip);
 	mainTimeout = g_timeout_add(500, checkClipboard, NULL);
-	gtk_widget_show_all(GTK_WIDGET(TrayIcon));
+
+	#if ( ! GTK_CHECK_VERSION(2,10,0) )
+/*		Hmmm.  Looks like we don't need anything to replace this for gtkstatusicon...*/
+		gtk_widget_show_all(GTK_WIDGET(TrayIcon));
+	#endif
 	return 1;
 }
 
@@ -408,41 +419,59 @@ void historyEntryActivate(GtkMenuItem* menuItem, gpointer user_data)
 	hasChanged = 1;
 }
 
+/*Set the tooltip text:*/
+void setTooltip()
+{
+	char tooltiptext[100];
+	sprintf(tooltiptext, _("Glipper-Lite clipboard manager\n(%s)"), keyComb);
+	#if GTK_CHECK_VERSION(2,16,0)
+		gtk_status_icon_set_tooltip_text(GTK_STATUS_ICON(TrayIcon), tooltiptext);
+	#elif GTK_CHECK_VERSION(2,10,0)
+		gtk_status_icon_set_tooltip(GTK_STATUS_ICON(TrayIcon), tooltiptext);
+	#else
+		gtk_tooltips_set_tip(toolTip, eventbox, tooltiptext, "Glipper-Lite");	
+	#endif
+}
+
+/*Load trayicon*/
 void createTrayIcon()
 {
 	GdkPixbuf* pixbuf;
-	GtkWidget* tray_icon_image;
 	GError* pix_error = NULL;
-
-	//Load trayicon
-	TrayIcon = (GtkWidget*)egg_tray_icon_new("GLIPPER");
 	pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error);
 
 	//In case we cannot load icon, display error message and exit
-	if (pix_error != NULL)
-	{
+	if (pix_error != NULL) {
 		errorDialog(pix_error->message, _("Cannot load icon. Is the software properly installed ?"));
 		exit(1);
 	}
 
-	tray_icon_image = gtk_image_new_from_pixbuf(pixbuf);
-	gdk_pixbuf_unref(pixbuf);
+	#if GTK_CHECK_VERSION(2,10,0)
+		TrayIcon = gtk_status_icon_new_from_pixbuf(pixbuf);
+		g_signal_connect_swapped(G_OBJECT(TrayIcon), "button-press-event", 
+							 G_CALLBACK(TrayIconClicked), NULL); 
+	#else
+		GtkWidget* tray_icon_image;
 
-	//create eventbox:
-	eventbox = gtk_event_box_new();
-
-	//Add description tooltip to the icon
-	toolTip = gtk_tooltips_new();
-	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper-Lite (%s)\nClipboard manager"),
-		keyComb), "Glipper-Lite");
-
-	//connect and show everything:
-	gtk_container_add(GTK_CONTAINER(eventbox), tray_icon_image);
-	gtk_container_add (GTK_CONTAINER(TrayIcon), eventbox);
-	gtk_widget_show_all(GTK_WIDGET(TrayIcon));
-	g_signal_connect_swapped(G_OBJECT(eventbox), "button-press-event", 
-							 G_CALLBACK(TrayIconClicked), NULL);
-	g_signal_connect(G_OBJECT(TrayIcon), "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+		TrayIcon = (GtkWidget*)egg_tray_icon_new("GLIPPER");
+		tray_icon_image = gtk_image_new_from_pixbuf(pixbuf);
+		gdk_pixbuf_unref(pixbuf);
+	
+		//create eventbox:
+		eventbox = gtk_event_box_new();
+	
+		//Add description tooltip to the icon
+		toolTip = gtk_tooltips_new();
+	
+		//connect and show everything:
+		gtk_container_add(GTK_CONTAINER(eventbox), tray_icon_image);
+		gtk_container_add (GTK_CONTAINER(TrayIcon), eventbox);
+		gtk_widget_show_all(GTK_WIDGET(TrayIcon));
+		g_signal_connect_swapped(G_OBJECT(eventbox), "button-press-event", 
+								 G_CALLBACK(TrayIconClicked), NULL);
+		g_signal_connect(G_OBJECT(TrayIcon), "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+	#endif
+	setTooltip();
 }
 
 void show_about(gpointer data)
@@ -467,7 +496,7 @@ void show_about(gpointer data)
 	GError* pix_error = NULL;
 	gtk_show_about_dialog(NULL, 
 		"authors", authors,
-		"copyright", "Copyright © 2006 Sven Rech",
+		"copyright", _("Copyright © 2006 Sven Rech"),
 		"translator-credits", _("translator-credits"),
 		"license", license,
 		"name", "Glipper-Lite",
@@ -484,7 +513,7 @@ void createPopupMenu()
 	//Create new popup menu
 	popupMenu = gtk_menu_new();
 
-	//Create widgets to be plced in the popup menu
+	//Create widgets to be placed in the popup menu
 	GtkWidget* quit = gtk_image_menu_item_new_from_stock(GTK_STOCK_QUIT, NULL);
 	g_signal_connect(G_OBJECT(quit), "activate", G_CALLBACK(gtk_main_quit), NULL);
 
@@ -618,8 +647,7 @@ void applyPreferences()
 	hasChanged=1; 
 	deleteOldElement(maxElements);
 	keybinder_bind(keyComb, keyhandler, NULL);
-	gtk_tooltips_set_tip(toolTip, eventbox, g_strdup_printf(_("Glipper-Lite (%s)\nClipboard manager"),
-		keyComb), "Glipper-Lite");
+	setTooltip();
 }
 
 void savePreferences()
