@@ -4,7 +4,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 icondir = $(datadir)/pixmaps
-icon_DATA = glipper.png
+icon_DATA = glipper-lite.png
 
 uidir = $(datadir)/glipper-lite
 ui_DATA = glipper-properties.ui

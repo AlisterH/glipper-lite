@@ -170,7 +170,7 @@ void createHistMenu()
 		GError* pix_error = NULL;
 
 		menuHeader = gtk_image_menu_item_new_with_label("");
-		pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error);
+		pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper-lite.png", &pix_error);
 
 		//In case we cannot load icon, display error message and exit
 		if (pix_error != NULL)
@@ -438,7 +438,7 @@ void createTrayIcon()
 {
 	GdkPixbuf* pixbuf;
 	GError* pix_error = NULL;
-	pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error);
+	pixbuf = gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper-lite.png", &pix_error);
 
 	//In case we cannot load icon, display error message and exit
 	if (pix_error != NULL) {
@@ -501,7 +501,7 @@ void show_about(gpointer data)
 		"license", license,
 		"name", "Glipper-Lite",
 		"comments", _("Clipboard manager"),
-		"logo", gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper.png", &pix_error),
+		"logo", gdk_pixbuf_new_from_file(PIXMAPDIR"/glipper-lite.png", &pix_error),
 		"website", "http://code.google.com/p/glipper-lite/",
 		"version", VERSION,
 		 NULL);
