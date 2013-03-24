@@ -176,7 +176,7 @@ void createHistMenu()
 		if (pix_error != NULL)
 		{
 			errorDialog(pix_error->message, 
-				_("Cannot load icon. Is the software properly installed ?"));
+				_("Cannot load icon. Is the software properly installed?"));
 			exit(1);
 		}
 
@@ -203,7 +203,7 @@ void createHistMenu()
 	//Now add all history entrys:
 	if (history == NULL)
 		gtk_menu_append(historyMenu, 
-			gtk_menu_item_new_with_label(_("<No Content>")));
+			gtk_menu_item_new_with_label(_("<No content>")));
 	else
 	{
 		GSList* temp = history;
@@ -442,7 +442,7 @@ void createTrayIcon()
 
 	//In case we cannot load icon, display error message and exit
 	if (pix_error != NULL) {
-		errorDialog(pix_error->message, _("Cannot load icon. Is the software properly installed ?"));
+		errorDialog(pix_error->message, _("Cannot load icon. Is the software properly installed?"));
 		exit(1);
 	}
 
@@ -496,7 +496,7 @@ void show_about(gpointer data)
 	GError* pix_error = NULL;
 	gtk_show_about_dialog(NULL, 
 		"authors", authors,
-		"copyright", _("Copyright © 2006 Sven Rech"),
+		"copyright", _("Copyright \u00A9 2006 Sven Rech"),
 		"translator-credits", _("translator-credits"),
 		"license", license,
 		"name", "Glipper-Lite",

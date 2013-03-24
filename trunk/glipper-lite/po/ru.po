@@ -26,17 +26,17 @@ msgstr ""
 
 #: ../src/main.c:150
 #: ../src/main.c:345
-msgid "Cannot load icon. Is the software properly installed ?"
+msgid "Cannot load icon. Is the software properly installed?"
 msgstr "Не могу загрузить иконку. Возможно Glipper-Lite установлен неполностью?"
 
 #: ../src/main.c:158
-#, fuzzy, c-format
-msgid "Glipper-Lite - clipboard manager  (%s)"
-msgstr "Glipper-Lite - Менеджер буфера обмена (%s)"
+#, c-format
+msgid "Glipper-Lite clipboard manager (%s)"
+msgstr "Glipper-Lite mенеджер буфера обмена (%s)"
 
 #: ../src/main.c:177
-msgid "<No Content>"
-msgstr "<Kein Inhalt>"
+msgid "<No content>"
+msgstr "<Нет содержания>"
 
 #. addHistMenuItem(temp->data);
 #. Add description tooltip to first item
@@ -54,21 +54,19 @@ msgstr "Не могу показать справку Glipper-Lite'а"
 
 #: ../src/main.c:357
 #: ../src/main.c:542
-#, fuzzy, c-format
+#, c-format
 msgid ""
-"Glipper-Lite (%s)\n"
-"clipboard manager"
+"Glipper-Lite clipboard manager\n(%s)"
 msgstr ""
-"Glipper-Lite (%s)\n"
-"Менеджер буфера обмена"
+"Glipper-Lite mенеджер буфера обмена\n(%s)"
 
 #: ../src/main.c:391
 msgid "translator-credits"
 msgstr "Евгений Вдовин <evdovin at pochta dot ru>"
 
 #: ../src/main.c:394
-msgid "Clipboard manager for Gnome"
-msgstr "Менеджер буфера обмена для Гнома"
+msgid "Clipboard manager"
+msgstr "Менеджер буфера обмена"
 
 #: ../src/preferences.c:76
 msgid "Help support is not compiled in."
@@ -82,63 +80,63 @@ msgstr "Для просмотра документации посетите са
 msgid "Could not load the preferences interface"
 msgstr "Не могу загрузить интерфейс настроек"
 
-#: ../data/Glipper-Lite-properties.ui.h:1
+#: ../data/glipper-properties.ui.h:1
 msgid "<Ctrl><Alt>c"
 msgstr "<Ctrl><Atl>c"
 
-#: ../data/Glipper-Lite-properties.ui.h:2
+#: ../data/glipper-properties.ui.h:2
 msgid "<b>Behaviour</b>"
 msgstr "<b>Свойства</b>"
 
-#: ../data/Glipper-Lite-properties.ui.h:3
+#: ../data/glipper-properties.ui.h:3
 msgid "<b>Clipboards</b>"
 msgstr "<b>Буферы обмена</b>"
 
-#: ../data/Glipper-Lite-properties.ui.h:4
+#: ../data/glipper-properties.ui.h:4
 msgid "<b>Limits</b>"
 msgstr "<b>Пределы</b>"
 
-#: ../data/Glipper-Lite-properties.ui.h:5
+#: ../data/glipper-properties.ui.h:5
 msgid "Amount of entries in history:"
 msgstr "Количество элементов истории:"
 
-#: ../data/Glipper-Lite-properties.ui.h:6
+#: ../data/glipper-properties.ui.h:6
 msgid "Copy - Ctrl+C/Ctrl+V"
 msgstr "\"Буфер копирования\" - Ctrl+C/Ctrl+V"
 
-#: ../data/Glipper-Lite-properties.ui.h:7
+#: ../data/glipper-properties.ui.h:7
 msgid "Glipper-Lite Preferences"
 msgstr "Свойства Glipper-Lite'а"
 
-#: ../data/Glipper-Lite-properties.ui.h:8
+#: ../data/glipper-properties.ui.h:8
 msgid "Key combination for popup: "
 msgstr "Комбинация клавиш для всплытия: "
 
-#: ../data/Glipper-Lite-properties.ui.h:9
+#: ../data/glipper-properties.ui.h:9
 msgid "Length of one history entry:"
 msgstr "Длина элемента истории:"
 
-#: ../data/Glipper-Lite-properties.ui.h:10
+#: ../data/glipper-properties.ui.h:10
 msgid "Save history"
 msgstr "История сохранения"
 
-#: ../data/Glipper-Lite-properties.ui.h:11
+#: ../data/glipper-properties.ui.h:11
 msgid "Select - Mark/middle mouse button"
 msgstr "\"Буфер выделения\" - Выделение/Вставка средней кнопкой мыши"
 
-#: ../data/Glipper-Lite-properties.ui.h:12
+#: ../data/glipper-properties.ui.h:12
 msgid "Tag Ctrl+C clipboard's content in history (bold)"
 msgstr "Отмечать содержимое \"буфера копирования\" в истории жирным шрифтом"
 
-#: ../data/Glipper-Lite-properties.ui.h:13
+#: ../data/glipper-properties.ui.h:13
 msgid "Which clipboards should be managed by Glipper-Lite?"
 msgstr "За какими буферами обмена должен наблюдать Glipper-Lite?"
 
-#: ../data/Glipper-Lite.desktop.in.h:1
+#: ../data/glipper-lite.desktop.in.h:1
 msgid "Clipboard Manager"
 msgstr "Менеджер буфера обмена"
 
-#: ../data/Glipper-Lite.desktop.in.h:2
+#: ../data/glipper-lite.desktop.in.h:2
 msgid "Glipper-Lite"
 msgstr "Glipper-Lite"
 
