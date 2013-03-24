@@ -19,8 +19,8 @@ GETTEXT_PACKAGE="glipper-lite"
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext package])
 
-# Add languages here, one fo each .po file
-ALL_LINGUAS="de fr ru nl es hu"
+# Add languages here, one for each .po file
+ALL_LINGUAS="de fr ru nl es hu pl"
 AM_GLIB_GNU_GETTEXT
 AC_PROG_INTLTOOL([0.23])
 
