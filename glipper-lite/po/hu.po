@@ -27,16 +27,16 @@ msgstr ""
 "Beilleszthető a Ctrl+v kombinációval."
 
 #: ../src/main.c:150 ../src/main.c:345
-msgid "Cannot load icon. Is the software properly installed ?"
+msgid "Cannot load icon. Is the software properly installed?"
 msgstr "Nem tölthető be az ikon. Megfelelően van telepítve ez a szoftver?"
 
 #: ../src/main.c:158
 #, c-format
-msgid "Glipper-Lite - clipboard manager  (%s)"
-msgstr "Glipper-Lite - vágólapkezelő (%s)"
+msgid "Glipper-Lite clipboard manager (%s)"
+msgstr "Glipper-Lite vágólapkezelő (%s)"
 
 #: ../src/main.c:177
-msgid "<No Content>"
+msgid "<No content>"
 msgstr "<Nincs tartalom>"
 
 #. addHistMenuItem(temp->data);
@@ -56,19 +56,17 @@ msgstr "Nem jeleníthető meg a Glipper-Lite súgója"
 #: ../src/main.c:357 ../src/main.c:542
 #, c-format
 msgid ""
-"Glipper-Lite (%s)\n"
-"clipboard manager"
+"Glipper-Lite clipboard manager\n(%s)"
 msgstr ""
-"Glipper-Lite (%s)\n"
-"Vágólapkezelő"
+"Glipper-Lite vágólapkezelő\n(%s)"
 
 #: ../src/main.c:391
 msgid "translator-credits"
 msgstr "Kelemen Gábor <kelemeng@gnome.hu>"
 
 #: ../src/main.c:394
-msgid "Clipboard manager for Gnome"
-msgstr "Vágólapkezelő a Gnome-hoz"
+msgid "Clipboard manager"
+msgstr "Vágólapkezelő"
 
 #: ../src/preferences.c:76
 msgid "Help support is not compiled in."
@@ -86,63 +84,63 @@ msgstr ""
 msgid "Could not load the preferences interface"
 msgstr "Nem sikerült betölteni a beállítófelületet"
 
-#: ../data/Glipper-Lite-properties.ui.h:1
+#: ../data/glipper-properties.ui.h:1
 msgid "<Ctrl><Alt>c"
 msgstr "<Ctrl><Alt>c"
 
-#: ../data/Glipper-Lite-properties.ui.h:2
+#: ../data/glipper-properties.ui.h:2
 msgid "<b>Behaviour</b>"
 msgstr "<b>Viselkedés</b>"
 
-#: ../data/Glipper-Lite-properties.ui.h:3
+#: ../data/glipper-properties.ui.h:3
 msgid "<b>Clipboards</b>"
 msgstr "<b>Vágólapok</b>"
 
-#: ../data/Glipper-Lite-properties.ui.h:4
+#: ../data/glipper-properties.ui.h:4
 msgid "<b>Limits</b>"
 msgstr "<b>Korlátok</b>"
 
-#: ../data/Glipper-Lite-properties.ui.h:5
+#: ../data/glipper-properties.ui.h:5
 msgid "Amount of entries in history:"
 msgstr "Előzménybejegyzések mennyisége:"
 
-#: ../data/Glipper-Lite-properties.ui.h:6
+#: ../data/glipper-properties.ui.h:6
 msgid "Copy - Ctrl+C/Ctrl+V"
 msgstr "Másolás - Ctrl+c/Ctrl+c"
 
-#: ../data/Glipper-Lite-properties.ui.h:7
+#: ../data/glipper-properties.ui.h:7
 msgid "Glipper-Lite Preferences"
 msgstr "A Glipper-Lite beállításai"
 
-#: ../data/Glipper-Lite-properties.ui.h:8
+#: ../data/glipper-properties.ui.h:8
 msgid "Key combination for popup: "
 msgstr "Felugró menü billentyűkombinációja: "
 
-#: ../data/Glipper-Lite-properties.ui.h:9
+#: ../data/glipper-properties.ui.h:9
 msgid "Length of one history entry:"
 msgstr "Egy előzménybejegyzés hossza:"
 
-#: ../data/Glipper-Lite-properties.ui.h:10
+#: ../data/glipper-properties.ui.h:10
 msgid "Save history"
 msgstr "Előzmények mentése"
 
-#: ../data/Glipper-Lite-properties.ui.h:11
+#: ../data/glipper-properties.ui.h:11
 msgid "Select - Mark/middle mouse button"
 msgstr "Kijelölés - Kijelölés/középső egérgomb"
 
-#: ../data/Glipper-Lite-properties.ui.h:12
+#: ../data/glipper-properties.ui.h:12
 msgid "Tag Ctrl+C clipboard's content in history (bold)"
 msgstr "A Ctrl+c vágólap tartalmának kiemelése (félkövéren)"
 
-#: ../data/Glipper-Lite-properties.ui.h:13
+#: ../data/glipper-properties.ui.h:13
 msgid "Which clipboards should be managed by Glipper-Lite?"
 msgstr "A Glipper-Lite mely vágólapokat kezelje?"
 
-#: ../data/Glipper-Lite.desktop.in.h:1
+#: ../data/glipper-lite.desktop.in.h:1
 msgid "Clipboard Manager"
 msgstr "Vágólapkezelő"
 
-#: ../data/Glipper-Lite.desktop.in.h:2
+#: ../data/glipper-lite.desktop.in.h:2
 msgid "Glipper-Lite"
 msgstr "Glipper-Lite"
 

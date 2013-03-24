@@ -26,16 +26,16 @@ msgstr ""
 
 #: ../src/main.c:150
 #: ../src/main.c:345
-msgid "Cannot load icon. Is the software properly installed ?"
+msgid "Cannot load icon. Is the software properly installed?"
 msgstr "Kan het icoon niet laden. Is de software correct geïnstalleerd?"
 
 #: ../src/main.c:158
-#, fuzzy, c-format
-msgid "Glipper-Lite - clipboard manager  (%s)"
-msgstr "Glipper-Lite - klembordmanager  (%s)"
+#, c-format
+msgid "Glipper-Lite clipboard manager (%s)"
+msgstr "Glipper-Lite klembordmanager (%s)"
 
 #: ../src/main.c:177
-msgid "<No Content>"
+msgid "<No content>"
 msgstr "<Geen inhoud>"
 
 #. addHistMenuItem(temp->data);
@@ -54,21 +54,19 @@ msgstr "Het was niet mogelijk de helpfunctie van Glipper-Lite weer te geven"
 
 #: ../src/main.c:357
 #: ../src/main.c:542
-#, fuzzy, c-format
+#, c-format
 msgid ""
-"Glipper-Lite (%s)\n"
-"clipboard manager"
+"Glipper-Lite clipboard manager\n(%s)"
 msgstr ""
-"Glipper-Lite (%s)\n"
-"Klembordmanager"
+"Glipper-Lite klembordmanager\n(%s)"
 
 #: ../src/main.c:391
 msgid "translator-credits"
 msgstr "Harm Hilvers <harm@tweakers.net>"
 
 #: ../src/main.c:394
-msgid "Clipboard manager for Gnome"
-msgstr "Klembordmanager voor Gnome"
+msgid "Clipboard manager"
+msgstr "Klembordmanager"
 
 #: ../src/preferences.c:76
 msgid "Help support is not compiled in."
@@ -82,63 +80,63 @@ msgstr "Om de documentatie in te zien, bezoek de Glipper-Lite-website of compile
 msgid "Could not load the preferences interface"
 msgstr "Het was niet mogelijk om het voorkeurenvenster te laden"
 
-#: ../data/Glipper-Lite-properties.ui.h:1
+#: ../data/glipper-properties.ui.h:1
 msgid "<Ctrl><Alt>c"
 msgstr "<Ctrl><Atl>C"
 
-#: ../data/Glipper-Lite-properties.ui.h:2
+#: ../data/glipper-properties.ui.h:2
 msgid "<b>Behaviour</b>"
 msgstr "<b>Gedrag</b>"
 
-#: ../data/Glipper-Lite-properties.ui.h:3
+#: ../data/glipper-properties.ui.h:3
 msgid "<b>Clipboards</b>"
 msgstr "<b>Klemborden</b>"
 
-#: ../data/Glipper-Lite-properties.ui.h:4
+#: ../data/glipper-properties.ui.h:4
 msgid "<b>Limits</b>"
 msgstr "<b>Limieten</b>"
 
-#: ../data/Glipper-Lite-properties.ui.h:5
+#: ../data/glipper-properties.ui.h:5
 msgid "Amount of entries in history:"
 msgstr "Aantal regels in de geschiedenis:"
 
-#: ../data/Glipper-Lite-properties.ui.h:6
+#: ../data/glipper-properties.ui.h:6
 msgid "Copy - Ctrl+C/Ctrl+V"
 msgstr "Kopiëren - Ctrl+C/Ctrl+V"
 
-#: ../data/Glipper-Lite-properties.ui.h:7
+#: ../data/glipper-properties.ui.h:7
 msgid "Glipper-Lite Preferences"
 msgstr "Glipper-Lite-instellingen"
 
-#: ../data/Glipper-Lite-properties.ui.h:8
+#: ../data/glipper-properties.ui.h:8
 msgid "Key combination for popup: "
 msgstr "Toetscombinatie voor het popupmenu:"
 
-#: ../data/Glipper-Lite-properties.ui.h:9
+#: ../data/glipper-properties.ui.h:9
 msgid "Length of one history entry:"
 msgstr "Lengte van regels in de geschiedenis:"
 
-#: ../data/Glipper-Lite-properties.ui.h:10
+#: ../data/glipper-properties.ui.h:10
 msgid "Save history"
 msgstr "Geschiedenis bewaren"
 
-#: ../data/Glipper-Lite-properties.ui.h:11
+#: ../data/glipper-properties.ui.h:11
 msgid "Select - Mark/middle mouse button"
 msgstr "Selecteren - Markeren/Middelste muisknop"
 
-#: ../data/Glipper-Lite-properties.ui.h:12
+#: ../data/glipper-properties.ui.h:12
 msgid "Tag Ctrl+C clipboard's content in history (bold)"
 msgstr "Markeer de inhoud van het Ctrl+C-klembord in de geschiedenis (vet)"
 
-#: ../data/Glipper-Lite-properties.ui.h:13
+#: ../data/glipper-properties.ui.h:13
 msgid "Which clipboards should be managed by Glipper-Lite?"
 msgstr "Welke klemborden moeten door Glipper-Lite beheerd worden?"
 
-#: ../data/Glipper-Lite.desktop.in.h:1
+#: ../data/glipper-lite.desktop.in.h:1
 msgid "Clipboard Manager"
 msgstr "Klembordmanager"
 
-#: ../data/Glipper-Lite.desktop.in.h:2
+#: ../data/glipper-lite.desktop.in.h:2
 msgid "Glipper-Lite"
 msgstr "Glipper-Lite"
 

@@ -29,16 +29,16 @@ msgstr ""
 
 #: ../src/main.c:150
 #: ../src/main.c:345
-msgid "Cannot load icon. Is the software properly installed ?"
-msgstr "Ne peut charger l'icône. Le logiciel est-il bien installé ?"
+msgid "Cannot load icon. Is the software properly installed?"
+msgstr "Ne peut charger l'icône. Le logiciel est-il bien installé?"
 
 #: ../src/main.c:158
 #, c-format
-msgid "Glipper-Lite - clipboard manager  (%s)"
-msgstr "Glipper-Lite - gestionnaire de presse-papiers (%s)"
+msgid "Glipper-Lite clipboard manager (%s)"
+msgstr "Glipper-Lite gestionnaire de presse-papiers (%s)"
 
 #: ../src/main.c:177
-msgid "<No Content>"
+msgid "<No content>"
 msgstr "<Vide>"
 
 #. addHistMenuItem(temp->data);
@@ -59,19 +59,17 @@ msgstr "Ne peut afficher l'aide pour Glipper-Lite"
 #: ../src/main.c:542
 #, c-format
 msgid ""
-"Glipper-Lite (%s)\n"
-"clipboard manager"
+"Glipper-Lite clipboard manager\n(%s)"
 msgstr ""
-"Glipper-Lite (%s)\n"
-"Gestionnaire de presse-papiers"
+"Glipper-Lite gestionnaire de presse-papiers\n(%s)"
 
 #: ../src/main.c:391
 msgid "translator-credits"
 msgstr "Karderio <karderio at gmail dot com>"
 
 #: ../src/main.c:394
-msgid "Clipboard manager for Gnome"
-msgstr "Gestionnaire de presse-papiers pour Gnome"
+msgid "Clipboard manager"
+msgstr "Gestionnaire de presse-papiers"
 
 #: ../src/preferences.c:76
 msgid "Help support is not compiled in."
@@ -85,64 +83,63 @@ msgstr "Pour consulter la documentation, consultez le site de Glipper-Lite ou co
 msgid "Could not load the preferences interface"
 msgstr "N'a pas pû charger l'interface pour les préférences"
 
-#: ../data/Glipper-Lite-properties.ui.h:1
+#: ../data/glipper-properties.ui.h:1
 msgid "<Ctrl><Alt>c"
 msgstr "<Ctrl><Alt>c"
 
-#: ../data/Glipper-Lite-properties.ui.h:2
+#: ../data/glipper-properties.ui.h:2
 msgid "<b>Behaviour</b>"
 msgstr "<b>Comportement</b>"
 
-#: ../data/Glipper-Lite-properties.ui.h:3
+#: ../data/glipper-properties.ui.h:3
 msgid "<b>Clipboards</b>"
 msgstr "<b>Presse-papiers</b>"
 
-#: ../data/Glipper-Lite-properties.ui.h:4
+#: ../data/glipper-properties.ui.h:4
 msgid "<b>Limits</b>"
 msgstr "<b>Limites</b>"
 
-#: ../data/Glipper-Lite-properties.ui.h:5
+#: ../data/glipper-properties.ui.h:5
 msgid "Amount of entries in history:"
 msgstr "Nombre d'entrées dans l'historique:"
 
-#: ../data/Glipper-Lite-properties.ui.h:6
+#: ../data/glipper-properties.ui.h:6
 msgid "Copy - Ctrl+C/Ctrl+V"
 msgstr "Copie - Ctrl+C/Ctrl+V"
 
-#: ../data/Glipper-Lite-properties.ui.h:7
+#: ../data/glipper-properties.ui.h:7
 msgid "Glipper-Lite Preferences"
 msgstr "Préférences de Glipper-Lite"
 
-#: ../data/Glipper-Lite-properties.ui.h:8
+#: ../data/glipper-properties.ui.h:8
 msgid "Key combination for popup: "
 msgstr "Raccourci clavier pour le menu :"
 
-#: ../data/Glipper-Lite-properties.ui.h:9
+#: ../data/glipper-properties.ui.h:9
 msgid "Length of one history entry:"
 msgstr "Taille maximale d'une entrée:"
 
-#: ../data/Glipper-Lite-properties.ui.h:10
-#, fuzzy
+#: ../data/glipper-properties.ui.h:10
 msgid "Save history"
 msgstr "Enregistrer l'historique en quittant"
 
-#: ../data/Glipper-Lite-properties.ui.h:11
+#: ../data/glipper-properties.ui.h:11
 msgid "Select - Mark/middle mouse button"
 msgstr "Sélection - Marquer/Bouton central de la souris"
 
-#: ../data/Glipper-Lite-properties.ui.h:12
+#: ../data/glipper-properties.ui.h:12
 msgid "Tag Ctrl+C clipboard's content in history (bold)"
 msgstr "Marquer le contenu du presse-papiers Ctrl+C dans l'historique (en gras)"
 
-#: ../data/Glipper-Lite-properties.ui.h:13
+#: ../data/glipper-properties.ui.h:13
 msgid "Which clipboards should be managed by Glipper-Lite?"
 msgstr "Quels presses-papiers devront être gérés par Glipper-Lite?"
 
-#: ../data/Glipper-Lite.desktop.in.h:1
+#: ../data/glipper-lite.desktop.in.h:1
 msgid "Clipboard Manager"
 msgstr "Gestionnaire de presse-papiers"
 
-#: ../data/Glipper-Lite.desktop.in.h:2
+#: ../data/glipper-lite.desktop.in.h:2
 msgid "Glipper-Lite"
 msgstr "Glipper-Lite"
 
