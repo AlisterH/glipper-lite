@@ -18,7 +18,6 @@ GtkWidget* saveHistCheck;
 GtkWidget* keyCombEntry;
 GtkWidget* applyButton;
 GtkWidget* prefWin;
-GtkWidget* helpButton;
 
 //Sets initial state of widgets
 void setWidgets()
@@ -64,12 +63,6 @@ on_applyButton_clicked                 (GtkButton       *button,
 	gtk_widget_destroy(prefWin);
 }
 
-on_helpButton_clicked                 (GtkButton       *button,
-                                        gpointer         user_data)
-{
-    errorDialog(_("Help support is not compiled in."), _("To see the documentation, consult the glipper website or compile glipper with GNOME support (see README file)."));
-}
-
 void showPreferences(gpointer data)
 {
 	char* ui_file;
@@ -101,7 +94,6 @@ void showPreferences(gpointer data)
 	saveHistCheck = GTK_WIDGET (gtk_builder_get_object (builder, "saveHistCheck"));
 	keyCombEntry = GTK_WIDGET (gtk_builder_get_object (builder, "keyComb"));
 	applyButton = GTK_WIDGET (gtk_builder_get_object (builder, "applyButton"));
-	helpButton = GTK_WIDGET (gtk_builder_get_object (builder, "helpButton"));
 	prefWin = GTK_WIDGET (gtk_builder_get_object (builder, "preferences-dialog"));
 
 
@@ -114,9 +106,6 @@ void showPreferences(gpointer data)
 		NULL);
 	g_signal_connect ((gpointer) applyButton, "clicked",
 		G_CALLBACK (on_applyButton_clicked),
-		NULL);
-	g_signal_connect ((gpointer) helpButton, "clicked",
-		G_CALLBACK (on_helpButton_clicked),
 		NULL);
 
 	//Show preferences dialog
